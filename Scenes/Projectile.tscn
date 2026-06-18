@@ -1,6 +1,68 @@
 [gd_scene format=3 uid="uid://dfgghhva4et46"]
 
 [ext_resource type="Script" uid="uid://bh66xfb6jcblf" path="res://Scripts/Projectile.cs" id="1_lal66"]
+[ext_resource type="Script" uid="uid://d3op0eovhs6cq" path="res://Scripts/Spell/DamageComponent.cs" id="2_4tued"]
+[ext_resource type="Script" uid="uid://5k1veq5ulv3t" path="res://Scripts/Spell/SpellMovementComponent.cs" id="3_ar0ab"]
+[ext_resource type="Script" uid="uid://2l34ar0ivauf" path="res://Scripts/SpellSpawnComponent.cs" id="4_ekur6"]
+[ext_resource type="Script" uid="uid://cyw23b1rilbxg" path="res://Scripts/Spell/HitComponent.cs" id="5_xxsyy"]
+[ext_resource type="Script" uid="uid://cs8nivwxnirj8" path="res://Scripts/Spell/DespawnComponent.cs" id="6_dsm84"]
+[ext_resource type="Script" uid="uid://7vbl3a4b3hlt" path="res://Scripts/Spell/LifetimeComponent.cs" id="7_xsjeh"]
+
+[sub_resource type="CSharpScript" id="CSharpScript_tomee"]
+script/source = "using Godot;
+using System;
+using System.ComponentModel;
+
+public partial class CritComponent : Node
+{
+	[Export] public float CritChance { get; set; } = 0.05f; // 5 percent
+	[Export] public int CritMultiplier { get; set; } = 2;
+
+	public override void _Ready()
+	{
+	}
+
+	public override void _Process(double delta)
+	{
+	}
+
+	public bool IsCriticalHit()
+	{
+		if (CritChance >= 1f)
+			return true;
+		
+		return GD.Randf() < CritChance;
+	}
+}
+"
 
 [node name="Projectile" type="Node2D" unique_id=118783092]
 script = ExtResource("1_lal66")
+
+[node name="DamageComponent" type="Node" parent="." unique_id=1364884458]
+unique_name_in_owner = true
+script = ExtResource("2_4tued")
+
+[node name="SpellMovementComponent" type="Node" parent="." unique_id=2005470311]
+unique_name_in_owner = true
+script = ExtResource("3_ar0ab")
+
+[node name="CritComponent" type="Node" parent="." unique_id=1017049965]
+unique_name_in_owner = true
+script = SubResource("CSharpScript_tomee")
+
+[node name="SpawnComponent" type="Node" parent="." unique_id=1256497537]
+unique_name_in_owner = true
+script = ExtResource("4_ekur6")
+
+[node name="HitComponent" type="Node" parent="." unique_id=1927365654]
+unique_name_in_owner = true
+script = ExtResource("5_xxsyy")
+
+[node name="DespawnComponent" type="Node" parent="." unique_id=1157908819]
+unique_name_in_owner = true
+script = ExtResource("6_dsm84")
+
+[node name="LifetimeComponent" type="Node" parent="." unique_id=316637106]
+unique_name_in_owner = true
+script = ExtResource("7_xsjeh")

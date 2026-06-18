@@ -1,6 +1,0 @@
-[gd_scene format=3 uid="uid://cweek1x4ueecn"]
-
-[ext_resource type="Script" uid="uid://c6rc6styhvulp" path="res://Scripts/SpellEffect.cs" id="1_tefv6"]
-
-[node name="SpellEffect" type="Node2D" unique_id=1248335440]
-script = ExtResource("1_tefv6")
