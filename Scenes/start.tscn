@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://bhc22mkeo4n1y"]
+
+[ext_resource type="PackedScene" uid="uid://c4rggtnuhb8j3" path="res://Scenes/player.tscn" id="1_3bxa3"]
+[ext_resource type="Texture2D" uid="uid://t72qohuqwr0h" path="res://Assets/Sprites/grass.png" id="2_r48yj"]
+
+[node name="Node2D" type="Node2D" unique_id=1087891947]
+
+[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=455015594]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1575237862]
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1340440999]
+
+[node name="Grass" type="Sprite2D" parent="." unique_id=728686338]
+position = Vector2(-2, 2)
+texture = ExtResource("2_r48yj")
+
+[node name="Player" parent="." unique_id=1570652818 instance=ExtResource("1_3bxa3")]

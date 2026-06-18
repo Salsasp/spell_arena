@@ -1,0 +1,32 @@
+# Godot
+.godot/
+.import/
+
+# Mono / C#
+.mono/
+temp/
+bin/
+obj/
+
+# IDE
+.vscode/
+.idea/
+.vs/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Build exports
+exports/
+build/
+
+# Logs
+*.log
+
+# Rider
+*.sln.iml
+
+# User-specific files
+*.user
+*.csproj.user

@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://c4rggtnuhb8j3"]
+
+[ext_resource type="Texture2D" uid="uid://6dumusajv3tu" path="res://Assets/Sprites/player_placeholder.png" id="1_v0iea"]
+[ext_resource type="Script" uid="uid://x3a37t5720xg" path="res://Scripts/Player.cs" id="1_vgqql"]
+[ext_resource type="Script" uid="uid://cn0ulmxa1s7nw" path="res://Scripts/MovementComponent.cs" id="2_fkybt"]
+[ext_resource type="Script" uid="uid://1jk3xu5psrn6" path="res://Scripts/InputComponent.cs" id="4_x3wgy"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v0iea"]
+size = Vector2(20, 32)
+
+[node name="Player" type="CharacterBody2D" unique_id=1570652818]
+script = ExtResource("1_vgqql")
+
+[node name="Collider" type="CollisionShape2D" parent="." unique_id=462390313]
+shape = SubResource("RectangleShape2D_v0iea")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=225990918]
+z_index = 1
+texture = ExtResource("1_v0iea")
+
+[node name="MovementComponent" type="Node" parent="." unique_id=1954122666 node_paths=PackedStringArray("body", "sprite")]
+unique_name_in_owner = true
+script = ExtResource("2_fkybt")
+body = NodePath("..")
+sprite = NodePath("../Sprite2D")
+
+[node name="InputComponent" type="Node" parent="." unique_id=1875043093]
+unique_name_in_owner = true
+script = ExtResource("4_x3wgy")
+
+[node name="HealthComponent" type="Node" parent="." unique_id=690876232]
+unique_name_in_owner = true
