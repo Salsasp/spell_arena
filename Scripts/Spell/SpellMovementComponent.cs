@@ -1,15 +1,23 @@
 using Godot;
 using System;
+using System.ComponentModel;
 
-public partial class SpellMovementComponent : Node
+public partial class SpellMovementComponent : Node2D
 {
-	// Called when the node enters the scene tree for the first time.
-	public override void _Ready()
+	[Export] public Sprite2D Sprite;
+	[Export] public float Speed = 50f;
+	public Vector2 Velocity = Vector2.Zero;
+	public Vector2 Direction = Vector2.Zero;
+
+	public void Update()
 	{
+		if (Direction != Vector2.Zero)
+		{
+			Velocity = Direction * Speed;
+		}
 	}
 
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta)
+	public override void _Ready()
 	{
 	}
 }

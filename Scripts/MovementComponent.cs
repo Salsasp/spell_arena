@@ -1,6 +1,6 @@
 using Godot;
 
-public partial class MovementComponent : Node
+public partial class MovementComponent : Node2D
 {
 	[Export] public CharacterBody2D body;
 	[Export] public Sprite2D sprite; // replace this with animated sprite later

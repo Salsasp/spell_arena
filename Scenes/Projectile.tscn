@@ -1,68 +1,52 @@
 [gd_scene format=3 uid="uid://dfgghhva4et46"]
 
-[ext_resource type="Script" uid="uid://bh66xfb6jcblf" path="res://Scripts/Projectile.cs" id="1_lal66"]
-[ext_resource type="Script" uid="uid://d3op0eovhs6cq" path="res://Scripts/Spell/DamageComponent.cs" id="2_4tued"]
-[ext_resource type="Script" uid="uid://5k1veq5ulv3t" path="res://Scripts/Spell/SpellMovementComponent.cs" id="3_ar0ab"]
-[ext_resource type="Script" uid="uid://2l34ar0ivauf" path="res://Scripts/SpellSpawnComponent.cs" id="4_ekur6"]
-[ext_resource type="Script" uid="uid://cyw23b1rilbxg" path="res://Scripts/Spell/HitComponent.cs" id="5_xxsyy"]
-[ext_resource type="Script" uid="uid://cs8nivwxnirj8" path="res://Scripts/Spell/DespawnComponent.cs" id="6_dsm84"]
-[ext_resource type="Script" uid="uid://7vbl3a4b3hlt" path="res://Scripts/Spell/LifetimeComponent.cs" id="7_xsjeh"]
+[ext_resource type="Script" uid="uid://bh66xfb6jcblf" path="res://Scripts/Projectile.cs" id="1_cu5m1"]
+[ext_resource type="Script" uid="uid://d3op0eovhs6cq" path="res://Scripts/Spell/DamageComponent.cs" id="2_rsyq6"]
+[ext_resource type="Script" uid="uid://5k1veq5ulv3t" path="res://Scripts/Spell/SpellMovementComponent.cs" id="3_augfd"]
+[ext_resource type="Script" uid="uid://2l34ar0ivauf" path="res://Scripts/SpellSpawnComponent.cs" id="4_0iiay"]
+[ext_resource type="Script" uid="uid://cyw23b1rilbxg" path="res://Scripts/Spell/HitComponent.cs" id="5_d6p7i"]
+[ext_resource type="Script" uid="uid://cs8nivwxnirj8" path="res://Scripts/Spell/DespawnComponent.cs" id="6_ovs0d"]
+[ext_resource type="Script" uid="uid://7vbl3a4b3hlt" path="res://Scripts/Spell/LifetimeComponent.cs" id="7_ay8ps"]
+[ext_resource type="Texture2D" uid="uid://bpfxjffj44vw3" path="res://Assets/Sprites/proj_placeholder.png" id="8_rsyq6"]
 
-[sub_resource type="CSharpScript" id="CSharpScript_tomee"]
-script/source = "using Godot;
-using System;
-using System.ComponentModel;
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_rsyq6"]
+radius = 9.0
+height = 62.0
 
-public partial class CritComponent : Node
-{
-	[Export] public float CritChance { get; set; } = 0.05f; // 5 percent
-	[Export] public int CritMultiplier { get; set; } = 2;
+[node name="Projectile" type="Node2D" unique_id=1249408229]
 
-	public override void _Ready()
-	{
-	}
+[node name="Area2D" type="Area2D" parent="." unique_id=631328878]
+script = ExtResource("1_cu5m1")
 
-	public override void _Process(double delta)
-	{
-	}
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=487064132]
+position = Vector2(-1, 0)
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_rsyq6")
 
-	public bool IsCriticalHit()
-	{
-		if (CritChance >= 1f)
-			return true;
-		
-		return GD.Randf() < CritChance;
-	}
-}
-"
-
-[node name="Projectile" type="Node2D" unique_id=118783092]
-script = ExtResource("1_lal66")
+[node name="Sprite2D" type="Sprite2D" parent="Area2D" unique_id=1934519041]
+texture = ExtResource("8_rsyq6")
 
 [node name="DamageComponent" type="Node" parent="." unique_id=1364884458]
 unique_name_in_owner = true
-script = ExtResource("2_4tued")
+script = ExtResource("2_rsyq6")
 
-[node name="SpellMovementComponent" type="Node" parent="." unique_id=2005470311]
+[node name="SpellMovementComponent" type="Node2D" parent="." unique_id=1332081632 node_paths=PackedStringArray("Sprite")]
 unique_name_in_owner = true
-script = ExtResource("3_ar0ab")
-
-[node name="CritComponent" type="Node" parent="." unique_id=1017049965]
-unique_name_in_owner = true
-script = SubResource("CSharpScript_tomee")
+script = ExtResource("3_augfd")
+Sprite = NodePath("../Area2D/Sprite2D")
 
 [node name="SpawnComponent" type="Node" parent="." unique_id=1256497537]
 unique_name_in_owner = true
-script = ExtResource("4_ekur6")
+script = ExtResource("4_0iiay")
 
 [node name="HitComponent" type="Node" parent="." unique_id=1927365654]
 unique_name_in_owner = true
-script = ExtResource("5_xxsyy")
+script = ExtResource("5_d6p7i")
 
 [node name="DespawnComponent" type="Node" parent="." unique_id=1157908819]
 unique_name_in_owner = true
-script = ExtResource("6_dsm84")
+script = ExtResource("6_ovs0d")
 
 [node name="LifetimeComponent" type="Node" parent="." unique_id=316637106]
 unique_name_in_owner = true
-script = ExtResource("7_xsjeh")
+script = ExtResource("7_ay8ps")
