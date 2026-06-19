@@ -15,15 +15,17 @@ height = 62.0
 
 [node name="Projectile" type="Node2D" unique_id=1249408229]
 
-[node name="Area2D" type="Area2D" parent="." unique_id=631328878]
+[node name="ProjectilePivot" type="Node2D" parent="." unique_id=271081983]
+
+[node name="Area2D" type="Area2D" parent="ProjectilePivot" unique_id=631328878]
 script = ExtResource("1_cu5m1")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=487064132]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ProjectilePivot/Area2D" unique_id=487064132]
 position = Vector2(-1, 0)
 rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_rsyq6")
 
-[node name="Sprite2D" type="Sprite2D" parent="Area2D" unique_id=1934519041]
+[node name="Sprite2D" type="Sprite2D" parent="ProjectilePivot/Area2D" unique_id=1934519041]
 texture = ExtResource("8_rsyq6")
 
 [node name="DamageComponent" type="Node" parent="." unique_id=1364884458]
@@ -33,7 +35,7 @@ script = ExtResource("2_rsyq6")
 [node name="SpellMovementComponent" type="Node2D" parent="." unique_id=1332081632 node_paths=PackedStringArray("Sprite")]
 unique_name_in_owner = true
 script = ExtResource("3_augfd")
-Sprite = NodePath("../Area2D/Sprite2D")
+Sprite = NodePath("../ProjectilePivot/Area2D/Sprite2D")
 
 [node name="SpawnComponent" type="Node" parent="." unique_id=1256497537]
 unique_name_in_owner = true

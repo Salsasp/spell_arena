@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.ComponentModel;
 
 public partial class Projectile : Node2D
 {
@@ -11,11 +12,11 @@ public partial class Projectile : Node2D
 
 	public override void _Ready()
 	{
-		_damageComponent = GetNode<DamageComponent>("../DamageComponent");
-		_despawnComponent = GetNode<DespawnComponent>("../DespawnComponent");
-		_hitComponent = GetNode<HitComponent>("../HitComponent");
-		_lifetimeComponent = GetNode<LifetimeComponent>("../LifetimeComponent");
-		_spellMovementComponent = GetNode<SpellMovementComponent>("../SpellMovementComponent");
+		_damageComponent = GetNode<DamageComponent>("../../DamageComponent");
+		_despawnComponent = GetNode<DespawnComponent>("../../DespawnComponent");
+		_hitComponent = GetNode<HitComponent>("../../HitComponent");
+		_lifetimeComponent = GetNode<LifetimeComponent>("../../LifetimeComponent");
+		_spellMovementComponent = GetNode<SpellMovementComponent>("../../SpellMovementComponent");
 	}
 
     public override void _PhysicsProcess(double delta)

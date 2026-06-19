@@ -13,6 +13,7 @@ public partial class InputComponent : Node2D
 	{
 		MoveDir = Input.GetVector("move_left", "move_right", "move_up", "move_down");
 		LeftClickPressed = Input.IsMouseButtonPressed(MouseButton.Left);
+		LeftClickJustPressed = Input.IsActionJustReleased("left_click");
 		RightClickPressed = Input.IsMouseButtonPressed(MouseButton.Right);
 		MousePos = GetGlobalMousePosition();
 	}
