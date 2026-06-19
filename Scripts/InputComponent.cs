@@ -20,17 +20,17 @@ public partial class InputComponent : Node2D
 	{
 	}
 
-	public override void _Process(double delta)
-	{
-		QueueRedraw();
-	}
+	// public override void _Process(double delta)
+	// {
+	// 	QueueRedraw();
+	// }
 
-	// For debugging
-	public override void _Draw()
-    {
-		if (LeftClickPressed)
-		{
-			DrawLine(Position, MousePos, Colors.Red);
-		}
-    }
+	// // For debugging
+	// public override void _Draw()
+    // {
+	// 	if (LeftClickPressed)
+	// 	{
+	// 		DrawLine(Position, MousePos, Colors.Red);
+	// 	}
+    // }
 }
