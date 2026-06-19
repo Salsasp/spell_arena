@@ -26,10 +26,12 @@ public partial class Player : CharacterBody2D
 		// TODO: replace GlobalPosition with the GlobalPosition of a custom point2D
 		Vector2 EndOfWandPos = wand.GetEndOfWandPos();
 		Vector2 projDir = EndOfWandPos.DirectionTo(inputComponent.MousePos).Normalized();
+		
 		if (inputComponent.LeftClickJustPressed)
 		{
 			projectileSpawner.SpawnProjectile(EndOfWandPos, projDir);
 		}
+
 		wand.RotateWand(inputComponent);
 		movementComponent.direction = inputComponent.MoveDir;
 		movementComponent.Update(delta);
