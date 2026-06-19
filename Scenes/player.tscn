@@ -1,12 +1,110 @@
 [gd_scene format=3 uid="uid://c4rggtnuhb8j3"]
 
-[ext_resource type="Texture2D" uid="uid://6dumusajv3tu" path="res://Assets/Sprites/player_placeholder.png" id="1_v0iea"]
 [ext_resource type="Script" uid="uid://x3a37t5720xg" path="res://Scripts/Player.cs" id="1_vgqql"]
 [ext_resource type="Script" uid="uid://cn0ulmxa1s7nw" path="res://Scripts/MovementComponent.cs" id="2_fkybt"]
+[ext_resource type="Texture2D" uid="uid://c3k5mxk2bkhus" path="res://Assets/Sprites/Player/Walk/wizard_front.png" id="2_gymyn"]
+[ext_resource type="Texture2D" uid="uid://dsnglkk872mqb" path="res://Assets/Sprites/Player/Walk/wizard_front_walk_anim.png" id="2_pu2lt"]
+[ext_resource type="Texture2D" uid="uid://bxnnj0hy8p3q7" path="res://Assets/Sprites/Player/Walk/wizard_front2.png" id="3_pu2lt"]
+[ext_resource type="Texture2D" uid="uid://bt2c2qvlgoi2j" path="res://Assets/Sprites/Player/Walk/wizard_left1.png" id="4_ukyrk"]
 [ext_resource type="Script" uid="uid://1jk3xu5psrn6" path="res://Scripts/InputComponent.cs" id="4_x3wgy"]
+[ext_resource type="Texture2D" uid="uid://lasqkmvecp20" path="res://Assets/Sprites/Player/Walk/wizard_left2.png" id="5_7dp3o"]
+[ext_resource type="Script" uid="uid://nabumqpkq4ny" path="res://Scripts/AnimationComponent.cs" id="5_fkybt"]
+[ext_resource type="Texture2D" uid="uid://b1mgv7nmct86g" path="res://Assets/Sprites/Player/Walk/wizard_right_walk_anim.png" id="6_h4iuc"]
+[ext_resource type="Texture2D" uid="uid://dk40riilhdnn0" path="res://Assets/Sprites/Player/Walk/wizard_up_walk_anim.png" id="7_fd4e3"]
+[ext_resource type="PackedScene" uid="uid://cgrn4o6mbcqip" path="res://Scenes/wand.tscn" id="12_pu2lt"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v0iea"]
 size = Vector2(20, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ukyrk"]
+atlas = ExtResource("2_pu2lt")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7dp3o"]
+atlas = ExtResource("2_pu2lt")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qqcod"]
+atlas = ExtResource("6_h4iuc")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_igrcy"]
+atlas = ExtResource("6_h4iuc")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fs7ks"]
+atlas = ExtResource("7_fd4e3")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l6n3p"]
+atlas = ExtResource("7_fd4e3")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_olqyp"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ukyrk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7dp3o")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_gymyn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_pu2lt")
+}],
+"loop": true,
+"name": &"walk_down",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_ukyrk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_7dp3o")
+}],
+"loop": true,
+"name": &"walk_left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qqcod")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_igrcy")
+}],
+"loop": true,
+"name": &"walk_right",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fs7ks")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l6n3p")
+}],
+"loop": true,
+"name": &"walk_up",
+"speed": 5.0
+}]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_wpjfl"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_bi64h"]
+graph_offset = Vector2(-281.48572, 83.32469)
+nodes/output/position = Vector2(380, 160)
+nodes/Animation/node = SubResource("AnimationNodeAnimation_wpjfl")
+nodes/Animation/position = Vector2(180, 100)
 
 [node name="Player" type="CharacterBody2D" unique_id=1570652818]
 script = ExtResource("1_vgqql")
@@ -14,15 +112,15 @@ script = ExtResource("1_vgqql")
 [node name="Collider" type="CollisionShape2D" parent="." unique_id=462390313]
 shape = SubResource("RectangleShape2D_v0iea")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=225990918]
+[node name="PlayerSprite" type="AnimatedSprite2D" parent="." unique_id=335451100]
 z_index = 1
-texture = ExtResource("1_v0iea")
+sprite_frames = SubResource("SpriteFrames_olqyp")
+animation = &"idle"
 
-[node name="MovementComponent" type="Node2D" parent="." unique_id=498815492 node_paths=PackedStringArray("body", "sprite")]
+[node name="MovementComponent" type="Node2D" parent="." unique_id=498815492 node_paths=PackedStringArray("body")]
 unique_name_in_owner = true
 script = ExtResource("2_fkybt")
 body = NodePath("..")
-sprite = NodePath("../Sprite2D")
 
 [node name="InputComponent" type="Node2D" parent="." unique_id=1352110215]
 unique_name_in_owner = true
@@ -30,3 +128,17 @@ script = ExtResource("4_x3wgy")
 
 [node name="HealthComponent" type="Node" parent="." unique_id=690876232]
 unique_name_in_owner = true
+
+[node name="AnimationComponent" type="Node2D" parent="." unique_id=626483266 node_paths=PackedStringArray("animatedSprite", "animationPlayer")]
+script = ExtResource("5_fkybt")
+animatedSprite = NodePath("../PlayerSprite")
+animationPlayer = NodePath("../AnimationPlayer")
+directionalSprites = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1391533077]
+
+[node name="AnimationTree" type="AnimationTree" parent="." unique_id=35411377]
+tree_root = SubResource("AnimationNodeBlendTree_bi64h")
+
+[node name="Wand" parent="." unique_id=1764541263 instance=ExtResource("12_pu2lt")]
+position = Vector2(10, 8)
