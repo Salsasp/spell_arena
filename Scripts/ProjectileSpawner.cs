@@ -17,8 +17,8 @@ public partial class ProjectileSpawner : Node2D
 		
 		var spellMovementComponent = projectile.GetNode<SpellMovementComponent>("SpellMovementComponent");
     	spellMovementComponent.Direction = dir;
-    	var projectilePivot = projectile.GetNode<Node2D>("ProjectilePivot");
-		projectilePivot.Rotation = dir.Angle();
+    	var projectileArea = projectile.GetNode<Area2D>("Area2D");
+		projectileArea.Rotation = dir.Angle();
 	}
 
 }

@@ -13,11 +13,11 @@ public partial class Projectile : Node2D
 
 	public override void _Ready()
 	{
-		damageComponent = GetNode<DamageComponent>("../../DamageComponent");
-		despawnComponent = GetNode<DespawnComponent>("../../DespawnComponent");
-		hitComponent = GetNode<HitComponent>("../../HitComponent");
-		lifetimeComponent = GetNode<LifetimeComponent>("../../LifetimeComponent");
-		spellMovementComponent = GetNode<SpellMovementComponent>("../../SpellMovementComponent");
+		damageComponent = GetNode<DamageComponent>("DamageComponent");
+		despawnComponent = GetNode<DespawnComponent>("DespawnComponent");
+		hitComponent = GetNode<HitComponent>("HitComponent");
+		lifetimeComponent = GetNode<LifetimeComponent>("LifetimeComponent");
+		spellMovementComponent = GetNode<SpellMovementComponent>("SpellMovementComponent");
 	}
 
     public override void _PhysicsProcess(double delta)
@@ -28,8 +28,6 @@ public partial class Projectile : Node2D
 		{
 			despawnComponent.Despawn();
 		}
-		//GD.Print("Pos:" + Position);
-		//GD.Print("Rotation" + Rotation);
     }
 
 }

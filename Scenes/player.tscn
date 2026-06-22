@@ -11,7 +11,9 @@
 [ext_resource type="Script" uid="uid://nabumqpkq4ny" path="res://Scripts/AnimationComponent.cs" id="5_fkybt"]
 [ext_resource type="Texture2D" uid="uid://b1mgv7nmct86g" path="res://Assets/Sprites/Player/Walk/wizard_right_walk_anim.png" id="6_h4iuc"]
 [ext_resource type="Texture2D" uid="uid://dk40riilhdnn0" path="res://Assets/Sprites/Player/Walk/wizard_up_walk_anim.png" id="7_fd4e3"]
+[ext_resource type="Script" uid="uid://csu7r54n2f32y" path="res://Scripts/HealthComponent.cs" id="11_ukyrk"]
 [ext_resource type="PackedScene" uid="uid://cgrn4o6mbcqip" path="res://Scenes/wand.tscn" id="12_pu2lt"]
+[ext_resource type="Script" uid="uid://bol4ib3tbtusr" path="res://Scripts/HitboxComponent.cs" id="14_7dp3o"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v0iea"]
 size = Vector2(20, 32)
@@ -106,6 +108,9 @@ nodes/output/position = Vector2(380, 160)
 nodes/Animation/node = SubResource("AnimationNodeAnimation_wpjfl")
 nodes/Animation/position = Vector2(180, 100)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7dp3o"]
+size = Vector2(20, 32)
+
 [node name="Player" type="CharacterBody2D" unique_id=1570652818]
 script = ExtResource("1_vgqql")
 
@@ -126,8 +131,9 @@ body = NodePath("..")
 unique_name_in_owner = true
 script = ExtResource("4_x3wgy")
 
-[node name="HealthComponent" type="Node" parent="." unique_id=690876232]
+[node name="HealthComponent" type="Node2D" parent="." unique_id=237216526]
 unique_name_in_owner = true
+script = ExtResource("11_ukyrk")
 
 [node name="AnimationComponent" type="Node2D" parent="." unique_id=626483266 node_paths=PackedStringArray("animatedSprite", "animationPlayer")]
 script = ExtResource("5_fkybt")
@@ -142,3 +148,11 @@ tree_root = SubResource("AnimationNodeBlendTree_bi64h")
 
 [node name="Wand" parent="." unique_id=1764541263 instance=ExtResource("12_pu2lt")]
 position = Vector2(10, 8)
+
+[node name="HitboxComponent" type="Node2D" parent="." unique_id=2033937966]
+script = ExtResource("14_7dp3o")
+
+[node name="Area2D" type="Area2D" parent="HitboxComponent" unique_id=385752626]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent/Area2D" unique_id=880933975]
+shape = SubResource("RectangleShape2D_7dp3o")
