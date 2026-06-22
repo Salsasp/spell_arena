@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class InputComponent : Node2D
+public partial class InputComponent : Component
 {
 	public Vector2 MoveDir { get; private set; } = Vector2.Zero;
 	public bool LeftClickPressed { get; private set; } = false;

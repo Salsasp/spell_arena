@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class LifetimeComponent : Node
+public partial class LifetimeComponent : Component
 {
 	[Export] public int Lifetime; // Seconds
 	public bool TimedOut = false;

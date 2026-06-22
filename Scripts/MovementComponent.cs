@@ -1,6 +1,6 @@
 using Godot;
 
-public partial class MovementComponent : Node2D
+public partial class MovementComponent : Component
 {
 	[Export] public CharacterBody2D body;
 	[Export] public float speed { get; set; } = 100f;

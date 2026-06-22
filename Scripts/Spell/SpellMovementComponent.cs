@@ -2,7 +2,7 @@ using Godot;
 using System;
 using System.ComponentModel;
 
-public partial class SpellMovementComponent : Node2D
+public partial class SpellMovementComponent : Component
 {
 	[Export] public Sprite2D Sprite;
 	[Export] public float Speed = 50f;

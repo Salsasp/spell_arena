@@ -1,6 +1,6 @@
 using Godot;
 
-public abstract partial class Component : Node
+public abstract partial class Component : Node2D
 {
     protected Node2D owner;
 

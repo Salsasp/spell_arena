@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class DespawnComponent : Node
+public partial class DespawnComponent : Component
 {
 	public override void _Ready()
 	{
