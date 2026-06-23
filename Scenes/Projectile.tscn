@@ -18,7 +18,7 @@ script = ExtResource("1_cu5m1")
 
 [node name="ProjectilePivot" type="Node2D" parent="." unique_id=271081983]
 
-[node name="DamageComponent" type="Node" parent="." unique_id=1364884458]
+[node name="DamageComponent" type="Node2D" parent="." unique_id=539318127]
 unique_name_in_owner = true
 script = ExtResource("2_rsyq6")
 
@@ -28,19 +28,19 @@ script = ExtResource("3_augfd")
 Sprite = NodePath("../Area2D/Sprite2D")
 Speed = 100.0
 
-[node name="SpawnComponent" type="Node" parent="." unique_id=1256497537]
+[node name="SpawnComponent" type="Node2D" parent="." unique_id=345381162]
 unique_name_in_owner = true
 script = ExtResource("4_0iiay")
 
-[node name="HitComponent" type="Node" parent="." unique_id=1927365654]
+[node name="HitComponent" type="Node2D" parent="." unique_id=1007074092]
 unique_name_in_owner = true
 script = ExtResource("5_d6p7i")
 
-[node name="DespawnComponent" type="Node" parent="." unique_id=1157908819]
+[node name="DespawnComponent" type="Node2D" parent="." unique_id=161814801]
 unique_name_in_owner = true
 script = ExtResource("6_ovs0d")
 
-[node name="LifetimeComponent" type="Node" parent="." unique_id=316637106]
+[node name="LifetimeComponent" type="Node2D" parent="." unique_id=363474903]
 unique_name_in_owner = true
 script = ExtResource("7_ay8ps")
 Lifetime = 2

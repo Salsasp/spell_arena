@@ -10,6 +10,7 @@ public partial class Player : CharacterBody2D
 	private ProjectileSpawner projectileSpawner;
 	private AnimationComponent animationComponent;
 	private Wand wand;
+	private ModifierManager modifierManager;
 
     public override void _Ready()
 	{
@@ -18,6 +19,8 @@ public partial class Player : CharacterBody2D
     	movementComponent = GetNode<MovementComponent>("MovementComponent");
 		animationComponent = GetNode<AnimationComponent>("AnimationComponent");
 		wand = GetNode<Wand>("Wand");
+		modifierManager = GetNode<ModifierManager>("ModifierManager");
+		modifierManager.PrintModifiers();
 	}
 
 	public override void _PhysicsProcess(double delta)

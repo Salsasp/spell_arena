@@ -14,6 +14,7 @@
 [ext_resource type="Script" uid="uid://csu7r54n2f32y" path="res://Scripts/HealthComponent.cs" id="11_ukyrk"]
 [ext_resource type="PackedScene" uid="uid://cgrn4o6mbcqip" path="res://Scenes/wand.tscn" id="12_pu2lt"]
 [ext_resource type="Script" uid="uid://bol4ib3tbtusr" path="res://Scripts/HitboxComponent.cs" id="14_7dp3o"]
+[ext_resource type="Script" uid="uid://dqpht7uwxxbvk" path="res://Scripts/Spell/ModifierManager.cs" id="15_h4iuc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v0iea"]
 size = Vector2(20, 32)
@@ -156,3 +157,6 @@ script = ExtResource("14_7dp3o")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent/Area2D" unique_id=880933975]
 shape = SubResource("RectangleShape2D_7dp3o")
+
+[node name="ModifierManager" type="Node" parent="." unique_id=1865708893]
+script = ExtResource("15_h4iuc")

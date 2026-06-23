@@ -9,6 +9,7 @@ public partial class Projectile : Node2D
 	private HitComponent hitComponent;
 	private LifetimeComponent lifetimeComponent;
 	private SpellMovementComponent spellMovementComponent;
+	private ModifierManager modifierManager;
 
 
 	public override void _Ready()
@@ -18,6 +19,7 @@ public partial class Projectile : Node2D
 		hitComponent = GetNode<HitComponent>("HitComponent");
 		lifetimeComponent = GetNode<LifetimeComponent>("LifetimeComponent");
 		spellMovementComponent = GetNode<SpellMovementComponent>("SpellMovementComponent");
+		modifierManager = GetNode<ModifierManager>("../Player/ModifierManager");
 	}
 
     public override void _PhysicsProcess(double delta)

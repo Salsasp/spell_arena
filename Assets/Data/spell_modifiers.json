@@ -1,0 +1,18 @@
+{
+    "modifiers": [
+        {
+            "id": "-1",
+            "name": "Debug Modifier",
+            "description": "Debugs your modifier.",
+            "icon": "res://Assets/Sprites/proj_placeholder.png",
+            "rarity": "common",
+            "damage_type": "arcane",
+            "crit_additive": 0.0,
+            "crit_multiplicative": 0.0,
+            "on_hit": "",
+            "orbital": "",
+            "on_spawn": "",
+            "on_despawn": ""
+        }
+    ]
+}
