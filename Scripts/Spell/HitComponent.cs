@@ -25,6 +25,12 @@ public partial class HitComponent : Component
 		despawnComponent = GetNode<DespawnComponent>("../DespawnComponent");
 	}
 
+	public void Initialize(ModifierManager modMan, DespawnComponent despawnComp)
+	{
+		modifierManager = modMan;
+		despawnComponent = despawnComp;
+	}
+
 	public void ChainSpell()
 	{
 		// TODO: Implement

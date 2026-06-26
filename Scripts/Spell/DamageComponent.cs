@@ -6,6 +6,8 @@ public partial class DamageComponent : Component
 	[Export] public float CritChance { get; set; } = 0.05f; // 5 percent
 	[Export] public int CritMultiplier { get; set; } = 2;
 	[Export] public int BaseDamage { get; set; } = 20;
+	public string DamageType = "";
+	public int ElementalDamage = 0;
 	
 	public override void _Ready()
 	{
@@ -13,7 +15,7 @@ public partial class DamageComponent : Component
 
 	public int CalculateDamage()
 	{
-		int dmg = BaseDamage;
+		int dmg = BaseDamage + ElementalDamage;
 		if (IsCriticalHit())
 		{
 			dmg *= CritMultiplier;

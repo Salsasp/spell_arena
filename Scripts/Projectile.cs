@@ -9,6 +9,7 @@ public partial class Projectile : Node2D
 	private HitComponent hitComponent;
 	private LifetimeComponent lifetimeComponent;
 	private SpellMovementComponent spellMovementComponent;
+	private SpellSpawnComponent spawnComponent;
 	private ModifierManager modifierManager;
 
 
@@ -19,7 +20,13 @@ public partial class Projectile : Node2D
 		hitComponent = GetNode<HitComponent>("HitComponent");
 		lifetimeComponent = GetNode<LifetimeComponent>("LifetimeComponent");
 		spellMovementComponent = GetNode<SpellMovementComponent>("SpellMovementComponent");
+		spawnComponent = GetNode<SpellSpawnComponent>("SpellSpawnComponent");
 		modifierManager = GetNode<ModifierManager>("../Player/ModifierManager");
+
+		hitComponent.Initialize(modifierManager, despawnComponent);
+		spawnComponent.Initialize(modifierManager, damageComponent);
+
+		spawnComponent.Update();
 	}
 
     public override void _PhysicsProcess(double delta)
