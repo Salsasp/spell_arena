@@ -20,6 +20,8 @@ public partial class Player : CharacterBody2D
 		animationComponent = GetNode<AnimationComponent>("AnimationComponent");
 		wand = GetNode<Wand>("Wand");
 		modifierManager = GetNode<ModifierManager>("ModifierManager");
+		// FOR TESTING: REMOVE LATER
+		modifierManager.ActiveModifiers.Add("fire_spells", modifierManager.GetModifier("fire_spells"));
 		modifierManager.PrintModifiers();
 	}
 

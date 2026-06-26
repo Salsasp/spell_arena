@@ -4,7 +4,8 @@ using System.Collections.Generic;
 public partial class ModifierManager : Node
 {
     public static ModifierManager Instance { get; private set; }
-    private Dictionary<string, ModifierData> modifiers = new();
+    private Dictionary<string, ModifierData> modifiers = [];
+    public Dictionary<string, ModifierData> ActiveModifiers = [];
 
     public override void _EnterTree()
     {

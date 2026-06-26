@@ -26,12 +26,14 @@ public partial class Enemy : CharacterBody2D
     {
         Modulate = Colors.Red;
 		DamageComponent hitByDamageComponent = hitBy.GetNodeOrNull<DamageComponent>("DamageComponent");
-		if (hitByDamageComponent == null)
+        HitComponent hitByHitComponent = hitBy.GetNodeOrNull<HitComponent>("HitComponent");
+		if (hitByDamageComponent == null || hitByHitComponent == null)
 		{
-			GD.PrintErr("Hit by area without damage component");
+			GD.PrintErr("Hit by area without valid component");
 			return;
 		}
 		healthComponent.TakeDamage(hitByDamageComponent.CalculateDamage());
+        hitByHitComponent.Update();
     }
 
     private void OnDead()
