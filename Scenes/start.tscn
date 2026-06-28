@@ -28,3 +28,6 @@ ProjectilePrefab = ExtResource("4_lb6bl")
 
 [node name="Enemy" parent="." unique_id=736334869 instance=ExtResource("5_rk01k")]
 position = Vector2(176, -64)
+
+[node name="Enemy2" parent="." unique_id=235611402 instance=ExtResource("5_rk01k")]
+position = Vector2(184, 31)

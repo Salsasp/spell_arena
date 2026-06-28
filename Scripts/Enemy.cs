@@ -1,3 +1,4 @@
+using System;
 using Godot;
 
 public partial class Enemy : CharacterBody2D
@@ -33,12 +34,25 @@ public partial class Enemy : CharacterBody2D
 			return;
 		}
 		healthComponent.TakeDamage(hitByDamageComponent.CalculateDamage());
-        hitByHitComponent.Update();
+        hitByHitComponent.Update(this);
     }
 
     private void OnDead()
     {
         GD.Print("Enemy died!");
         // TODO: Play death animation, drop loot, etc.
+    }
+
+    public bool DotApplied()
+    {
+        foreach (Node child in this.GetChildren())
+        {
+            if (child is DotComponent)
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

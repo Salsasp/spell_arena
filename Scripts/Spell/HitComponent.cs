@@ -6,8 +6,10 @@ public partial class HitComponent : Component
 	private ModifierManager modifierManager;
 	private DespawnComponent despawnComponent;
 	private const int CHAIN_LIMIT = 3;
+	private const int DOT_TICK_INTERVAL = 2;
+	private const int DOT_DURATION = 10;
 
-	public void Update()
+	public void Update(Enemy enemy)
 	{
 		if (modifierManager.ActiveModifiers.ContainsKey("chains_spells"))
 		{
@@ -16,6 +18,11 @@ public partial class HitComponent : Component
 		else if (!modifierManager.ActiveModifiers.ContainsKey("pierce_spells"))
 		{
 			despawnComponent.Despawn();
+		}
+
+		if (modifierManager.ActiveModifiers.ContainsKey("fire_spells"))
+		{
+			ApplyDot(enemy, modifierManager.ActiveModifiers["fire_spells"]);
 		}
 	}
 
@@ -36,8 +43,19 @@ public partial class HitComponent : Component
 		// TODO: Implement
 	}
 
-	public static void ApplyDot(Projectile projectile, Enemy enemy)
+	public void ApplyDot(Enemy enemy, ModifierData modifier)
 	{
-		// TODO: Implement
+		float dotDamage = modifier.dotDamage;
+		DotComponent dot = new()
+        {
+			DamagePerTick = dotDamage,
+			TickInterval = DOT_TICK_INTERVAL,
+			Duration = DOT_DURATION
+		};
+
+		if (!enemy.DotApplied())
+		{
+			enemy.AddChild(dot);
+		}
 	}
 }

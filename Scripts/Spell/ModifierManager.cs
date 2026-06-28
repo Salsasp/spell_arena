@@ -49,6 +49,7 @@ public partial class ModifierManager : Node
                 icon = modData["icon"].ToString(),
                 rarity = modData["rarity"].ToString(),
                 damageType = modData["damage_type"].ToString(),
+                dotDamage = modData["dot_damage"].ToString().ToFloat(),
                 critAdditive = modData["crit_additive"].ToString().ToFloat(),
                 critMultiplicative = modData["crit_multiplicative"].ToString().ToFloat(),
                 onHit = modData["on_hit"].ToString(),

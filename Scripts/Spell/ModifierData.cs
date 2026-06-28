@@ -8,6 +8,7 @@ public class ModifierData
     public string icon;
     public string rarity;
     public string damageType;
+    public float dotDamage;
     public float critAdditive;
     public float critMultiplicative;
     public string onHit;

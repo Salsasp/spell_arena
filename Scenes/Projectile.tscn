@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://bh66xfb6jcblf" path="res://Scripts/Projectile.cs" id="1_cu5m1"]
 [ext_resource type="Script" uid="uid://d3op0eovhs6cq" path="res://Scripts/Spell/DamageComponent.cs" id="2_rsyq6"]
 [ext_resource type="Script" uid="uid://5k1veq5ulv3t" path="res://Scripts/Spell/SpellMovementComponent.cs" id="3_augfd"]
-[ext_resource type="Script" uid="uid://2l34ar0ivauf" path="res://Scripts/SpellSpawnComponent.cs" id="4_0iiay"]
+[ext_resource type="Script" uid="uid://d1r3sxdk0chv5" path="res://Scripts/Spell/SpellSpawnComponent.cs" id="4_ar0ab"]
 [ext_resource type="Script" uid="uid://cyw23b1rilbxg" path="res://Scripts/Spell/HitComponent.cs" id="5_d6p7i"]
 [ext_resource type="Script" uid="uid://cs8nivwxnirj8" path="res://Scripts/Spell/DespawnComponent.cs" id="6_ovs0d"]
 [ext_resource type="Script" uid="uid://7vbl3a4b3hlt" path="res://Scripts/Spell/LifetimeComponent.cs" id="7_ay8ps"]
@@ -28,9 +28,9 @@ script = ExtResource("3_augfd")
 Sprite = NodePath("../Area2D/Sprite2D")
 Speed = 100.0
 
-[node name="SpawnComponent" type="Node2D" parent="." unique_id=345381162]
+[node name="SpellSpawnComponent" type="Node2D" parent="." unique_id=345381162]
 unique_name_in_owner = true
-script = ExtResource("4_0iiay")
+script = ExtResource("4_ar0ab")
 
 [node name="HitComponent" type="Node2D" parent="." unique_id=1007074092]
 unique_name_in_owner = true
