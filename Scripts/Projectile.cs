@@ -23,7 +23,7 @@ public partial class Projectile : Node2D
 		spawnComponent = GetNode<SpellSpawnComponent>("SpellSpawnComponent");
 		modifierManager = GetNode<ModifierManager>("../Player/ModifierManager");
 
-		hitComponent.Initialize(modifierManager, despawnComponent);
+		hitComponent.Initialize(modifierManager, despawnComponent, spellMovementComponent);
 		spawnComponent.Initialize(modifierManager, damageComponent);
 
 		spawnComponent.Update();

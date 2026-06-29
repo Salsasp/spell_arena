@@ -13,6 +13,8 @@
 radius = 9.0
 height = 62.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_ar0ab"]
+
 [node name="Projectile" type="Node2D" unique_id=1249408229]
 script = ExtResource("1_cu5m1")
 
@@ -56,3 +58,8 @@ shape = SubResource("CapsuleShape2D_rsyq6")
 
 [node name="Sprite2D" type="Sprite2D" parent="Area2D" unique_id=1934519041]
 texture = ExtResource("8_rsyq6")
+
+[node name="ChainRadius" type="Area2D" parent="." unique_id=656173701]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ChainRadius" unique_id=1420828172]
+shape = SubResource("CircleShape2D_ar0ab")

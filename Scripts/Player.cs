@@ -21,8 +21,9 @@ public partial class Player : CharacterBody2D
 		wand = GetNode<Wand>("Wand");
 		modifierManager = GetNode<ModifierManager>("ModifierManager");
 		// FOR TESTING: REMOVE LATER
-		modifierManager.ActiveModifiers.Add("fire_spells", modifierManager.GetModifier("fire_spells"));
-		modifierManager.PrintModifiers();
+		//modifierManager.ActiveModifiers.Add("fire_spells", modifierManager.GetModifier("fire_spells"));
+		modifierManager.ActiveModifiers.Add("chain_spells", modifierManager.GetModifier("chain_spells"));
+		//modifierManager.PrintModifiers();
 	}
 
 	public override void _PhysicsProcess(double delta)

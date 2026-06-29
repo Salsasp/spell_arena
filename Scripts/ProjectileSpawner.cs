@@ -9,7 +9,7 @@ public partial class ProjectileSpawner : Node2D
 		
 	}
 
-	public void SpawnProjectile(Vector2 pos, Vector2 dir)
+	public void SpawnProjectile(Vector2 pos, Vector2 dir, Vector2 initVel = new())
 	{
 		Node2D projectile = ProjectilePrefab.Instantiate<Node2D>();
 		GetParent().AddChild(projectile);
@@ -17,6 +17,12 @@ public partial class ProjectileSpawner : Node2D
 		
 		var spellMovementComponent = projectile.GetNode<SpellMovementComponent>("SpellMovementComponent");
     	spellMovementComponent.Direction = dir;
+
+		if (initVel != Vector2.Zero)
+		{
+			spellMovementComponent.Velocity = initVel;
+		}
+
     	var projectileArea = projectile.GetNode<Area2D>("Area2D");
 		projectileArea.Rotation = dir.Angle();
 	}
