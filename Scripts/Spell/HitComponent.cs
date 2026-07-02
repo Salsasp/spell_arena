@@ -12,8 +12,6 @@ public partial class HitComponent : Component
 	private int chainCount = 4;
 	private const int DOT_TICK_INTERVAL = 2;
 	private const int DOT_DURATION = 10;
-	private const int CHAIN_RADIUS_INACTIVE = 10;
-	private const int CHAIN_RADIUS_ACTIVE = 200;
 	[Export] public bool ShowDebugCircle { get; set; } = true;
 
 	public void Update(Enemy enemy)
@@ -55,36 +53,21 @@ public partial class HitComponent : Component
 			return;
 		}
 
-		CollisionShape2D collisionShape = chainRadius.GetChild<CollisionShape2D>(0);
-		if (collisionShape.Shape is CircleShape2D circle)
-		{
-			circle.Radius = CHAIN_RADIUS_ACTIVE;
-			if (ShowDebugCircle)
-			{
-				QueueRedraw();
-			}
-		}
-
 		List<Node2D> chainTargets = new();
 
 		// Acquire potential chain candidates
 		foreach (Node2D body in chainRadius.GetOverlappingAreas())
 		{
-			if (body.IsInGroup("enemy") && body != currTarget)
+			// Potential pitfalls for future debugging: this grabs ANY area2D, including projectiles and player
+			// TODO: clean up tree navigation to avoid future errors
+			Node2D bodyRoot = (Node2D)body.GetParent().GetParent();
+			if (body.IsInGroup("enemies") && bodyRoot != currTarget)
 			{
 				chainTargets.Add(body);
 			}
 		}
 
-        if (collisionShape.Shape is CircleShape2D circleActive)
-		{
-			circleActive.Radius = CHAIN_RADIUS_ACTIVE;
-			if (ShowDebugCircle)
-			{
-				QueueRedraw();
-			}
-		}
-
+		// No enemies in chain radius
 		if (chainTargets.Count == 0)
 		{
 			return;
@@ -116,8 +99,9 @@ public partial class HitComponent : Component
 	{
 		float dir = Mathf.Atan2(enemy.GlobalPosition.Y - currTarget.GlobalPosition.Y,
 								enemy.GlobalPosition.X - currTarget.GlobalPosition.X);
+		movementComponent.GetParent().GetNode<Area2D>("ProjArea2D").Rotation = dir;
 		movementComponent.Direction = new Vector2(Mathf.Cos(dir), Mathf.Sin(dir));
-		movementComponent.Speed = 500f;
+		movementComponent.Speed = 1000f;
 		chainCount -= 1;
 	}
 
@@ -125,7 +109,7 @@ public partial class HitComponent : Component
 	{
 		float dotDamage = modifier.dotDamage;
 		DotComponent dot = new()
-        {
+		{
 			DamagePerTick = dotDamage,
 			TickInterval = DOT_TICK_INTERVAL,
 			Duration = DOT_DURATION
@@ -137,34 +121,26 @@ public partial class HitComponent : Component
 		}
 	}
 
-	public void UpdateChainRadius(float newRadius)
-    {
-        // ... your existing code that changes collisionShape.Shape.Radius ...
-
-        // Trigger a redraw so _Draw() executes on the next frame
-        
-    }
-
 	public override void _Draw()
-    {
-        if (!ShowDebugCircle) return;
+	{
+		if (!ShowDebugCircle) return;
 
-        // Get the current radius dynamically from your CollisionShape2D child
-        var collisionShape = chainRadius.GetChild<CollisionShape2D>(0);
-        if (collisionShape?.Shape is CircleShape2D circle)
-        {
-            // Center of the circle relative to this node
-            Vector2 center = Vector2.Zero; 
-            
-            // Color(Red, Green, Blue, Alpha/Translucency)
-            Color circleColor = new Color(0.1f, 0.6f, 1.0f, 0.3f); // Translucent Blue
+		// Get the current radius dynamically from your CollisionShape2D child
+		var collisionShape = chainRadius.GetChild<CollisionShape2D>(0);
+		if (collisionShape?.Shape is CircleShape2D circle)
+		{
+			// Center of the circle relative to this node
+			Vector2 center = Vector2.Zero; 
+			
+			// Color(Red, Green, Blue, Alpha/Translucency)
+			Color circleColor = new Color(0.1f, 0.6f, 1.0f, 0.3f); // Translucent Blue
 
-            // Draw the filled translucent circle
-            DrawCircle(center, circle.Radius, circleColor);
+			// Draw the filled translucent circle
+			DrawCircle(center, circle.Radius, circleColor);
 
-            // Optional: Draw a solid crisp border outline so it stands out
-            Color borderColor = new Color(0.1f, 0.6f, 1.0f, 0.8f);
-            DrawArc(center, circle.Radius, 0, Mathf.Tau, 64, borderColor, 2.0f);
-        }
-    }
+			// Optional: Draw a solid crisp border outline so it stands out
+			Color borderColor = new Color(0.1f, 0.6f, 1.0f, 0.8f);
+			DrawArc(center, circle.Radius, 0, Mathf.Tau, 64, borderColor, 2.0f);
+		}
+	}
 }

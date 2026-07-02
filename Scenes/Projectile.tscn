@@ -14,6 +14,7 @@ radius = 9.0
 height = 62.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ar0ab"]
+radius = 200.0
 
 [node name="Projectile" type="Node2D" unique_id=1249408229]
 script = ExtResource("1_cu5m1")
@@ -27,8 +28,8 @@ script = ExtResource("2_rsyq6")
 [node name="SpellMovementComponent" type="Node2D" parent="." unique_id=1332081632 node_paths=PackedStringArray("Sprite")]
 unique_name_in_owner = true
 script = ExtResource("3_augfd")
-Sprite = NodePath("../Area2D/Sprite2D")
-Speed = 100.0
+Sprite = NodePath("../ProjArea2D/Sprite2D")
+Speed = 200.0
 
 [node name="SpellSpawnComponent" type="Node2D" parent="." unique_id=345381162]
 unique_name_in_owner = true
@@ -49,14 +50,12 @@ Lifetime = 2
 
 [node name="Timer" type="Timer" parent="LifetimeComponent" unique_id=295151940]
 
-[node name="Area2D" type="Area2D" parent="." unique_id=631328878]
+[node name="ProjArea2D" type="Area2D" parent="." unique_id=631328878]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=487064132]
-position = Vector2(-1, 0)
-rotation = 1.5707964
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ProjArea2D" unique_id=487064132]
 shape = SubResource("CapsuleShape2D_rsyq6")
 
-[node name="Sprite2D" type="Sprite2D" parent="Area2D" unique_id=1934519041]
+[node name="Sprite2D" type="Sprite2D" parent="ProjArea2D" unique_id=1934519041]
 texture = ExtResource("8_rsyq6")
 
 [node name="ChainRadius" type="Area2D" parent="." unique_id=656173701]

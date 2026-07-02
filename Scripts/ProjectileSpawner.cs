@@ -23,7 +23,7 @@ public partial class ProjectileSpawner : Node2D
 			spellMovementComponent.Velocity = initVel;
 		}
 
-    	var projectileArea = projectile.GetNode<Area2D>("Area2D");
+    	var projectileArea = projectile.GetNode<Area2D>("ProjArea2D");
 		projectileArea.Rotation = dir.Angle();
 	}
 

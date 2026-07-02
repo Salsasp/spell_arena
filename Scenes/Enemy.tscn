@@ -17,7 +17,7 @@ nodes/Animation/position = Vector2(180, 100)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uoxpr"]
 size = Vector2(20, 32)
 
-[node name="Enemy" type="CharacterBody2D" unique_id=736334869]
+[node name="Enemy" type="CharacterBody2D" unique_id=736334869 groups=["enemies"]]
 script = ExtResource("1_1exfc")
 
 [node name="EnemySprite" type="Sprite2D" parent="." unique_id=1456288672]
@@ -41,10 +41,10 @@ sprite = NodePath("../EnemySprite")
 [node name="AnimationTree" type="AnimationTree" parent="." unique_id=1380034119]
 tree_root = SubResource("AnimationNodeBlendTree_idouy")
 
-[node name="HitboxComponent" type="Node2D" parent="." unique_id=1591322173]
+[node name="HitboxComponent" type="Node2D" parent="." unique_id=1591322173 groups=["enemies"]]
 script = ExtResource("6_mo1ky")
 
-[node name="Area2D" type="Area2D" parent="HitboxComponent" unique_id=1248440504]
+[node name="Area2D" type="Area2D" parent="HitboxComponent" unique_id=1248440504 groups=["enemies"]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent/Area2D" unique_id=1007366774]
 shape = SubResource("RectangleShape2D_uoxpr")

@@ -12,11 +12,11 @@ public partial class Player : CharacterBody2D
 	private Wand wand;
 	private ModifierManager modifierManager;
 
-    public override void _Ready()
+	public override void _Ready()
 	{
 		projectileSpawner= GetNode<ProjectileSpawner>("../ProjectileSpawner");
 		inputComponent = GetNode<InputComponent>("InputComponent");
-    	movementComponent = GetNode<MovementComponent>("MovementComponent");
+		movementComponent = GetNode<MovementComponent>("MovementComponent");
 		animationComponent = GetNode<AnimationComponent>("AnimationComponent");
 		wand = GetNode<Wand>("Wand");
 		modifierManager = GetNode<ModifierManager>("ModifierManager");
@@ -50,11 +50,11 @@ public partial class Player : CharacterBody2D
 	}
 
 	public override void _Draw()
-    {
+	{
 		if (inputComponent.LeftClickPressed)
 		{
 			//DrawLine(wand.GetEndOfWandPos(), inputComponent.MousePos, Colors.Red);
 		}
-    }
+	}
 
 }
