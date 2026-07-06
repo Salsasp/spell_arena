@@ -23,11 +23,16 @@ public partial class Enemy : CharacterBody2D
         GD.Print($"Health changed: {newHealth}");
     }
 
-    private void OnHit(Node2D hitBy)
+    private void OnHit(Area2D hitBy)
     {
+        if (hitBy.Name != "ProjArea2D")
+        {
+            return;
+        }
         Modulate = Colors.Red;
-		DamageComponent hitByDamageComponent = hitBy.GetNodeOrNull<DamageComponent>("DamageComponent");
-        HitComponent hitByHitComponent = hitBy.GetNodeOrNull<HitComponent>("HitComponent");
+        Node2D root = hitBy.GetParent<Node2D>();
+		DamageComponent hitByDamageComponent = root.GetNodeOrNull<DamageComponent>("DamageComponent");
+        HitComponent hitByHitComponent = root.GetNodeOrNull<HitComponent>("HitComponent");
 		if (hitByDamageComponent == null || hitByHitComponent == null)
 		{
 			GD.PrintErr("Hit by area without valid component");

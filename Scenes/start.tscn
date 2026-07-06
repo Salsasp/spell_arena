@@ -26,11 +26,31 @@ unique_name_in_owner = true
 script = ExtResource("3_5ogh5")
 ProjectilePrefab = ExtResource("4_lb6bl")
 
-[node name="Enemy" parent="." unique_id=736334869 instance=ExtResource("5_rk01k")]
+[node name="EnemyManager" type="Node2D" parent="." unique_id=529077049]
+
+[node name="Enemy" parent="EnemyManager" unique_id=736334869 instance=ExtResource("5_rk01k")]
 position = Vector2(176, -64)
 
-[node name="Enemy" parent="Enemy" unique_id=447986707 instance=ExtResource("5_rk01k")]
-position = Vector2(-25, 176)
-
-[node name="Enemy2" parent="." unique_id=235611402 instance=ExtResource("5_rk01k")]
+[node name="Enemy2" parent="EnemyManager" unique_id=235611402 instance=ExtResource("5_rk01k")]
 position = Vector2(184, 31)
+
+[node name="Enemy3" parent="EnemyManager" unique_id=447986707 instance=ExtResource("5_rk01k")]
+position = Vector2(151, 112)
+
+[node name="Enemy4" parent="EnemyManager" unique_id=587480059 instance=ExtResource("5_rk01k")]
+position = Vector2(156, 195)
+
+[node name="Enemy5" parent="EnemyManager" unique_id=1322314701 instance=ExtResource("5_rk01k")]
+position = Vector2(73, 176)
+
+[node name="Enemy6" parent="EnemyManager" unique_id=1551205888 instance=ExtResource("5_rk01k")]
+position = Vector2(253, 105)
+
+[node name="Enemy7" parent="EnemyManager" unique_id=1104209981 instance=ExtResource("5_rk01k")]
+position = Vector2(251, -13)
+
+[node name="Enemy8" parent="EnemyManager" unique_id=1798195243 instance=ExtResource("5_rk01k")]
+position = Vector2(274, 213)
+
+[node name="Enemy9" parent="EnemyManager" unique_id=1125373638 instance=ExtResource("5_rk01k")]
+position = Vector2(168, 285)
