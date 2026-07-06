@@ -11,19 +11,28 @@ public partial class AnimationComponent : Node2D
 
 	public void Update(MovementComponent movementComponent)
 	{
-		// Ignore animated movement if npc is stationary
+		// Ignore animated movement if npc doesn't move
 		if (directionalSprites)
 		{
-			if (movementComponent.direction.Length() > 0)
+			// Original WASD based direction changing; keeping intact in case I change my mind in the future
+			// if (movementComponent.direction.Length() > 0)
+			// {
+			// 	Vector2 direction = movementComponent.direction.Round();
+			// 	switch (direction)
+			// 	{
+			// 		case var v when v == Vector2.Right: animationState = "walk_right"; break;
+			// 		case var v when v == Vector2.Left: animationState = "walk_left"; break;
+			// 		case var v when v == Vector2.Up: animationState = "walk_up"; break;
+			// 		case var v when v == Vector2.Down: animationState = "walk_down"; break;
+			// 	}
+			// }
+			Vector2 direction = movementComponent.mouseDir.Round();
+			switch (direction)
 			{
-				Vector2 direction = movementComponent.direction.Round();
-				switch (direction)
-				{
-					case var v when v == Vector2.Right: animationState = "walk_right"; break;
-					case var v when v == Vector2.Left: animationState = "walk_left"; break;
-					case var v when v == Vector2.Up: animationState = "walk_up"; break;
-					case var v when v == Vector2.Down: animationState = "walk_down"; break;
-				}
+				case var v when v == Vector2.Right: animationState = "walk_right"; break;
+				case var v when v == Vector2.Left: animationState = "walk_left"; break;
+				case var v when v == Vector2.Up: animationState = "walk_up"; break;
+				case var v when v == Vector2.Down: animationState = "walk_down"; break;
 			}
 			animatedSprite.Play(animationState);
 		}

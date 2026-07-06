@@ -6,6 +6,7 @@ public partial class MovementComponent : Component
 	[Export] public float speed { get; set; } = 100f;
 
 	public Vector2 direction = Vector2.Zero;
+	public Vector2 mouseDir = Vector2.Zero;
 
 	public void Update(double delta)
 	{

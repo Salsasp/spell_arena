@@ -40,6 +40,7 @@ public partial class Player : CharacterBody2D
 
 		wand.RotateWand(inputComponent);
 		movementComponent.direction = inputComponent.MoveDir;
+		movementComponent.mouseDir = GlobalPosition.DirectionTo(inputComponent.MousePos).Normalized();
 		movementComponent.Update(delta);
 		animationComponent.Update(movementComponent);
 	}
