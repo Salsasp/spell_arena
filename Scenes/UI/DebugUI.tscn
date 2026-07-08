@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cwhripoub67q1"]
 
-[ext_resource type="Script" uid="uid://leg6xct3f02" path="res://Scripts/UI/DebugHealthLabel.cs" id="1_fpupx"]
+[ext_resource type="Script" uid="uid://xhkltev7xgnk" path="res://Scripts/UI/DebugUi.cs" id="1_fpupx"]
 
 [node name="DebugUi" type="Control" unique_id=1563016044]
 layout_mode = 3
@@ -9,10 +9,10 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_fpupx")
 
 [node name="DebugHealthLabel" type="Label" parent="." unique_id=2108735174]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
 text = "Current HP: "
-script = ExtResource("1_fpupx")
