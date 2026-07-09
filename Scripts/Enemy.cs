@@ -5,11 +5,17 @@ public partial class Enemy : CharacterBody2D
 {
     private HealthComponent healthComponent;
     private HitboxComponent hitboxComponent;
+    private MovementComponent movementComponent;
+    private AIMovementComponent aiMovementComponent;
+    private Player player;
 
     public override void _Ready()
     {
         healthComponent = GetNode<HealthComponent>("HealthComponent");
         hitboxComponent = GetNode<HitboxComponent>("HitboxComponent");
+        movementComponent = GetNode<MovementComponent>("MovementComponent");
+        aiMovementComponent = GetNode<AIMovementComponent>("AIMovementComponent");
+        player = GetNodeOrNull<Player>("../Player");
 
         // Connect signals
         healthComponent.HealthChanged += OnHealthChanged;
@@ -23,11 +29,16 @@ public partial class Enemy : CharacterBody2D
         GD.Print($"Health changed: {newHealth}");
     }
 
-    private void OnHit(Node2D hitBy)
+    private void OnHit(Area2D hitBy)
     {
+        if (hitBy.Name != "ProjArea2D")
+        {
+            return;
+        }
         Modulate = Colors.Red;
-		DamageComponent hitByDamageComponent = hitBy.GetNodeOrNull<DamageComponent>("DamageComponent");
-        HitComponent hitByHitComponent = hitBy.GetNodeOrNull<HitComponent>("HitComponent");
+        Node2D root = hitBy.GetParent<Node2D>();
+		DamageComponent hitByDamageComponent = root.GetNodeOrNull<DamageComponent>("DamageComponent");
+        HitComponent hitByHitComponent = root.GetNodeOrNull<HitComponent>("HitComponent");
 		if (hitByDamageComponent == null || hitByHitComponent == null)
 		{
 			GD.PrintErr("Hit by area without valid component");

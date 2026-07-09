@@ -5,7 +5,7 @@ public partial class HitboxComponent : Component
     private Area2D area2D;
 
     [Signal]
-    public delegate void HitEventHandler(Node2D hitBy);
+    public delegate void HitEventHandler(Area2D hitBy);
 
     public override void _Ready()
     {
@@ -16,7 +16,7 @@ public partial class HitboxComponent : Component
 
     private void OnAreaEntered(Area2D area)
     {
-        EmitSignal(SignalName.Hit, area.GetParent<Node2D>());
+        EmitSignal(SignalName.Hit, area);
     }
 
     public Area2D GetArea2D() => area2D;

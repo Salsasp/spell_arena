@@ -1,12 +1,15 @@
 [gd_scene format=3 uid="uid://bhc22mkeo4n1y"]
 
 [ext_resource type="PackedScene" uid="uid://c4rggtnuhb8j3" path="res://Scenes/player.tscn" id="1_3bxa3"]
+[ext_resource type="Script" uid="uid://cuocixvi4813j" path="res://Scripts/Main.cs" id="1_pg4io"]
 [ext_resource type="Texture2D" uid="uid://t72qohuqwr0h" path="res://Assets/Sprites/grass.png" id="2_r48yj"]
 [ext_resource type="Script" uid="uid://dlfxn8ubefymy" path="res://Scripts/ProjectileSpawner.cs" id="3_5ogh5"]
 [ext_resource type="PackedScene" uid="uid://dfgghhva4et46" path="res://Scenes/Projectile.tscn" id="4_lb6bl"]
 [ext_resource type="PackedScene" uid="uid://bquhpmf7bnwls" path="res://Scenes/Enemy.tscn" id="5_rk01k"]
+[ext_resource type="PackedScene" uid="uid://cwhripoub67q1" path="res://Scenes/UI/DebugUI.tscn" id="6_o3wvq"]
 
-[node name="Node2D" type="Node2D" unique_id=1087891947]
+[node name="Main" type="Node2D" unique_id=1087891947]
+script = ExtResource("1_pg4io")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=455015594]
 
@@ -26,11 +29,37 @@ unique_name_in_owner = true
 script = ExtResource("3_5ogh5")
 ProjectilePrefab = ExtResource("4_lb6bl")
 
-[node name="Enemy" parent="." unique_id=736334869 instance=ExtResource("5_rk01k")]
+[node name="EnemyManager" type="Node2D" parent="." unique_id=529077049]
+
+[node name="Enemy" parent="EnemyManager" unique_id=736334869 instance=ExtResource("5_rk01k")]
 position = Vector2(176, -64)
 
-[node name="Enemy" parent="Enemy" unique_id=447986707 instance=ExtResource("5_rk01k")]
-position = Vector2(-25, 176)
-
-[node name="Enemy2" parent="." unique_id=235611402 instance=ExtResource("5_rk01k")]
+[node name="Enemy2" parent="EnemyManager" unique_id=235611402 instance=ExtResource("5_rk01k")]
 position = Vector2(184, 31)
+
+[node name="Enemy3" parent="EnemyManager" unique_id=447986707 instance=ExtResource("5_rk01k")]
+position = Vector2(151, 112)
+
+[node name="Enemy4" parent="EnemyManager" unique_id=587480059 instance=ExtResource("5_rk01k")]
+position = Vector2(156, 195)
+
+[node name="Enemy5" parent="EnemyManager" unique_id=1322314701 instance=ExtResource("5_rk01k")]
+position = Vector2(73, 176)
+
+[node name="Enemy6" parent="EnemyManager" unique_id=1551205888 instance=ExtResource("5_rk01k")]
+position = Vector2(253, 105)
+
+[node name="Enemy7" parent="EnemyManager" unique_id=1104209981 instance=ExtResource("5_rk01k")]
+position = Vector2(251, -13)
+
+[node name="Enemy8" parent="EnemyManager" unique_id=1798195243 instance=ExtResource("5_rk01k")]
+position = Vector2(274, 213)
+
+[node name="Enemy9" parent="EnemyManager" unique_id=1125373638 instance=ExtResource("5_rk01k")]
+position = Vector2(168, 285)
+
+[node name="DebugUi" parent="." unique_id=1563016044 instance=ExtResource("6_o3wvq")]
+offset_left = -566.0
+offset_top = -314.0
+offset_right = -566.0
+offset_bottom = -314.0
