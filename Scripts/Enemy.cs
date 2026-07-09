@@ -5,11 +5,17 @@ public partial class Enemy : CharacterBody2D
 {
     private HealthComponent healthComponent;
     private HitboxComponent hitboxComponent;
+    private MovementComponent movementComponent;
+    private AIMovementComponent aiMovementComponent;
+    private Player player;
 
     public override void _Ready()
     {
         healthComponent = GetNode<HealthComponent>("HealthComponent");
         hitboxComponent = GetNode<HitboxComponent>("HitboxComponent");
+        movementComponent = GetNode<MovementComponent>("MovementComponent");
+        aiMovementComponent = GetNode<AIMovementComponent>("AIMovementComponent");
+        player = GetNodeOrNull<Player>("../Player");
 
         // Connect signals
         healthComponent.HealthChanged += OnHealthChanged;
