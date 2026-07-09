@@ -3,20 +3,23 @@ using Godot;
 
 public partial class Enemy : CharacterBody2D
 {
+    [Export] public float AttackSpeed = 1.0f;
     private HealthComponent healthComponent;
     private HitboxComponent hitboxComponent;
     private MovementComponent movementComponent;
     private AIMovementComponent aiMovementComponent;
     private ProjectileSpawner projectileSpawner;
     private Player player;
+    private float speedCounter;
 
     public override void _Ready()
     {
+        speedCounter = AttackSpeed;
         healthComponent = GetNode<HealthComponent>("HealthComponent");
         hitboxComponent = GetNode<HitboxComponent>("HitboxComponent");
         movementComponent = GetNode<MovementComponent>("MovementComponent");
         aiMovementComponent = GetNode<AIMovementComponent>("AIMovementComponent");
-        projectileSpawner = GetNode<ProjectileSpawner>("ProjectileSpawner");
+        projectileSpawner = GetNode<ProjectileSpawner>("../../ProjectileSpawner");
         player = GetNodeOrNull<Player>("../../Player");
         aiMovementComponent.Initialize(movementComponent, player);
 
@@ -28,7 +31,15 @@ public partial class Enemy : CharacterBody2D
 
     public override void _PhysicsProcess(double delta)
     {
+        if (speedCounter <= 0)
+        {
+            Vector2 projDir = GlobalPosition.DirectionTo(player.GlobalPosition);
+            projectileSpawner.SpawnProjectile(GlobalPosition, projDir);
+            speedCounter = AttackSpeed;
+        }
         movementComponent.Update(delta);
+
+        speedCounter -= (float)delta;
     }
 
 
