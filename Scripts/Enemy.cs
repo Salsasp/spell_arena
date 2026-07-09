@@ -3,7 +3,7 @@ using Godot;
 
 public partial class Enemy : CharacterBody2D
 {
-    [Export] public float AttackSpeed = 1.0f;
+    [Export] public float AttackDelay = 2.0f;
     private HealthComponent healthComponent;
     private HitboxComponent hitboxComponent;
     private MovementComponent movementComponent;
@@ -14,7 +14,7 @@ public partial class Enemy : CharacterBody2D
 
     public override void _Ready()
     {
-        speedCounter = AttackSpeed;
+        speedCounter = AttackDelay;
         healthComponent = GetNode<HealthComponent>("HealthComponent");
         hitboxComponent = GetNode<HitboxComponent>("HitboxComponent");
         movementComponent = GetNode<MovementComponent>("MovementComponent");
@@ -35,7 +35,7 @@ public partial class Enemy : CharacterBody2D
         {
             Vector2 projDir = GlobalPosition.DirectionTo(player.GlobalPosition);
             projectileSpawner.SpawnProjectile(GlobalPosition, projDir);
-            speedCounter = AttackSpeed;
+            speedCounter = AttackDelay;
         }
         movementComponent.Update(delta);
 
