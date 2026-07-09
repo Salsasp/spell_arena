@@ -29,7 +29,7 @@ script = ExtResource("2_rsyq6")
 unique_name_in_owner = true
 script = ExtResource("3_augfd")
 Sprite = NodePath("../ProjArea2D/Sprite2D")
-Speed = 200.0
+Speed = 400.0
 
 [node name="SpellSpawnComponent" type="Node2D" parent="." unique_id=345381162]
 unique_name_in_owner = true

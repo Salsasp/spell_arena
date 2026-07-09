@@ -7,6 +7,7 @@ public partial class Enemy : CharacterBody2D
     private HitboxComponent hitboxComponent;
     private MovementComponent movementComponent;
     private AIMovementComponent aiMovementComponent;
+    private ProjectileSpawner projectileSpawner;
     private Player player;
 
     public override void _Ready()
@@ -15,13 +16,21 @@ public partial class Enemy : CharacterBody2D
         hitboxComponent = GetNode<HitboxComponent>("HitboxComponent");
         movementComponent = GetNode<MovementComponent>("MovementComponent");
         aiMovementComponent = GetNode<AIMovementComponent>("AIMovementComponent");
-        player = GetNodeOrNull<Player>("../Player");
+        projectileSpawner = GetNode<ProjectileSpawner>("ProjectileSpawner");
+        player = GetNodeOrNull<Player>("../../Player");
+        aiMovementComponent.Initialize(movementComponent, player);
 
         // Connect signals
         healthComponent.HealthChanged += OnHealthChanged;
         healthComponent.Dead += OnDead;
         hitboxComponent.Hit += OnHit;
     }
+
+    public override void _PhysicsProcess(double delta)
+    {
+        movementComponent.Update(delta);
+    }
+
 
     private void OnHealthChanged(int newHealth)
     {
