@@ -1,89 +1,102 @@
-using System;
 using Godot;
 
 public partial class Enemy : CharacterBody2D
 {
-    [Export] public float AttackDelay = 2.0f;
-    private HealthComponent healthComponent;
-    private HitboxComponent hitboxComponent;
-    private MovementComponent movementComponent;
-    private AIMovementComponent aiMovementComponent;
-    private ProjectileSpawner projectileSpawner;
-    private Player player;
-    private float speedCounter;
+	private HealthComponent healthComponent;
+	private HitboxComponent hitboxComponent;
+	private MovementComponent movementComponent;
+	private AIMovementBehaviorComponent movementBehavior;
+	private AttackBehaviorComponent attackBehavior;
+	private EnemyContext context;
 
-    public override void _Ready()
-    {
-        speedCounter = AttackDelay;
-        healthComponent = GetNode<HealthComponent>("HealthComponent");
-        hitboxComponent = GetNode<HitboxComponent>("HitboxComponent");
-        movementComponent = GetNode<MovementComponent>("MovementComponent");
-        aiMovementComponent = GetNode<AIMovementComponent>("AIMovementComponent");
-        projectileSpawner = GetNode<ProjectileSpawner>("../../ProjectileSpawner");
-        player = GetNodeOrNull<Player>("../../Player");
-        aiMovementComponent.Initialize(movementComponent, player);
+	public override void _Ready()
+	{
+		healthComponent = GetNode<HealthComponent>("HealthComponent");
+		hitboxComponent = GetNode<HitboxComponent>("HitboxComponent");
+		movementComponent = GetNode<MovementComponent>("MovementComponent");
+		movementBehavior = FindBehavior<AIMovementBehaviorComponent>();
+		attackBehavior = FindBehavior<AttackBehaviorComponent>();
 
-        // Connect signals
-        healthComponent.HealthChanged += OnHealthChanged;
-        healthComponent.Dead += OnDead;
-        hitboxComponent.Hit += OnHit;
-    }
+		ProjectileSpawner projectileSpawner = GetNode<ProjectileSpawner>("../../ProjectileSpawner");
+		Player player = GetNodeOrNull<Player>("../../Player");
+		context = new EnemyContext(this, player, movementComponent, projectileSpawner);
 
-    public override void _PhysicsProcess(double delta)
-    {
-        if (speedCounter <= 0)
-        {
-            Vector2 projDir = GlobalPosition.DirectionTo(player.GlobalPosition);
-            projectileSpawner.SpawnProjectile(GlobalPosition, projDir);
-            speedCounter = AttackDelay;
-        }
-        movementComponent.Update(delta);
+		movementBehavior?.Initialize(context);
+		attackBehavior?.Initialize(context);
 
-        speedCounter -= (float)delta;
-    }
+		healthComponent.HealthChanged += OnHealthChanged;
+		healthComponent.Dead += OnDead;
+		hitboxComponent.Hit += OnHit;
+	}
 
+	public override void _PhysicsProcess(double delta)
+	{
+		if (!context.IsPlayerValid)
+		{
+			movementComponent.direction = Vector2.Zero;
+			movementComponent.Update(delta);
+			return;
+		}
 
-    private void OnHealthChanged(int newHealth)
-    {
-        // TODO: Update UI, play animation, etc.
-        GD.Print($"Health changed: {newHealth}");
-    }
+		movementBehavior?.Update(delta);
+		attackBehavior?.Update(delta);
+		movementComponent.Update(delta);
+	}
 
-    private void OnHit(Area2D hitBy)
-    {
-        if (hitBy.Name != "ProjArea2D")
-        {
-            return;
-        }
-        Modulate = Colors.Red;
-        Node2D root = hitBy.GetParent<Node2D>();
-		DamageComponent hitByDamageComponent = root.GetNodeOrNull<DamageComponent>("DamageComponent");
-        HitComponent hitByHitComponent = root.GetNodeOrNull<HitComponent>("HitComponent");
+	private T FindBehavior<T>() where T : Component
+	{
+		foreach (Node child in GetChildren())
+		{
+			if (child is T behavior)
+			{
+				return behavior;
+			}
+		}
+
+		return null;
+	}
+
+	private void OnHealthChanged(int newHealth)
+	{
+		GD.Print($"Health changed: {newHealth}");
+	}
+
+	private void OnHit(Area2D hitBy)
+	{
+		if ((hitBy.CollisionLayer & CollisionLayers.PlayerProjectile) == 0)
+		{
+			return;
+		}
+
+		Modulate = Colors.Red;
+		Node2D projectileRoot = hitBy.GetParent<Node2D>();
+		DamageComponent hitByDamageComponent = projectileRoot.GetNodeOrNull<DamageComponent>("DamageComponent");
+		HitComponent hitByHitComponent = projectileRoot.GetNodeOrNull<HitComponent>("HitComponent");
 		if (hitByDamageComponent == null || hitByHitComponent == null)
 		{
 			GD.PrintErr("Hit by area without valid component");
 			return;
 		}
+
 		healthComponent.TakeDamage(hitByDamageComponent.CalculateDamage());
-        hitByHitComponent.Update(this);
-    }
+		hitByHitComponent.Update(this);
+	}
 
-    private void OnDead()
-    {
-        GD.Print("Enemy died!");
-        // TODO: Play death animation, drop loot, etc.
-    }
+	private void OnDead()
+	{
+		GD.Print("Enemy died!");
+	}
 
-    public bool DotApplied()
-    {
-        foreach (Node child in this.GetChildren())
-        {
-            if (child is DotComponent)
-            {
-                return true;
-            }
-        }
+	public bool DotApplied()
+	{
+		foreach (Node child in GetChildren())
+		{
+			if (child is DotComponent)
+			{
+				return true;
+			}
+		}
 
-        return false;
-    }
+		return false;
+	}
 }

@@ -7,6 +7,8 @@ public partial class Player : CharacterBody2D
 	public const float JumpVelocity = -400.0f;
 	private InputComponent inputComponent;
 	private MovementComponent movementComponent;
+	private HealthComponent healthComponent;
+	private HitboxComponent hitboxComponent;
 	private ProjectileSpawner projectileSpawner;
 	private AnimationComponent animationComponent;
 	private Wand wand;
@@ -14,25 +16,24 @@ public partial class Player : CharacterBody2D
 
 	public override void _Ready()
 	{
-		projectileSpawner= GetNode<ProjectileSpawner>("../ProjectileSpawner");
+		projectileSpawner = GetNode<ProjectileSpawner>("../ProjectileSpawner");
 		inputComponent = GetNode<InputComponent>("InputComponent");
 		movementComponent = GetNode<MovementComponent>("MovementComponent");
+		healthComponent = GetNode<HealthComponent>("HealthComponent");
+		hitboxComponent = GetNode<HitboxComponent>("HitboxComponent");
 		animationComponent = GetNode<AnimationComponent>("AnimationComponent");
 		wand = GetNode<Wand>("Wand");
 		modifierManager = GetNode<ModifierManager>("ModifierManager");
-		// FOR TESTING: REMOVE LATER
-		//modifierManager.ActiveModifiers.Add("fire_spells", modifierManager.GetModifier("fire_spells"));
+		hitboxComponent.Hit += OnHit;
 		modifierManager.ActiveModifiers.Add("chain_spells", modifierManager.GetModifier("chain_spells"));
-		//modifierManager.PrintModifiers();
 	}
 
 	public override void _PhysicsProcess(double delta)
 	{
 		inputComponent.Update();
-		// TODO: replace GlobalPosition with the GlobalPosition of a custom point2D
 		Vector2 EndOfWandPos = wand.GetEndOfWandPos();
 		Vector2 projDir = EndOfWandPos.DirectionTo(inputComponent.MousePos).Normalized();
-		
+
 		if (inputComponent.LeftClickJustPressed)
 		{
 			projectileSpawner.SpawnProjectile(EndOfWandPos, projDir);
@@ -54,8 +55,26 @@ public partial class Player : CharacterBody2D
 	{
 		if (inputComponent.LeftClickPressed)
 		{
-			//DrawLine(wand.GetEndOfWandPos(), inputComponent.MousePos, Colors.Red);
 		}
 	}
 
+	private void OnHit(Area2D hitBy)
+	{
+		if ((hitBy.CollisionLayer & CollisionLayers.EnemyProjectile) == 0)
+		{
+			return;
+		}
+
+		Modulate = Colors.Red;
+		Node2D projectileRoot = hitBy.GetParent<Node2D>();
+		DamageComponent damageComponent = projectileRoot.GetNodeOrNull<DamageComponent>("DamageComponent");
+		if (damageComponent == null)
+		{
+			GD.PrintErr("Hit by enemy projectile without DamageComponent");
+			return;
+		}
+
+		healthComponent.TakeDamage(damageComponent.CalculateDamage());
+		projectileRoot.QueueFree();
+	}
 }

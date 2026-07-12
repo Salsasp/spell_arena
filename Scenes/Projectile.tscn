@@ -51,6 +51,8 @@ Lifetime = 2
 [node name="Timer" type="Timer" parent="LifetimeComponent" unique_id=295151940]
 
 [node name="ProjArea2D" type="Area2D" parent="." unique_id=631328878]
+collision_layer = 16
+collision_mask = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ProjArea2D" unique_id=487064132]
 shape = SubResource("CapsuleShape2D_rsyq6")
@@ -59,6 +61,8 @@ shape = SubResource("CapsuleShape2D_rsyq6")
 texture = ExtResource("8_rsyq6")
 
 [node name="ChainRadius" type="Area2D" parent="." unique_id=656173701]
+collision_layer = 0
+collision_mask = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ChainRadius" unique_id=1420828172]
 shape = SubResource("CircleShape2D_ar0ab")

@@ -6,7 +6,8 @@
 [ext_resource type="Script" uid="uid://csu7r54n2f32y" path="res://Scripts/HealthComponent.cs" id="3_mo1ky"]
 [ext_resource type="Script" uid="uid://nabumqpkq4ny" path="res://Scripts/AnimationComponent.cs" id="4_6bs3c"]
 [ext_resource type="Script" uid="uid://bol4ib3tbtusr" path="res://Scripts/HitboxComponent.cs" id="6_mo1ky"]
-[ext_resource type="Script" uid="uid://jxt6krydnb6" path="res://Scripts/AIMovementComponent.cs" id="7_6bs3c"]
+[ext_resource type="Script" path="res://Scripts/Enemy/Behaviors/StrafeMovementComponent.cs" id="7_strafe"]
+[ext_resource type="Script" path="res://Scripts/Enemy/Behaviors/ProjectileAttackComponent.cs" id="8_projectile"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_wpjfl"]
 
@@ -19,6 +20,8 @@ nodes/Animation/position = Vector2(180, 100)
 size = Vector2(20, 32)
 
 [node name="Enemy" type="CharacterBody2D" unique_id=736334869 groups=["enemies"]]
+collision_layer = 4
+collision_mask = 1
 script = ExtResource("1_1exfc")
 
 [node name="EnemySprite" type="Sprite2D" parent="." unique_id=1456288672]
@@ -47,6 +50,8 @@ tree_root = SubResource("AnimationNodeBlendTree_idouy")
 script = ExtResource("6_mo1ky")
 
 [node name="Area2D" type="Area2D" parent="HitboxComponent" unique_id=1248440504 groups=["enemies"]]
+collision_layer = 8
+collision_mask = 16
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent/Area2D" unique_id=1007366774]
 shape = SubResource("RectangleShape2D_uoxpr")
@@ -54,5 +59,8 @@ shape = SubResource("RectangleShape2D_uoxpr")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=992306056]
 shape = SubResource("RectangleShape2D_uoxpr")
 
-[node name="AIMovementComponent" type="Node2D" parent="." unique_id=1137040085]
-script = ExtResource("7_6bs3c")
+[node name="StrafeMovementComponent" type="Node2D" parent="." unique_id=1137040085]
+script = ExtResource("7_strafe")
+
+[node name="ProjectileAttackComponent" type="Node2D" parent="."]
+script = ExtResource("8_projectile")

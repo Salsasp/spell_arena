@@ -1,0 +1,66 @@
+[gd_scene format=3 uid="uid://c8strafeenemy01"]
+
+[ext_resource type="Script" uid="uid://c0ouqjnx6xc1d" path="res://Scripts/Enemy.cs" id="1_enemy"]
+[ext_resource type="Texture2D" uid="uid://dx3ws0g34at1r" path="res://Assets/Sprites/Enemy/placeholder_enemy.png" id="2_sprite"]
+[ext_resource type="Script" uid="uid://cn0ulmxa1s7nw" path="res://Scripts/MovementComponent.cs" id="3_move"]
+[ext_resource type="Script" uid="uid://csu7r54n2f32y" path="res://Scripts/HealthComponent.cs" id="4_health"]
+[ext_resource type="Script" uid="uid://nabumqpkq4ny" path="res://Scripts/AnimationComponent.cs" id="5_anim"]
+[ext_resource type="Script" uid="uid://bol4ib3tbtusr" path="res://Scripts/HitboxComponent.cs" id="6_hitbox"]
+[ext_resource type="Script" path="res://Scripts/Enemy/Behaviors/StrafeMovementComponent.cs" id="7_strafe"]
+[ext_resource type="Script" path="res://Scripts/Enemy/Behaviors/ProjectileAttackComponent.cs" id="8_projectile"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_strafe"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_strafe"]
+nodes/output/position = Vector2(380, 160)
+nodes/Animation/node = SubResource("AnimationNodeAnimation_strafe")
+nodes/Animation/position = Vector2(180, 100)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_strafe"]
+size = Vector2(20, 32)
+
+[node name="EnemyStrafeShooter" type="CharacterBody2D" groups=["enemies"]]
+collision_layer = 4
+collision_mask = 1
+script = ExtResource("1_enemy")
+
+[node name="EnemySprite" type="Sprite2D" parent="."]
+z_index = 1
+texture = ExtResource("2_sprite")
+
+[node name="MovementComponent" type="Node2D" parent="." node_paths=PackedStringArray("body")]
+unique_name_in_owner = true
+script = ExtResource("3_move")
+body = NodePath("..")
+
+[node name="HealthComponent" type="Node2D" parent="."]
+unique_name_in_owner = true
+script = ExtResource("4_health")
+
+[node name="AnimationComponent" type="Node2D" parent="." node_paths=PackedStringArray("sprite")]
+script = ExtResource("5_anim")
+sprite = NodePath("../EnemySprite")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeBlendTree_strafe")
+
+[node name="HitboxComponent" type="Node2D" parent="." groups=["enemies"]]
+script = ExtResource("6_hitbox")
+
+[node name="Area2D" type="Area2D" parent="HitboxComponent" groups=["enemies"]]
+collision_layer = 8
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent/Area2D"]
+shape = SubResource("RectangleShape2D_strafe")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_strafe")
+
+[node name="StrafeMovementComponent" type="Node2D" parent="."]
+script = ExtResource("7_strafe")
+
+[node name="ProjectileAttackComponent" type="Node2D" parent="."]
+script = ExtResource("8_projectile")

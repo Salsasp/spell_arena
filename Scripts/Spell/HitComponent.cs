@@ -14,11 +14,11 @@ public partial class HitComponent : Component
 	private const int DOT_DURATION = 10;
 	[Export] public bool ShowDebugCircle { get; set; } = true;
 
-	public void Update(Enemy enemy)
+	public void Update(Node2D target)
 	{
 		if (modifierManager.ActiveModifiers.ContainsKey("chain_spells"))
 		{
-			ChainSpell(enemy);
+			ChainSpell(target);
 		}
 		else if (!modifierManager.ActiveModifiers.ContainsKey("pierce_spells"))
 		{
@@ -27,7 +27,7 @@ public partial class HitComponent : Component
 
 		if (modifierManager.ActiveModifiers.ContainsKey("fire_spells"))
 		{
-			ApplyDot(enemy, modifierManager.ActiveModifiers["fire_spells"]);
+			ApplyDot(target, modifierManager.ActiveModifiers["fire_spells"]);
 		}
 	}
 
@@ -46,7 +46,7 @@ public partial class HitComponent : Component
 		movementComponent = moveComp;
 	}
 
-	public void ChainSpell(Enemy currTarget)
+	public void ChainSpell(Node2D currTarget)
 	{
 		if (chainCount <= 0)
 		{
@@ -55,47 +55,46 @@ public partial class HitComponent : Component
 
 		List<Node2D> chainTargets = new();
 
-		// Acquire potential chain candidates
-		foreach (Node2D body in chainRadius.GetOverlappingAreas())
+		foreach (Area2D area in chainRadius.GetOverlappingAreas())
 		{
-			// Potential pitfalls for future debugging: this grabs ANY area2D, including projectiles and player
-			// TODO: clean up tree navigation to avoid future errors
-			Node2D bodyRoot = (Node2D)body.GetParent().GetParent();
-			if (body.IsInGroup("enemies") && bodyRoot != currTarget)
+			if ((area.CollisionLayer & CollisionLayers.EnemyHurtbox) == 0)
 			{
-				chainTargets.Add(body);
+				continue;
 			}
+
+			Node2D enemyRoot = area.GetParent()?.GetParent() as Node2D;
+			if (enemyRoot == null || enemyRoot == currTarget)
+			{
+				continue;
+			}
+
+			chainTargets.Add(enemyRoot);
 		}
 
-		// No enemies in chain radius
 		if (chainTargets.Count == 0)
 		{
 			return;
 		}
 
-		// Obtain closest enemy
 		Node2D closestEnemy = chainTargets[0];
 		float currDistance = chainTargets[0].GlobalPosition.DistanceTo(currTarget.GlobalPosition);
-		if (chainTargets.Count > 1)
+		for (int i = 1; i < chainTargets.Count; i++)
 		{
-			for (int i = 1; i < chainTargets.Count; i++)
+			float distance = chainTargets[i].GlobalPosition.DistanceTo(currTarget.GlobalPosition);
+			if (distance < currDistance)
 			{
-				float distance = chainTargets[i].GlobalPosition.DistanceTo(currTarget.GlobalPosition);
-				if (distance < currDistance)
-				{
-					closestEnemy = chainTargets[i];
-					currDistance = distance;
-				}
+				closestEnemy = chainTargets[i];
+				currDistance = distance;
 			}
 		}
-		
+
 		ChainTo(currTarget, closestEnemy);
 	}
 
 	// TODO: change chain structure to recursive by passing in curr and nearest enemy,
 	// decrementing chain limit until 0
 
-	public void ChainTo(Enemy currTarget, Node2D enemy)
+	public void ChainTo(Node2D currTarget, Node2D enemy)
 	{
 		float dir = Mathf.Atan2(enemy.GlobalPosition.Y - currTarget.GlobalPosition.Y,
 								enemy.GlobalPosition.X - currTarget.GlobalPosition.X);
@@ -105,7 +104,7 @@ public partial class HitComponent : Component
 		chainCount -= 1;
 	}
 
-	public void ApplyDot(Enemy enemy, ModifierData modifier)
+	public void ApplyDot(Node2D target, ModifierData modifier)
 	{
 		float dotDamage = modifier.dotDamage;
 		DotComponent dot = new()
@@ -115,10 +114,23 @@ public partial class HitComponent : Component
 			Duration = DOT_DURATION
 		};
 
-		if (!enemy.DotApplied())
+		if (!HasDotComponent(target))
 		{
-			enemy.AddChild(dot);
+			target.AddChild(dot);
 		}
+	}
+
+	private static bool HasDotComponent(Node2D target)
+	{
+		foreach (Node child in target.GetChildren())
+		{
+			if (child is DotComponent)
+			{
+				return true;
+			}
+		}
+
+		return false;
 	}
 
 	public override void _Draw()
