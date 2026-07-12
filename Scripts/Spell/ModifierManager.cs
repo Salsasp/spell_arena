@@ -7,6 +7,10 @@ public partial class ModifierManager : Node
     private Dictionary<string, ModifierData> modifiers = [];
     public Dictionary<string, ModifierData> ActiveModifiers = [];
 
+    public IEnumerable<ModifierData> GetAllModifiers() => modifiers.Values;
+
+    public bool HasActiveModifier(string id) => ActiveModifiers.ContainsKey(id);
+
     public override void _EnterTree()
     {
         Instance = this;

@@ -7,6 +7,7 @@ public partial class Enemy : CharacterBody2D
 	private MovementComponent movementComponent;
 	private AIMovementBehaviorComponent movementBehavior;
 	private AttackBehaviorComponent attackBehavior;
+	private ArenaClampComponent arenaClamp;
 	private EnemyContext context;
 
 	public override void _Ready()
@@ -16,13 +17,16 @@ public partial class Enemy : CharacterBody2D
 		movementComponent = GetNode<MovementComponent>("MovementComponent");
 		movementBehavior = FindBehavior<AIMovementBehaviorComponent>();
 		attackBehavior = FindBehavior<AttackBehaviorComponent>();
+		arenaClamp = GetNodeOrNull<ArenaClampComponent>("ArenaClampComponent");
 
 		ProjectileSpawner projectileSpawner = GetNode<ProjectileSpawner>("../../ProjectileSpawner");
 		Player player = GetNodeOrNull<Player>("../../Player");
-		context = new EnemyContext(this, player, movementComponent, projectileSpawner);
+		ArenaBounds arenaBounds = GetNodeOrNull<ArenaBounds>("../../ArenaBounds");
+		context = new EnemyContext(this, player, movementComponent, projectileSpawner, arenaBounds);
 
 		movementBehavior?.Initialize(context);
 		attackBehavior?.Initialize(context);
+		arenaClamp?.Initialize(context);
 
 		healthComponent.HealthChanged += OnHealthChanged;
 		healthComponent.Dead += OnDead;
@@ -41,6 +45,7 @@ public partial class Enemy : CharacterBody2D
 		movementBehavior?.Update(delta);
 		attackBehavior?.Update(delta);
 		movementComponent.Update(delta);
+		arenaClamp?.Apply();
 	}
 
 	private T FindBehavior<T>() where T : Component
