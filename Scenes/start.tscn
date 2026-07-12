@@ -5,8 +5,10 @@
 [ext_resource type="Texture2D" uid="uid://t72qohuqwr0h" path="res://Assets/Sprites/grass.png" id="2_r48yj"]
 [ext_resource type="Script" uid="uid://dlfxn8ubefymy" path="res://Scripts/ProjectileSpawner.cs" id="3_5ogh5"]
 [ext_resource type="PackedScene" uid="uid://dfgghhva4et46" path="res://Scenes/Projectile.tscn" id="4_lb6bl"]
-[ext_resource type="PackedScene" uid="uid://bquhpmf7bnwls" path="res://Scenes/Enemy.tscn" id="5_rk01k"]
-[ext_resource type="PackedScene" uid="uid://cwhripoub67q1" path="res://Scenes/UI/DebugUI.tscn" id="6_o3wvq"]
+[ext_resource type="PackedScene" uid="uid://bgg3myko12fb5" path="res://Scenes/Enemies/EnemyStrafeShooter.tscn" id="5_strafe"]
+[ext_resource type="PackedScene" uid="uid://jl207mgkmkb7" path="res://Scenes/Enemies/EnemyCharger.tscn" id="6_charger"]
+[ext_resource type="PackedScene" uid="uid://v1rbis70bab5" path="res://Scenes/EnemyProjectile.tscn" id="7_enemyproj"]
+[ext_resource type="PackedScene" uid="uid://cwhripoub67q1" path="res://Scenes/UI/DebugUI.tscn" id="8_o3wvq"]
 
 [node name="Main" type="Node2D" unique_id=1087891947]
 script = ExtResource("1_pg4io")
@@ -28,37 +30,38 @@ scale = Vector2(2, 2)
 unique_name_in_owner = true
 script = ExtResource("3_5ogh5")
 ProjectilePrefab = ExtResource("4_lb6bl")
+EnemyProjectilePrefab = ExtResource("7_enemyproj")
 
 [node name="EnemyManager" type="Node2D" parent="." unique_id=529077049]
 
-[node name="Enemy" parent="EnemyManager" unique_id=736334869 instance=ExtResource("5_rk01k")]
-position = Vector2(176, -64)
+[node name="StrafeShooter1" parent="EnemyManager" unique_id=539418025 instance=ExtResource("5_strafe")]
+position = Vector2(183, -224)
 
-[node name="Enemy2" parent="EnemyManager" unique_id=235611402 instance=ExtResource("5_rk01k")]
-position = Vector2(184, 31)
+[node name="StrafeShooter2" parent="EnemyManager" unique_id=1677674681 instance=ExtResource("5_strafe")]
+position = Vector2(-257, 13)
 
-[node name="Enemy3" parent="EnemyManager" unique_id=447986707 instance=ExtResource("5_rk01k")]
-position = Vector2(151, 112)
+[node name="StrafeShooter3" parent="EnemyManager" unique_id=1334393253 instance=ExtResource("5_strafe")]
+position = Vector2(-190, -166)
 
-[node name="Enemy4" parent="EnemyManager" unique_id=587480059 instance=ExtResource("5_rk01k")]
-position = Vector2(156, 195)
+[node name="StrafeShooter4" parent="EnemyManager" unique_id=1954211916 instance=ExtResource("5_strafe")]
+position = Vector2(33, 283)
 
-[node name="Enemy5" parent="EnemyManager" unique_id=1322314701 instance=ExtResource("5_rk01k")]
-position = Vector2(73, 176)
-
-[node name="Enemy6" parent="EnemyManager" unique_id=1551205888 instance=ExtResource("5_rk01k")]
-position = Vector2(253, 105)
-
-[node name="Enemy7" parent="EnemyManager" unique_id=1104209981 instance=ExtResource("5_rk01k")]
+[node name="StrafeShooter5" parent="EnemyManager" unique_id=1297519502 instance=ExtResource("5_strafe")]
 position = Vector2(251, -13)
 
-[node name="Enemy8" parent="EnemyManager" unique_id=1798195243 instance=ExtResource("5_rk01k")]
+[node name="Charger1" parent="EnemyManager" unique_id=1915982292 instance=ExtResource("6_charger")]
+position = Vector2(-131, 207)
+
+[node name="Charger2" parent="EnemyManager" unique_id=1007062506 instance=ExtResource("6_charger")]
+position = Vector2(253, 105)
+
+[node name="Charger3" parent="EnemyManager" unique_id=1412385166 instance=ExtResource("6_charger")]
 position = Vector2(274, 213)
 
-[node name="Enemy9" parent="EnemyManager" unique_id=1125373638 instance=ExtResource("5_rk01k")]
+[node name="Charger4" parent="EnemyManager" unique_id=132863710 instance=ExtResource("6_charger")]
 position = Vector2(168, 285)
 
-[node name="DebugUi" parent="." unique_id=1563016044 instance=ExtResource("6_o3wvq")]
+[node name="DebugUi" parent="." unique_id=1563016044 instance=ExtResource("8_o3wvq")]
 offset_left = -566.0
 offset_top = -314.0
 offset_right = -566.0

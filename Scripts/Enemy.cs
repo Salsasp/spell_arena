@@ -1,69 +1,102 @@
-using System;
 using Godot;
 
 public partial class Enemy : CharacterBody2D
 {
-    private HealthComponent healthComponent;
-    private HitboxComponent hitboxComponent;
-    private MovementComponent movementComponent;
-    private AIMovementComponent aiMovementComponent;
-    private Player player;
+	private HealthComponent healthComponent;
+	private HitboxComponent hitboxComponent;
+	private MovementComponent movementComponent;
+	private AIMovementBehaviorComponent movementBehavior;
+	private AttackBehaviorComponent attackBehavior;
+	private EnemyContext context;
 
-    public override void _Ready()
-    {
-        healthComponent = GetNode<HealthComponent>("HealthComponent");
-        hitboxComponent = GetNode<HitboxComponent>("HitboxComponent");
-        movementComponent = GetNode<MovementComponent>("MovementComponent");
-        aiMovementComponent = GetNode<AIMovementComponent>("AIMovementComponent");
-        player = GetNodeOrNull<Player>("../Player");
+	public override void _Ready()
+	{
+		healthComponent = GetNode<HealthComponent>("HealthComponent");
+		hitboxComponent = GetNode<HitboxComponent>("HitboxComponent");
+		movementComponent = GetNode<MovementComponent>("MovementComponent");
+		movementBehavior = FindBehavior<AIMovementBehaviorComponent>();
+		attackBehavior = FindBehavior<AttackBehaviorComponent>();
 
-        // Connect signals
-        healthComponent.HealthChanged += OnHealthChanged;
-        healthComponent.Dead += OnDead;
-        hitboxComponent.Hit += OnHit;
-    }
+		ProjectileSpawner projectileSpawner = GetNode<ProjectileSpawner>("../../ProjectileSpawner");
+		Player player = GetNodeOrNull<Player>("../../Player");
+		context = new EnemyContext(this, player, movementComponent, projectileSpawner);
 
-    private void OnHealthChanged(int newHealth)
-    {
-        // TODO: Update UI, play animation, etc.
-        GD.Print($"Health changed: {newHealth}");
-    }
+		movementBehavior?.Initialize(context);
+		attackBehavior?.Initialize(context);
 
-    private void OnHit(Area2D hitBy)
-    {
-        if (hitBy.Name != "ProjArea2D")
-        {
-            return;
-        }
-        Modulate = Colors.Red;
-        Node2D root = hitBy.GetParent<Node2D>();
-		DamageComponent hitByDamageComponent = root.GetNodeOrNull<DamageComponent>("DamageComponent");
-        HitComponent hitByHitComponent = root.GetNodeOrNull<HitComponent>("HitComponent");
+		healthComponent.HealthChanged += OnHealthChanged;
+		healthComponent.Dead += OnDead;
+		hitboxComponent.Hit += OnHit;
+	}
+
+	public override void _PhysicsProcess(double delta)
+	{
+		if (!context.IsPlayerValid)
+		{
+			movementComponent.direction = Vector2.Zero;
+			movementComponent.Update(delta);
+			return;
+		}
+
+		movementBehavior?.Update(delta);
+		attackBehavior?.Update(delta);
+		movementComponent.Update(delta);
+	}
+
+	private T FindBehavior<T>() where T : Component
+	{
+		foreach (Node child in GetChildren())
+		{
+			if (child is T behavior)
+			{
+				return behavior;
+			}
+		}
+
+		return null;
+	}
+
+	private void OnHealthChanged(int newHealth)
+	{
+		GD.Print($"Health changed: {newHealth}");
+	}
+
+	private void OnHit(Area2D hitBy)
+	{
+		if ((hitBy.CollisionLayer & CollisionLayers.PlayerProjectile) == 0)
+		{
+			return;
+		}
+
+		Modulate = Colors.Red;
+		Node2D projectileRoot = hitBy.GetParent<Node2D>();
+		DamageComponent hitByDamageComponent = projectileRoot.GetNodeOrNull<DamageComponent>("DamageComponent");
+		HitComponent hitByHitComponent = projectileRoot.GetNodeOrNull<HitComponent>("HitComponent");
 		if (hitByDamageComponent == null || hitByHitComponent == null)
 		{
 			GD.PrintErr("Hit by area without valid component");
 			return;
 		}
+
 		healthComponent.TakeDamage(hitByDamageComponent.CalculateDamage());
-        hitByHitComponent.Update(this);
-    }
+		hitByHitComponent.Update(this);
+	}
 
-    private void OnDead()
-    {
-        GD.Print("Enemy died!");
-        // TODO: Play death animation, drop loot, etc.
-    }
+	private void OnDead()
+	{
+		GD.Print("Enemy died!");
+	}
 
-    public bool DotApplied()
-    {
-        foreach (Node child in this.GetChildren())
-        {
-            if (child is DotComponent)
-            {
-                return true;
-            }
-        }
+	public bool DotApplied()
+	{
+		foreach (Node child in GetChildren())
+		{
+			if (child is DotComponent)
+			{
+				return true;
+			}
+		}
 
-        return false;
-    }
+		return false;
+	}
 }

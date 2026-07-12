@@ -113,6 +113,7 @@ nodes/Animation/position = Vector2(180, 100)
 size = Vector2(20, 32)
 
 [node name="Player" type="CharacterBody2D" unique_id=1570652818]
+collision_mask = 4
 script = ExtResource("1_vgqql")
 
 [node name="Collider" type="CollisionShape2D" parent="." unique_id=462390313]
@@ -127,6 +128,7 @@ animation = &"idle"
 unique_name_in_owner = true
 script = ExtResource("2_fkybt")
 body = NodePath("..")
+speed = 200.0
 
 [node name="InputComponent" type="Node2D" parent="." unique_id=1352110215]
 unique_name_in_owner = true
@@ -154,6 +156,8 @@ position = Vector2(10, 8)
 script = ExtResource("14_7dp3o")
 
 [node name="Area2D" type="Area2D" parent="HitboxComponent" unique_id=385752626]
+collision_layer = 2
+collision_mask = 32
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent/Area2D" unique_id=880933975]
 shape = SubResource("RectangleShape2D_7dp3o")

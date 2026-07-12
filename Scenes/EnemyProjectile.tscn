@@ -1,0 +1,50 @@
+[gd_scene format=3 uid="uid://v1rbis70bab5"]
+
+[ext_resource type="Script" uid="uid://c68bviqtcbcmk" path="res://Scripts/EnemyProjectile.cs" id="1_enemyproj"]
+[ext_resource type="Script" uid="uid://d3op0eovhs6cq" path="res://Scripts/Spell/DamageComponent.cs" id="2_damage"]
+[ext_resource type="Script" uid="uid://5k1veq5ulv3t" path="res://Scripts/Spell/SpellMovementComponent.cs" id="3_move"]
+[ext_resource type="Script" uid="uid://cs8nivwxnirj8" path="res://Scripts/Spell/DespawnComponent.cs" id="4_despawn"]
+[ext_resource type="Script" uid="uid://7vbl3a4b3hlt" path="res://Scripts/Spell/LifetimeComponent.cs" id="5_lifetime"]
+[ext_resource type="Texture2D" uid="uid://bi10gkxvs8qa7" path="res://Assets/Sprites/Enemy/projectile_enemy.png" id="6_hwef1"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_enemyproj"]
+radius = 2.0
+height = 20.0
+
+[node name="EnemyProjectile" type="Node2D" unique_id=183864806 groups=["enemy_attacks"]]
+script = ExtResource("1_enemyproj")
+
+[node name="DamageComponent" type="Node2D" parent="." unique_id=1688255860]
+unique_name_in_owner = true
+script = ExtResource("2_damage")
+CritChance = 0.0
+BaseDamage = 5
+
+[node name="SpellMovementComponent" type="Node2D" parent="." unique_id=20917591 node_paths=PackedStringArray("Sprite")]
+unique_name_in_owner = true
+script = ExtResource("3_move")
+Sprite = NodePath("../ProjArea2D/Sprite2D")
+Speed = 100.0
+
+[node name="DespawnComponent" type="Node2D" parent="." unique_id=60519413]
+unique_name_in_owner = true
+script = ExtResource("4_despawn")
+
+[node name="LifetimeComponent" type="Node2D" parent="." unique_id=1142040630]
+unique_name_in_owner = true
+script = ExtResource("5_lifetime")
+Lifetime = 3
+
+[node name="Timer" type="Timer" parent="LifetimeComponent" unique_id=1557837100]
+
+[node name="ProjArea2D" type="Area2D" parent="." unique_id=997250099 groups=["enemy_attacks"]]
+collision_layer = 32
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ProjArea2D" unique_id=1385845091]
+shape = SubResource("CapsuleShape2D_enemyproj")
+
+[node name="Sprite2D" type="Sprite2D" parent="ProjArea2D" unique_id=461592810]
+modulate = Color(1, 0.3, 0.3, 1)
+rotation = 1.5707964
+texture = ExtResource("6_hwef1")
