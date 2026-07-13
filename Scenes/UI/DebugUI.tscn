@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://cwhripoub67q1"]
 
 [ext_resource type="Script" uid="uid://xhkltev7xgnk" path="res://Scripts/UI/DebugUi.cs" id="1_fpupx"]
+[ext_resource type="Script" uid="uid://dxqwh5q56ypao" path="res://Scripts/UI/EndRoundButton.cs" id="2_7gdgf"]
 
 [node name="DebugUi" type="Control" unique_id=1563016044]
 layout_mode = 3
@@ -16,3 +17,12 @@ layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
 text = "Current HP: "
+
+[node name="EndRoundButton" type="Button" parent="." unique_id=930195425]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 26.0
+offset_right = 158.0
+offset_bottom = 57.0
+text = "End Current Round"
+script = ExtResource("2_7gdgf")

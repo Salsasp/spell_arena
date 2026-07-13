@@ -9,6 +9,10 @@
 [ext_resource type="PackedScene" uid="uid://jl207mgkmkb7" path="res://Scenes/Enemies/EnemyCharger.tscn" id="6_charger"]
 [ext_resource type="PackedScene" uid="uid://v1rbis70bab5" path="res://Scenes/EnemyProjectile.tscn" id="7_enemyproj"]
 [ext_resource type="PackedScene" uid="uid://cwhripoub67q1" path="res://Scenes/UI/DebugUI.tscn" id="8_o3wvq"]
+[ext_resource type="Script" uid="uid://chiji0st1ftrb" path="res://Scripts/Wave/ArenaBounds.cs" id="9_arena"]
+[ext_resource type="Script" uid="uid://drai7myprghfn" path="res://Scripts/Wave/WaveSpawner.cs" id="10_spawner"]
+[ext_resource type="Script" uid="uid://clpg8wpj286h1" path="res://Scripts/Wave/RunManager.cs" id="11_run"]
+[ext_resource type="PackedScene" uid="uid://bobqekh085xdg" path="res://Scenes/UI/GameUI.tscn" id="12_gameui"]
 
 [node name="Main" type="Node2D" unique_id=1087891947]
 script = ExtResource("1_pg4io")
@@ -17,11 +21,16 @@ script = ExtResource("1_pg4io")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1575237862]
 
+[node name="GameUI" parent="CanvasLayer" unique_id=1497517439 instance=ExtResource("12_gameui")]
+
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1340440999]
 
 [node name="Grass" type="Sprite2D" parent="." unique_id=728686338]
-position = Vector2(-2, 2)
+position = Vector2(-14, 0)
 texture = ExtResource("2_r48yj")
+
+[node name="ArenaBounds" type="Node2D" parent="." unique_id=923003245]
+script = ExtResource("9_arena")
 
 [node name="Player" parent="." unique_id=1570652818 instance=ExtResource("1_3bxa3")]
 scale = Vector2(2, 2)
@@ -34,32 +43,19 @@ EnemyProjectilePrefab = ExtResource("7_enemyproj")
 
 [node name="EnemyManager" type="Node2D" parent="." unique_id=529077049]
 
-[node name="StrafeShooter1" parent="EnemyManager" unique_id=539418025 instance=ExtResource("5_strafe")]
-position = Vector2(183, -224)
+[node name="WaveSpawner" type="Node2D" parent="." unique_id=883766410]
+script = ExtResource("10_spawner")
+EnemyContainerPath = NodePath("../EnemyManager")
+ArenaBoundsPath = NodePath("../ArenaBounds")
+PlayerPath = NodePath("../Player")
+StrafeShooterScene = ExtResource("5_strafe")
+ChargerScene = ExtResource("6_charger")
 
-[node name="StrafeShooter2" parent="EnemyManager" unique_id=1677674681 instance=ExtResource("5_strafe")]
-position = Vector2(-257, 13)
-
-[node name="StrafeShooter3" parent="EnemyManager" unique_id=1334393253 instance=ExtResource("5_strafe")]
-position = Vector2(-190, -166)
-
-[node name="StrafeShooter4" parent="EnemyManager" unique_id=1954211916 instance=ExtResource("5_strafe")]
-position = Vector2(33, 283)
-
-[node name="StrafeShooter5" parent="EnemyManager" unique_id=1297519502 instance=ExtResource("5_strafe")]
-position = Vector2(251, -13)
-
-[node name="Charger1" parent="EnemyManager" unique_id=1915982292 instance=ExtResource("6_charger")]
-position = Vector2(-131, 207)
-
-[node name="Charger2" parent="EnemyManager" unique_id=1007062506 instance=ExtResource("6_charger")]
-position = Vector2(253, 105)
-
-[node name="Charger3" parent="EnemyManager" unique_id=1412385166 instance=ExtResource("6_charger")]
-position = Vector2(274, 213)
-
-[node name="Charger4" parent="EnemyManager" unique_id=132863710 instance=ExtResource("6_charger")]
-position = Vector2(168, 285)
+[node name="RunManager" type="Node" parent="." unique_id=1918361792]
+script = ExtResource("11_run")
+WaveSpawnerPath = NodePath("../WaveSpawner")
+GameUiPath = NodePath("../CanvasLayer/GameUI")
+PlayerPath = NodePath("../Player")
 
 [node name="DebugUi" parent="." unique_id=1563016044 instance=ExtResource("8_o3wvq")]
 offset_left = -566.0

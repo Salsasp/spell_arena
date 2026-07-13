@@ -25,7 +25,6 @@ public partial class Player : CharacterBody2D
 		wand = GetNode<Wand>("Wand");
 		modifierManager = GetNode<ModifierManager>("ModifierManager");
 		hitboxComponent.Hit += OnHit;
-		modifierManager.ActiveModifiers.Add("chain_spells", modifierManager.GetModifier("chain_spells"));
 	}
 
 	public override void _PhysicsProcess(double delta)

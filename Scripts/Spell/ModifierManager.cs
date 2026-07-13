@@ -1,4 +1,5 @@
 using Godot;
+using System;
 using System.Collections.Generic;
 
 public partial class ModifierManager : Node
@@ -6,6 +7,10 @@ public partial class ModifierManager : Node
     public static ModifierManager Instance { get; private set; }
     private Dictionary<string, ModifierData> modifiers = [];
     public Dictionary<string, ModifierData> ActiveModifiers = [];
+
+    public IEnumerable<ModifierData> GetAllModifiers() => modifiers.Values;
+
+    public bool HasActiveModifier(string id) => ActiveModifiers.ContainsKey(id);
 
     public override void _EnterTree()
     {
@@ -56,6 +61,7 @@ public partial class ModifierManager : Node
                 orbital = modData["orbital"].ToString(),
                 onSpawn = modData["on_spawn"].ToString(),
                 onDespawn = modData["on_despawn"].ToString(),
+                isStackable = Convert.ToBoolean(modData["stackable"].ToString())
             };
 
             modifiers[modifier.id] = modifier;

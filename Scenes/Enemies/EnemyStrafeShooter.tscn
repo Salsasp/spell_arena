@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://bol4ib3tbtusr" path="res://Scripts/HitboxComponent.cs" id="6_hitbox"]
 [ext_resource type="Script" path="res://Scripts/Enemy/Behaviors/StrafeMovementComponent.cs" id="7_strafe"]
 [ext_resource type="Script" path="res://Scripts/Enemy/Behaviors/ProjectileAttackComponent.cs" id="8_projectile"]
+[ext_resource type="Script" path="res://Scripts/Enemy/Behaviors/ArenaClampComponent.cs" id="9_clamp"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_strafe"]
 
@@ -64,3 +65,6 @@ script = ExtResource("7_strafe")
 
 [node name="ProjectileAttackComponent" type="Node2D" parent="."]
 script = ExtResource("8_projectile")
+
+[node name="ArenaClampComponent" type="Node2D" parent="."]
+script = ExtResource("9_clamp")

@@ -109,7 +109,7 @@ public partial class HitComponent : Component
 		float dotDamage = modifier.dotDamage;
 		DotComponent dot = new()
 		{
-			DamagePerTick = dotDamage,
+			DamagePerTick = dotDamage * modifier.copies,
 			TickInterval = DOT_TICK_INTERVAL,
 			Duration = DOT_DURATION
 		};

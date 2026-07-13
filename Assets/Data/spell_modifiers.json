@@ -13,13 +13,14 @@
             "on_hit": "",
             "orbital": "",
             "on_spawn": "",
-            "on_despawn": ""
+            "on_despawn": "",
+            "stackable": true
         },
         {
             "id": "fire_spells",
             "name": "Fire Magic",
             "description": "Applies fire damage to all spells.",
-            "icon": "res://Assets/Sprites/proj_placeholder.png",
+            "icon": "res://Assets/Sprites/Spell/fire_spells_icon.png",
             "rarity": "common",
             "damage_type": "fire",
             "dot_damage": 10.0,
@@ -28,13 +29,14 @@
             "on_hit": "apply_burn",
             "orbital": "",
             "on_spawn": "",
-            "on_despawn": ""
+            "on_despawn": "",
+            "stackable": true
         },
         {
             "id": "chain_spells",
             "name": "Chaining Spells",
             "description": "Spells chain to nearby enemies.",
-            "icon": "res://Assets/Sprites/proj_placeholder.png",
+            "icon": "res://Assets/Sprites/Spell/chain_spells_icon.png",
             "rarity": "uncommon",
             "damage_type": "",
             "dot_damage": 0.0,
@@ -43,13 +45,14 @@
             "on_hit": "chain",
             "orbital": "",
             "on_spawn": "",
-            "on_despawn": ""
+            "on_despawn": "",
+            "stackable": false
         },
         {
             "id": "pierce_spells",
             "name": "Piercing Spells",
             "description": "Spells pierce through enemies.",
-            "icon": "res://Assets/Sprites/proj_placeholder.png",
+            "icon": "res://Assets/Sprites/Spell/piercing_spells_icon.png",
             "rarity": "uncommon",
             "damage_type": "",
             "dot_damage": 0.0,
@@ -58,7 +61,8 @@
             "on_hit": "pierce",
             "orbital": "",
             "on_spawn": "",
-            "on_despawn": ""
+            "on_despawn": "",
+            "stackable": false
         }
     ]
 }
