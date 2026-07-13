@@ -1,4 +1,5 @@
 using Godot;
+using System;
 using System.Collections.Generic;
 
 public partial class GameUi : Control
@@ -43,6 +44,7 @@ public partial class GameUi : Control
 			{
 				CustomMinimumSize = new Vector2(220, 140),
 				Text = $"{modifier.name}\n\n{modifier.description}\n\n[{modifier.rarity}]",
+				Icon = GD.Load<Texture2D>(modifier.icon)
 			};
 			button.Pressed += () => EmitSignal(SignalName.ModifierSelected, modifier.id);
 			modifierOptionsContainer.AddChild(button);

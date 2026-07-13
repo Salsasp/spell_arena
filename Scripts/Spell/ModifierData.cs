@@ -15,7 +15,8 @@ public class ModifierData
     public string orbital;
     public string onSpawn;
     public string onDespawn;
-
+    public bool isStackable;
+    public int copies = 1;
     public override string ToString()
     {
         return $"[{id}] {name} ({rarity}) - {description}\n" +

@@ -1,5 +1,6 @@
 using Godot;
 using System.Collections.Generic;
+using System.ComponentModel;
 
 public enum RunPhase
 {
@@ -16,6 +17,7 @@ public partial class RunManager : Node
 
 	[Signal] public delegate void PhaseChangedEventHandler(RunPhase phase);
 	[Signal] public delegate void WaveStartedEventHandler(int waveNumber);
+	[Signal] public delegate void ForceEndWaveEventHandler();
 
 	private WaveSpawner waveSpawner;
 	private GameUi gameUi;
@@ -36,6 +38,7 @@ public partial class RunManager : Node
 		waveSpawner.WaveComplete += OnWaveComplete;
 		playerHealth.Dead += OnPlayerDead;
 		gameUi.ModifierSelected += OnModifierSelected;
+		ForceEndWave += OnForceEndWave;
 
 		StartWave();
 	}
@@ -75,6 +78,11 @@ public partial class RunManager : Node
 		{
 			modifierManager.ActiveModifiers.Add(modifierId, modifier);
 		}
+		else if (modifier != null && modifierManager.HasActiveModifier(modifierId) 
+			&& modifierManager.GetModifier(modifierId).isStackable)
+		{
+			modifierManager.ActiveModifiers[modifierId].copies += 1;
+		}
 
 		GetTree().Paused = false;
 		currentWave++;
@@ -94,5 +102,11 @@ public partial class RunManager : Node
 	{
 		phase = newPhase;
 		EmitSignal(SignalName.PhaseChanged, (int)newPhase);
+	}
+
+	private void OnForceEndWave()
+	{
+		waveSpawner.ClearAllEnemies();
+		waveSpawner.EmitSignal(WaveSpawner.SignalName.WaveComplete);
 	}
 }
