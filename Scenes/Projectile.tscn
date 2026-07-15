@@ -7,11 +7,62 @@
 [ext_resource type="Script" uid="uid://cyw23b1rilbxg" path="res://Scripts/Spell/HitComponent.cs" id="5_d6p7i"]
 [ext_resource type="Script" uid="uid://cs8nivwxnirj8" path="res://Scripts/Spell/DespawnComponent.cs" id="6_ovs0d"]
 [ext_resource type="Script" uid="uid://7vbl3a4b3hlt" path="res://Scripts/Spell/LifetimeComponent.cs" id="7_ay8ps"]
-[ext_resource type="Texture2D" uid="uid://bpfxjffj44vw3" path="res://Assets/Sprites/proj_placeholder.png" id="8_rsyq6"]
+[ext_resource type="Texture2D" uid="uid://blh6in6m1obtw" path="res://Assets/Sprites/Spell/projectile_animated-Sheet-particles-Sheet.png" id="8_ekur6"]
+[ext_resource type="Script" uid="uid://nabumqpkq4ny" path="res://Scripts/AnimationComponent.cs" id="9_ekur6"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_rsyq6"]
-radius = 9.0
-height = 62.0
+radius = 5.9
+height = 31.88
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xxsyy"]
+atlas = ExtResource("8_ekur6")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dsm84"]
+atlas = ExtResource("8_ekur6")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xsjeh"]
+atlas = ExtResource("8_ekur6")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tomee"]
+atlas = ExtResource("8_ekur6")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_likag"]
+atlas = ExtResource("8_ekur6")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_urmru"]
+atlas = ExtResource("8_ekur6")
+region = Rect2(80, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_urmru"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xxsyy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dsm84")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xsjeh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tomee")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_likag")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_urmru")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 16.0
+}]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ar0ab"]
 radius = 200.0
@@ -28,8 +79,8 @@ script = ExtResource("2_rsyq6")
 [node name="SpellMovementComponent" type="Node2D" parent="." unique_id=1332081632 node_paths=PackedStringArray("Sprite")]
 unique_name_in_owner = true
 script = ExtResource("3_augfd")
-Sprite = NodePath("../ProjArea2D/Sprite2D")
-Speed = 400.0
+Sprite = NodePath("")
+Speed = 500.0
 
 [node name="SpellSpawnComponent" type="Node2D" parent="." unique_id=345381162]
 unique_name_in_owner = true
@@ -57,12 +108,25 @@ collision_mask = 8
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ProjArea2D" unique_id=487064132]
 shape = SubResource("CapsuleShape2D_rsyq6")
 
-[node name="Sprite2D" type="Sprite2D" parent="ProjArea2D" unique_id=1934519041]
-texture = ExtResource("8_rsyq6")
+[node name="Sprite2D" type="AnimatedSprite2D" parent="ProjArea2D" unique_id=1596038784]
+rotation = 0.7853982
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_urmru")
+animation = &"idle"
+autoplay = "idle"
+frame_progress = 0.7750408
 
 [node name="ChainRadius" type="Area2D" parent="." unique_id=656173701]
+visible = false
 collision_layer = 0
 collision_mask = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ChainRadius" unique_id=1420828172]
 shape = SubResource("CircleShape2D_ar0ab")
+
+[node name="AnimationComponent" type="Node2D" parent="." unique_id=402119261 node_paths=PackedStringArray("animatedSprite", "animationPlayer")]
+script = ExtResource("9_ekur6")
+animatedSprite = NodePath("../ProjArea2D/Sprite2D")
+animationPlayer = NodePath("../AnimationPlayer")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1027066159]

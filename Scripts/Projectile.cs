@@ -11,6 +11,7 @@ public partial class Projectile : Node2D
 	private SpellMovementComponent spellMovementComponent;
 	private SpellSpawnComponent spawnComponent;
 	private ModifierManager modifierManager;
+	private AnimationComponent animationComponent;
 
 
 	public override void _Ready()
@@ -22,6 +23,9 @@ public partial class Projectile : Node2D
 		spellMovementComponent = GetNode<SpellMovementComponent>("SpellMovementComponent");
 		spawnComponent = GetNode<SpellSpawnComponent>("SpellSpawnComponent");
 		modifierManager = GetNode<ModifierManager>("../Player/ModifierManager");
+		animationComponent = GetNode<AnimationComponent>("AnimationComponent");
+
+		animationComponent.Update();
 
 		hitComponent.Initialize(modifierManager, despawnComponent, spellMovementComponent);
 		spawnComponent.Initialize(modifierManager, damageComponent);
