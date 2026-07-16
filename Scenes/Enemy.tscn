@@ -8,7 +8,8 @@
 [ext_resource type="Script" uid="uid://bol4ib3tbtusr" path="res://Scripts/HitboxComponent.cs" id="6_mo1ky"]
 [ext_resource type="Script" uid="uid://cjlg368x7kn8b" path="res://Scripts/Enemy/Behaviors/StrafeMovementComponent.cs" id="7_strafe"]
 [ext_resource type="Script" uid="uid://d3yfmkht13rxm" path="res://Scripts/Enemy/Behaviors/ProjectileAttackComponent.cs" id="8_projectile"]
-[ext_resource type="Script" path="res://Scripts/DamageFlashComponent.cs" id="9_flash"]
+[ext_resource type="Script" uid="uid://3d4f4v4pavcm" path="res://Scripts/DamageFlashComponent.cs" id="9_flash"]
+[ext_resource type="Script" uid="uid://3ugmys41jeqj" path="res://Scripts/UI/TextManagerComponent.cs" id="10_0o0ue"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_wpjfl"]
 
@@ -67,3 +68,6 @@ script = ExtResource("8_projectile")
 [node name="DamageFlashComponent" type="Node2D" parent="." unique_id=1048576957]
 script = ExtResource("9_flash")
 FlashTargetPath = NodePath("EnemySprite")
+
+[node name="TextManagerComponent" type="Node2D" parent="." unique_id=2015669960]
+script = ExtResource("10_0o0ue")

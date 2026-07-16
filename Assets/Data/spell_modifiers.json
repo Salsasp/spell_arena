@@ -79,6 +79,38 @@
             "on_spawn": "homing",
             "on_despawn": "",
             "stackable": false
+        },
+        {
+            "id": "crit_chance_up",
+            "name": "Critical Chance Up",
+            "description": "Increase spell critical chance by 10%",
+            "icon": "res://Assets/Sprites/proj_placeholder.png",
+            "rarity": "common",
+            "damage_type": "",
+            "dot_damage": 0.0,
+            "crit_additive": 0.1,
+            "crit_multiplicative": 0.0,
+            "on_hit": "",
+            "orbital": "",
+            "on_spawn": "",
+            "on_despawn": "",
+            "stackable": true
+        },
+        {
+            "id": "damaging_text",
+            "name": "Homing Damage Numbers",
+            "description": "Damage numbers become homing projectiles that strike enemies?!?!?",
+            "icon": "res://Assets/Sprites/proj_placeholder.png",
+            "rarity": "rare",
+            "damage_type": "",
+            "dot_damage": 0.0,
+            "crit_additive": 0.0,
+            "crit_multiplicative": 0.0,
+            "on_hit": "damaging_text",
+            "orbital": "",
+            "on_spawn": "",
+            "on_despawn": "",
+            "stackable": false
         }
     ]
 }

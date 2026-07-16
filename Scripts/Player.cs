@@ -72,7 +72,8 @@ public partial class Player : CharacterBody2D
 			return;
 		}
 
-		healthComponent.TakeDamage(damageComponent.CalculateDamage());
+		bool isCrit = damageComponent.IsCriticalHit();
+		healthComponent.TakeDamage(damageComponent.CalculateDamage(isCrit));
 		projectileRoot.QueueFree();
 	}
 }

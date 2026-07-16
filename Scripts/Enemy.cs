@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Godot;
 
 public partial class Enemy : CharacterBody2D
@@ -9,6 +10,7 @@ public partial class Enemy : CharacterBody2D
 	private AttackBehaviorComponent attackBehavior;
 	private ArenaClampComponent arenaClamp;
 	private EnemyContext context;
+	private TextManagerComponent textManagerComponent;
 
 	public override void _Ready()
 	{
@@ -18,6 +20,7 @@ public partial class Enemy : CharacterBody2D
 		movementBehavior = FindBehavior<AIMovementBehaviorComponent>();
 		attackBehavior = FindBehavior<AttackBehaviorComponent>();
 		arenaClamp = GetNodeOrNull<ArenaClampComponent>("ArenaClampComponent");
+		textManagerComponent = GetNode<TextManagerComponent>("../../TextManagerComponent");
 
 		ProjectileSpawner projectileSpawner = GetNode<ProjectileSpawner>("../../ProjectileSpawner");
 		Player player = GetNodeOrNull<Player>("../../Player");
@@ -76,14 +79,30 @@ public partial class Enemy : CharacterBody2D
 		Node2D projectileRoot = hitBy.GetParent<Node2D>();
 		DamageComponent hitByDamageComponent = projectileRoot.GetNodeOrNull<DamageComponent>("DamageComponent");
 		HitComponent hitByHitComponent = projectileRoot.GetNodeOrNull<HitComponent>("HitComponent");
-		if (hitByDamageComponent == null || hitByHitComponent == null)
+		if (hitByDamageComponent == null)
 		{
-			GD.PrintErr("Hit by area without valid component");
+			GD.PrintErr("Hit by area without valid DamageComponent");
 			return;
 		}
 
-		healthComponent.TakeDamage(hitByDamageComponent.CalculateDamage());
-		hitByHitComponent.Update(this);
+		bool isCrit = hitByDamageComponent.IsCriticalHit();
+		int damage = hitByDamageComponent.CalculateDamage(isCrit);
+
+		healthComponent.TakeDamage(damage);
+
+		if (hitByHitComponent != null)
+		{
+			hitByHitComponent.Update(this);
+		}
+		else
+		{
+			projectileRoot.QueueFree();
+		}
+
+		if (textManagerComponent != null && projectileRoot is not TextProjectile)
+		{
+			textManagerComponent.DrawAbove(this, -30, damage.ToString(), new List<string>() { "color=red", "tornado" }, damage);
+		}
 	}
 
 	private void OnDead()

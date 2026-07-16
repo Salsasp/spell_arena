@@ -1,0 +1,48 @@
+[gd_scene format=3 uid="uid://c5xyb7qpbq56d"]
+
+[ext_resource type="Script" uid="uid://c7dd4msyxmvca" path="res://Scripts/TextProjectile.cs" id="1_qs5n5"]
+[ext_resource type="Script" uid="uid://d3op0eovhs6cq" path="res://Scripts/Spell/DamageComponent.cs" id="2_l2ooy"]
+[ext_resource type="Script" uid="uid://5k1veq5ulv3t" path="res://Scripts/Spell/SpellMovementComponent.cs" id="3_8sncr"]
+[ext_resource type="Script" uid="uid://cs8nivwxnirj8" path="res://Scripts/Spell/DespawnComponent.cs" id="4_oov7n"]
+[ext_resource type="Script" uid="uid://7vbl3a4b3hlt" path="res://Scripts/Spell/LifetimeComponent.cs" id="5_psdc5"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_enemyproj"]
+radius = 2.0
+height = 20.0
+
+[node name="TextProjectile" type="Node2D" unique_id=183864806]
+script = ExtResource("1_qs5n5")
+
+[node name="DamageComponent" type="Node2D" parent="." unique_id=1688255860]
+unique_name_in_owner = true
+script = ExtResource("2_l2ooy")
+CritChance = 0.0
+BaseDamage = 5
+
+[node name="SpellMovementComponent" type="Node2D" parent="." unique_id=20917591]
+unique_name_in_owner = true
+script = ExtResource("3_8sncr")
+Speed = 100.0
+
+[node name="DespawnComponent" type="Node2D" parent="." unique_id=60519413]
+unique_name_in_owner = true
+script = ExtResource("4_oov7n")
+
+[node name="LifetimeComponent" type="Node2D" parent="." unique_id=1142040630]
+unique_name_in_owner = true
+script = ExtResource("5_psdc5")
+Lifetime = 3
+
+[node name="Timer" type="Timer" parent="LifetimeComponent" unique_id=1557837100]
+
+[node name="ProjArea2D" type="Area2D" parent="." unique_id=997250099]
+collision_layer = 16
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ProjArea2D" unique_id=1385845091]
+shape = SubResource("CapsuleShape2D_enemyproj")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ProjArea2D" unique_id=1904307704]
+offset_right = 40.0
+offset_bottom = 40.0
+bbcode_enabled = true

@@ -20,6 +20,12 @@ public partial class SpellSpawnComponent : Component
 			ModifierData homingModifier = modifierManager.ActiveModifiers["homing_spells"];
 			movementComponent.SetHomingEnabled(true, movementComponent.HomingTurnSpeed);
 		}
+
+		if (modifierManager.ActiveModifiers.ContainsKey("crit_chance_up"))
+		{
+			ModifierData modifier = modifierManager.ActiveModifiers["crit_chance_up"];
+			damageComponent.CritChance += modifier.critAdditive * modifier.copies;
+		}
 	}
 
 	public void Initialize(ModifierManager modMan, DamageComponent damCom, SpellMovementComponent moveComp)

@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://c63br0578nusx"]
+
+[ext_resource type="Script" uid="uid://cj24unqaqgwqh" path="res://Scripts/UI/DamageText.cs" id="1_b7unp"]
+[ext_resource type="Script" uid="uid://7vbl3a4b3hlt" path="res://Scripts/Spell/LifetimeComponent.cs" id="2_uskud"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_srett"]
+
+[node name="DamageText" type="Node2D" unique_id=341899527 node_paths=PackedStringArray("area2D", "lifetimeComponent", "label", "textCollider")]
+script = ExtResource("1_b7unp")
+area2D = NodePath("Area2D")
+lifetimeComponent = NodePath("LifetimeComponent")
+label = NodePath("Area2D/RichTextLabel")
+textCollider = NodePath("Area2D/CollisionShape2D")
+TrackDelay = 1.0
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1465101150]
+collision_layer = 16
+collision_mask = 16
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Area2D" unique_id=38077320]
+offset_right = 40.0
+offset_bottom = 40.0
+bbcode_enabled = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=91868194]
+shape = SubResource("RectangleShape2D_srett")
+
+[node name="LifetimeComponent" type="Node2D" parent="." unique_id=118587227]
+unique_name_in_owner = true
+script = ExtResource("2_uskud")
+Lifetime = 2
+
+[node name="Timer" type="Timer" parent="LifetimeComponent" unique_id=793986177]

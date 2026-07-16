@@ -9,10 +9,13 @@
 [ext_resource type="PackedScene" uid="uid://jl207mgkmkb7" path="res://Scenes/Enemies/EnemyCharger.tscn" id="6_charger"]
 [ext_resource type="PackedScene" uid="uid://v1rbis70bab5" path="res://Scenes/EnemyProjectile.tscn" id="7_enemyproj"]
 [ext_resource type="PackedScene" uid="uid://cwhripoub67q1" path="res://Scenes/UI/DebugUI.tscn" id="8_o3wvq"]
+[ext_resource type="PackedScene" uid="uid://c5xyb7qpbq56d" path="res://Scenes/TextProjectile.tscn" id="9_1tr1b"]
 [ext_resource type="Script" uid="uid://chiji0st1ftrb" path="res://Scripts/Wave/ArenaBounds.cs" id="9_arena"]
 [ext_resource type="Script" uid="uid://drai7myprghfn" path="res://Scripts/Wave/WaveSpawner.cs" id="10_spawner"]
 [ext_resource type="Script" uid="uid://clpg8wpj286h1" path="res://Scripts/Wave/RunManager.cs" id="11_run"]
 [ext_resource type="PackedScene" uid="uid://bobqekh085xdg" path="res://Scenes/UI/GameUI.tscn" id="12_gameui"]
+[ext_resource type="Script" uid="uid://3ugmys41jeqj" path="res://Scripts/UI/TextManagerComponent.cs" id="15_ss8vn"]
+[ext_resource type="PackedScene" uid="uid://c63br0578nusx" path="res://Scenes/UI/DamageText.tscn" id="16_w5kog"]
 
 [node name="Main" type="Node2D" unique_id=1087891947]
 script = ExtResource("1_pg4io")
@@ -40,6 +43,7 @@ unique_name_in_owner = true
 script = ExtResource("3_5ogh5")
 ProjectilePrefab = ExtResource("4_lb6bl")
 EnemyProjectilePrefab = ExtResource("7_enemyproj")
+TextProjectilePrefab = ExtResource("9_1tr1b")
 
 [node name="EnemyManager" type="Node2D" parent="." unique_id=529077049]
 
@@ -62,3 +66,8 @@ offset_left = -566.0
 offset_top = -314.0
 offset_right = -566.0
 offset_bottom = -314.0
+
+[node name="TextManagerComponent" type="Node2D" parent="." unique_id=918073506 node_paths=PackedStringArray("projectileSpawner")]
+script = ExtResource("15_ss8vn")
+DamageTextPrefab = ExtResource("16_w5kog")
+projectileSpawner = NodePath("../ProjectileSpawner")

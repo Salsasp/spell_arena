@@ -13,10 +13,10 @@ public partial class DamageComponent : Component
 	{
 	}
 
-	public int CalculateDamage()
+	public int CalculateDamage(bool isCrit)
 	{
 		int dmg = BaseDamage + ElementalDamage;
-		if (IsCriticalHit())
+		if (isCrit)
 		{
 			dmg *= CritMultiplier;
 		}
