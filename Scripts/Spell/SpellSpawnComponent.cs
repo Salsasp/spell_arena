@@ -1,28 +1,31 @@
 using Godot;
-using System;
 
 public partial class SpellSpawnComponent : Component
 {
 	private ModifierManager modifierManager;
 	private DamageComponent damageComponent;
+	private SpellMovementComponent movementComponent;
+
 	public void Update()
 	{
-		// Add orbitals, damage types, etc
 		if (modifierManager.ActiveModifiers.ContainsKey("fire_spells"))
 		{
+			ModifierData fireModifier = modifierManager.ActiveModifiers["fire_spells"];
 			damageComponent.DamageType = "fire";
-			damageComponent.ElementalDamage = 10;
+			damageComponent.ElementalDamage = 10 * fireModifier.copies;
 		}
-		// TODO: fill this in for more damage types
+
+		if (modifierManager.ActiveModifiers.ContainsKey("homing_spells"))
+		{
+			ModifierData homingModifier = modifierManager.ActiveModifiers["homing_spells"];
+			movementComponent.SetHomingEnabled(true, movementComponent.HomingTurnSpeed);
+		}
 	}
 
-	public override void _Ready()
-	{
-	}
-
-	public void Initialize(ModifierManager modMan, DamageComponent damCom)
+	public void Initialize(ModifierManager modMan, DamageComponent damCom, SpellMovementComponent moveComp)
 	{
 		modifierManager = modMan;
 		damageComponent = damCom;
+		movementComponent = moveComp;
 	}
 }

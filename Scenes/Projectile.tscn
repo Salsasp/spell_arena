@@ -89,6 +89,7 @@ script = ExtResource("4_ar0ab")
 [node name="HitComponent" type="Node2D" parent="." unique_id=1007074092]
 unique_name_in_owner = true
 script = ExtResource("5_d6p7i")
+ShowDebugCircle = false
 
 [node name="DespawnComponent" type="Node2D" parent="." unique_id=161814801]
 unique_name_in_owner = true
@@ -114,7 +115,7 @@ scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_urmru")
 animation = &"idle"
 autoplay = "idle"
-frame_progress = 0.7750408
+frame_progress = 0.26001713
 
 [node name="ChainRadius" type="Area2D" parent="." unique_id=656173701]
 visible = false

@@ -64,7 +64,6 @@ public partial class Player : CharacterBody2D
 			return;
 		}
 
-		Modulate = Colors.Red;
 		Node2D projectileRoot = hitBy.GetParent<Node2D>();
 		DamageComponent damageComponent = projectileRoot.GetNodeOrNull<DamageComponent>("DamageComponent");
 		if (damageComponent == null)

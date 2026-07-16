@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://cgrn4o6mbcqip" path="res://Scenes/wand.tscn" id="12_pu2lt"]
 [ext_resource type="Script" uid="uid://bol4ib3tbtusr" path="res://Scripts/HitboxComponent.cs" id="14_7dp3o"]
 [ext_resource type="Script" uid="uid://dqpht7uwxxbvk" path="res://Scripts/Spell/ModifierManager.cs" id="15_h4iuc"]
+[ext_resource type="Script" path="res://Scripts/DamageFlashComponent.cs" id="16_fd4e3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v0iea"]
 size = Vector2(20, 32)
@@ -164,3 +165,7 @@ shape = SubResource("RectangleShape2D_7dp3o")
 
 [node name="ModifierManager" type="Node" parent="." unique_id=1865708893]
 script = ExtResource("15_h4iuc")
+
+[node name="DamageFlashComponent" type="Node2D" parent="." unique_id=1982938410]
+script = ExtResource("16_fd4e3")
+FlashTargetPath = NodePath("PlayerSprite")

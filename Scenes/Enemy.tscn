@@ -6,8 +6,9 @@
 [ext_resource type="Script" uid="uid://csu7r54n2f32y" path="res://Scripts/HealthComponent.cs" id="3_mo1ky"]
 [ext_resource type="Script" uid="uid://nabumqpkq4ny" path="res://Scripts/AnimationComponent.cs" id="4_6bs3c"]
 [ext_resource type="Script" uid="uid://bol4ib3tbtusr" path="res://Scripts/HitboxComponent.cs" id="6_mo1ky"]
-[ext_resource type="Script" path="res://Scripts/Enemy/Behaviors/StrafeMovementComponent.cs" id="7_strafe"]
-[ext_resource type="Script" path="res://Scripts/Enemy/Behaviors/ProjectileAttackComponent.cs" id="8_projectile"]
+[ext_resource type="Script" uid="uid://cjlg368x7kn8b" path="res://Scripts/Enemy/Behaviors/StrafeMovementComponent.cs" id="7_strafe"]
+[ext_resource type="Script" uid="uid://d3yfmkht13rxm" path="res://Scripts/Enemy/Behaviors/ProjectileAttackComponent.cs" id="8_projectile"]
+[ext_resource type="Script" path="res://Scripts/DamageFlashComponent.cs" id="9_flash"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_wpjfl"]
 
@@ -21,7 +22,6 @@ size = Vector2(20, 32)
 
 [node name="Enemy" type="CharacterBody2D" unique_id=736334869 groups=["enemies"]]
 collision_layer = 4
-collision_mask = 1
 script = ExtResource("1_1exfc")
 
 [node name="EnemySprite" type="Sprite2D" parent="." unique_id=1456288672]
@@ -37,9 +37,8 @@ body = NodePath("..")
 unique_name_in_owner = true
 script = ExtResource("3_mo1ky")
 
-[node name="AnimationComponent" type="Node2D" parent="." unique_id=578259019 node_paths=PackedStringArray("sprite")]
+[node name="AnimationComponent" type="Node2D" parent="." unique_id=578259019]
 script = ExtResource("4_6bs3c")
-sprite = NodePath("../EnemySprite")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1005762870]
 
@@ -62,5 +61,9 @@ shape = SubResource("RectangleShape2D_uoxpr")
 [node name="StrafeMovementComponent" type="Node2D" parent="." unique_id=1137040085]
 script = ExtResource("7_strafe")
 
-[node name="ProjectileAttackComponent" type="Node2D" parent="."]
+[node name="ProjectileAttackComponent" type="Node2D" parent="." unique_id=1074373288]
 script = ExtResource("8_projectile")
+
+[node name="DamageFlashComponent" type="Node2D" parent="." unique_id=1048576957]
+script = ExtResource("9_flash")
+FlashTargetPath = NodePath("EnemySprite")

@@ -28,14 +28,14 @@ public partial class Projectile : Node2D
 		animationComponent.Update();
 
 		hitComponent.Initialize(modifierManager, despawnComponent, spellMovementComponent);
-		spawnComponent.Initialize(modifierManager, damageComponent);
+		spawnComponent.Initialize(modifierManager, damageComponent, spellMovementComponent);
 
 		spawnComponent.Update();
 	}
 
     public override void _PhysicsProcess(double delta)
     {
-        spellMovementComponent.Update();
+        spellMovementComponent.Update(delta);
 		GlobalPosition += spellMovementComponent.Velocity * (float)delta;
 		if (lifetimeComponent.TimedOut)
 		{

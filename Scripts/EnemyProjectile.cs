@@ -17,7 +17,7 @@ public partial class EnemyProjectile : Node2D
 
 	public override void _PhysicsProcess(double delta)
 	{
-		spellMovementComponent.Update();
+		spellMovementComponent.Update(delta);
 		GlobalPosition += spellMovementComponent.Velocity * (float)delta;
 
 		if (lifetimeComponent.TimedOut)
