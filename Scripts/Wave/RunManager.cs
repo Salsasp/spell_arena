@@ -26,6 +26,7 @@ public partial class RunManager : Node
 	private HealthComponent playerHealth;
 	private int currentWave = 1;
 	private RunPhase phase = RunPhase.Combat;
+	private const int DEFAULT_DRAFT_OPTIONS = 3;
 
 	public override void _Ready()
 	{
@@ -63,7 +64,14 @@ public partial class RunManager : Node
 
 		SetPhase(RunPhase.ModifierDraft);
 		GetTree().Paused = true;
-		gameUi.ShowModifierDraft(ModifierDraftService.RollDraft());
+
+		int numDraftOptions = DEFAULT_DRAFT_OPTIONS;
+		if (modifierManager.HasActiveModifier("extra_modifier"))
+		{
+			numDraftOptions += modifierManager.ActiveModifiers["extra_modifier"].copies;	
+		}
+
+		gameUi.ShowModifierDraft(ModifierDraftService.RollDraft(numDraftOptions));
 	}
 
 	private void OnModifierSelected(string modifierId)

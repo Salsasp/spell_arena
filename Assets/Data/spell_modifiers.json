@@ -20,7 +20,7 @@
             "id": "fire_spells",
             "name": "Fire Magic",
             "description": "Applies fire damage to all spells.",
-            "icon": "res://Assets/Sprites/Spell/fire_spells_icon.png",
+            "icon": "res://Assets/Sprites/Spell/Modifiers/fire_spells_icon.png",
             "rarity": "common",
             "damage_type": "fire",
             "dot_damage": 10.0,
@@ -36,7 +36,7 @@
             "id": "chain_spells",
             "name": "Chaining Spells",
             "description": "Spells chain to nearby enemies.",
-            "icon": "res://Assets/Sprites/Spell/chain_spells_icon.png",
+            "icon": "res://Assets/Sprites/Spell/Modifiers/chain_spells_icon.png",
             "rarity": "uncommon",
             "damage_type": "",
             "dot_damage": 0.0,
@@ -52,7 +52,7 @@
             "id": "pierce_spells",
             "name": "Piercing Spells",
             "description": "Spells pierce through enemies.",
-            "icon": "res://Assets/Sprites/Spell/piercing_spells_icon.png",
+            "icon": "res://Assets/Sprites/Spell/Modifiers/piercing_spells_icon.png",
             "rarity": "uncommon",
             "damage_type": "",
             "dot_damage": 0.0,
@@ -84,7 +84,7 @@
             "id": "crit_chance_up",
             "name": "Critical Chance Up",
             "description": "Increase spell critical chance by 10%",
-            "icon": "res://Assets/Sprites/proj_placeholder.png",
+            "icon": "res://Assets/Sprites/Spell/Modifiers/crit_up.png",
             "rarity": "common",
             "damage_type": "",
             "dot_damage": 0.0,
@@ -111,6 +111,22 @@
             "on_spawn": "",
             "on_despawn": "",
             "stackable": false
+        },
+        {
+            "id": "extra_modifier",
+            "name": "Extra Modifier Option",
+            "description": "Gain one additional modifier to choose from in the modifier select.",
+            "icon": "res://Assets/Sprites/Spell/Modifiers/plus_1.png",
+            "rarity": "rare",
+            "damage_type": "",
+            "dot_damage": 0.0,
+            "crit_additive": 0.0,
+            "crit_multiplicative": 0.0,
+            "on_hit": "",
+            "orbital": "",
+            "on_spawn": "",
+            "on_despawn": "",
+            "stackable": true
         }
     ]
 }

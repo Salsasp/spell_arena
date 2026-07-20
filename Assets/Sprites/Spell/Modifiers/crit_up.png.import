@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bk46awe2blyxp"
-path="res://.godot/imported/piercing_spells_icon.png-7ab8e3517d50886d704e8e2f224109b0.ctex"
+uid="uid://dumok7eyey2io"
+path="res://.godot/imported/crit_up.png-32d93d6f398f283494188c78b2dafe26.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/Spell/piercing_spells_icon.png"
-dest_files=["res://.godot/imported/piercing_spells_icon.png-7ab8e3517d50886d704e8e2f224109b0.ctex"]
+source_file="res://Assets/Sprites/Spell/Modifiers/crit_up.png"
+dest_files=["res://.godot/imported/crit_up.png-32d93d6f398f283494188c78b2dafe26.ctex"]
 
 [params]
 

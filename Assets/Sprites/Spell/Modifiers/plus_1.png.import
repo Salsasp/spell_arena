@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://r46kx0n4qvpn"
-path="res://.godot/imported/chain_spells_icon.png-675bfcf068a5e8f45cbdaa9a62aceeea.ctex"
+uid="uid://dsuovhqink5eq"
+path="res://.godot/imported/plus_1.png-f5edc97752c567fa04886a24d8517021.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/Spell/chain_spells_icon.png"
-dest_files=["res://.godot/imported/chain_spells_icon.png-675bfcf068a5e8f45cbdaa9a62aceeea.ctex"]
+source_file="res://Assets/Sprites/Spell/Modifiers/plus_1.png"
+dest_files=["res://.godot/imported/plus_1.png-f5edc97752c567fa04886a24d8517021.ctex"]
 
 [params]
 
