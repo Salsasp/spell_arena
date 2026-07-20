@@ -11,16 +11,17 @@ area2D = NodePath("Area2D")
 lifetimeComponent = NodePath("LifetimeComponent")
 label = NodePath("Area2D/RichTextLabel")
 textCollider = NodePath("Area2D/CollisionShape2D")
-TrackDelay = 1.0
 
 [node name="Area2D" type="Area2D" parent="." unique_id=1465101150]
 collision_layer = 16
 collision_mask = 16
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Area2D" unique_id=38077320]
-offset_right = 40.0
+offset_right = 310.0
 offset_bottom = 40.0
 bbcode_enabled = true
+scroll_active = false
+autowrap_mode = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=91868194]
 shape = SubResource("RectangleShape2D_srett")

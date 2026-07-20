@@ -11,6 +11,7 @@ public partial class TextManagerComponent : Component
 
 	private ModifierManager modifierManager;
 	private CanvasLayer canvasLayer;
+	private readonly Dictionary<ulong, DamageText> activeTextByTarget = new();
 
 	public override void _Ready()
 	{
@@ -26,12 +27,57 @@ public partial class TextManagerComponent : Component
 
 	public void DrawAbove(Node2D targetNode, int verticalOffset, string text, List<string> textModifiers, int damage = 0)
 	{
+		DismissActiveText(targetNode);
 		SpawnDamageText(targetNode, verticalOffset, text, textModifiers, damage);
 	}
 
-	public void InstantiateDamageText(Node2D targetNode, int verticalOffset, string text, List<string> textModifiers, int damage = 0)
+	public void RegisterActiveText(Node2D targetNode, DamageText damageText)
 	{
-		SpawnDamageText(targetNode, verticalOffset, text, textModifiers, damage);
+		if (damageText == null || targetNode == null || !GodotObject.IsInstanceValid(targetNode))
+		{
+			return;
+		}
+
+		activeTextByTarget[targetNode.GetInstanceId()] = damageText;
+	}
+
+	public void UnregisterActiveText(DamageText damageText)
+	{
+		if (damageText == null)
+		{
+			return;
+		}
+
+		foreach (KeyValuePair<ulong, DamageText> entry in activeTextByTarget)
+		{
+			if (entry.Value != damageText)
+			{
+				continue;
+			}
+
+			activeTextByTarget.Remove(entry.Key);
+			return;
+		}
+	}
+
+	private void DismissActiveText(Node2D targetNode)
+	{
+		if (targetNode == null || !GodotObject.IsInstanceValid(targetNode))
+		{
+			return;
+		}
+
+		ulong targetId = targetNode.GetInstanceId();
+		if (!activeTextByTarget.TryGetValue(targetId, out DamageText existing))
+		{
+			return;
+		}
+
+		activeTextByTarget.Remove(targetId);
+		if (GodotObject.IsInstanceValid(existing))
+		{
+			existing.Dismiss();
+		}
 	}
 
 	private void SpawnDamageText(Node2D targetNode, int verticalOffset, string text, List<string> textModifiers, int damage)
@@ -64,6 +110,7 @@ public partial class TextManagerComponent : Component
 		damageText.spawnAboveTarget = targetNode;
 		damageText.projectileSpawner = projectileSpawner;
 		damageText.canvasLayer = canvasLayer;
+		damageText.textManagerComponent = this;
 		canvasLayer.CallDeferred(Node.MethodName.AddChild, damageText);
 	}
 
@@ -74,16 +121,24 @@ public partial class TextManagerComponent : Component
 			return text;
 		}
 
-		string result = text;
+		string prefix = "";
+		string suffix = "";
 		foreach (string modifier in textModifiers)
 		{
+			// Color is unique in that it takes a provided value
 			if (modifier.StartsWith("color="))
 			{
 				string color = modifier.Substring("color=".Length);
-				result = $"[color={color}]{result}[/color]";
+				prefix = $"[color={color}]{prefix}";
+				suffix = $"{suffix}[/color]";
+			}
+			else
+			{
+				prefix = $"[{modifier}]{prefix}";
+				suffix = $"{suffix}[/{modifier}]";
 			}
 		}
 
-		return result;
+		return prefix + text + suffix;
 	}
 }

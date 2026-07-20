@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using Godot;
 
 public partial class Enemy : CharacterBody2D
@@ -99,9 +100,18 @@ public partial class Enemy : CharacterBody2D
 			projectileRoot.QueueFree();
 		}
 
+		List<string> textModifiers = new List<string>() { "color=red", "center" };
+		string damageString = damage.ToString();
+
+		if (isCrit)
+		{
+			textModifiers.Add("shake");
+			damageString += " - CRIT!";
+		} 
+		
 		if (textManagerComponent != null && projectileRoot is not TextProjectile)
 		{
-			textManagerComponent.DrawAbove(this, -30, damage.ToString(), new List<string>() { "color=red", "tornado" }, damage);
+			textManagerComponent.DrawAbove(this, -30, damageString, textModifiers, damage);
 		}
 	}
 
