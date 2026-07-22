@@ -4,6 +4,7 @@ using System.ComponentModel;
 
 public partial class Projectile : Node2D
 {
+	[Export] public PackedScene OrbitScene;
 	private DamageComponent damageComponent;
 	private DespawnComponent despawnComponent;
 	private HitComponent hitComponent;
@@ -28,7 +29,7 @@ public partial class Projectile : Node2D
 		animationComponent.Update();
 
 		hitComponent.Initialize(modifierManager, despawnComponent, spellMovementComponent);
-		spawnComponent.Initialize(modifierManager, damageComponent, spellMovementComponent);
+		spawnComponent.Initialize(modifierManager, damageComponent, spellMovementComponent, OrbitScene);
 
 		spawnComponent.Update();
 	}
