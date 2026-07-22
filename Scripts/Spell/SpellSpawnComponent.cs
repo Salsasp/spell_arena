@@ -29,6 +29,7 @@ public partial class SpellSpawnComponent : Component
 			damageComponent.CritChance += modifier.critAdditive * modifier.copies;
 		}
 
+		// TODO: add some field to modifier manager that groups all orbits for easy checking
 		if (modifierManager.ActiveModifiers.ContainsKey("fireball_orbit") || modifierManager.ActiveModifiers.ContainsKey("wizard_orbit"))
 		{
 			try

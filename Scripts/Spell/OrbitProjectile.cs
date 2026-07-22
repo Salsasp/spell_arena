@@ -2,7 +2,7 @@ using Godot;
 
 public partial class OrbitProjectile : Node2D
 {
-	[Export] public float OrbitDistance = 50f;
+	private float orbitDistance = 50f;
 	[Export] public float AngularSpeed = 4f;
 	private DamageComponent damageComponent;
 	private DespawnComponent despawnComponent;
@@ -11,6 +11,7 @@ public partial class OrbitProjectile : Node2D
 	private SpellSpawnComponent spawnComponent;
 	private ModifierManager modifierManager;
 	private AnimationComponent animationComponent;
+	public float AngleToParent = 0f;
 	
 
 
@@ -35,6 +36,8 @@ public partial class OrbitProjectile : Node2D
     public override void _PhysicsProcess(double delta)
     {
 		// Rotation around parent
+		AngleToParent += AngularSpeed*(float)delta;
+		spellMovementComponent.Velocity = new Vector2(Mathf.Cos(AngleToParent)*orbitDistance, Mathf.Sin(AngleToParent)*orbitDistance);
 
         spellMovementComponent.Update(delta);
 		GlobalPosition += spellMovementComponent.Velocity * (float)delta;
