@@ -127,6 +127,38 @@
             "on_spawn": "",
             "on_despawn": "",
             "stackable": true
+        },
+        {
+            "id": "fireball_orbit",
+            "name": "Fireball Orbit",
+            "description": "Spells now have 3 fireballs orbiting them.",
+            "icon": "res://Assets/Sprites/proj_placeholder.png",
+            "rarity": "uncommon",
+            "damage_type": "fire",
+            "dot_damage": 0.0,
+            "crit_additive": 0.0,
+            "crit_multiplicative": 0.0,
+            "on_hit": "",
+            "orbital": "",
+            "on_spawn": "orbit",
+            "on_despawn": "",
+            "stackable": false
+        },
+        {
+            "id": "wizard_orbit",
+            "name": "Wizard Orbit",
+            "description": "Spells now have 3 allied wizards orbiting them.",
+            "icon": "res://Assets/Sprites/proj_placeholder.png",
+            "rarity": "rare",
+            "damage_type": "",
+            "dot_damage": 0.0,
+            "crit_additive": 0.0,
+            "crit_multiplicative": 0.0,
+            "on_hit": "",
+            "orbital": "",
+            "on_spawn": "orbit",
+            "on_despawn": "",
+            "stackable": false
         }
     ]
 }
