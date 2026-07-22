@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://dwgyxrrevl24e"]
+
+[ext_resource type="Script" uid="uid://cfoq3jmrgc2iw" path="res://Scripts/Spell/OrbitManager.cs" id="1_64lmx"]
+
+[node name="OrbitManager" type="Node2D" unique_id=1454127629]
+script = ExtResource("1_64lmx")
