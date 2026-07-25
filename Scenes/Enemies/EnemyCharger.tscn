@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://c8chargerenemy1"]
+[gd_scene format=3 uid="uid://jl207mgkmkb7"]
 
 [ext_resource type="Script" uid="uid://c0ouqjnx6xc1d" path="res://Scripts/Enemy.cs" id="1_enemy"]
 [ext_resource type="Texture2D" uid="uid://dx3ws0g34at1r" path="res://Assets/Sprites/Enemy/placeholder_enemy.png" id="2_sprite"]
@@ -6,10 +6,10 @@
 [ext_resource type="Script" uid="uid://csu7r54n2f32y" path="res://Scripts/HealthComponent.cs" id="4_health"]
 [ext_resource type="Script" uid="uid://nabumqpkq4ny" path="res://Scripts/AnimationComponent.cs" id="5_anim"]
 [ext_resource type="Script" uid="uid://bol4ib3tbtusr" path="res://Scripts/HitboxComponent.cs" id="6_hitbox"]
-[ext_resource type="Script" path="res://Scripts/Enemy/Behaviors/ChaseMovementComponent.cs" id="7_chase"]
-[ext_resource type="Script" path="res://Scripts/Enemy/Behaviors/MeleeAttackComponent.cs" id="8_melee"]
-[ext_resource type="Script" path="res://Scripts/Enemy/Behaviors/ArenaClampComponent.cs" id="9_clamp"]
-[ext_resource type="Script" path="res://Scripts/DamageFlashComponent.cs" id="10_flash"]
+[ext_resource type="Script" uid="uid://b5a4ximggnjsp" path="res://Scripts/Enemy/Behaviors/ChaseMovementComponent.cs" id="7_chase"]
+[ext_resource type="Script" uid="uid://cc6b21v53uga3" path="res://Scripts/Enemy/Behaviors/MeleeAttackComponent.cs" id="8_melee"]
+[ext_resource type="Script" uid="uid://cjlcywrbmru3k" path="res://Scripts/Enemy/Behaviors/ArenaClampComponent.cs" id="9_clamp"]
+[ext_resource type="Script" uid="uid://3d4f4v4pavcm" path="res://Scripts/DamageFlashComponent.cs" id="10_flash"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_charger"]
 
@@ -21,61 +21,56 @@ nodes/Animation/position = Vector2(180, 100)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_charger"]
 size = Vector2(20, 32)
 
-[node name="EnemyCharger" type="CharacterBody2D" groups=["enemies"]]
-collision_layer = 4
-collision_mask = 1
+[node name="EnemyCharger" type="CharacterBody2D" unique_id=917117052 groups=["enemies"]]
 modulate = Color(1, 0.6, 0.6, 1)
+collision_layer = 4
 script = ExtResource("1_enemy")
 
-[node name="EnemySprite" type="Sprite2D" parent="."]
+[node name="EnemySprite" type="Sprite2D" parent="." unique_id=743277598]
 z_index = 1
 texture = ExtResource("2_sprite")
 
-[node name="MovementComponent" type="Node2D" parent="." node_paths=PackedStringArray("body")]
+[node name="MovementComponent" type="Node2D" parent="." unique_id=2129182553 node_paths=PackedStringArray("body")]
 unique_name_in_owner = true
 script = ExtResource("3_move")
 body = NodePath("..")
-speed = 180.0
+speed = 80.0
 
-[node name="HealthComponent" type="Node2D" parent="."]
+[node name="HealthComponent" type="Node2D" parent="." unique_id=300003991]
 unique_name_in_owner = true
 script = ExtResource("4_health")
 MaxHealth = 60
 
-[node name="AnimationComponent" type="Node2D" parent="." node_paths=PackedStringArray("sprite")]
+[node name="AnimationComponent" type="Node2D" parent="." unique_id=196994673]
 script = ExtResource("5_anim")
-sprite = NodePath("../EnemySprite")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=2074772212]
 
-[node name="AnimationTree" type="AnimationTree" parent="."]
+[node name="AnimationTree" type="AnimationTree" parent="." unique_id=1188544908]
 tree_root = SubResource("AnimationNodeBlendTree_charger")
 
-[node name="HitboxComponent" type="Node2D" parent="." groups=["enemies"]]
+[node name="HitboxComponent" type="Node2D" parent="." unique_id=1590627092 groups=["enemies"]]
 script = ExtResource("6_hitbox")
 
-[node name="Area2D" type="Area2D" parent="HitboxComponent" groups=["enemies"]]
+[node name="Area2D" type="Area2D" parent="HitboxComponent" unique_id=1339677383 groups=["enemies"]]
 collision_layer = 8
 collision_mask = 16
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent/Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent/Area2D" unique_id=1645468465]
 shape = SubResource("RectangleShape2D_charger")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=355587230]
 shape = SubResource("RectangleShape2D_charger")
 
-[node name="ChaseMovementComponent" type="Node2D" parent="."]
+[node name="ChaseMovementComponent" type="Node2D" parent="." unique_id=1352163447]
 script = ExtResource("7_chase")
 
-[node name="MeleeAttackComponent" type="Node2D" parent="."]
+[node name="MeleeAttackComponent" type="Node2D" parent="." unique_id=1973116540]
 script = ExtResource("8_melee")
-AttackDelay = 1.0
-MeleeRange = 40.0
-Damage = 10
 
-[node name="ArenaClampComponent" type="Node2D" parent="."]
+[node name="ArenaClampComponent" type="Node2D" parent="." unique_id=838125797]
 script = ExtResource("9_clamp")
 
-[node name="DamageFlashComponent" type="Node2D" parent="."]
+[node name="DamageFlashComponent" type="Node2D" parent="." unique_id=586835674]
 script = ExtResource("10_flash")
 FlashTargetPath = NodePath("EnemySprite")

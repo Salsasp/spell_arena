@@ -86,7 +86,7 @@ tile_set = SubResource("TileSet_vp7ys")
 
 [node name="ArenaBounds" type="Node2D" parent="." unique_id=923003245]
 script = ExtResource("9_arena")
-ArenaHalfSize = Vector2(350, 275)
+ArenaHalfSize = Vector2(500, 300)
 SpawnMargin = 150.0
 MinSpawnDistanceFromPlayer = 175.0
 
