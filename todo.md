@@ -1,6 +1,7 @@
 # TODO
 
 ## HIGH PRIORITY
+- Fix bug causing player location to be shifted to initial charger enemy spawn location
 - rework spawn system for enemies
 - visual polish on shooting
 - more modifiers
