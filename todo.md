@@ -8,6 +8,7 @@
 
 ## MEDIUM PRIORITY
 - rebalance melee enemies
+- Add lifetime to damage number text so it doesn't affect performance
 
 ## LOW PRIORITY
 - Implement sound effects
