@@ -1,0 +1,135 @@
+[gd_scene format=3 uid="uid://x8l344sbjamp"]
+
+[ext_resource type="Script" uid="uid://bh66xfb6jcblf" path="res://Scripts/Projectile.cs" id="1_t1ukn"]
+[ext_resource type="PackedScene" uid="uid://dwgyxrrevl24e" path="res://Scenes/Spells/OrbitManager.tscn" id="2_44skl"]
+[ext_resource type="Script" uid="uid://d3op0eovhs6cq" path="res://Scripts/Spell/DamageComponent.cs" id="3_m8t83"]
+[ext_resource type="Script" uid="uid://5k1veq5ulv3t" path="res://Scripts/Spell/SpellMovementComponent.cs" id="4_ih8fk"]
+[ext_resource type="Script" uid="uid://d1r3sxdk0chv5" path="res://Scripts/Spell/SpellSpawnComponent.cs" id="5_icv8i"]
+[ext_resource type="Script" uid="uid://cyw23b1rilbxg" path="res://Scripts/Spell/HitComponent.cs" id="6_nsp1x"]
+[ext_resource type="Script" uid="uid://cs8nivwxnirj8" path="res://Scripts/Spell/DespawnComponent.cs" id="7_h5uj7"]
+[ext_resource type="Script" uid="uid://7vbl3a4b3hlt" path="res://Scripts/Spell/LifetimeComponent.cs" id="8_f0ref"]
+[ext_resource type="Texture2D" uid="uid://blh6in6m1obtw" path="res://Assets/Sprites/Spell/projectile_animated-Sheet-particles-Sheet.png" id="9_labef"]
+[ext_resource type="Script" uid="uid://nabumqpkq4ny" path="res://Scripts/AnimationComponent.cs" id="10_rs6xu"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_rsyq6"]
+radius = 5.9
+height = 31.88
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xxsyy"]
+atlas = ExtResource("9_labef")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dsm84"]
+atlas = ExtResource("9_labef")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xsjeh"]
+atlas = ExtResource("9_labef")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tomee"]
+atlas = ExtResource("9_labef")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_likag"]
+atlas = ExtResource("9_labef")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_urmru"]
+atlas = ExtResource("9_labef")
+region = Rect2(80, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_urmru"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xxsyy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dsm84")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xsjeh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tomee")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_likag")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_urmru")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 16.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ar0ab"]
+radius = 200.0
+
+[node name="OrbitWizardProjectile" type="Node2D" unique_id=1249408229]
+script = ExtResource("1_t1ukn")
+OrbitScene = ExtResource("2_44skl")
+
+[node name="ProjectilePivot" type="Node2D" parent="." unique_id=271081983]
+
+[node name="DamageComponent" type="Node2D" parent="." unique_id=539318127]
+unique_name_in_owner = true
+script = ExtResource("3_m8t83")
+
+[node name="SpellMovementComponent" type="Node2D" parent="." unique_id=1332081632]
+unique_name_in_owner = true
+script = ExtResource("4_ih8fk")
+Speed = 500.0
+
+[node name="SpellSpawnComponent" type="Node2D" parent="." unique_id=345381162]
+unique_name_in_owner = true
+script = ExtResource("5_icv8i")
+OrbitAllowed = false
+
+[node name="HitComponent" type="Node2D" parent="." unique_id=1007074092]
+unique_name_in_owner = true
+script = ExtResource("6_nsp1x")
+ShowDebugCircle = false
+
+[node name="DespawnComponent" type="Node2D" parent="." unique_id=161814801]
+unique_name_in_owner = true
+script = ExtResource("7_h5uj7")
+
+[node name="LifetimeComponent" type="Node2D" parent="." unique_id=363474903]
+unique_name_in_owner = true
+script = ExtResource("8_f0ref")
+Lifetime = 2
+
+[node name="Timer" type="Timer" parent="LifetimeComponent" unique_id=295151940]
+
+[node name="ProjArea2D" type="Area2D" parent="." unique_id=631328878]
+collision_layer = 16
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ProjArea2D" unique_id=487064132]
+shape = SubResource("CapsuleShape2D_rsyq6")
+
+[node name="Sprite2D" type="AnimatedSprite2D" parent="ProjArea2D" unique_id=1596038784]
+rotation = 0.7853982
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_urmru")
+animation = &"idle"
+autoplay = "idle"
+frame_progress = 0.26001713
+
+[node name="ChainRadius" type="Area2D" parent="." unique_id=656173701]
+visible = false
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ChainRadius" unique_id=1420828172]
+shape = SubResource("CircleShape2D_ar0ab")
+
+[node name="AnimationComponent" type="Node2D" parent="." unique_id=402119261 node_paths=PackedStringArray("animatedSprite", "animationPlayer")]
+script = ExtResource("10_rs6xu")
+animatedSprite = NodePath("../ProjArea2D/Sprite2D")
+animationPlayer = NodePath("../AnimationPlayer")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1027066159]

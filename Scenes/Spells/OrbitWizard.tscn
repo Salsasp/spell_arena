@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://d3op0eovhs6cq" path="res://Scripts/Spell/DamageComponent.cs" id="2_hgufc"]
 [ext_resource type="Script" uid="uid://5k1veq5ulv3t" path="res://Scripts/Spell/SpellMovementComponent.cs" id="3_ljdwj"]
 [ext_resource type="Script" uid="uid://cs8nivwxnirj8" path="res://Scripts/Spell/DespawnComponent.cs" id="4_tefci"]
-[ext_resource type="Texture2D" uid="uid://dfsaapvej0soa" path="res://Assets/Sprites/Spell/projectile_orbit.png" id="5_y6e7y"]
+[ext_resource type="Texture2D" uid="uid://byslesqt4jpyw" path="res://Assets/Sprites/Spell/placeholder_wizard_orbit.png" id="5_44dal"]
 [ext_resource type="Script" uid="uid://nabumqpkq4ny" path="res://Scripts/AnimationComponent.cs" id="6_xfrl5"]
 [ext_resource type="Script" uid="uid://cyw23b1rilbxg" path="res://Scripts/Spell/HitComponent.cs" id="7_yy8f1"]
 
@@ -40,8 +40,7 @@ shape = SubResource("CircleShape2D_0dfur")
 
 [node name="Sprite2D" type="Sprite2D" parent="ProjArea2D" unique_id=461592810]
 modulate = Color(1, 0.3, 0.3, 1)
-rotation = 1.5707964
-texture = ExtResource("5_y6e7y")
+texture = ExtResource("5_44dal")
 
 [node name="AnimationComponent" type="Node2D" parent="." unique_id=960598031]
 script = ExtResource("6_xfrl5")

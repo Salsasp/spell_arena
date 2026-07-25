@@ -3,6 +3,7 @@ using Godot;
 
 public partial class SpellSpawnComponent : Component
 {
+	[Export] public bool OrbitAllowed = true;
 	private ModifierManager modifierManager;
 	private DamageComponent damageComponent;
 	private SpellMovementComponent movementComponent;
@@ -30,7 +31,7 @@ public partial class SpellSpawnComponent : Component
 		}
 
 		// TODO: add some field to modifier manager that groups all orbits for easy checking
-		if (modifierManager.ActiveModifiers.ContainsKey("fireball_orbit") || modifierManager.ActiveModifiers.ContainsKey("wizard_orbit"))
+		if ((modifierManager.ActiveModifiers.ContainsKey("fireball_orbit") || modifierManager.ActiveModifiers.ContainsKey("wizard_orbit")) && OrbitAllowed)
 		{
 			try
 			{

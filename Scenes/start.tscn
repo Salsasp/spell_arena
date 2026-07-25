@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://jl207mgkmkb7" path="res://Scenes/Enemies/EnemyCharger.tscn" id="6_charger"]
 [ext_resource type="PackedScene" uid="uid://v1rbis70bab5" path="res://Scenes/EnemyProjectile.tscn" id="7_enemyproj"]
 [ext_resource type="PackedScene" uid="uid://cwhripoub67q1" path="res://Scenes/UI/DebugUI.tscn" id="8_o3wvq"]
+[ext_resource type="PackedScene" uid="uid://x8l344sbjamp" path="res://Scenes/Spells/OrbitWizardProjectile.tscn" id="8_y71vl"]
 [ext_resource type="PackedScene" uid="uid://c5xyb7qpbq56d" path="res://Scenes/TextProjectile.tscn" id="9_1tr1b"]
 [ext_resource type="Script" uid="uid://chiji0st1ftrb" path="res://Scripts/Wave/ArenaBounds.cs" id="9_arena"]
 [ext_resource type="Script" uid="uid://drai7myprghfn" path="res://Scripts/Wave/WaveSpawner.cs" id="10_spawner"]
@@ -97,6 +98,7 @@ scale = Vector2(2, 2)
 unique_name_in_owner = true
 script = ExtResource("3_5ogh5")
 ProjectilePrefab = ExtResource("4_lb6bl")
+OrbitWizardProjectilePrefab = ExtResource("8_y71vl")
 EnemyProjectilePrefab = ExtResource("7_enemyproj")
 TextProjectilePrefab = ExtResource("9_1tr1b")
 

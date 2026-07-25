@@ -15,6 +15,10 @@ run/main_scene="uid://bhc22mkeo4n1y"
 config/features=PackedStringArray("4.6", "C#", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+ProjectileSpawner="*uid://dlfxn8ubefymy"
+
 [dotnet]
 
 project/assembly_name="spell_arena"

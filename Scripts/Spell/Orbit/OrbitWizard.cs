@@ -2,11 +2,39 @@ using Godot;
 
 public partial class OrbitWizard : OrbitProjectile
 {
-	// TODO: Add wizard exclusive stuff
+    // List of requirements
+    // Shoot projectiles at closest enemy on 0.5s cooldown
+    // Projectiles should be identical to player projectile
+	[Export] public float AttackCooldown = 0.5f;
+	private float cooldown = 0f;
+
+    public override void _Ready()
+    {
+        base._Ready();
+	}
+
 
 	public override void _PhysicsProcess(double delta)
 	{
 		base._PhysicsProcess(delta);
-		Rotation = AngleToParent;
+		//Rotation = AngleToParent;
+		Update(delta);
 	}
+
+	public void Update(double delta)
+	{
+		cooldown -= (float)delta;
+
+		if (cooldown > 0)
+		{
+			return;
+		}
+
+		Vector2 dir = GlobalPosition.DirectionTo(Util.FindNearestEnemy(this).GlobalPosition);
+		ProjectileSpawner.Instance.SpawnOrbitWizardProjectile(GlobalPosition, dir);
+
+		cooldown = AttackCooldown;
+	}
+
+
 }
