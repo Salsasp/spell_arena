@@ -12,7 +12,6 @@
 radius = 13.0
 
 [node name="OrbitWizard" type="Node2D" unique_id=183864806 groups=["enemy_attacks"]]
-scale = Vector2(0.5, 0.5)
 script = ExtResource("1_wizard")
 
 [node name="DamageComponent" type="Node2D" parent="." unique_id=1688255860]
