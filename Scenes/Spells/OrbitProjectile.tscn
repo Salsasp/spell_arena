@@ -6,12 +6,15 @@
 [ext_resource type="Script" uid="uid://cs8nivwxnirj8" path="res://Scripts/Spell/DespawnComponent.cs" id="4_pyvti"]
 [ext_resource type="Texture2D" uid="uid://dfsaapvej0soa" path="res://Assets/Sprites/Spell/projectile_orbit.png" id="5_pm8k5"]
 [ext_resource type="Script" uid="uid://nabumqpkq4ny" path="res://Scripts/AnimationComponent.cs" id="6_4ou24"]
+[ext_resource type="Script" uid="uid://cyw23b1rilbxg" path="res://Scripts/Spell/HitComponent.cs" id="7_de50p"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_0dfur"]
 radius = 13.0
 
 [node name="OrbitProjectile" type="Node2D" unique_id=183864806 groups=["enemy_attacks"]]
+scale = Vector2(0.5, 0.5)
 script = ExtResource("1_0dfur")
+AngularSpeed = 6.0
 
 [node name="DamageComponent" type="Node2D" parent="." unique_id=1688255860]
 unique_name_in_owner = true
@@ -30,8 +33,8 @@ unique_name_in_owner = true
 script = ExtResource("4_pyvti")
 
 [node name="ProjArea2D" type="Area2D" parent="." unique_id=997250099 groups=["enemy_attacks"]]
-collision_layer = 32
-collision_mask = 2
+collision_layer = 16
+collision_mask = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ProjArea2D" unique_id=1385845091]
 shape = SubResource("CircleShape2D_0dfur")
@@ -41,7 +44,11 @@ modulate = Color(1, 0.3, 0.3, 1)
 rotation = 1.5707964
 texture = ExtResource("5_pm8k5")
 
-[node name="AnimationComponent" type="Node2D" parent="." unique_id=960598031 node_paths=PackedStringArray("animatedSprite", "animationPlayer")]
+[node name="AnimationComponent" type="Node2D" parent="." unique_id=960598031]
 script = ExtResource("6_4ou24")
-animatedSprite = NodePath("")
-animationPlayer = NodePath("")
+
+[node name="HitComponent" type="Node2D" parent="." unique_id=930089306]
+unique_name_in_owner = true
+script = ExtResource("7_de50p")
+ShowDebugCircle = false
+ChainEnabled = false

@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 
 public partial class HitComponent : Component
 {
@@ -8,15 +9,15 @@ public partial class HitComponent : Component
 	private DespawnComponent despawnComponent;
 	private SpellMovementComponent movementComponent;
 	private Area2D chainRadius;
-	private ProjectileSpawner projectileSpawner;
 	private int chainCount = 4;
 	private const int DOT_TICK_INTERVAL = 2;
 	private const int DOT_DURATION = 10;
 	[Export] public bool ShowDebugCircle { get; set; } = true;
+	[Export] public bool ChainEnabled { get; set; } = true;
 
 	public void Update(Node2D target)
 	{
-		if (modifierManager.ActiveModifiers.ContainsKey("chain_spells"))
+		if (modifierManager.ActiveModifiers.ContainsKey("chain_spells") && ChainEnabled)
 		{
 			ChainSpell(target);
 		}
@@ -35,8 +36,10 @@ public partial class HitComponent : Component
 	{
 		//modifierManager = GetNode<ModifierManager>("../../Player/ModifierManager");
 		//despawnComponent = GetNode<DespawnComponent>("../DespawnComponent");
-		chainRadius = GetNode<Area2D>("../ChainRadius");
-		projectileSpawner = GetNode<ProjectileSpawner>("../../ProjectileSpawner");
+		if (ChainEnabled)
+		{
+			chainRadius = GetNode<Area2D>("../ChainRadius");
+		}
 	}
 
 	public void Initialize(ModifierManager modMan, DespawnComponent despawnComp, SpellMovementComponent moveComp)

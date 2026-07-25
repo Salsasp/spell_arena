@@ -5,14 +5,14 @@ using System.ComponentModel;
 public partial class Projectile : Node2D
 {
 	[Export] public PackedScene OrbitScene;
-	private DamageComponent damageComponent;
-	private DespawnComponent despawnComponent;
-	private HitComponent hitComponent;
-	private LifetimeComponent lifetimeComponent;
-	private SpellMovementComponent spellMovementComponent;
-	private SpellSpawnComponent spawnComponent;
-	private ModifierManager modifierManager;
-	private AnimationComponent animationComponent;
+	public DamageComponent damageComponent;
+	public DespawnComponent despawnComponent;
+	public HitComponent hitComponent;
+	public LifetimeComponent lifetimeComponent;
+	public SpellMovementComponent spellMovementComponent;
+	public SpellSpawnComponent spawnComponent;
+	public ModifierManager modifierManager;
+	public AnimationComponent animationComponent;
 
 
 	public override void _Ready()
