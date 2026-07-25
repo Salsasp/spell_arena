@@ -22,7 +22,7 @@ BaseDamage = 5
 [node name="SpellMovementComponent" type="Node2D" parent="." unique_id=20917591]
 unique_name_in_owner = true
 script = ExtResource("3_8sncr")
-Speed = 100.0
+Speed = 200.0
 
 [node name="DespawnComponent" type="Node2D" parent="." unique_id=60519413]
 unique_name_in_owner = true

@@ -4,14 +4,15 @@ using System.ComponentModel;
 
 public partial class Projectile : Node2D
 {
-	private DamageComponent damageComponent;
-	private DespawnComponent despawnComponent;
-	private HitComponent hitComponent;
-	private LifetimeComponent lifetimeComponent;
-	private SpellMovementComponent spellMovementComponent;
-	private SpellSpawnComponent spawnComponent;
-	private ModifierManager modifierManager;
-	private AnimationComponent animationComponent;
+	[Export] public PackedScene OrbitScene;
+	public DamageComponent damageComponent;
+	public DespawnComponent despawnComponent;
+	public HitComponent hitComponent;
+	public LifetimeComponent lifetimeComponent;
+	public SpellMovementComponent spellMovementComponent;
+	public SpellSpawnComponent spawnComponent;
+	public ModifierManager modifierManager;
+	public AnimationComponent animationComponent;
 
 
 	public override void _Ready()
@@ -28,7 +29,7 @@ public partial class Projectile : Node2D
 		animationComponent.Update();
 
 		hitComponent.Initialize(modifierManager, despawnComponent, spellMovementComponent);
-		spawnComponent.Initialize(modifierManager, damageComponent, spellMovementComponent);
+		spawnComponent.Initialize(modifierManager, damageComponent, spellMovementComponent, OrbitScene);
 
 		spawnComponent.Update();
 	}

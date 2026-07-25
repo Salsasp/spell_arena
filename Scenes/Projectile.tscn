@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bh66xfb6jcblf" path="res://Scripts/Projectile.cs" id="1_cu5m1"]
 [ext_resource type="Script" uid="uid://d3op0eovhs6cq" path="res://Scripts/Spell/DamageComponent.cs" id="2_rsyq6"]
+[ext_resource type="PackedScene" uid="uid://dwgyxrrevl24e" path="res://Scenes/Spells/OrbitManager.tscn" id="2_xxsyy"]
 [ext_resource type="Script" uid="uid://5k1veq5ulv3t" path="res://Scripts/Spell/SpellMovementComponent.cs" id="3_augfd"]
 [ext_resource type="Script" uid="uid://d1r3sxdk0chv5" path="res://Scripts/Spell/SpellSpawnComponent.cs" id="4_ar0ab"]
 [ext_resource type="Script" uid="uid://cyw23b1rilbxg" path="res://Scripts/Spell/HitComponent.cs" id="5_d6p7i"]
@@ -59,7 +60,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_urmru")
 }],
-"loop": true,
+"loop": 1,
 "name": &"idle",
 "speed": 16.0
 }]
@@ -69,6 +70,7 @@ radius = 200.0
 
 [node name="Projectile" type="Node2D" unique_id=1249408229]
 script = ExtResource("1_cu5m1")
+OrbitScene = ExtResource("2_xxsyy")
 
 [node name="ProjectilePivot" type="Node2D" parent="." unique_id=271081983]
 
@@ -76,10 +78,9 @@ script = ExtResource("1_cu5m1")
 unique_name_in_owner = true
 script = ExtResource("2_rsyq6")
 
-[node name="SpellMovementComponent" type="Node2D" parent="." unique_id=1332081632 node_paths=PackedStringArray("Sprite")]
+[node name="SpellMovementComponent" type="Node2D" parent="." unique_id=1332081632]
 unique_name_in_owner = true
 script = ExtResource("3_augfd")
-Sprite = NodePath("")
 Speed = 500.0
 
 [node name="SpellSpawnComponent" type="Node2D" parent="." unique_id=345381162]
