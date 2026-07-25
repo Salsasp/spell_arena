@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://f5onkvuladqn"]
 
-[ext_resource type="Script" uid="uid://decny0s67kbnq" path="res://Scripts/Spell/OrbitProjectile.cs" id="1_0dfur"]
+[ext_resource type="Script" uid="uid://dx7k56y4r6c6l" path="res://Scripts/Spell/Orbit/OrbitProjectile.cs" id="1_de50p"]
 [ext_resource type="Script" uid="uid://d3op0eovhs6cq" path="res://Scripts/Spell/DamageComponent.cs" id="2_4ou24"]
 [ext_resource type="Script" uid="uid://5k1veq5ulv3t" path="res://Scripts/Spell/SpellMovementComponent.cs" id="3_2bhmo"]
 [ext_resource type="Script" uid="uid://cs8nivwxnirj8" path="res://Scripts/Spell/DespawnComponent.cs" id="4_pyvti"]
@@ -13,8 +13,7 @@ radius = 13.0
 
 [node name="OrbitProjectile" type="Node2D" unique_id=183864806 groups=["enemy_attacks"]]
 scale = Vector2(0.5, 0.5)
-script = ExtResource("1_0dfur")
-AngularSpeed = 6.0
+script = ExtResource("1_de50p")
 
 [node name="DamageComponent" type="Node2D" parent="." unique_id=1688255860]
 unique_name_in_owner = true

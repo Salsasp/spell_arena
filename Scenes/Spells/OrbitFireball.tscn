@@ -1,0 +1,53 @@
+[gd_scene format=3 uid="uid://cfe5hvmsrpc31"]
+
+[ext_resource type="Script" uid="uid://d2owcuf745x57" path="res://Scripts/Spell/Orbit/OrbitFireball.cs" id="1_fireball"]
+[ext_resource type="Script" uid="uid://d3op0eovhs6cq" path="res://Scripts/Spell/DamageComponent.cs" id="2_iit1p"]
+[ext_resource type="Script" uid="uid://5k1veq5ulv3t" path="res://Scripts/Spell/SpellMovementComponent.cs" id="3_08kpi"]
+[ext_resource type="Script" uid="uid://cs8nivwxnirj8" path="res://Scripts/Spell/DespawnComponent.cs" id="4_kchkn"]
+[ext_resource type="Texture2D" uid="uid://dfsaapvej0soa" path="res://Assets/Sprites/Spell/projectile_orbit.png" id="5_lt3ql"]
+[ext_resource type="Script" uid="uid://nabumqpkq4ny" path="res://Scripts/AnimationComponent.cs" id="6_uw5ag"]
+[ext_resource type="Script" uid="uid://cyw23b1rilbxg" path="res://Scripts/Spell/HitComponent.cs" id="7_xo41w"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0dfur"]
+radius = 13.0
+
+[node name="OrbitFireball" type="Node2D" unique_id=183864806 groups=["enemy_attacks"]]
+scale = Vector2(0.5, 0.5)
+script = ExtResource("1_fireball")
+
+[node name="DamageComponent" type="Node2D" parent="." unique_id=1688255860]
+unique_name_in_owner = true
+script = ExtResource("2_iit1p")
+CritChance = 0.0
+BaseDamage = 5
+
+[node name="SpellMovementComponent" type="Node2D" parent="." unique_id=20917591 node_paths=PackedStringArray("Sprite")]
+unique_name_in_owner = true
+script = ExtResource("3_08kpi")
+Sprite = NodePath("../ProjArea2D/Sprite2D")
+Speed = 100.0
+
+[node name="DespawnComponent" type="Node2D" parent="." unique_id=60519413]
+unique_name_in_owner = true
+script = ExtResource("4_kchkn")
+
+[node name="ProjArea2D" type="Area2D" parent="." unique_id=997250099 groups=["enemy_attacks"]]
+collision_layer = 16
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ProjArea2D" unique_id=1385845091]
+shape = SubResource("CircleShape2D_0dfur")
+
+[node name="Sprite2D" type="Sprite2D" parent="ProjArea2D" unique_id=461592810]
+modulate = Color(1, 0.3, 0.3, 1)
+rotation = 1.5707964
+texture = ExtResource("5_lt3ql")
+
+[node name="AnimationComponent" type="Node2D" parent="." unique_id=960598031]
+script = ExtResource("6_uw5ag")
+
+[node name="HitComponent" type="Node2D" parent="." unique_id=930089306]
+unique_name_in_owner = true
+script = ExtResource("7_xo41w")
+ShowDebugCircle = false
+ChainEnabled = false
