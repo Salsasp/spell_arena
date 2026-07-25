@@ -79,6 +79,29 @@ public partial class ModifierManager : Node
         return null;
     }
 
+    public bool TryAddActiveModifier(string id)
+    {
+        ModifierData modifier = GetModifier(id);
+        if (modifier == null)
+        {
+            return false;
+        }
+
+        if (!HasActiveModifier(id))
+        {
+            ActiveModifiers.Add(id, modifier);
+            return true;
+        }
+
+        if (modifier.isStackable)
+        {
+            ActiveModifiers[id].copies += 1;
+            return true;
+        }
+
+        return false;
+    }
+
     public void PrintModifiers()
     {
         foreach (var (key, value) in modifiers)

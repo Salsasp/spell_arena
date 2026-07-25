@@ -81,15 +81,9 @@ public partial class RunManager : Node
 			return;
 		}
 
-		ModifierData modifier = modifierManager.GetModifier(modifierId);
-		if (modifier != null && !modifierManager.HasActiveModifier(modifierId))
+		if (!modifierManager.TryAddActiveModifier(modifierId))
 		{
-			modifierManager.ActiveModifiers.Add(modifierId, modifier);
-		}
-		else if (modifier != null && modifierManager.HasActiveModifier(modifierId) 
-			&& modifierManager.GetModifier(modifierId).isStackable)
-		{
-			modifierManager.ActiveModifiers[modifierId].copies += 1;
+			GD.Print($"Modifier '{modifierId}' was not added.");
 		}
 
 		GetTree().Paused = false;
