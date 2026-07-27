@@ -8,7 +8,7 @@ public partial class Util
 	enemy
 }
 
-public static Enemy FindNearestEnemy(Node2D currentNode)
+	public static Enemy FindNearestEnemy(Node2D currentNode)
 	{
 		Vector2 pos = currentNode.GetParent<Node2D>().GlobalPosition;
 		Enemy nearest = null;
@@ -31,4 +31,16 @@ public static Enemy FindNearestEnemy(Node2D currentNode)
 
 		return nearest;
 	}
+
+	public static int GetDirectionIndex8D(Vector2 vec)
+    {
+        if (vec == Vector2.Zero)
+            return 0;
+
+        float angle = vec.Angle();
+        int index = Mathf.RoundToInt(angle / (Mathf.Pi / 4.0f));
+        index = ((index % 8) + 8) % 8;
+        return index;
+    }
+
 }

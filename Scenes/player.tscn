@@ -149,9 +149,17 @@ nodes/Animation/position = Vector2(180, 100)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7dp3o"]
 size = Vector2(20, 32)
 
-[node name="Player" type="CharacterBody2D" unique_id=1570652818]
+[node name="Player" type="CharacterBody2D" unique_id=1570652818 node_paths=PackedStringArray("inputComponent", "movementComponent", "healthComponent", "hitboxComponent", "animationComponent", "wand", "wandSnapPoints", "modifierManager")]
 collision_mask = 4
 script = ExtResource("1_vgqql")
+inputComponent = NodePath("InputComponent")
+movementComponent = NodePath("MovementComponent")
+healthComponent = NodePath("HealthComponent")
+hitboxComponent = NodePath("HitboxComponent")
+animationComponent = NodePath("AnimationComponent")
+wand = NodePath("Wand")
+wandSnapPoints = NodePath("WandSnapPoints")
+modifierManager = NodePath("ModifierManager")
 
 [node name="Collider" type="CollisionShape2D" parent="." unique_id=462390313]
 shape = SubResource("RectangleShape2D_v0iea")
@@ -159,7 +167,7 @@ shape = SubResource("RectangleShape2D_v0iea")
 [node name="PlayerSprite" type="AnimatedSprite2D" parent="." unique_id=335451100]
 z_index = 1
 sprite_frames = SubResource("SpriteFrames_olqyp")
-animation = &"walk_up_right"
+animation = &"walk_down_right"
 
 [node name="MovementComponent" type="Node2D" parent="." unique_id=498815492 node_paths=PackedStringArray("body")]
 unique_name_in_owner = true
@@ -206,3 +214,29 @@ script = ExtResource("15_h4iuc")
 [node name="DamageFlashComponent" type="Node2D" parent="." unique_id=1982938410]
 script = ExtResource("16_fd4e3")
 FlashTargetPath = NodePath("PlayerSprite")
+
+[node name="WandSnapPoints" type="Node2D" parent="." unique_id=1815601114]
+
+[node name="Down" type="Marker2D" parent="WandSnapPoints" unique_id=151542751]
+position = Vector2(9, 9)
+
+[node name="Up" type="Marker2D" parent="WandSnapPoints" unique_id=150177413]
+position = Vector2(-9, 8)
+
+[node name="Left" type="Marker2D" parent="WandSnapPoints" unique_id=1550800057]
+position = Vector2(-7, 8)
+
+[node name="Right" type="Marker2D" parent="WandSnapPoints" unique_id=1937380984]
+position = Vector2(7, 8)
+
+[node name="UpLeft" type="Marker2D" parent="WandSnapPoints" unique_id=1635143623]
+position = Vector2(-10, 8)
+
+[node name="UpRight" type="Marker2D" parent="WandSnapPoints" unique_id=847213911]
+position = Vector2(-5, 3)
+
+[node name="DownLeft" type="Marker2D" parent="WandSnapPoints" unique_id=861984707]
+position = Vector2(7.5, 10)
+
+[node name="DownRight" type="Marker2D" parent="WandSnapPoints" unique_id=136738825]
+position = Vector2(10.5, 6)

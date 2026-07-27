@@ -5,25 +5,20 @@ public partial class Player : CharacterBody2D
 {
 	public const float Speed = 300.0f;
 	public const float JumpVelocity = -400.0f;
-	private InputComponent inputComponent;
-	private MovementComponent movementComponent;
-	private HealthComponent healthComponent;
-	private HitboxComponent hitboxComponent;
+	[Export] public InputComponent inputComponent;
+	[Export] public MovementComponent movementComponent;
+	[Export] public HealthComponent healthComponent;
+	[Export] public HitboxComponent hitboxComponent;
 	private ProjectileSpawner projectileSpawner;
-	private AnimationComponent animationComponent;
-	private Wand wand;
-	private ModifierManager modifierManager;
+	[Export] public AnimationComponent animationComponent;
+	[Export] public Wand wand;
+	[Export] public Node2D wandSnapPoints;
+	[Export] public ModifierManager modifierManager;
 
 	public override void _Ready()
 	{
 		projectileSpawner = GetNode<ProjectileSpawner>("../ProjectileSpawner");
-		inputComponent = GetNode<InputComponent>("InputComponent");
-		movementComponent = GetNode<MovementComponent>("MovementComponent");
-		healthComponent = GetNode<HealthComponent>("HealthComponent");
-		hitboxComponent = GetNode<HitboxComponent>("HitboxComponent");
-		animationComponent = GetNode<AnimationComponent>("AnimationComponent");
-		wand = GetNode<Wand>("Wand");
-		modifierManager = GetNode<ModifierManager>("ModifierManager");
+
 		hitboxComponent.Hit += OnHit;
 	}
 
@@ -39,6 +34,7 @@ public partial class Player : CharacterBody2D
 		}
 
 		wand.RotateWand(inputComponent);
+		wand.SnapPivotToDirection(movementComponent, wandSnapPoints);
 		movementComponent.direction = inputComponent.MoveDir;
 		movementComponent.mouseDir = GlobalPosition.DirectionTo(inputComponent.MousePos).Normalized();
 		movementComponent.Update(delta);

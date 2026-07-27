@@ -15,7 +15,7 @@ public partial class AnimationComponent : Node2D
 		if (directionalSprites && movementComponent != null)
 		{
 			Vector2 direction = movementComponent.mouseDir.Round();
-			switch (GetDirectionIndex(direction))
+			switch (Util.GetDirectionIndex8D(direction))
 			{
 				case 0: animationState = "walk_right"; break;
 				case 1: animationState = "walk_down_right"; break;
@@ -30,15 +30,4 @@ public partial class AnimationComponent : Node2D
 		}
 		
 	}
-
-	private int GetDirectionIndex(Vector2 vec)
-    {
-        if (vec == Vector2.Zero)
-            return 0;
-
-        float angle = vec.Angle();
-        int index = Mathf.RoundToInt(angle / (Mathf.Pi / 4.0f));
-        index = ((index % 8) + 8) % 8;
-        return index;
-    }
 }
