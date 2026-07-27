@@ -64,12 +64,13 @@ public partial class WaveSpawner : Node2D
 		PackedScene scene = GD.Randf() < activeWave.ChargerWeight ? ChargerScene : StrafeShooterScene;
 		Enemy enemy = scene.Instantiate<Enemy>();
 		ApplyStatMultipliers(enemy);
-		enemyContainer.AddChild(enemy);
 
 		Vector2 playerPos = player != null && GodotObject.IsInstanceValid(player)
 			? player.GlobalPosition
 			: Vector2.Zero;
-		enemy.GlobalPosition = arenaBounds.GetSpawnPosition(playerPos);
+		Vector2 spawnPos = arenaBounds.GetSpawnPosition(playerPos);
+		enemy.Position = enemyContainer.ToLocal(spawnPos);
+		enemyContainer.AddChild(enemy);
 
 		HealthComponent health = enemy.GetNode<HealthComponent>("HealthComponent");
 		health.Dead += OnEnemyDied;
