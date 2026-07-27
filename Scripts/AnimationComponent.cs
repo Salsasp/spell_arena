@@ -15,23 +15,30 @@ public partial class AnimationComponent : Node2D
 		if (directionalSprites && movementComponent != null)
 		{
 			Vector2 direction = movementComponent.mouseDir.Round();
-			switch (direction)
+			switch (GetDirectionIndex(direction))
 			{
-				case var v when v == Vector2.Right: animationState = "walk_right"; break;
-				case var v when v == Vector2.Left: animationState = "walk_left"; break;
-				case var v when v == Vector2.Up: animationState = "walk_up"; break;
-				case var v when v == Vector2.Down: animationState = "walk_down"; break;
+				case 0: animationState = "walk_right"; break;
+				case 1: animationState = "walk_down_right"; break;
+				case 2: animationState = "walk_down"; break;
+				case 3: animationState = "walk_down_left"; break;
+				case 4: animationState = "walk_left"; break;
+				case 5: animationState = "walk_up_left"; break;
+				case 6: animationState = "walk_up"; break;
+				case 7: animationState = "walk_up_right"; break;
 			}
 			animatedSprite.Play(animationState);
 		}
 		
 	}
 
-	public override void _Ready()
-	{
-	}
+	private int GetDirectionIndex(Vector2 vec)
+    {
+        if (vec == Vector2.Zero)
+            return 0;
 
-	public override void _Process(double delta)
-	{
-	}
+        float angle = vec.Angle();
+        int index = Mathf.RoundToInt(angle / (Mathf.Pi / 4.0f));
+        index = ((index % 8) + 8) % 8;
+        return index;
+    }
 }
