@@ -19,14 +19,14 @@ public partial class Wand : Node2D
 		Vector2 direction = movementComponent.mouseDir.Round();
 			switch (Util.GetDirectionIndex8D(direction))
 			{
-				case 0: WandPivot.GlobalPosition = wandSnapPoints.GetNode<Marker2D>("Right").GlobalPosition; break;
-				case 1: WandPivot.GlobalPosition = wandSnapPoints.GetNode<Marker2D>("DownRight").GlobalPosition; break;
-				case 2: WandPivot.GlobalPosition = wandSnapPoints.GetNode<Marker2D>("Down").GlobalPosition; break;
-				case 3: WandPivot.GlobalPosition = wandSnapPoints.GetNode<Marker2D>("DownLeft").GlobalPosition; break;
-				case 4: WandPivot.GlobalPosition = wandSnapPoints.GetNode<Marker2D>("Left").GlobalPosition; break;
-				case 5: WandPivot.GlobalPosition = wandSnapPoints.GetNode<Marker2D>("UpLeft").GlobalPosition; break;
-				case 6: WandPivot.GlobalPosition = wandSnapPoints.GetNode<Marker2D>("Up").GlobalPosition; break;
-				case 7: WandPivot.GlobalPosition = wandSnapPoints.GetNode<Marker2D>("UpRight").GlobalPosition; break;
+				case 0: WandPivot.GlobalPosition = wandSnapPoints.GetNode<Marker2D>("Right").GlobalPosition; ZIndex = 1; break;
+				case 1: WandPivot.GlobalPosition = wandSnapPoints.GetNode<Marker2D>("DownRight").GlobalPosition; ZIndex = 1; break;
+				case 2: WandPivot.GlobalPosition = wandSnapPoints.GetNode<Marker2D>("Down").GlobalPosition; ZIndex = 1; break;
+				case 3: WandPivot.GlobalPosition = wandSnapPoints.GetNode<Marker2D>("DownLeft").GlobalPosition; ZIndex = 1; break;
+				case 4: WandPivot.GlobalPosition = wandSnapPoints.GetNode<Marker2D>("Left").GlobalPosition; ZIndex = 1; break;
+				case 5: WandPivot.GlobalPosition = wandSnapPoints.GetNode<Marker2D>("UpLeft").GlobalPosition; ZIndex = 1; break;
+				case 6: WandPivot.GlobalPosition = wandSnapPoints.GetNode<Marker2D>("Up").GlobalPosition; ZIndex = 0; break;
+				case 7: WandPivot.GlobalPosition = wandSnapPoints.GetNode<Marker2D>("UpRight").GlobalPosition; ZIndex = 0; break;
 			}
 	}
 

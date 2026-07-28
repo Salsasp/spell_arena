@@ -196,6 +196,7 @@ libraries/ = SubResource("AnimationLibrary_wpjfl")
 tree_root = SubResource("AnimationNodeBlendTree_bi64h")
 
 [node name="Wand" parent="." unique_id=1764541263 instance=ExtResource("12_pu2lt")]
+z_index = 1
 position = Vector2(10, 8)
 
 [node name="HitboxComponent" type="Node2D" parent="." unique_id=2033937966]
