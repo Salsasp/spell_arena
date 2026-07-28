@@ -30,9 +30,14 @@ public partial class OrbitWizard : OrbitProjectile
 			return;
 		}
 
-		Vector2 dir = GlobalPosition.DirectionTo(Util.FindNearestEnemy(this).GlobalPosition);
-		ProjectileSpawner.Instance.SpawnOrbitWizardProjectile(GlobalPosition, dir);
+		Enemy target = Util.FindNearestEnemy(this);
+		if (target == null || ProjectileSpawner.Instance == null)
+		{
+			return;
+		}
 
+		Vector2 dir = GlobalPosition.DirectionTo(target.GlobalPosition);
+		ProjectileSpawner.Instance.SpawnOrbitWizardProjectile(GlobalPosition, dir);
 		cooldown = AttackCooldown;
 	}
 

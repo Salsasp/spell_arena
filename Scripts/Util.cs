@@ -10,7 +10,7 @@ public partial class Util
 
 	public static Enemy FindNearestEnemy(Node2D currentNode)
 	{
-		Vector2 pos = currentNode.GetParent<Node2D>().GlobalPosition;
+		Vector2 pos = currentNode.GlobalPosition;
 		Enemy nearest = null;
 		float minDistSq = float.MaxValue;
 
