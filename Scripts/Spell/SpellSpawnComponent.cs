@@ -30,28 +30,25 @@ public partial class SpellSpawnComponent : Component
 			damageComponent.CritChance += modifier.critAdditive * modifier.copies;
 		}
 
-		// TODO: add some field to modifier manager that groups all orbits for easy checking
-		if ((modifierManager.ActiveModifiers.ContainsKey("fireball_orbit") || modifierManager.ActiveModifiers.ContainsKey("wizard_orbit")) && OrbitAllowed)
+		if (HasActiveOrbitModifier() && OrbitAllowed)
 		{
 			try
 			{
 				OrbitManager orbitManager = orbitScene.Instantiate<OrbitManager>();
-				if (modifierManager.ActiveModifiers.ContainsKey("fireball_orbit"))
-				{
-					orbitManager.hasFireballs = true;
-				}
-				if (modifierManager.ActiveModifiers.ContainsKey("wizard_orbit"))
-				{
-					orbitManager.hasWizards = true;
-				}
-
+				orbitManager.ConfigureFromModifiers(modifierManager);
 				GetParent<Projectile>().AddChild(orbitManager);
 			}
-			catch(Exception e)
+			catch (Exception e)
 			{
 				GD.PrintErr(e);
 			}
 		}
+	}
+
+	private bool HasActiveOrbitModifier()
+	{
+		return modifierManager.ActiveModifiers.ContainsKey("fireball_orbit")
+			|| modifierManager.ActiveModifiers.ContainsKey("wizard_orbit");
 	}
 
 	public void Initialize(ModifierManager modMan, DamageComponent damCom, SpellMovementComponent moveComp, PackedScene orbitScene = null)
