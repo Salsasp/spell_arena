@@ -85,8 +85,6 @@ tile_set = SubResource("TileSet_vp7ys")
 
 [node name="DebugUi" parent="UI" unique_id=1563016044 instance=ExtResource("8_o3wvq")]
 
-[node name="Camera2D" type="Camera2D" parent="." unique_id=1340440999]
-
 [node name="ArenaBounds" type="Node2D" parent="." unique_id=923003245]
 script = ExtResource("9_arena")
 ArenaHalfSize = Vector2(500, 300)
