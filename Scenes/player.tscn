@@ -142,6 +142,7 @@ _data = {
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_wpjfl"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_bi64h"]
+graph_offset = Vector2(-174.67361, -18.251179)
 nodes/output/position = Vector2(380, 160)
 nodes/Animation/node = SubResource("AnimationNodeAnimation_wpjfl")
 nodes/Animation/position = Vector2(180, 100)
@@ -241,3 +242,5 @@ position = Vector2(7.5, 10)
 
 [node name="DownRight" type="Marker2D" parent="WandSnapPoints" unique_id=136738825]
 position = Vector2(10.5, 6)
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=2146642956]

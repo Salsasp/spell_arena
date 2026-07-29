@@ -8,7 +8,7 @@ public partial class Main : Node2D
 	public override void _Ready()
 	{
 		// Link game state data to UI components
-		debugUi = GetNode<DebugUi>("DebugUi");
+		debugUi = GetNode<DebugUi>("UI/DebugUi");
 		healthComponent = GetNode<HealthComponent>("Player/HealthComponent");
 		healthComponent.HealthChanged += debugUi.OnHealthChanged;
 		debugUi.InitComponents(healthComponent);

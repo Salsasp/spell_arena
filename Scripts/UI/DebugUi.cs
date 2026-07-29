@@ -4,13 +4,13 @@ using System.Collections.Generic;
 
 public partial class DebugUi : Control
 {
-	private Label debugHealthLabel;
+	[Export] public Label debugHealthLabel;
+	[Export] public OptionButton modifierOptionButton;
+	[Export] public PopupPanel modifierPickerPopup;
+	[Export] public Label modifierApplyStatusLabel;
 	private HealthComponent healthComponent;
 	private RunManager runManager;
 	private ModifierManager modifierManager;
-	private OptionButton modifierOptionButton;
-	private PopupPanel modifierPickerPopup;
-	private Label modifierApplyStatusLabel;
 	private bool pausedForModifierPicker;
 
 	public override void _Ready()
@@ -22,8 +22,8 @@ public partial class DebugUi : Control
 		modifierPickerPopup.ProcessMode = ProcessModeEnum.Always;
 		modifierPickerPopup.PopupHide += OnModifierPickerHidden;
 		modifierApplyStatusLabel = GetNode<Label>("ModifierPickerPopup/MarginContainer/VBoxContainer/ApplyStatusLabel");
-		runManager = GetNode<RunManager>("../RunManager");
-		modifierManager = GetNode<ModifierManager>("../Player/ModifierManager");
+		runManager = GetNode<RunManager>("../../RunManager");
+		modifierManager = GetNode<ModifierManager>("../../Player/ModifierManager");
 
 		GetNode<Button>("DebugButtons/EndRoundButton").Pressed += OnEndRoundButtonPressed;
 		GetNode<Button>("DebugButtons/AddModifierButton").Pressed += OnAddModifierButtonPressed;
