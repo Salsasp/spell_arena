@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://5k1veq5ulv3t" path="res://Scripts/Spell/SpellMovementComponent.cs" id="3_2bhmo"]
 [ext_resource type="Script" uid="uid://cs8nivwxnirj8" path="res://Scripts/Spell/DespawnComponent.cs" id="4_pyvti"]
 [ext_resource type="Texture2D" uid="uid://dfsaapvej0soa" path="res://Assets/Sprites/Spell/projectile_orbit.png" id="5_pm8k5"]
-[ext_resource type="Script" uid="uid://nabumqpkq4ny" path="res://Scripts/AnimationComponent.cs" id="6_4ou24"]
+[ext_resource type="Script" uid="uid://nabumqpkq4ny" path="res://Scripts/Entity/AnimationComponent.cs" id="6_4ou24"]
 [ext_resource type="Script" uid="uid://cyw23b1rilbxg" path="res://Scripts/Spell/HitComponent.cs" id="7_de50p"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_0dfur"]

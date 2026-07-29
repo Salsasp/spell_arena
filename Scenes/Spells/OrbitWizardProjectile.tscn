@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://x8l344sbjamp"]
 
-[ext_resource type="Script" uid="uid://bh66xfb6jcblf" path="res://Scripts/Projectile.cs" id="1_t1ukn"]
+[ext_resource type="Script" uid="uid://bh66xfb6jcblf" path="res://Scripts/Entity/Projectile/Projectile.cs" id="1_t1ukn"]
 [ext_resource type="PackedScene" uid="uid://dwgyxrrevl24e" path="res://Scenes/Spells/OrbitManager.tscn" id="2_44skl"]
 [ext_resource type="Script" uid="uid://d3op0eovhs6cq" path="res://Scripts/Spell/DamageComponent.cs" id="3_m8t83"]
 [ext_resource type="Script" uid="uid://5k1veq5ulv3t" path="res://Scripts/Spell/SpellMovementComponent.cs" id="4_ih8fk"]
@@ -9,7 +9,7 @@
 [ext_resource type="Script" uid="uid://cs8nivwxnirj8" path="res://Scripts/Spell/DespawnComponent.cs" id="7_h5uj7"]
 [ext_resource type="Script" uid="uid://7vbl3a4b3hlt" path="res://Scripts/Spell/LifetimeComponent.cs" id="8_f0ref"]
 [ext_resource type="Texture2D" uid="uid://blh6in6m1obtw" path="res://Assets/Sprites/Spell/projectile_animated-Sheet-particles-Sheet.png" id="9_labef"]
-[ext_resource type="Script" uid="uid://nabumqpkq4ny" path="res://Scripts/AnimationComponent.cs" id="10_rs6xu"]
+[ext_resource type="Script" uid="uid://nabumqpkq4ny" path="res://Scripts/Entity/AnimationComponent.cs" id="10_rs6xu"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_rsyq6"]
 radius = 5.9

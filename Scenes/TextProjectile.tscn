@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://c5xyb7qpbq56d"]
 
-[ext_resource type="Script" uid="uid://c7dd4msyxmvca" path="res://Scripts/TextProjectile.cs" id="1_qs5n5"]
+[ext_resource type="Script" uid="uid://c7dd4msyxmvca" path="res://Scripts/Entity/Projectile/TextProjectile.cs" id="1_qs5n5"]
 [ext_resource type="Script" uid="uid://d3op0eovhs6cq" path="res://Scripts/Spell/DamageComponent.cs" id="2_l2ooy"]
 [ext_resource type="Script" uid="uid://5k1veq5ulv3t" path="res://Scripts/Spell/SpellMovementComponent.cs" id="3_8sncr"]
 [ext_resource type="Script" uid="uid://cs8nivwxnirj8" path="res://Scripts/Spell/DespawnComponent.cs" id="4_oov7n"]

@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://v1rbis70bab5"]
 
-[ext_resource type="Script" uid="uid://c68bviqtcbcmk" path="res://Scripts/EnemyProjectile.cs" id="1_enemyproj"]
+[ext_resource type="Script" uid="uid://c68bviqtcbcmk" path="res://Scripts/Entity/Projectile/EnemyProjectile.cs" id="1_enemyproj"]
 [ext_resource type="Script" uid="uid://d3op0eovhs6cq" path="res://Scripts/Spell/DamageComponent.cs" id="2_damage"]
 [ext_resource type="Script" uid="uid://5k1veq5ulv3t" path="res://Scripts/Spell/SpellMovementComponent.cs" id="3_move"]
 [ext_resource type="Script" uid="uid://cs8nivwxnirj8" path="res://Scripts/Spell/DespawnComponent.cs" id="4_despawn"]
