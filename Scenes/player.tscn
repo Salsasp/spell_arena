@@ -189,6 +189,7 @@ script = ExtResource("5_fkybt")
 animatedSprite = NodePath("../PlayerSprite")
 animationPlayer = NodePath("../AnimationPlayer")
 directionalSprites = true
+isPlayer = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1391533077]
 libraries/ = SubResource("AnimationLibrary_wpjfl")

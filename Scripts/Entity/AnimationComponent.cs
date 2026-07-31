@@ -6,13 +6,14 @@ public partial class AnimationComponent : Node2D
 	[Export] public AnimatedSprite2D animatedSprite;
 	[Export] public AnimationPlayer animationPlayer;
 	[Export] public bool directionalSprites;
-	//[Export] public bool isPlayer;
+	[Export] public bool isPlayer;
+	[Export] public bool isEnemy;
 	private string animationState = "idle";
 
 	public void Update(MovementComponent movementComponent = null)
 	{
 		// Ignore animated movement if npc doesn't move / non player animation
-		if (directionalSprites && movementComponent != null)
+		if (directionalSprites && isPlayer && movementComponent != null)
 		{
 			Vector2 direction = movementComponent.mouseDir.Round();
 			switch (Util.GetDirectionIndex8D(direction))
@@ -26,8 +27,27 @@ public partial class AnimationComponent : Node2D
 				case 6: animationState = "walk_up"; break;
 				case 7: animationState = "walk_up_right"; break;
 			}
+
 			animatedSprite.Play(animationState);
 		}
-		
+
+		if (directionalSprites && isEnemy && movementComponent != null)
+		{
+			Vector2 dir = movementComponent.direction;
+			if (dir.X < 0)
+			{
+				animationState = "walk_left";
+			}
+			else if (dir.X >= 0)
+			{
+				animationState = "walk_right";
+			}
+			else
+			{
+				animationState = "idle";
+			}
+
+			animatedSprite.Play(animationState);
+		}
 	}
 }

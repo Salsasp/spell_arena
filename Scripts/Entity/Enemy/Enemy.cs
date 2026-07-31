@@ -4,23 +4,18 @@ using Godot;
 
 public partial class Enemy : CharacterBody2D
 {
-	private HealthComponent healthComponent;
-	private HitboxComponent hitboxComponent;
-	private MovementComponent movementComponent;
-	private AIMovementBehaviorComponent movementBehavior;
-	private AttackBehaviorComponent attackBehavior;
-	private ArenaClampComponent arenaClamp;
+	[Export] public HealthComponent healthComponent;
+	[Export] public HitboxComponent hitboxComponent;
+	[Export] public MovementComponent movementComponent;
+	[Export] public AIMovementBehaviorComponent movementBehavior;
+	[Export] public AttackBehaviorComponent attackBehavior;
+	[Export] public AnimationComponent animationComponent;
+	[Export] public ArenaClampComponent arenaClamp;
 	private EnemyContext context;
 	private TextManagerComponent textManagerComponent;
 
 	public override void _Ready()
 	{
-		healthComponent = GetNode<HealthComponent>("HealthComponent");
-		hitboxComponent = GetNode<HitboxComponent>("HitboxComponent");
-		movementComponent = GetNode<MovementComponent>("MovementComponent");
-		movementBehavior = FindBehavior<AIMovementBehaviorComponent>();
-		attackBehavior = FindBehavior<AttackBehaviorComponent>();
-		arenaClamp = GetNodeOrNull<ArenaClampComponent>("ArenaClampComponent");
 		textManagerComponent = GetNode<TextManagerComponent>("../../TextManagerComponent");
 
 		ProjectileSpawner projectileSpawner = GetNode<ProjectileSpawner>("../../ProjectileSpawner");
@@ -49,6 +44,7 @@ public partial class Enemy : CharacterBody2D
 		movementBehavior?.Update(delta);
 		attackBehavior?.Update(delta);
 		movementComponent.Update(delta);
+		animationComponent.Update(movementComponent);
 		arenaClamp?.Apply();
 	}
 

@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://jl207mgkmkb7"]
 
 [ext_resource type="Script" uid="uid://c0ouqjnx6xc1d" path="res://Scripts/Entity/Enemy/Enemy.cs" id="1_enemy"]
-[ext_resource type="Texture2D" uid="uid://dx3ws0g34at1r" path="res://Assets/Sprites/Enemy/placeholder_enemy.png" id="2_sprite"]
+[ext_resource type="Texture2D" uid="uid://d4hd4rsph3khq" path="res://Assets/Sprites/Enemy/skeleton_walk.png" id="2_156dd"]
 [ext_resource type="Script" uid="uid://cn0ulmxa1s7nw" path="res://Scripts/Entity/MovementComponent.cs" id="3_move"]
 [ext_resource type="Script" uid="uid://csu7r54n2f32y" path="res://Scripts/Entity/HealthComponent.cs" id="4_health"]
 [ext_resource type="Script" uid="uid://nabumqpkq4ny" path="res://Scripts/Entity/AnimationComponent.cs" id="5_anim"]
@@ -11,6 +11,59 @@
 [ext_resource type="Script" uid="uid://cjlcywrbmru3k" path="res://Scripts/Entity/Enemy/Behaviors/ArenaClampComponent.cs" id="9_clamp"]
 [ext_resource type="Script" uid="uid://3d4f4v4pavcm" path="res://Scripts/Entity/DamageFlashComponent.cs" id="10_flash"]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_uboki"]
+atlas = ExtResource("2_156dd")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8lwin"]
+atlas = ExtResource("2_156dd")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_khfrg"]
+atlas = ExtResource("2_156dd")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s031n"]
+atlas = ExtResource("2_156dd")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bmy8f"]
+atlas = ExtResource("2_156dd")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0utv8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uboki")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8lwin")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_khfrg")
+}],
+"loop": true,
+"name": &"walk_left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s031n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bmy8f")
+}],
+"loop": true,
+"name": &"walk_right",
+"speed": 5.0
+}]
+
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_charger"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_charger"]
@@ -19,16 +72,26 @@ nodes/Animation/node = SubResource("AnimationNodeAnimation_charger")
 nodes/Animation/position = Vector2(180, 100)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_charger"]
-size = Vector2(20, 32)
+size = Vector2(34, 62)
 
-[node name="EnemyCharger" type="CharacterBody2D" unique_id=917117052 groups=["enemies"]]
+[node name="EnemyCharger" type="CharacterBody2D" unique_id=917117052 node_paths=PackedStringArray("healthComponent", "hitboxComponent", "movementComponent", "movementBehavior", "attackBehavior", "animationComponent", "arenaClamp") groups=["enemies"]]
 modulate = Color(1, 0.6, 0.6, 1)
 collision_layer = 4
 script = ExtResource("1_enemy")
+healthComponent = NodePath("HealthComponent")
+hitboxComponent = NodePath("HitboxComponent")
+movementComponent = NodePath("MovementComponent")
+movementBehavior = NodePath("ChaseMovementComponent")
+attackBehavior = NodePath("MeleeAttackComponent")
+animationComponent = NodePath("AnimationComponent")
+arenaClamp = NodePath("ArenaClampComponent")
 
-[node name="EnemySprite" type="Sprite2D" parent="." unique_id=743277598]
+[node name="EnemySprite" type="AnimatedSprite2D" parent="." unique_id=982701685]
 z_index = 1
-texture = ExtResource("2_sprite")
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_0utv8")
+animation = &"idle"
+frame_progress = 0.96987045
 
 [node name="MovementComponent" type="Node2D" parent="." unique_id=2129182553 node_paths=PackedStringArray("body")]
 unique_name_in_owner = true
@@ -41,8 +104,11 @@ unique_name_in_owner = true
 script = ExtResource("4_health")
 MaxHealth = 60
 
-[node name="AnimationComponent" type="Node2D" parent="." unique_id=196994673]
+[node name="AnimationComponent" type="Node2D" parent="." unique_id=196994673 node_paths=PackedStringArray("animatedSprite")]
 script = ExtResource("5_anim")
+animatedSprite = NodePath("../EnemySprite")
+directionalSprites = true
+isEnemy = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=2074772212]
 
@@ -57,9 +123,7 @@ collision_layer = 8
 collision_mask = 16
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent/Area2D" unique_id=1645468465]
-shape = SubResource("RectangleShape2D_charger")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=355587230]
+position = Vector2(0, -1)
 shape = SubResource("RectangleShape2D_charger")
 
 [node name="ChaseMovementComponent" type="Node2D" parent="." unique_id=1352163447]

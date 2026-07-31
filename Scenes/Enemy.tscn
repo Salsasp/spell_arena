@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://bquhpmf7bnwls"]
 
 [ext_resource type="Script" uid="uid://c0ouqjnx6xc1d" path="res://Scripts/Entity/Enemy/Enemy.cs" id="1_1exfc"]
-[ext_resource type="Texture2D" uid="uid://dx3ws0g34at1r" path="res://Assets/Sprites/Enemy/placeholder_enemy.png" id="1_kpr8r"]
 [ext_resource type="Script" uid="uid://cn0ulmxa1s7nw" path="res://Scripts/Entity/MovementComponent.cs" id="2_1exfc"]
 [ext_resource type="Script" uid="uid://csu7r54n2f32y" path="res://Scripts/Entity/HealthComponent.cs" id="3_mo1ky"]
 [ext_resource type="Script" uid="uid://nabumqpkq4ny" path="res://Scripts/Entity/AnimationComponent.cs" id="4_6bs3c"]
@@ -21,13 +20,18 @@ nodes/Animation/position = Vector2(180, 100)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uoxpr"]
 size = Vector2(20, 32)
 
-[node name="Enemy" type="CharacterBody2D" unique_id=736334869 groups=["enemies"]]
+[node name="Enemy" type="CharacterBody2D" unique_id=736334869 node_paths=PackedStringArray("healthComponent", "hitboxComponent", "movementComponent", "movementBehavior", "attackBehavior", "animationComponent") groups=["enemies"]]
 collision_layer = 4
 script = ExtResource("1_1exfc")
+healthComponent = NodePath("HealthComponent")
+hitboxComponent = NodePath("HitboxComponent")
+movementComponent = NodePath("MovementComponent")
+movementBehavior = NodePath("MovementComponent")
+attackBehavior = NodePath("ProjectileAttackComponent")
+animationComponent = NodePath("AnimationComponent")
 
-[node name="EnemySprite" type="Sprite2D" parent="." unique_id=1456288672]
+[node name="EnemySprite" type="AnimatedSprite2D" parent="." unique_id=1904469389]
 z_index = 1
-texture = ExtResource("1_kpr8r")
 
 [node name="MovementComponent" type="Node2D" parent="." unique_id=216025523 node_paths=PackedStringArray("body")]
 unique_name_in_owner = true
