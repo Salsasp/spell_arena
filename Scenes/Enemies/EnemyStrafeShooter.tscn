@@ -20,6 +20,22 @@ animations = [{
 "loop": true,
 "name": &"idle",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_sprite")
+}],
+"loop": true,
+"name": &"walk_left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_sprite")
+}],
+"loop": true,
+"name": &"walk_right",
+"speed": 5.0
 }]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_strafe"]
@@ -46,7 +62,7 @@ arenaClamp = NodePath("ArenaClampComponent")
 [node name="EnemySprite" type="AnimatedSprite2D" parent="." unique_id=1241496993]
 z_index = 1
 sprite_frames = SubResource("SpriteFrames_aymqc")
-animation = &"idle"
+animation = &"walk_right"
 
 [node name="MovementComponent" type="Node2D" parent="." unique_id=2077971796 node_paths=PackedStringArray("body")]
 unique_name_in_owner = true
