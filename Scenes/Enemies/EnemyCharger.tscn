@@ -91,7 +91,7 @@ z_index = 1
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_0utv8")
 animation = &"idle"
-frame_progress = 0.96987045
+frame_progress = 0.54840505
 
 [node name="MovementComponent" type="Node2D" parent="." unique_id=2129182553 node_paths=PackedStringArray("body")]
 unique_name_in_owner = true
@@ -138,3 +138,7 @@ script = ExtResource("9_clamp")
 [node name="DamageFlashComponent" type="Node2D" parent="." unique_id=586835674]
 script = ExtResource("10_flash")
 FlashTargetPath = NodePath("EnemySprite")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=84299739]
+position = Vector2(0, -1)
+shape = SubResource("RectangleShape2D_charger")
