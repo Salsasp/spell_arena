@@ -17,6 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://bobqekh085xdg" path="res://Scenes/UI/GameUI.tscn" id="12_gameui"]
 [ext_resource type="Script" uid="uid://3ugmys41jeqj" path="res://Scripts/UI/TextManagerComponent.cs" id="15_ss8vn"]
 [ext_resource type="PackedScene" uid="uid://c63br0578nusx" path="res://Scenes/UI/DamageText.tscn" id="16_w5kog"]
+[ext_resource type="Texture2D" uid="uid://dp1c3gytffl71" path="res://Assets/Sprites/Map/pitfall_96x96.png" id="18_vp7ys"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_y71vl"]
 texture = ExtResource("2_w5kog")
@@ -72,6 +73,15 @@ texture_region_size = Vector2i(32, 32)
 [sub_resource type="TileSet" id="TileSet_rc81e"]
 tile_size = Vector2i(32, 32)
 sources/0 = SubResource("TileSetAtlasSource_08nt8")
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1tb08"]
+texture = ExtResource("18_vp7ys")
+texture_region_size = Vector2i(96, 96)
+0:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_08nt8"]
+tile_size = Vector2i(96, 96)
+sources/0 = SubResource("TileSetAtlasSource_1tb08")
 
 [node name="Main" type="Node2D" unique_id=1087891947]
 script = ExtResource("1_pg4io")
@@ -134,3 +144,7 @@ tile_set = SubResource("TileSet_1tb08")
 [node name="Walls32x32" type="TileMapLayer" parent="TileMaps" unique_id=156212138]
 tile_map_data = PackedByteArray("AADt//b/AAAGAAEAAADt//f/AAAGAAEAAADt//j/AAAGAAEAAADt//n/AAAGAAEAAADt//r/AAAGAAEAAADt//v/AAAGAAEAAADt//z/AAAGAAEAAADt//3/AAAGAAEAAADt//7/AAAGAAEAAADt////AAAGAAEAAADt/wAAAAAGAAEAAADt/wEAAAAGAAEAAADt/wIAAAAGAAEAAADt/wMAAAAGAAEAAADt/wQAAAAGAAEAAADt/wUAAAAGAAEAAADt/wYAAAAGAAEAAADt/wcAAAAGAAEAAADt/wgAAAAGAAEAAADt/wkAAAAGAAEAAADt/woAAAAGAAEAAAATAPb/AAAKAAEAAAATAPf/AAAKAAEAAAATAPj/AAAKAAEAAAATAPn/AAAKAAEAAAATAPr/AAAKAAEAAAATAPv/AAAKAAEAAAATAPz/AAAKAAEAAAATAP3/AAAKAAEAAAATAP7/AAAKAAEAAAATAP//AAAKAAEAAAATAAAAAAAKAAEAAAATAAEAAAAKAAEAAAATAAIAAAAKAAEAAAATAAMAAAAKAAEAAAATAAQAAAAKAAEAAAATAAUAAAAKAAEAAAATAAYAAAAKAAEAAAATAAcAAAAKAAEAAAATAAgAAAAKAAEAAAATAAkAAAAKAAEAAAATAAoAAAAKAAEAAADt/wsAAAAMAAEAAAATAAsAAAAOAAEAAADu/wsAAAAIAAEAAADv/wsAAAAIAAEAAADw/wsAAAAIAAEAAADx/wsAAAAIAAEAAADy/wsAAAAIAAEAAADz/wsAAAAIAAEAAAD0/wsAAAAIAAEAAAD1/wsAAAAIAAEAAAD2/wsAAAAIAAEAAAD3/wsAAAAIAAEAAAD4/wsAAAAIAAEAAAD5/wsAAAAIAAEAAAD6/wsAAAAIAAEAAAD7/wsAAAAIAAEAAAD8/wsAAAAIAAEAAAD9/wsAAAAIAAEAAAD+/wsAAAAIAAEAAAD//wsAAAAIAAEAAAAAAAsAAAAIAAEAAAABAAsAAAAIAAEAAAACAAsAAAAIAAEAAAADAAsAAAAIAAEAAAAEAAsAAAAIAAEAAAAFAAsAAAAIAAEAAAAGAAsAAAAIAAEAAAAHAAsAAAAIAAEAAAAIAAsAAAAIAAEAAAAJAAsAAAAIAAEAAAAKAAsAAAAIAAEAAAALAAsAAAAIAAEAAAAMAAsAAAAIAAEAAAANAAsAAAAIAAEAAAAOAAsAAAAIAAEAAAAPAAsAAAAIAAEAAAAQAAsAAAAIAAEAAAARAAsAAAAIAAEAAAASAAsAAAAIAAEAAAA=")
 tile_set = SubResource("TileSet_rc81e")
+
+[node name="Pitfalls32x32" type="TileMapLayer" parent="TileMaps" unique_id=1140601221]
+tile_map_data = PackedByteArray("AAD8//7/AAAAAAAAAAAEAP7/AAAAAAAAAAD8/wIAAAAAAAAAAAAEAAIAAAAAAAAAAAA=")
+tile_set = SubResource("TileSet_08nt8")
