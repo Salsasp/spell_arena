@@ -1,0 +1,42 @@
+[gd_scene format=3 uid="uid://tyjtdxw8l54a"]
+
+[ext_resource type="Script" uid="uid://bb7jntfgswwha" path="res://Scripts/Map/Pitfall.cs" id="1_qxcdb"]
+[ext_resource type="Texture2D" uid="uid://dp1c3gytffl71" path="res://Assets/Sprites/Map/pitfall_96x96.png" id="2_62w1j"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rp7rf"]
+size = Vector2(74, 71)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_pfdka"]
+radius = 78.0
+
+[node name="Pitfall" type="Node2D" unique_id=802387860 node_paths=PackedStringArray("PitfallSprite", "FallArea", "SwipeArea", "SkeletalHand")]
+script = ExtResource("1_qxcdb")
+PitfallSprite = NodePath("PitfallSprite")
+FallArea = NodePath("FallArea")
+SwipeArea = NodePath("SwipeArea")
+SkeletalHand = NodePath("SkeletalHand")
+
+[node name="PitfallSprite" type="Sprite2D" parent="." unique_id=303965949]
+texture = ExtResource("2_62w1j")
+
+[node name="FallArea" type="Area2D" parent="." unique_id=1822041476]
+collision_layer = 5
+collision_mask = 5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FallArea" unique_id=1991607705]
+position = Vector2(0, 1.5)
+shape = SubResource("RectangleShape2D_rp7rf")
+
+[node name="SwipeArea" type="Area2D" parent="." unique_id=2020868099]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SwipeArea" unique_id=1695392249]
+shape = SubResource("CircleShape2D_pfdka")
+
+[node name="SkeletalHand" type="Node2D" parent="." unique_id=620802109]
+
+[node name="AnimatableBody2D" type="AnimatableBody2D" parent="SkeletalHand" unique_id=566056237]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="SkeletalHand" unique_id=2079688472]
+
+[connection signal="area_entered" from="FallArea" to="." method="_on_fall_area_entered"]
+[connection signal="area_entered" from="SwipeArea" to="." method="_on_swipe_area_entered"]
