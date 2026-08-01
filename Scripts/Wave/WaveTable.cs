@@ -9,7 +9,7 @@ public static class WaveTable
 		return new WaveDefinition
 		{
 			WaveNumber = wave,
-			EnemyCount = 3 + wave * 2,
+			EnemyCount = 10 + wave * 3,
 			SpawnInterval = Mathf.Max(0.35f, 1.1f - wave * 0.07f),
 			ChargerWeight = wave >= 3 ? Mathf.Clamp(0.25f + (wave - 3) * 0.06f, 0f, 0.5f) : 0f,
 			HealthMultiplier = 1f + (wave - 1) * 0.12f,
