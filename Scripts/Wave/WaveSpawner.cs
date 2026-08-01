@@ -68,7 +68,8 @@ public partial class WaveSpawner : Node2D
 		Vector2 playerPos = player != null && GodotObject.IsInstanceValid(player)
 			? player.GlobalPosition
 			: Vector2.Zero;
-		Vector2 spawnPos = arenaBounds.GetSpawnPosition(playerPos);
+		Camera2D camera = player?.GetNodeOrNull<Camera2D>("Camera2D");
+		Vector2 spawnPos = arenaBounds.GetSpawnPosition(playerPos, camera);
 		enemy.Position = enemyContainer.ToLocal(spawnPos);
 		enemyContainer.AddChild(enemy);
 

@@ -29,15 +29,20 @@ texture_region_size = Vector2i(32, 32)
 14:1/0 = 0
 0:0/size_in_atlas = Vector2i(1, 2)
 0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -32, 16, -32, 16, 3.5971756, -4.856186, 3.5971737, -5.6447372, 32, -16, 32)
 2:0/size_in_atlas = Vector2i(1, 2)
 2:0/0 = 0
+2:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -32, 16, -32, 16, 4.515789, -16, 3.9513168)
 4:0/size_in_atlas = Vector2i(1, 2)
 4:0/0 = 0
+4:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -32, 16, -32, 16, 32, 5.6447372, 32, 3.9513168, 3.3868408, -16, 3.9513168)
 0:3/0 = 0
 2:3/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_vp7ys"]
 tile_size = Vector2i(32, 64)
+physics_layer_0/collision_layer = 5
+physics_layer_0/collision_mask = 5
 sources/0 = SubResource("TileSetAtlasSource_y71vl")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vp7ys"]
@@ -65,13 +70,20 @@ sources/0 = SubResource("TileSetAtlasSource_vp7ys")
 texture = ExtResource("2_w5kog")
 texture_region_size = Vector2i(32, 32)
 6:1/0 = 0
+6:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, -5.036045, -16, -5.2159023, 16, -16, 16)
 8:1/0 = 0
+8:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, 5.2159033, 16, 5.3957615, 16, 16, -16, 16)
 10:1/0 = 0
+10:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(16, -16, 16, 16, 5.098091, 16, 5.098091, -16)
 12:1/0 = 0
+12:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-5.036044, 5.2159023, 16, 5.036043, 16, 16, -16, 16, -16, -16, -5.2159023, -16)
 14:1/0 = 0
+14:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(5.036045, -16, 16, -16, 16, 16, -16, 16, -16, 5.2159023, 4.856186, 5.2159023)
 
 [sub_resource type="TileSet" id="TileSet_rc81e"]
 tile_size = Vector2i(32, 32)
+physics_layer_0/collision_layer = 5
+physics_layer_0/collision_mask = 5
 sources/0 = SubResource("TileSetAtlasSource_08nt8")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1tb08"]
@@ -94,9 +106,10 @@ script = ExtResource("1_pg4io")
 
 [node name="ArenaBounds" type="Node2D" parent="." unique_id=923003245]
 script = ExtResource("9_arena")
-ArenaHalfSize = Vector2(500, 300)
+BoundsTileMapLayerPath = NodePath("../TileMaps/Floors")
 SpawnMargin = 150.0
 MinSpawnDistanceFromPlayer = 175.0
+SpawnOutsideCameraMargin = 64.0
 
 [node name="Player" parent="." unique_id=1570652818 instance=ExtResource("1_3bxa3")]
 scale = Vector2(2, 2)
