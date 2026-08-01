@@ -97,12 +97,11 @@ frame_progress = 0.54840505
 unique_name_in_owner = true
 script = ExtResource("3_move")
 body = NodePath("..")
-speed = 80.0
+speed = 120.0
 
 [node name="HealthComponent" type="Node2D" parent="." unique_id=300003991]
 unique_name_in_owner = true
 script = ExtResource("4_health")
-MaxHealth = 60
 
 [node name="AnimationComponent" type="Node2D" parent="." unique_id=196994673 node_paths=PackedStringArray("animatedSprite")]
 script = ExtResource("5_anim")

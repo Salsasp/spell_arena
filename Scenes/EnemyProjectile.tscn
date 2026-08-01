@@ -24,7 +24,7 @@ BaseDamage = 5
 unique_name_in_owner = true
 script = ExtResource("3_move")
 Sprite = NodePath("../ProjArea2D/Sprite2D")
-Speed = 100.0
+Speed = 120.0
 
 [node name="DespawnComponent" type="Node2D" parent="." unique_id=60519413]
 unique_name_in_owner = true
@@ -33,7 +33,7 @@ script = ExtResource("4_despawn")
 [node name="LifetimeComponent" type="Node2D" parent="." unique_id=1142040630]
 unique_name_in_owner = true
 script = ExtResource("5_lifetime")
-Lifetime = 3
+Lifetime = 6
 
 [node name="Timer" type="Timer" parent="LifetimeComponent" unique_id=1557837100]
 
