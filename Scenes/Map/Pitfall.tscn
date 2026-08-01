@@ -37,6 +37,3 @@ shape = SubResource("CircleShape2D_pfdka")
 [node name="AnimatableBody2D" type="AnimatableBody2D" parent="SkeletalHand" unique_id=566056237]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="SkeletalHand" unique_id=2079688472]
-
-[connection signal="area_entered" from="FallArea" to="." method="_on_fall_area_entered"]
-[connection signal="area_entered" from="SwipeArea" to="." method="_on_swipe_area_entered"]
