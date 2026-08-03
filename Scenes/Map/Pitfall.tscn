@@ -2,6 +2,9 @@
 
 [ext_resource type="Script" uid="uid://bb7jntfgswwha" path="res://Scripts/Map/Pitfall.cs" id="1_qxcdb"]
 [ext_resource type="Texture2D" uid="uid://dp1c3gytffl71" path="res://Assets/Sprites/Map/pitfall_96x96.png" id="2_62w1j"]
+[ext_resource type="Texture2D" uid="uid://l6eetvkonpha" path="res://Assets/Sprites/Enemy/SkeletalArm/skeletal_arm_hand.png" id="3_pfdka"]
+[ext_resource type="Texture2D" uid="uid://be1gytehp3hr2" path="res://Assets/Sprites/Enemy/SkeletalArm/skeletal_arm_forearm.png" id="4_he5qr"]
+[ext_resource type="Texture2D" uid="uid://dr1y2hx88sbp0" path="res://Assets/Sprites/Enemy/SkeletalArm/skeletal_arm_humerus.png" id="5_87gd2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rp7rf"]
 size = Vector2(74, 71)
@@ -9,7 +12,166 @@ size = Vector2(74, 71)
 [sub_resource type="CircleShape2D" id="CircleShape2D_pfdka"]
 radius = 78.0
 
+[sub_resource type="Animation" id="Animation_xf4ha"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HandSprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(93, -12)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("HandSprite:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ForearmSprite:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(42, -26)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("ForearmSprite:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("HumerusSprite:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("HumerusSprite:rotation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_qw2cv"]
+resource_name = "swipe"
+length = 0.5
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HandSprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.099999994, 0.19999999, 0.3, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(50.695, -132.51), Vector2(105.726, -80.845), Vector2(128.507, -4.64), Vector2(116.278, 64.125), Vector2(77.85, 108.85)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("HandSprite:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.099999994, 0.19999999, 0.3, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [-1.3962634015954636, -0.7723082, -0.14835298641951802, 0.3359759, 0.8203047484373349]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ForearmSprite:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.099999994, 0.19999999, 0.3, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(31.7, -85.64), Vector2(63.204, -54.476), Vector2(77.658, -10.402), Vector2(74.151, 32.952), Vector2(59.165, 66.245)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("ForearmSprite:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.099999994, 0.19999999, 0.3, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [-1.3962634015954636, -0.7330383, -0.06981317007977318, 0.4537856, 0.9773843811168246]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("HumerusSprite:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.099999994, 0.19999999, 0.3, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(7.905, -26.455), Vector2(11.45125, -15.31125), Vector2(14.997499, -4.1674995), Vector2(18.54375, 6.9762506), Vector2(22.09, 18.12)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("HumerusSprite:rotation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.099999994, 0.19999999, 0.3, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.48651052, 0.97302103, 1.4595315, 1.9460421159736774]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ha1c7"]
+_data = {
+&"RESET": SubResource("Animation_xf4ha"),
+&"swipe": SubResource("Animation_qw2cv")
+}
+
 [node name="Pitfall" type="Node2D" unique_id=802387860 node_paths=PackedStringArray("PitfallSprite", "FallArea", "SwipeArea", "SkeletalHand")]
+position = Vector2(0, -1)
 script = ExtResource("1_qxcdb")
 PitfallSprite = NodePath("PitfallSprite")
 FallArea = NodePath("FallArea")
@@ -17,19 +179,23 @@ SwipeArea = NodePath("SwipeArea")
 SkeletalHand = NodePath("SkeletalHand")
 
 [node name="PitfallSprite" type="Sprite2D" parent="." unique_id=303965949]
+visible = false
 texture = ExtResource("2_62w1j")
 
 [node name="FallArea" type="Area2D" parent="." unique_id=1822041476]
+visible = false
 collision_layer = 5
 collision_mask = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FallArea" unique_id=1991607705]
+visible = false
 position = Vector2(0, 1.5)
 shape = SubResource("RectangleShape2D_rp7rf")
 
 [node name="SwipeArea" type="Area2D" parent="." unique_id=2020868099]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SwipeArea" unique_id=1695392249]
+visible = false
 shape = SubResource("CircleShape2D_pfdka")
 
 [node name="SkeletalHand" type="Node2D" parent="." unique_id=620802109]
@@ -37,3 +203,20 @@ shape = SubResource("CircleShape2D_pfdka")
 [node name="AnimatableBody2D" type="AnimatableBody2D" parent="SkeletalHand" unique_id=566056237]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="SkeletalHand" unique_id=2079688472]
+
+[node name="HandSprite" type="Sprite2D" parent="SkeletalHand" unique_id=1155032848]
+z_index = 2
+position = Vector2(93, -12)
+texture = ExtResource("3_pfdka")
+
+[node name="ForearmSprite" type="Sprite2D" parent="SkeletalHand" unique_id=1544494484]
+z_index = 1
+position = Vector2(42, -26)
+texture = ExtResource("4_he5qr")
+
+[node name="HumerusSprite" type="Sprite2D" parent="SkeletalHand" unique_id=1891544178]
+z_index = 1
+texture = ExtResource("5_87gd2")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="SkeletalHand" unique_id=763447020]
+libraries/ = SubResource("AnimationLibrary_ha1c7")
