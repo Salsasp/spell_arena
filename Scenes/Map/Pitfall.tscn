@@ -161,7 +161,7 @@ tracks/5/keys = {
 "times": PackedFloat32Array(0, 0.099999994, 0.19999999, 0.3, 0.5),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 0,
-"values": [0.0, 0.48651052, 0.97302103, 1.4595315, 1.9460421159736774]
+"values": [0.0, 0.48651052, 0.97302103, 1.4595315, 1.9460421159736776]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ha1c7"]
@@ -179,26 +179,23 @@ SwipeArea = NodePath("SwipeArea")
 SkeletalHand = NodePath("SkeletalHand")
 
 [node name="PitfallSprite" type="Sprite2D" parent="." unique_id=303965949]
-visible = false
 texture = ExtResource("2_62w1j")
 
 [node name="FallArea" type="Area2D" parent="." unique_id=1822041476]
-visible = false
 collision_layer = 5
 collision_mask = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FallArea" unique_id=1991607705]
-visible = false
 position = Vector2(0, 1.5)
 shape = SubResource("RectangleShape2D_rp7rf")
 
 [node name="SwipeArea" type="Area2D" parent="." unique_id=2020868099]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SwipeArea" unique_id=1695392249]
-visible = false
 shape = SubResource("CircleShape2D_pfdka")
 
 [node name="SkeletalHand" type="Node2D" parent="." unique_id=620802109]
+visible = false
 
 [node name="AnimatableBody2D" type="AnimatableBody2D" parent="SkeletalHand" unique_id=566056237]
 

@@ -31,4 +31,16 @@ public partial class DamageComponent : Component
 		
 		return GD.Randf() < CritChance;
 	}
+
+	public void ApplyFromStats(AggregatedSpellStats stats)
+	{
+		CritChance += stats.CritChanceBonus;
+
+		if (!string.IsNullOrEmpty(stats.DamageType))
+		{
+			DamageType = stats.DamageType;
+		}
+
+		ElementalDamage += stats.ElementalDamage;
+	}
 }

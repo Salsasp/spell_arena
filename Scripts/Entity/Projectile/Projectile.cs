@@ -29,7 +29,7 @@ public partial class Projectile : Node2D
 		animationComponent.Update();
 
 		hitComponent.Initialize(modifierManager, despawnComponent, spellMovementComponent);
-		spawnComponent.Initialize(modifierManager, damageComponent, spellMovementComponent, OrbitScene);
+		spawnComponent.Initialize(modifierManager, damageComponent);
 
 		spawnComponent.Update();
 	}

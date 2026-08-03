@@ -13,6 +13,9 @@ public partial class ModifierManager : Node
     public bool HasActiveModifier(string id) => ActiveModifiers.ContainsKey(id);
     [Export] public float SpellEnlargeAmount = 0.1f; // additive transform scale modifier
 
+    /// <summary>Run-scoped counter mutated by OnAcquire effects (e.g. ExtraDraftOptionAcquireEffect).</summary>
+    public int ExtraDraftOptions { get; set; }
+
     public override void _EnterTree()
     {
         Instance = this;
@@ -20,6 +23,7 @@ public partial class ModifierManager : Node
 
     public override void _Ready()
     {
+        ModifierEffectRegistry.RegisterDefaults();
         LoadModifiers("res://Assets/Data/spell_modifiers.json");
     }
 
@@ -61,7 +65,8 @@ public partial class ModifierManager : Node
                 onHit = modData["on_hit"].ToString(),
                 orbital = modData["orbital"].ToString(),
                 onSpawn = modData["on_spawn"].ToString(),
-                onDespawn = modData["on_despawn"].ToString(),
+                onAcquire = modData.ContainsKey("on_acquire") ? modData["on_acquire"].ToString() : "",
+                uiOnHit = modData.ContainsKey("ui_on_hit") ? modData["ui_on_hit"].ToString() : "",
                 isStackable = Convert.ToBoolean(modData["stackable"].ToString())
             };
 
@@ -88,19 +93,30 @@ public partial class ModifierManager : Node
             return false;
         }
 
+        bool added;
         if (!HasActiveModifier(id))
         {
             ActiveModifiers.Add(id, modifier);
-            return true;
+            added = true;
         }
-
-        if (modifier.isStackable)
+        else if (modifier.isStackable)
         {
             ActiveModifiers[id].copies += 1;
-            return true;
+            added = true;
+        }
+        else
+        {
+            added = false;
         }
 
-        return false;
+        if (added)
+        {
+            // Only the modifier that was just picked fires its OnAcquire effect,
+            // unlike OnSpawn/OnHit which re-evaluate the whole active set.
+            ModifierEffectRegistry.ApplyToModifier(ModifierPhase.OnAcquire, ModifierContext.ForRun(this), modifier);
+        }
+
+        return added;
     }
 
     public void PrintModifiers()

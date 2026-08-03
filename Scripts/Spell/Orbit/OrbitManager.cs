@@ -6,12 +6,12 @@ public partial class OrbitManager : Node2D
 {
 	private readonly struct OrbitTypeDefinition
 	{
-		public readonly string ModifierId;
+		public readonly string OrbitalKey;
 		public readonly PackedScene Scene;
 
-		public OrbitTypeDefinition(string modifierId, PackedScene scene)
+		public OrbitTypeDefinition(string orbitalKey, PackedScene scene)
 		{
-			ModifierId = modifierId;
+			OrbitalKey = orbitalKey;
 			Scene = scene;
 		}
 	}
@@ -24,18 +24,18 @@ public partial class OrbitManager : Node2D
 
 	public List<OrbitProjectile> OrbitProjectiles = [];
 
-	private readonly HashSet<string> activeModifierIds = [];
+	private readonly HashSet<string> activeOrbitalKeys = [];
 	private Projectile parentProjectile;
 
 	public void ConfigureFromModifiers(ModifierManager modifierManager)
 	{
-		activeModifierIds.Clear();
+		activeOrbitalKeys.Clear();
 
-		foreach (OrbitTypeDefinition orbitType in GetOrbitTypeDefinitions())
+		foreach (ModifierData modifier in modifierManager.ActiveModifiers.Values)
 		{
-			if (modifierManager.HasActiveModifier(orbitType.ModifierId))
+			if (modifier.onSpawn == "orbit" && !string.IsNullOrEmpty(modifier.orbital))
 			{
-				activeModifierIds.Add(orbitType.ModifierId);
+				activeOrbitalKeys.Add(modifier.orbital);
 			}
 		}
 	}
@@ -56,8 +56,8 @@ public partial class OrbitManager : Node2D
 
 	private IEnumerable<OrbitTypeDefinition> GetOrbitTypeDefinitions()
 	{
-		yield return new OrbitTypeDefinition("fireball_orbit", OrbitFireballScene);
-		yield return new OrbitTypeDefinition("wizard_orbit", OrbitWizardScene);
+		yield return new OrbitTypeDefinition("fireball", OrbitFireballScene);
+		yield return new OrbitTypeDefinition("wizard", OrbitWizardScene);
 	}
 
 	private void InitOrbitProjectiles()
@@ -89,7 +89,7 @@ public partial class OrbitManager : Node2D
 		List<PackedScene> activeScenes = [];
 		foreach (OrbitTypeDefinition orbitType in GetOrbitTypeDefinitions())
 		{
-			if (!activeModifierIds.Contains(orbitType.ModifierId) || orbitType.Scene == null)
+			if (!activeOrbitalKeys.Contains(orbitType.OrbitalKey) || orbitType.Scene == null)
 			{
 				continue;
 			}
