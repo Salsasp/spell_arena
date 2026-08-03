@@ -11,6 +11,7 @@ public partial class ModifierManager : Node
     public IEnumerable<ModifierData> GetAllModifiers() => modifiers.Values;
 
     public bool HasActiveModifier(string id) => ActiveModifiers.ContainsKey(id);
+    [Export] public float SpellEnlargeAmount = 0.1f; // additive transform scale modifier
 
     public override void _EnterTree()
     {

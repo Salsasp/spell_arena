@@ -11,6 +11,14 @@ public partial class SpellSpawnComponent : Component
 
 	public void Update()
 	{
+		if (modifierManager.ActiveModifiers.ContainsKey("larger_spells"))
+		{
+			ModifierData enlargeModifier = modifierManager.ActiveModifiers["larger_spells"];
+			Vector2 modifiedScale = new(1.0f + (0.1f * enlargeModifier.copies), 1.0f + (0.1f * enlargeModifier.copies));
+			Area2D area = GetParent<Node2D>().GetNode<Area2D>("ProjArea2D");
+			area.Scale = modifiedScale;
+		}
+		
 		if (modifierManager.ActiveModifiers.ContainsKey("fire_spells"))
 		{
 			ModifierData fireModifier = modifierManager.ActiveModifiers["fire_spells"];
