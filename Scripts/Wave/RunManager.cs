@@ -65,11 +65,7 @@ public partial class RunManager : Node
 		SetPhase(RunPhase.ModifierDraft);
 		GetTree().Paused = true;
 
-		int numDraftOptions = DEFAULT_DRAFT_OPTIONS;
-		if (modifierManager.HasActiveModifier("extra_modifier"))
-		{
-			numDraftOptions += modifierManager.ActiveModifiers["extra_modifier"].copies;	
-		}
+		int numDraftOptions = DEFAULT_DRAFT_OPTIONS + modifierManager.ExtraDraftOptions;
 
 		gameUi.ShowModifierDraft(ModifierDraftService.RollDraft(numDraftOptions));
 	}

@@ -101,7 +101,7 @@ public partial class TextManagerComponent : Component
 		}
 
 		DamageText damageText = DamageTextPrefab.Instantiate<DamageText>();
-		bool isDamaging = modifierManager.ActiveModifiers.ContainsKey("damaging_text");
+		bool isDamaging = RunStatBuilder.HasDamagingText(modifierManager.ActiveModifiers.Values);
 		damageText.IsDamaging = isDamaging;
 		damageText.Text = text;
 		damageText.Damage = damage;

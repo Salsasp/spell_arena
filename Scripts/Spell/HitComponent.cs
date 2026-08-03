@@ -1,7 +1,5 @@
 using Godot;
-using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 
 public partial class HitComponent : Component
 {
@@ -17,25 +15,17 @@ public partial class HitComponent : Component
 
 	public void Update(Node2D target)
 	{
-		if (modifierManager.ActiveModifiers.ContainsKey("chain_spells") && ChainEnabled)
-		{
-			ChainSpell(target);
-		}
-		else if (!modifierManager.ActiveModifiers.ContainsKey("pierce_spells"))
+		ModifierContext context = ModifierContext.ForProjectile(GetParent<Projectile>(), target);
+		ModifierEffectRegistry.Apply(ModifierPhase.OnHit, context);
+
+		if (!context.HitResult.PreventDespawn && !context.HitResult.HandledChain)
 		{
 			despawnComponent.Despawn();
-		}
-
-		if (modifierManager.ActiveModifiers.ContainsKey("fire_spells"))
-		{
-			ApplyDot(target, modifierManager.ActiveModifiers["fire_spells"]);
 		}
 	}
 
 	public override void _Ready()
 	{
-		//modifierManager = GetNode<ModifierManager>("../../Player/ModifierManager");
-		//despawnComponent = GetNode<DespawnComponent>("../DespawnComponent");
 		if (ChainEnabled)
 		{
 			chainRadius = GetNode<Area2D>("../ChainRadius");
@@ -94,9 +84,6 @@ public partial class HitComponent : Component
 		ChainTo(currTarget, closestEnemy);
 	}
 
-	// TODO: change chain structure to recursive by passing in curr and nearest enemy,
-	// decrementing chain limit until 0
-
 	public void ChainTo(Node2D currTarget, Node2D enemy)
 	{
 		float dir = Mathf.Atan2(enemy.GlobalPosition.Y - currTarget.GlobalPosition.Y,
@@ -140,20 +127,13 @@ public partial class HitComponent : Component
 	{
 		if (!ShowDebugCircle) return;
 
-		// Get the current radius dynamically from your CollisionShape2D child
 		var collisionShape = chainRadius.GetChild<CollisionShape2D>(0);
 		if (collisionShape?.Shape is CircleShape2D circle)
 		{
-			// Center of the circle relative to this node
-			Vector2 center = Vector2.Zero; 
-			
-			// Color(Red, Green, Blue, Alpha/Translucency)
-			Color circleColor = new Color(0.1f, 0.6f, 1.0f, 0.3f); // Translucent Blue
-
-			// Draw the filled translucent circle
+			Vector2 center = Vector2.Zero;
+			Color circleColor = new Color(0.1f, 0.6f, 1.0f, 0.3f);
 			DrawCircle(center, circle.Radius, circleColor);
 
-			// Optional: Draw a solid crisp border outline so it stands out
 			Color borderColor = new Color(0.1f, 0.6f, 1.0f, 0.8f);
 			DrawArc(center, circle.Radius, 0, Mathf.Tau, 64, borderColor, 2.0f);
 		}

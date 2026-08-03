@@ -1,16 +1,10 @@
 using Godot;
 
-public partial class OrbitProjectile : Node2D
+public partial class OrbitProjectile : Projectile
 {
 	public float OrbitDistance;
 	[Export] public float AngularSpeed = 4f;
 	public float AngleToParent;
-
-	private DamageComponent damageComponent;
-	private DespawnComponent despawnComponent;
-	private HitComponent hitComponent;
-	private SpellMovementComponent spellMovementComponent;
-	private AnimationComponent animationComponent;
 
 	public override void _Ready()
 	{

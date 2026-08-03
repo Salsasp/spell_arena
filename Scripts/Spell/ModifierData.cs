@@ -14,14 +14,15 @@ public class ModifierData
     public string onHit;
     public string orbital;
     public string onSpawn;
-    public string onDespawn;
+    public string onAcquire;
+    public string uiOnHit;
     public bool isStackable;
     public int copies = 1;
     public override string ToString()
     {
         return $"[{id}] {name} ({rarity}) - {description}\n" +
             $"Damage: {damageType} | Crit: +{critAdditive} x{critMultiplicative}\n" +
-            $"Events: onHit={onHit}, onSpawn={onSpawn}, onDespawn={onDespawn}, orbital={orbital}";
+            $"Events: onHit={onHit}, onSpawn={onSpawn}, onAcquire={onAcquire}, uiOnHit={uiOnHit}, orbital={orbital}";
     }
 }
 

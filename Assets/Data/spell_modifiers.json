@@ -13,7 +13,6 @@
             "on_hit": "",
             "orbital": "",
             "on_spawn": "",
-            "on_despawn": "",
             "stackable": true
         },
         {
@@ -29,7 +28,6 @@
             "on_hit": "apply_burn",
             "orbital": "",
             "on_spawn": "",
-            "on_despawn": "",
             "stackable": true
         },
         {
@@ -45,7 +43,6 @@
             "on_hit": "chain",
             "orbital": "",
             "on_spawn": "",
-            "on_despawn": "",
             "stackable": false
         },
         {
@@ -61,7 +58,6 @@
             "on_hit": "pierce",
             "orbital": "",
             "on_spawn": "",
-            "on_despawn": "",
             "stackable": false
         },
         {
@@ -77,7 +73,6 @@
             "on_hit": "",
             "orbital": "",
             "on_spawn": "homing",
-            "on_despawn": "",
             "stackable": false
         },
         {
@@ -93,7 +88,6 @@
             "on_hit": "",
             "orbital": "",
             "on_spawn": "",
-            "on_despawn": "",
             "stackable": true
         },
         {
@@ -106,10 +100,10 @@
             "dot_damage": 0.0,
             "crit_additive": 0.0,
             "crit_multiplicative": 0.0,
-            "on_hit": "damaging_text",
+            "on_hit": "",
             "orbital": "",
             "on_spawn": "",
-            "on_despawn": "",
+            "ui_on_hit": "damaging_text",
             "stackable": false
         },
         {
@@ -125,7 +119,7 @@
             "on_hit": "",
             "orbital": "",
             "on_spawn": "",
-            "on_despawn": "",
+            "on_acquire": "extra_draft_option",
             "stackable": true
         },
         {
@@ -139,9 +133,8 @@
             "crit_additive": 0.0,
             "crit_multiplicative": 0.0,
             "on_hit": "",
-            "orbital": "",
+            "orbital": "fireball",
             "on_spawn": "orbit",
-            "on_despawn": "",
             "stackable": false
         },
         {
@@ -155,9 +148,8 @@
             "crit_additive": 0.0,
             "crit_multiplicative": 0.0,
             "on_hit": "",
-            "orbital": "",
+            "orbital": "wizard",
             "on_spawn": "orbit",
-            "on_despawn": "",
             "stackable": false
         },
         {
@@ -173,7 +165,6 @@
             "on_hit": "",
             "orbital": "",
             "on_spawn": "enlarge",
-            "on_despawn": "",
             "stackable": true
         }
     ]
