@@ -2,9 +2,10 @@ using System.Collections.Generic;
 
 public static class SpellStatBuilder
 {
-	public static AggregatedSpellStats Build(IEnumerable<ModifierData> activeModifiers, float enlargePerStack = 0.1f)
+	public static AggregatedSpellStats Build(IEnumerable<ModifierData> activeModifiers, float enlargePerStack = 0.1f, float hastenPerStack = 0.1f)
 	{
 		float scaleMultiplier = 1f;
+		float speedMultiplier = 1f;
 		float critChanceBonus = 0f;
 		int elementalDamage = 0;
 
@@ -19,6 +20,11 @@ public static class SpellStatBuilder
 			if (modifier.onSpawn == "enlarge")
 			{
 				scaleMultiplier += enlargePerStack * modifier.copies;
+			}
+
+			if (modifier.onSpawn == "hasten")
+			{
+				speedMultiplier += hastenPerStack * modifier.copies;
 			}
 
 			// Only modifiers that actually deal elemental damage get a say in the
@@ -49,6 +55,7 @@ public static class SpellStatBuilder
 		return new AggregatedSpellStats
 		{
 			ScaleMultiplier = scaleMultiplier,
+			SpeedMultiplier = speedMultiplier,
 			CritChanceBonus = critChanceBonus,
 			DamageType = damageType,
 			ElementalDamage = elementalDamage,

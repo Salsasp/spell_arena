@@ -12,6 +12,7 @@ public partial class ModifierManager : Node
 
     public bool HasActiveModifier(string id) => ActiveModifiers.ContainsKey(id);
     [Export] public float SpellEnlargeAmount = 0.1f; // additive transform scale modifier
+    [Export] public float SpellHastenAmount = 0.1f; // additive speed modifier
 
     /// <summary>Run-scoped counter mutated by OnAcquire effects (e.g. ExtraDraftOptionAcquireEffect).</summary>
     public int ExtraDraftOptions { get; set; }

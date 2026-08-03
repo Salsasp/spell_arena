@@ -18,7 +18,7 @@
         {
             "id": "fire_spells",
             "name": "Fire Magic",
-            "description": "Applies fire damage to all spells.",
+            "description": "Applies fire damage to all spells. (Stackable)",
             "icon": "res://Assets/Sprites/Spell/Modifiers/fire_spells_icon.png",
             "rarity": "common",
             "damage_type": "fire",
@@ -78,7 +78,7 @@
         {
             "id": "crit_chance_up",
             "name": "Critical Chance Up",
-            "description": "Increase spell critical chance by 10%",
+            "description": "Increase spell critical chance by 10% (Stackable)",
             "icon": "res://Assets/Sprites/Spell/Modifiers/crit_up.png",
             "rarity": "common",
             "damage_type": "",
@@ -165,6 +165,21 @@
             "on_hit": "",
             "orbital": "",
             "on_spawn": "enlarge",
+            "stackable": true
+        },
+        {
+            "id": "hasten_spells",
+            "name": "Hastened Spells",
+            "description": "Your spells now become slightly faster. (Stackable)",
+            "icon": "res://Assets/Sprites/proj_placeholder.png",
+            "rarity": "common",
+            "damage_type": "",
+            "dot_damage": 0.0,
+            "crit_additive": 0.0,
+            "crit_multiplicative": 0.0,
+            "on_hit": "",
+            "orbital": "",
+            "on_spawn": "hasten",
             "stackable": true
         }
     ]
