@@ -9,7 +9,9 @@
 [ext_resource type="Script" uid="uid://cs8nivwxnirj8" path="res://Scripts/Spell/DespawnComponent.cs" id="7_h5uj7"]
 [ext_resource type="Script" uid="uid://7vbl3a4b3hlt" path="res://Scripts/Spell/LifetimeComponent.cs" id="8_f0ref"]
 [ext_resource type="Texture2D" uid="uid://blh6in6m1obtw" path="res://Assets/Sprites/Spell/projectile_animated-Sheet-particles-Sheet.png" id="9_labef"]
+[ext_resource type="Texture2D" uid="uid://c6smv8wk2dp03" path="res://Assets/Sprites/Spell/projectile_animated-Sheet.png" id="10_ej3ww"]
 [ext_resource type="Script" uid="uid://nabumqpkq4ny" path="res://Scripts/Entity/AnimationComponent.cs" id="10_rs6xu"]
+[ext_resource type="Texture2D" uid="uid://c2cyol36emsq6" path="res://Assets/Sprites/Spell/spell_particle.png" id="11_iwgeg"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_rsyq6"]
 radius = 5.9
@@ -39,7 +41,31 @@ region = Rect2(64, 0, 16, 16)
 atlas = ExtResource("9_labef")
 region = Rect2(80, 0, 16, 16)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_urmru"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_qycw7"]
+atlas = ExtResource("10_ej3ww")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2rrls"]
+atlas = ExtResource("10_ej3ww")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r4qm0"]
+atlas = ExtResource("10_ej3ww")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_joqcv"]
+atlas = ExtResource("10_ej3ww")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4hnog"]
+atlas = ExtResource("10_ej3ww")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0qh1p"]
+atlas = ExtResource("10_ej3ww")
+region = Rect2(80, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_u1u3s"]
 animations = [{
 "frames": [{
 "duration": 1.0,
@@ -61,9 +87,51 @@ animations = [{
 "texture": SubResource("AtlasTexture_urmru")
 }],
 "loop": true,
-"name": &"idle",
+"name": &"animated_particles",
 "speed": 16.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qycw7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2rrls")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r4qm0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_joqcv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4hnog")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0qh1p")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
 }]
+
+[sub_resource type="Gradient" id="Gradient_xxsyy"]
+offsets = PackedFloat32Array(0, 0.6890244)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_wnkg6"]
+gradient = SubResource("Gradient_xxsyy")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 0)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ko026"]
+particle_flag_disable_z = true
+emission_shape_scale = Vector3(12, 15, 1)
+emission_shape = 1
+emission_sphere_radius = 1.0
+gravity = Vector3(0, 20, 0)
+hue_variation_min = -2.2351742e-08
+hue_variation_max = 0.19999997
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ar0ab"]
 radius = 200.0
@@ -111,13 +179,24 @@ collision_mask = 8
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ProjArea2D" unique_id=487064132]
 shape = SubResource("CapsuleShape2D_rsyq6")
 
-[node name="Sprite2D" type="AnimatedSprite2D" parent="ProjArea2D" unique_id=1596038784]
+[node name="Sprite2D" type="AnimatedSprite2D" parent="ProjArea2D" unique_id=1532494220]
 rotation = 0.7853982
 scale = Vector2(2, 2)
-sprite_frames = SubResource("SpriteFrames_urmru")
+sprite_frames = SubResource("SpriteFrames_u1u3s")
 animation = &"idle"
 autoplay = "idle"
-frame_progress = 0.26001713
+
+[node name="PointLight2D" type="PointLight2D" parent="ProjArea2D" unique_id=275346053]
+position = Vector2(-1.9073486e-06, -2)
+scale = Vector2(1.1337892, 0.8808593)
+texture = SubResource("GradientTexture2D_wnkg6")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="ProjArea2D" unique_id=344603952]
+amount = 16
+sub_emitter = NodePath(".")
+texture = ExtResource("11_iwgeg")
+lifetime = 0.5
+process_material = SubResource("ParticleProcessMaterial_ko026")
 
 [node name="ChainRadius" type="Area2D" parent="." unique_id=656173701]
 visible = false
@@ -129,7 +208,7 @@ shape = SubResource("CircleShape2D_ar0ab")
 
 [node name="AnimationComponent" type="Node2D" parent="." unique_id=402119261 node_paths=PackedStringArray("animatedSprite", "animationPlayer")]
 script = ExtResource("10_rs6xu")
-animatedSprite = NodePath("../ProjArea2D/Sprite2D")
+animatedSprite = NodePath("")
 animationPlayer = NodePath("../AnimationPlayer")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1027066159]

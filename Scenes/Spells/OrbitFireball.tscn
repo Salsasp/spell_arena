@@ -5,11 +5,39 @@
 [ext_resource type="Script" uid="uid://5k1veq5ulv3t" path="res://Scripts/Spell/SpellMovementComponent.cs" id="3_08kpi"]
 [ext_resource type="Script" uid="uid://cs8nivwxnirj8" path="res://Scripts/Spell/DespawnComponent.cs" id="4_kchkn"]
 [ext_resource type="Texture2D" uid="uid://dfsaapvej0soa" path="res://Assets/Sprites/Spell/projectile_orbit.png" id="5_lt3ql"]
+[ext_resource type="Texture2D" uid="uid://c2cyol36emsq6" path="res://Assets/Sprites/Spell/spell_particle.png" id="6_iit1p"]
 [ext_resource type="Script" uid="uid://nabumqpkq4ny" path="res://Scripts/Entity/AnimationComponent.cs" id="6_uw5ag"]
 [ext_resource type="Script" uid="uid://cyw23b1rilbxg" path="res://Scripts/Spell/HitComponent.cs" id="7_xo41w"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_0dfur"]
 radius = 13.0
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_08kpi"]
+lifetime_randomness = 0.1
+particle_flag_disable_z = true
+emission_shape_scale = Vector3(17.995, 15.715, 1)
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 1.0
+emission_ring_radius = 1.0
+emission_ring_inner_radius = 0.0
+emission_ring_cone_angle = 90.0
+direction = Vector3(1, 1, 0)
+spread = 180.0
+gravity = Vector3(0, 0, 0)
+radial_accel_min = -2.2351742e-06
+radial_accel_max = 70.439995
+color = Color(1, 0.48235294, 0.2, 1)
+
+[sub_resource type="Gradient" id="Gradient_xxsyy"]
+offsets = PackedFloat32Array(0, 0.6890244)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_86127"]
+gradient = SubResource("Gradient_xxsyy")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 0)
 
 [node name="OrbitFireball" type="Node2D" unique_id=183864806 groups=["enemy_attacks"]]
 scale = Vector2(0.5, 0.5)
@@ -42,6 +70,16 @@ shape = SubResource("CircleShape2D_0dfur")
 modulate = Color(1, 0.3, 0.3, 1)
 rotation = 1.5707964
 texture = ExtResource("5_lt3ql")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="ProjArea2D" unique_id=2029889895]
+texture = ExtResource("6_iit1p")
+lifetime = 0.5
+process_material = SubResource("ParticleProcessMaterial_08kpi")
+
+[node name="PointLight2D" type="PointLight2D" parent="ProjArea2D" unique_id=1834937273]
+position = Vector2(0, 5.9604645e-08)
+scale = Vector2(0.53344727, 0.45458984)
+texture = SubResource("GradientTexture2D_86127")
 
 [node name="AnimationComponent" type="Node2D" parent="." unique_id=960598031]
 script = ExtResource("6_uw5ag")

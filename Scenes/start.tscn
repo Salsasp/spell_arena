@@ -171,3 +171,7 @@ position = Vector2(-424, -185)
 
 [node name="Pitfall2" parent="Map/Pitfalls" unique_id=673295355 instance=ExtResource("19_1tb08")]
 position = Vector2(-416, 224)
+
+[node name="DirectionalLight2D" type="DirectionalLight2D" parent="." unique_id=847913430]
+position = Vector2(794, -3)
+color = Color(1, 1, 1, 0.101960786)

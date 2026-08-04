@@ -10,6 +10,8 @@
 [ext_resource type="Script" uid="uid://7vbl3a4b3hlt" path="res://Scripts/Spell/LifetimeComponent.cs" id="7_ay8ps"]
 [ext_resource type="Texture2D" uid="uid://blh6in6m1obtw" path="res://Assets/Sprites/Spell/projectile_animated-Sheet-particles-Sheet.png" id="8_ekur6"]
 [ext_resource type="Script" uid="uid://nabumqpkq4ny" path="res://Scripts/Entity/AnimationComponent.cs" id="9_ekur6"]
+[ext_resource type="Texture2D" uid="uid://c2cyol36emsq6" path="res://Assets/Sprites/Spell/spell_particle.png" id="10_dsm84"]
+[ext_resource type="Texture2D" uid="uid://c6smv8wk2dp03" path="res://Assets/Sprites/Spell/projectile_animated-Sheet.png" id="10_xsjeh"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_rsyq6"]
 radius = 5.9
@@ -39,6 +41,30 @@ region = Rect2(64, 0, 16, 16)
 atlas = ExtResource("8_ekur6")
 region = Rect2(80, 0, 16, 16)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_qycw7"]
+atlas = ExtResource("10_xsjeh")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2rrls"]
+atlas = ExtResource("10_xsjeh")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r4qm0"]
+atlas = ExtResource("10_xsjeh")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_joqcv"]
+atlas = ExtResource("10_xsjeh")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4hnog"]
+atlas = ExtResource("10_xsjeh")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0qh1p"]
+atlas = ExtResource("10_xsjeh")
+region = Rect2(80, 0, 16, 16)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_urmru"]
 animations = [{
 "frames": [{
@@ -60,10 +86,52 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_urmru")
 }],
-"loop": 1,
-"name": &"idle",
+"loop": true,
+"name": &"animated_particles",
 "speed": 16.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qycw7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2rrls")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r4qm0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_joqcv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4hnog")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0qh1p")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
 }]
+
+[sub_resource type="Gradient" id="Gradient_xxsyy"]
+offsets = PackedFloat32Array(0, 0.6890244)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_dsm84"]
+gradient = SubResource("Gradient_xxsyy")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 0)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_dsm84"]
+particle_flag_disable_z = true
+emission_shape_scale = Vector3(12, 15, 1)
+emission_shape = 1
+emission_sphere_radius = 1.0
+gravity = Vector3(0, 20, 0)
+hue_variation_min = -2.2351742e-08
+hue_variation_max = 0.19999997
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ar0ab"]
 radius = 200.0
@@ -116,7 +184,19 @@ scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_urmru")
 animation = &"idle"
 autoplay = "idle"
-frame_progress = 0.26001713
+frame_progress = 0.81077987
+
+[node name="PointLight2D" type="PointLight2D" parent="ProjArea2D" unique_id=99974882]
+position = Vector2(-1.9073486e-06, -2)
+scale = Vector2(1.1337892, 0.8808593)
+texture = SubResource("GradientTexture2D_dsm84")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="ProjArea2D" unique_id=176750348]
+amount = 16
+sub_emitter = NodePath(".")
+texture = ExtResource("10_dsm84")
+lifetime = 0.5
+process_material = SubResource("ParticleProcessMaterial_dsm84")
 
 [node name="ChainRadius" type="Area2D" parent="." unique_id=656173701]
 visible = false
