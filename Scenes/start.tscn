@@ -96,6 +96,10 @@ texture_region_size = Vector2i(96, 96)
 tile_size = Vector2i(96, 96)
 sources/0 = SubResource("TileSetAtlasSource_1tb08")
 
+[sub_resource type="Environment" id="Environment_1tb08"]
+
+[sub_resource type="Compositor" id="Compositor_08nt8"]
+
 [node name="Main" type="Node2D" unique_id=1087891947]
 script = ExtResource("1_pg4io")
 
@@ -173,5 +177,10 @@ position = Vector2(-424, -185)
 position = Vector2(-416, 224)
 
 [node name="DirectionalLight2D" type="DirectionalLight2D" parent="." unique_id=847913430]
-position = Vector2(794, -3)
-color = Color(1, 1, 1, 0.101960786)
+position = Vector2(818, -305)
+color = Color(0.108257316, 0.1284805, 0.38815635, 0.101960786)
+energy = 2.2
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1340268877]
+environment = SubResource("Environment_1tb08")
+compositor = SubResource("Compositor_08nt8")
