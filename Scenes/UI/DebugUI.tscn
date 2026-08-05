@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://cwhripoub67q1"]
 
 [ext_resource type="Script" uid="uid://xhkltev7xgnk" path="res://Scripts/UI/DebugUi.cs" id="1_fpupx"]
+[ext_resource type="Theme" uid="uid://btp4nkh4u337k" path="res://Assets/UI/main.tres" id="2_7gdgf"]
 
 [node name="DebugUi" type="Control" unique_id=1563016044 node_paths=PackedStringArray("debugHealthLabel", "modifierOptionButton", "modifierPickerPopup", "modifierApplyStatusLabel")]
 process_mode = 3
@@ -34,11 +35,13 @@ theme_override_constants/separation = 8
 [node name="EndRoundButton" type="Button" parent="DebugButtons" unique_id=930195425]
 custom_minimum_size = Vector2(156, 0)
 layout_mode = 2
+theme = ExtResource("2_7gdgf")
 text = "End Current Round"
 
 [node name="AddModifierButton" type="Button" parent="DebugButtons" unique_id=1265542386]
 custom_minimum_size = Vector2(156, 0)
 layout_mode = 2
+theme = ExtResource("2_7gdgf")
 text = "Add Modifier"
 
 [node name="ModifierPickerPopup" type="PopupPanel" parent="." unique_id=266951573]

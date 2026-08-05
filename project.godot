@@ -33,6 +33,7 @@ enemies="Lowest level group for enemies"
 
 [gui]
 
+theme/custom="uid://btp4nkh4u337k"
 theme/custom_font="uid://cr7hnqedyqejm"
 
 [input]
