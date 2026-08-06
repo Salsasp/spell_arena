@@ -17,7 +17,7 @@ public partial class SpellSpawnComponent : Component
 		);
 		damageComponent.ApplyFromStats(stats);
 
-		Area2D area = GetParent<Node2D>().GetNode<Area2D>("ProjArea2D");
+		Area2D area = GetParent<Projectile>().projArea2D;
 		area.Scale = Vector2.One * stats.ScaleMultiplier;
 
 		ctx.Movement.Speed *= stats.SpeedMultiplier;
