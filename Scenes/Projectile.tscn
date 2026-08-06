@@ -136,9 +136,17 @@ hue_variation_max = 0.19999997
 [sub_resource type="CircleShape2D" id="CircleShape2D_ar0ab"]
 radius = 200.0
 
-[node name="Projectile" type="Node2D" unique_id=1249408229]
+[node name="Projectile" type="Node2D" unique_id=1249408229 node_paths=PackedStringArray("damageComponent", "despawnComponent", "hitComponent", "lifetimeComponent", "spellMovementComponent", "spawnComponent", "animationComponent", "projArea2D")]
 script = ExtResource("1_cu5m1")
 OrbitScene = ExtResource("2_xxsyy")
+damageComponent = NodePath("DamageComponent")
+despawnComponent = NodePath("DespawnComponent")
+hitComponent = NodePath("HitComponent")
+lifetimeComponent = NodePath("LifetimeComponent")
+spellMovementComponent = NodePath("SpellMovementComponent")
+spawnComponent = NodePath("SpellSpawnComponent")
+animationComponent = NodePath("AnimationComponent")
+projArea2D = NodePath("ProjArea2D")
 
 [node name="ProjectilePivot" type="Node2D" parent="." unique_id=271081983]
 

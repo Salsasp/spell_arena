@@ -11,9 +11,15 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_0dfur"]
 radius = 13.0
 
-[node name="OrbitProjectile" type="Node2D" unique_id=183864806 groups=["enemy_attacks"]]
+[node name="OrbitProjectile" type="Node2D" unique_id=183864806 node_paths=PackedStringArray("damageComponent", "despawnComponent", "hitComponent", "spellMovementComponent", "animationComponent", "projArea2D") groups=["enemy_attacks"]]
 scale = Vector2(0.5, 0.5)
 script = ExtResource("1_de50p")
+damageComponent = NodePath("DamageComponent")
+despawnComponent = NodePath("DespawnComponent")
+hitComponent = NodePath("HitComponent")
+spellMovementComponent = NodePath("SpellMovementComponent")
+animationComponent = NodePath("AnimationComponent")
+projArea2D = NodePath("ProjArea2D")
 
 [node name="DamageComponent" type="Node2D" parent="." unique_id=1688255860]
 unique_name_in_owner = true

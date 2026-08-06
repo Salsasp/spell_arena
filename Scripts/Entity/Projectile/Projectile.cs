@@ -5,27 +5,20 @@ using System.ComponentModel;
 public partial class Projectile : Node2D
 {
 	[Export] public PackedScene OrbitScene;
-	public DamageComponent damageComponent;
-	public DespawnComponent despawnComponent;
-	public HitComponent hitComponent;
-	public LifetimeComponent lifetimeComponent;
-	public SpellMovementComponent spellMovementComponent;
-	public SpellSpawnComponent spawnComponent;
+	[Export] public DamageComponent damageComponent;
+	[Export] public DespawnComponent despawnComponent;
+	[Export] public HitComponent hitComponent;
+	[Export] public LifetimeComponent lifetimeComponent;
+	[Export] public SpellMovementComponent spellMovementComponent;
+	[Export] public SpellSpawnComponent spawnComponent;
 	public ModifierManager modifierManager;
-	public AnimationComponent animationComponent;
+	[Export] public AnimationComponent animationComponent;
+	[Export] public Area2D projArea2D;
 
 
 	public override void _Ready()
 	{
-		damageComponent = GetNode<DamageComponent>("DamageComponent");
-		despawnComponent = GetNode<DespawnComponent>("DespawnComponent");
-		hitComponent = GetNode<HitComponent>("HitComponent");
-		lifetimeComponent = GetNode<LifetimeComponent>("LifetimeComponent");
-		spellMovementComponent = GetNode<SpellMovementComponent>("SpellMovementComponent");
-		spawnComponent = GetNode<SpellSpawnComponent>("SpellSpawnComponent");
 		modifierManager = GetNode<ModifierManager>("../Player/ModifierManager");
-		animationComponent = GetNode<AnimationComponent>("AnimationComponent");
-
 		animationComponent.Update();
 
 		hitComponent.Initialize(modifierManager, despawnComponent, spellMovementComponent);
