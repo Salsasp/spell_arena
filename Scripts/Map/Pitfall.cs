@@ -40,25 +40,34 @@ public partial class Pitfall : Node2D
 		// Work in the shape's local space
 		Vector2 localPos = entity.GlobalPosition - shape2D.GlobalPosition;
 
+		// Signed distance to each edge: positive = inside the rect, negative = outside past that edge.
+		// The smallest value is the edge the entity is closest to (or entered through).
+		float dLeft = localPos.X + extents.X;
+		float dRight = extents.X - localPos.X;
+		float dTop = localPos.Y + extents.Y;
+		float dBottom = extents.Y - localPos.Y;
+		float dMin = Mathf.Min(Mathf.Min(dLeft, dRight), Mathf.Min(dTop, dBottom));
+
+		// Keep the perpendicular axis clamped to the rect so the respawn stays beside the entry point
 		float clampedX = Mathf.Clamp(localPos.X, -extents.X, extents.X);
 		float clampedY = Mathf.Clamp(localPos.Y, -extents.Y, extents.Y);
 
-		// If the point is inside the rectangle, snap it to the closest edge
-		if (MathF.Abs(localPos.X) < extents.X && MathF.Abs(localPos.Y) < extents.Y)
+		// Push out past the nearest edge, always including the offset
+		if (dMin == dLeft)
 		{
-			float dX = extents.X - MathF.Abs(localPos.X);
-			float dY = extents.Y - MathF.Abs(localPos.Y);
-
-			if (dX < dY)
-			{
-				clampedX = extents.X * MathF.Sign(localPos.X);
-				clampedX += RespawnOffset * MathF.Sign(localPos.X);
-			}
-			else
-			{
-				clampedY = extents.Y * MathF.Sign(localPos.Y);
-				clampedY += RespawnOffset * MathF.Sign(localPos.Y);
-			}
+			clampedX = -extents.X - RespawnOffset;
+		}
+		else if (dMin == dRight)
+		{
+			clampedX = extents.X + RespawnOffset;
+		}
+		else if (dMin == dTop)
+		{
+			clampedY = -extents.Y - RespawnOffset;
+		}
+		else
+		{
+			clampedY = extents.Y + RespawnOffset;
 		}
 
 		// Convert back to global space
