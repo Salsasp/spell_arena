@@ -3,8 +3,6 @@ using System;
 
 public partial class Player : CharacterBody2D
 {
-	public const float Speed = 300.0f;
-	public const float JumpVelocity = -400.0f;
 	[Export] public InputComponent inputComponent;
 	[Export] public MovementComponent movementComponent;
 	[Export] public HealthComponent healthComponent;
