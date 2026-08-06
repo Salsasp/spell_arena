@@ -2,20 +2,22 @@ using System.Collections.Generic;
 using System.Linq;
 using Godot;
 
-public partial class Enemy : CharacterBody2D
+public partial class Enemy : CharacterBody2D, IEntity
 {
-	[Export] public HealthComponent healthComponent;
-	[Export] public HitboxComponent hitboxComponent;
-	[Export] public MovementComponent movementComponent;
-	[Export] public AIMovementBehaviorComponent movementBehavior;
-	[Export] public AttackBehaviorComponent attackBehavior;
-	[Export] public AnimationComponent animationComponent;
-	[Export] public ArenaClampComponent arenaClamp;
+	[Export] public HealthComponent healthComponent { get; set; }
+	[Export] public HitboxComponent hitboxComponent { get; set; }
+	[Export] public MovementComponent movementComponent { get; set; }
+	[Export] public AIMovementBehaviorComponent movementBehavior { get; set; }
+	[Export] public AttackBehaviorComponent attackBehavior { get; set; }
+	[Export] public AnimationComponent animationComponent { get; set; }
+	[Export] public ArenaClampComponent arenaClamp { get; set; }
+	public bool isFalling { get; set; }
 	private EnemyContext context;
 	private TextManagerComponent textManagerComponent;
 
 	public override void _Ready()
 	{
+		isFalling = false;
 		textManagerComponent = GetNode<TextManagerComponent>("../../TextManagerComponent");
 
 		ProjectileSpawner projectileSpawner = GetNode<ProjectileSpawner>("../../ProjectileSpawner");
@@ -63,10 +65,10 @@ public partial class Enemy : CharacterBody2D
 
 	private void OnHealthChanged(int newHealth)
 	{
-		GD.Print($"Health changed: {newHealth}");
+		//GD.Print($"Health changed: {newHealth}");
 	}
 
-	private void OnHit(Area2D hitBy)
+	public void OnHit(Area2D hitBy)
 	{
 		if ((hitBy.CollisionLayer & CollisionLayers.PlayerProjectile) == 0)
 		{
@@ -113,7 +115,7 @@ public partial class Enemy : CharacterBody2D
 
 	private void OnDead()
 	{
-		GD.Print("Enemy died!");
+		//GD.Print("Enemy died!");
 	}
 
 	public bool DotApplied()
@@ -127,5 +129,10 @@ public partial class Enemy : CharacterBody2D
 		}
 
 		return false;
+	}
+
+	public void Fall()
+	{
+		
 	}
 }

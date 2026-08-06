@@ -1,20 +1,22 @@
 using Godot;
 using System;
 
-public partial class Player : CharacterBody2D
+public partial class Player : CharacterBody2D, IEntity
 {
-	[Export] public InputComponent inputComponent;
-	[Export] public MovementComponent movementComponent;
-	[Export] public HealthComponent healthComponent;
-	[Export] public HitboxComponent hitboxComponent;
-	private ProjectileSpawner projectileSpawner;
-	[Export] public AnimationComponent animationComponent;
-	[Export] public Wand wand;
-	[Export] public Node2D wandSnapPoints;
-	[Export] public ModifierManager modifierManager;
+	[Export] public InputComponent inputComponent { get; set; }
+	[Export] public MovementComponent movementComponent { get; set; }
+	[Export] public HealthComponent healthComponent { get; set; }
+	[Export] public HitboxComponent hitboxComponent { get; set; }
+	private ProjectileSpawner projectileSpawner { get; set; }
+	[Export] public AnimationComponent animationComponent { get; set; }
+	[Export] public Wand wand { get; set; }
+	[Export] public Node2D wandSnapPoints { get; set; }
+	[Export] public ModifierManager modifierManager { get; set; }
+    public bool isFalling { get; set; }
 
-	public override void _Ready()
+    public override void _Ready()
 	{
+		isFalling = false;
 		projectileSpawner = GetNode<ProjectileSpawner>("../ProjectileSpawner");
 
 		hitboxComponent.Hit += OnHit;
@@ -51,7 +53,7 @@ public partial class Player : CharacterBody2D
 		}
 	}
 
-	private void OnHit(Area2D hitBy)
+	public void OnHit(Area2D hitBy)
 	{
 		if ((hitBy.CollisionLayer & CollisionLayers.EnemyProjectile) == 0)
 		{
@@ -70,4 +72,13 @@ public partial class Player : CharacterBody2D
 		healthComponent.TakeDamage(damageComponent.CalculateDamage(isCrit));
 		projectileRoot.QueueFree();
 	}
+
+    public void Fall()
+    {
+        // animation component plays fall animation
+		// at end of fall animation
+		//	if player, subtract hp and return to initial fall position
+		//	if enemy, remove from the scene tree
+    }
+
 }
