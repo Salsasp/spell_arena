@@ -23,6 +23,7 @@ public static class ModifierEffectRegistry
 		Register(new PierceHitEffect());
 		Register(new BurnHitEffect());
 		Register(new ExtraDraftOptionAcquireEffect());
+		Register(new SwiftStepAcquireEffect());
 
 		defaultsRegistered = true;
 	}

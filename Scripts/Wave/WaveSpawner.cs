@@ -85,7 +85,7 @@ public partial class WaveSpawner : Node2D
 		health.MaxHealth = Mathf.Max(1, Mathf.RoundToInt(health.MaxHealth * activeWave.HealthMultiplier));
 
 		MovementComponent movement = enemy.GetNode<MovementComponent>("MovementComponent");
-		movement.speed *= activeWave.SpeedMultiplier;
+		movement.Speed *= activeWave.SpeedMultiplier;
 
 		ProjectileAttackComponent projectileAttack = enemy.GetNodeOrNull<ProjectileAttackComponent>("ProjectileAttackComponent");
 		if (projectileAttack != null)

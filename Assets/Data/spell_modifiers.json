@@ -181,6 +181,22 @@
             "orbital": "",
             "on_spawn": "hasten",
             "stackable": true
+        },
+        {
+            "id": "swift_step",
+            "name": "Swift Step",
+            "description": "Increased movement speed. (Stackable)",
+            "icon": "res://Assets/Sprites/proj_placeholder.png",
+            "rarity": "uncommon",
+            "damage_type": "",
+            "dot_damage": 0.0,
+            "crit_additive": 0.0,
+            "crit_multiplicative": 0.0,
+            "on_hit": "",
+            "orbital": "",
+            "on_spawn": "",
+            "on_acquire": "swiftness",
+            "stackable": true
         }
     ]
 }

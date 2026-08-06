@@ -50,7 +50,7 @@ public partial class StrafeMovementComponent : AIMovementBehaviorComponent
 
 		Vector2 desiredVelocity =
 			radialDir * radialFactor +
-			tangentialDir * osc * (strafeSpeed / Mathf.Max(movement.speed, 0.01f));
+			tangentialDir * osc * (strafeSpeed / Mathf.Max(movement.Speed, 0.01f));
 
 		movement.direction = desiredVelocity.Normalized();
 	}

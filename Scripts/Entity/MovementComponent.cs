@@ -3,7 +3,8 @@ using Godot;
 public partial class MovementComponent : Component
 {
 	[Export] public CharacterBody2D body;
-	[Export] public float speed { get; set; } = 100f;
+	[Export] public float Speed { get; set; } = 100f;
+	public float SpeedMultiplier = 1.0f;
 
 	public Vector2 direction = Vector2.Zero;
 	public Vector2 mouseDir = Vector2.Zero;
@@ -14,7 +15,7 @@ public partial class MovementComponent : Component
 		{
 			return;
 		}
-		body.Velocity = direction * speed;
+		body.Velocity = direction * (Speed*SpeedMultiplier);
 
 		body.MoveAndSlide();
 	}
