@@ -175,7 +175,7 @@ animation = &"idle"
 unique_name_in_owner = true
 script = ExtResource("2_fkybt")
 body = NodePath("..")
-speed = 200.0
+Speed = 200.0
 
 [node name="InputComponent" type="Node2D" parent="." unique_id=1352110215]
 unique_name_in_owner = true
