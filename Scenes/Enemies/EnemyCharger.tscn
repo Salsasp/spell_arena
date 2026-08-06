@@ -103,9 +103,10 @@ speed = 120.0
 unique_name_in_owner = true
 script = ExtResource("4_health")
 
-[node name="AnimationComponent" type="Node2D" parent="." unique_id=196994673 node_paths=PackedStringArray("animatedSprite")]
+[node name="AnimationComponent" type="Node2D" parent="." unique_id=196994673 node_paths=PackedStringArray("animatedSprite", "animationPlayer")]
 script = ExtResource("5_anim")
 animatedSprite = NodePath("../EnemySprite")
+animationPlayer = NodePath("../AnimationPlayer")
 directionalSprites = true
 isEnemy = true
 

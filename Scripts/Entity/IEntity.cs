@@ -6,7 +6,7 @@ public interface IEntity
     HealthComponent healthComponent { get; }
     HitboxComponent hitboxComponent { get; }
     AnimationComponent animationComponent { get; }
-    bool isFalling { get; set; }
+    bool IsFalling { get; set; }
     void OnHit(Area2D hitBy);
-    void Fall();
+    void Fall(Pitfall pitfall);
 }

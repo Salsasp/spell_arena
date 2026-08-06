@@ -7,23 +7,28 @@ public partial class Player : CharacterBody2D, IEntity
 	[Export] public MovementComponent movementComponent { get; set; }
 	[Export] public HealthComponent healthComponent { get; set; }
 	[Export] public HitboxComponent hitboxComponent { get; set; }
-	private ProjectileSpawner projectileSpawner { get; set; }
 	[Export] public AnimationComponent animationComponent { get; set; }
 	[Export] public Wand wand { get; set; }
 	[Export] public Node2D wandSnapPoints { get; set; }
 	[Export] public ModifierManager modifierManager { get; set; }
-    public bool isFalling { get; set; }
+    public bool IsFalling { get; set; }
+	private ProjectileSpawner projectileSpawner { get; set; }
+	private Vector2 respawnPos;
+	private int pitfallDamage;
 
     public override void _Ready()
 	{
-		isFalling = false;
+		IsFalling = false;
 		projectileSpawner = GetNode<ProjectileSpawner>("../ProjectileSpawner");
 
+		animationComponent.FallAnimationFinished += OnFallFinished;
 		hitboxComponent.Hit += OnHit;
 	}
 
 	public override void _PhysicsProcess(double delta)
 	{
+		if (IsFalling) return;
+
 		inputComponent.Update();
 		Vector2 EndOfWandPos = wand.GetEndOfWandPos();
 		Vector2 projDir = EndOfWandPos.DirectionTo(inputComponent.MousePos).Normalized();
@@ -73,12 +78,28 @@ public partial class Player : CharacterBody2D, IEntity
 		projectileRoot.QueueFree();
 	}
 
-    public void Fall()
+    public void Fall(Pitfall pitfall)
     {
-        // animation component plays fall animation
-		// at end of fall animation
-		//	if player, subtract hp and return to initial fall position
-		//	if enemy, remove from the scene tree
+		this.pitfallDamage = pitfall.PitfallDamage; // ik this is sloppy but prevents having to pass it through signals
+        if (IsFalling)
+			return;
+		IsFalling = true;
+		respawnPos = pitfall.GetFallRespawnPosition(this);
+		movementComponent.direction = Vector2.Zero;
+
+		GlobalPosition = pitfall.FallStartPoint.GlobalPosition;
+
+		if (!animationComponent.TryPlayFallAnimation(pitfall))
+		{
+			IsFalling = false; // no anim configured — fail safe
+		}
     }
+
+	private void OnFallFinished()
+	{
+		healthComponent.TakeDamage(pitfallDamage);
+		GlobalPosition = respawnPos;
+		IsFalling = false;
+	}
 
 }

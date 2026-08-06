@@ -8,7 +8,16 @@ public partial class AnimationComponent : Node2D
 	[Export] public bool directionalSprites;
 	[Export] public bool isPlayer;
 	[Export] public bool isEnemy;
+	[Signal] public delegate void FallAnimationFinishedEventHandler();
+	public bool IsPlayingFall { get; private set; }
 	private string animationState = "idle";
+	private Node2D parent;
+
+	public override void _Ready()
+	{
+		parent = GetParent<Node2D>();
+		animationPlayer.AnimationFinished += OnAnimationFinished;
+	}
 
 	public void Update(MovementComponent movementComponent = null)
 	{
@@ -49,5 +58,23 @@ public partial class AnimationComponent : Node2D
 
 			animatedSprite.Play(animationState);
 		}
+	}
+
+	private void OnAnimationFinished(StringName animName)
+	{
+		if (animName != "fall")
+			return;
+		IsPlayingFall = false;
+		EmitSignal(SignalName.FallAnimationFinished);
+	}
+
+	public bool TryPlayFallAnimation(Pitfall pitfall)
+	{
+		if (IsPlayingFall || !animationPlayer.HasAnimation("fall"))
+			return false;
+
+		IsPlayingFall = true;
+		animationPlayer.Play("fall");
+		return true;
 	}
 }

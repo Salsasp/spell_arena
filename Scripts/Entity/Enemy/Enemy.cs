@@ -11,13 +11,16 @@ public partial class Enemy : CharacterBody2D, IEntity
 	[Export] public AttackBehaviorComponent attackBehavior { get; set; }
 	[Export] public AnimationComponent animationComponent { get; set; }
 	[Export] public ArenaClampComponent arenaClamp { get; set; }
-	public bool isFalling { get; set; }
+	public bool IsFalling { get; set; }
 	private EnemyContext context;
 	private TextManagerComponent textManagerComponent;
+	private Vector2 fallStartPosition;
+	private int pitfallDamage;
+	private Pitfall activePitfall;
 
 	public override void _Ready()
 	{
-		isFalling = false;
+		IsFalling = false;
 		textManagerComponent = GetNode<TextManagerComponent>("../../TextManagerComponent");
 
 		ProjectileSpawner projectileSpawner = GetNode<ProjectileSpawner>("../../ProjectileSpawner");
@@ -32,10 +35,13 @@ public partial class Enemy : CharacterBody2D, IEntity
 		healthComponent.HealthChanged += OnHealthChanged;
 		healthComponent.Dead += OnDead;
 		hitboxComponent.Hit += OnHit;
+		animationComponent.FallAnimationFinished += OnFallFinished;
 	}
 
 	public override void _PhysicsProcess(double delta)
 	{
+		if (IsFalling) return;
+
 		if (!context.IsPlayerValid)
 		{
 			movementComponent.direction = Vector2.Zero;
@@ -131,8 +137,22 @@ public partial class Enemy : CharacterBody2D, IEntity
 		return false;
 	}
 
-	public void Fall()
+    public void Fall(Pitfall pitfall)
+    {
+		this.pitfallDamage = pitfall.PitfallDamage; // ik this is sloppy but prevents having to pass it through signals
+        if (IsFalling)
+			return;
+		IsFalling = true;
+		fallStartPosition = pitfall.GetFallRespawnPosition(this);
+		movementComponent.direction = Vector2.Zero;
+		if (!animationComponent.TryPlayFallAnimation(pitfall))
+		{
+			IsFalling = false; // no anim configured — fail safe
+		}
+    }
+
+	private void OnFallFinished()
 	{
-		
+		QueueFree();
 	}
 }
