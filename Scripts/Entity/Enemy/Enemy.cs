@@ -143,8 +143,10 @@ public partial class Enemy : CharacterBody2D, IEntity
         if (IsFalling)
 			return;
 		IsFalling = true;
-		fallStartPosition = pitfall.GetFallRespawnPosition(this);
 		movementComponent.direction = Vector2.Zero;
+
+		GlobalPosition = pitfall.FallStartPoint.GlobalPosition;
+
 		if (!animationComponent.TryPlayFallAnimation(pitfall))
 		{
 			IsFalling = false; // no anim configured — fail safe
@@ -154,5 +156,6 @@ public partial class Enemy : CharacterBody2D, IEntity
 	private void OnFallFinished()
 	{
 		QueueFree();
+		healthComponent.Die();
 	}
 }

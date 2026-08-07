@@ -33,7 +33,7 @@ public partial class HealthComponent : Component
         EmitSignal(SignalName.HealthChanged, currentHealth);
     }
 
-    private void Die()
+    public void Die()
     {
         EmitSignal(SignalName.Dead);
         owner.QueueFree();

@@ -11,11 +11,18 @@ public partial class Pitfall : Node2D
 	[Export] public int PitfallDamage = 20;
 	[Export] public float RespawnOffset = 30;
 	[Export] public Marker2D FallStartPoint;
+	[Export] public Timer FallInvulnTimer;
+	[Export] public CollisionShape2D PitfallBarrierShape;
+	[Export] public int FallGateDuration = 2;
+	private bool timerExpired = true;
 
 	public override void _Ready()
 	{
+		FallInvulnTimer.Timeout += OnTimerTimeout;
 		FallArea.BodyEntered += OnFallAreaEntered;
 		SwipeArea.BodyEntered += OnSwipeAreaEntered;
+
+		PitfallBarrierShape.SetDeferred(CollisionShape2D.PropertyName.Disabled, true);
 	}
 
 	private void OnSwipeAreaEntered(Node2D body)
@@ -25,9 +32,20 @@ public partial class Pitfall : Node2D
 
 	private void OnFallAreaEntered(Node2D body)
 	{
+		if (!timerExpired) // if timer still ticking return
+		{
+			return;
+		}
+
 		if (body is IEntity entity)
 		{
 			entity.Fall(this);
+			if (entity is Player)
+			{
+				FallInvulnTimer.Start(FallGateDuration);
+				timerExpired = false;
+				PitfallBarrierShape.SetDeferred(CollisionShape2D.PropertyName.Disabled, false);
+			}
 		}
 	}
 
@@ -72,5 +90,11 @@ public partial class Pitfall : Node2D
 
 		// Convert back to global space
 		return shape2D.GlobalPosition + new Vector2(clampedX, clampedY);
+	}
+
+	private void OnTimerTimeout()
+	{
+		timerExpired = true;
+		PitfallBarrierShape.SetDeferred(CollisionShape2D.PropertyName.Disabled, true);
 	}
 }
