@@ -72,7 +72,7 @@ nodes/Animation/node = SubResource("AnimationNodeAnimation_charger")
 nodes/Animation/position = Vector2(180, 100)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_charger"]
-size = Vector2(34, 62)
+size = Vector2(27, 46.875)
 
 [sub_resource type="Animation" id="Animation_156dd"]
 resource_name = "fall"
@@ -99,7 +99,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.49, 0.5),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector2(2, 2), Vector2(0.8, 0.8), Vector2(2, 2)]
+"values": [Vector2(1.5, 1.5), Vector2(0.8, 0.8), Vector2(1.5, 1.5)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -133,7 +133,7 @@ arenaClamp = NodePath("ArenaClampComponent")
 
 [node name="EnemySprite" type="AnimatedSprite2D" parent="." unique_id=982701685]
 z_index = 1
-scale = Vector2(2, 2)
+scale = Vector2(1.5, 1.5)
 sprite_frames = SubResource("SpriteFrames_0utv8")
 animation = &"idle"
 frame_progress = 0.54840505
@@ -150,7 +150,7 @@ script = ExtResource("4_health")
 [node name="AnimationComponent" type="Node2D" parent="." unique_id=196994673 node_paths=PackedStringArray("animatedSprite", "animationPlayer")]
 script = ExtResource("5_anim")
 animatedSprite = NodePath("../EnemySprite")
-animationPlayer = NodePath("")
+animationPlayer = NodePath("../AnimationPlayer")
 directionalSprites = true
 isEnemy = true
 
@@ -165,7 +165,6 @@ collision_layer = 8
 collision_mask = 16
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent/Area2D" unique_id=1645468465]
-position = Vector2(0, -1)
 shape = SubResource("RectangleShape2D_charger")
 
 [node name="ChaseMovementComponent" type="Node2D" parent="." unique_id=1352163447]
@@ -182,7 +181,6 @@ script = ExtResource("10_flash")
 FlashTargetPath = NodePath("EnemySprite")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=84299739]
-position = Vector2(0, -1)
 shape = SubResource("RectangleShape2D_charger")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1671678467]
