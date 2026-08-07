@@ -14,6 +14,8 @@
 [ext_resource type="Texture2D" uid="uid://bh8m3odh755o7" path="res://Assets/Sprites/Map/tileset_master_borderless-export.png" id="12_7eh1v"]
 [ext_resource type="Texture2D" uid="uid://dp1c3gytffl71" path="res://Assets/Sprites/Map/pitfall_96x96.png" id="13_2axc0"]
 [ext_resource type="PackedScene" uid="uid://tyjtdxw8l54a" path="res://Scenes/Map/Pitfall.tscn" id="14_vbdk7"]
+[ext_resource type="PackedScene" uid="uid://jl207mgkmkb7" path="res://Scenes/Enemies/EnemyCharger.tscn" id="15_38hdy"]
+[ext_resource type="Script" uid="uid://clpg8wpj286h1" path="res://Scripts/Wave/RunManager.cs" id="16_bsy17"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_y71vl"]
 texture = ExtResource("12_7eh1v")
@@ -117,6 +119,9 @@ TextProjectilePrefab = ExtResource("9_ntd5v")
 
 [node name="EnemyManager" type="Node2D" parent="." unique_id=529077049]
 
+[node name="EnemyCharger" parent="EnemyManager" unique_id=917117052 instance=ExtResource("15_38hdy")]
+position = Vector2(-261, 0)
+
 [node name="TextManagerComponent" type="Node2D" parent="." unique_id=918073506 node_paths=PackedStringArray("projectileSpawner")]
 script = ExtResource("10_igc14")
 DamageTextPrefab = ExtResource("11_oojuu")
@@ -149,3 +154,17 @@ position = Vector2(-424, -185)
 
 [node name="Pitfall2" parent="Map/Pitfalls" unique_id=673295355 instance=ExtResource("14_vbdk7")]
 position = Vector2(-416, 224)
+
+[node name="Pitfall3" parent="Map/Pitfalls" unique_id=909669379 instance=ExtResource("14_vbdk7")]
+position = Vector2(-126, 5)
+
+[node name="RunManager" type="Node" parent="." unique_id=1903293474]
+script = ExtResource("16_bsy17")
+WaveSpawnerPath = NodePath("../WaveSpawner")
+GameUiPath = NodePath("../UI/GameUI")
+PlayerPath = NodePath("../Player")
+
+[node name="TextManagerComponent2" type="Node2D" parent="." unique_id=42513012]
+script = ExtResource("10_igc14")
+DamageTextPrefab = ExtResource("11_oojuu")
+CanvasLayerPath = NodePath("../UI")
