@@ -19,7 +19,7 @@ public partial class HealthComponent : Component
     {
         currentHealth -= damage;
         EmitSignal(SignalName.HealthChanged, currentHealth);
-        GD.Print($"{owner.Name} took {damage} damage. HP: {currentHealth}/{MaxHealth}");
+        //GD.Print($"{owner.Name} took {damage} damage. HP: {currentHealth}/{MaxHealth}");
 
         if (currentHealth <= 0)
         {
