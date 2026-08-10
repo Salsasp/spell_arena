@@ -10,10 +10,6 @@ public partial class EnemyProjectile : Node2D, IProjectile
 
 	public override void _Ready()
 	{
-		damageComponent = GetNode<DamageComponent>("DamageComponent");
-		despawnComponent = GetNode<DespawnComponent>("DespawnComponent");
-		lifetimeComponent = GetNode<LifetimeComponent>("LifetimeComponent");
-		spellMovementComponent = GetNode<SpellMovementComponent>("SpellMovementComponent");
 	}
 
 	public override void _PhysicsProcess(double delta)
