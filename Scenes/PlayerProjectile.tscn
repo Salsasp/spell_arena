@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://c6smv8wk2dp03" path="res://Assets/Sprites/Spell/projectile_animated-Sheet.png" id="10_jgib8"]
 [ext_resource type="Texture2D" uid="uid://c2cyol36emsq6" path="res://Assets/Sprites/Spell/spell_particle.png" id="11_3wkhj"]
 [ext_resource type="Script" uid="uid://nabumqpkq4ny" path="res://Scripts/Entity/AnimationComponent.cs" id="12_ifwvi"]
+[ext_resource type="PackedScene" uid="uid://bu8isgl0sthh5" path="res://Scenes/Spells/FX/ProjectileHitAnimation.tscn" id="13_hekk0"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_rsyq6"]
 radius = 5.9
@@ -218,5 +219,6 @@ shape = SubResource("CircleShape2D_ar0ab")
 script = ExtResource("12_ifwvi")
 animatedSprite = NodePath("../ProjArea2D/Sprite2D")
 animationPlayer = NodePath("../AnimationPlayer")
+ProjectileHitAnimation = ExtResource("13_hekk0")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1027066159]

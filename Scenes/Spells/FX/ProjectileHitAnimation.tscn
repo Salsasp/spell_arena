@@ -1,0 +1,99 @@
+[gd_scene format=3 uid="uid://bu8isgl0sthh5"]
+
+[ext_resource type="Texture2D" uid="uid://er8shpcyja42" path="res://Assets/Sprites/Spell/FX/hit_effect.png" id="1_633vf"]
+[ext_resource type="Texture2D" uid="uid://c2cyol36emsq6" path="res://Assets/Sprites/Spell/spell_particle.png" id="2_y5vul"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y5vul"]
+atlas = ExtResource("1_633vf")
+region = Rect2(0, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lc6x0"]
+atlas = ExtResource("1_633vf")
+region = Rect2(64, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w0r63"]
+atlas = ExtResource("1_633vf")
+region = Rect2(128, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6iuw0"]
+atlas = ExtResource("1_633vf")
+region = Rect2(192, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yls32"]
+atlas = ExtResource("1_633vf")
+region = Rect2(256, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c8wdy"]
+atlas = ExtResource("1_633vf")
+region = Rect2(320, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a2lfl"]
+atlas = ExtResource("1_633vf")
+region = Rect2(384, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lfs4c"]
+atlas = ExtResource("1_633vf")
+region = Rect2(448, 64, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_sj8g1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y5vul")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lc6x0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w0r63")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6iuw0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yls32")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c8wdy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a2lfl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lfs4c")
+}],
+"loop": false,
+"name": &"hit",
+"speed": 30.0
+}]
+
+[sub_resource type="Gradient" id="Gradient_lc6x0"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_w0r63"]
+gradient = SubResource("Gradient_lc6x0")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_6iuw0"]
+particle_flag_disable_z = true
+spread = 180.0
+initial_velocity_min = 100.0
+initial_velocity_max = 250.0
+gravity = Vector3(0, 0, 0)
+scale_max = 1.1999999
+color_ramp = SubResource("GradientTexture1D_w0r63")
+
+[node name="ProjectileHitAnimation" type="AnimatedSprite2D" unique_id=1714040695]
+z_index = 5
+sprite_frames = SubResource("SpriteFrames_sj8g1")
+animation = &"hit"
+frame = 7
+frame_progress = 1.0
+
+[node name="HitBurst" type="GPUParticles2D" parent="." unique_id=1824611600]
+emitting = false
+amount = 24
+texture = ExtResource("2_y5vul")
+lifetime = 0.3
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_6iuw0")

@@ -84,6 +84,7 @@ public partial class Enemy : CharacterBody2D, IEntity
 		Node2D projectileRoot = hitBy.GetParent<Node2D>();
 		DamageComponent hitByDamageComponent = projectileRoot.GetNodeOrNull<DamageComponent>("DamageComponent");
 		HitComponent hitByHitComponent = projectileRoot.GetNodeOrNull<HitComponent>("HitComponent");
+		AnimationComponent hitByAnimationComponent = projectileRoot.GetNodeOrNull<AnimationComponent>("AnimationComponent");
 		if (hitByDamageComponent == null)
 		{
 			GD.PrintErr("Hit by area without valid DamageComponent");
@@ -117,6 +118,8 @@ public partial class Enemy : CharacterBody2D, IEntity
 		{
 			textManagerComponent.DrawAbove(this, -30, damageString, textModifiers, damage);
 		}
+
+		animationComponent.PlayProjectileHitAnimation(GlobalPosition);
 	}
 
 	private void OnDead()

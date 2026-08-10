@@ -8,6 +8,7 @@ public partial class AnimationComponent : Node2D
 	[Export] public bool directionalSprites;
 	[Export] public bool isPlayer;
 	[Export] public bool isEnemy;
+	[Export] public PackedScene ProjectileHitAnimation;
 	[Signal] public delegate void FallAnimationFinishedEventHandler();
 	public bool IsPlayingFall { get; private set; }
 	private string animationState = "idle";
@@ -76,5 +77,16 @@ public partial class AnimationComponent : Node2D
 		IsPlayingFall = true;
 		animationPlayer.Play("fall");
 		return true;
+	}
+
+	public void PlayProjectileHitAnimation(Vector2 position)
+	{
+		var hitAnim = ProjectileHitAnimation.Instantiate<AnimatedSprite2D>();
+		var hitBurst = hitAnim.GetNode<GpuParticles2D>("HitBurst");
+		GetTree().CurrentScene.AddChild(hitAnim);
+		hitAnim.GlobalPosition = position;
+		hitAnim.Play("hit");
+		hitBurst.Restart();
+		hitAnim.AnimationFinished += hitAnim.QueueFree;
 	}
 }

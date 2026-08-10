@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://csu7r54n2f32y" path="res://Scripts/Entity/HealthComponent.cs" id="4_health"]
 [ext_resource type="Script" uid="uid://nabumqpkq4ny" path="res://Scripts/Entity/AnimationComponent.cs" id="5_anim"]
 [ext_resource type="Script" uid="uid://bol4ib3tbtusr" path="res://Scripts/Entity/HitboxComponent.cs" id="6_hitbox"]
+[ext_resource type="PackedScene" uid="uid://bu8isgl0sthh5" path="res://Scenes/Spells/FX/ProjectileHitAnimation.tscn" id="6_wxs2d"]
 [ext_resource type="Script" uid="uid://cjlg368x7kn8b" path="res://Scripts/Entity/Enemy/Behaviors/StrafeMovementComponent.cs" id="7_strafe"]
 [ext_resource type="Script" uid="uid://d3yfmkht13rxm" path="res://Scripts/Entity/Enemy/Behaviors/ProjectileAttackComponent.cs" id="8_projectile"]
 [ext_resource type="Script" uid="uid://cjlcywrbmru3k" path="res://Scripts/Entity/Enemy/Behaviors/ArenaClampComponent.cs" id="9_clamp"]
@@ -124,6 +125,7 @@ animatedSprite = NodePath("../EnemySprite")
 animationPlayer = NodePath("../AnimationPlayer")
 directionalSprites = true
 isEnemy = true
+ProjectileHitAnimation = ExtResource("6_wxs2d")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=2086634365]
 libraries/ = SubResource("AnimationLibrary_wxs2d")
