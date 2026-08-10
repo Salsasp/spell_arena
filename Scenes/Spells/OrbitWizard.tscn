@@ -11,9 +11,10 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_0dfur"]
 radius = 13.0
 
-[node name="OrbitWizard" type="Node2D" unique_id=183864806 node_paths=PackedStringArray("damageComponent", "hitComponent", "spellMovementComponent", "animationComponent", "projArea2D") groups=["enemy_attacks"]]
+[node name="OrbitWizard" type="Node2D" unique_id=183864806 node_paths=PackedStringArray("damageComponent", "despawnComponent", "hitComponent", "spellMovementComponent", "animationComponent", "projArea2D") groups=["enemy_attacks"]]
 script = ExtResource("1_wizard")
 damageComponent = NodePath("DamageComponent")
+despawnComponent = NodePath("DespawnComponent")
 hitComponent = NodePath("HitComponent")
 spellMovementComponent = NodePath("SpellMovementComponent")
 animationComponent = NodePath("AnimationComponent")
@@ -46,11 +47,14 @@ shape = SubResource("CircleShape2D_0dfur")
 modulate = Color(1, 0.3, 0.3, 1)
 texture = ExtResource("5_44dal")
 
-[node name="AnimationComponent" type="Node2D" parent="." unique_id=960598031]
+[node name="AnimationComponent" type="Node2D" parent="." unique_id=960598031 node_paths=PackedStringArray("animationPlayer")]
 script = ExtResource("6_xfrl5")
+animationPlayer = NodePath("../AnimationPlayer")
 
 [node name="HitComponent" type="Node2D" parent="." unique_id=930089306]
 unique_name_in_owner = true
 script = ExtResource("7_yy8f1")
 ShowDebugCircle = false
 ChainEnabled = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=650452728]

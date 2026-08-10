@@ -1,11 +1,12 @@
 using Godot;
 
-public partial class EnemyProjectile : Node2D
+public partial class EnemyProjectile : Node2D, IProjectile
 {
-	private DamageComponent damageComponent;
-	private DespawnComponent despawnComponent;
-	private LifetimeComponent lifetimeComponent;
-	private SpellMovementComponent spellMovementComponent;
+	[Export] public DamageComponent damageComponent { get; set; }
+	[Export] public DespawnComponent despawnComponent { get; set; }
+	[Export] public LifetimeComponent lifetimeComponent { get; set; }
+	[Export] public SpellMovementComponent spellMovementComponent { get; set; }
+	[Export] public AnimationComponent animationComponent { get; set; }
 
 	public override void _Ready()
 	{

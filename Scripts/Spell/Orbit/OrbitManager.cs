@@ -25,7 +25,7 @@ public partial class OrbitManager : Node2D
 	public List<OrbitProjectile> OrbitProjectiles = [];
 
 	private readonly HashSet<string> activeOrbitalKeys = [];
-	private Projectile parentProjectile;
+	private PlayerProjectile parentProjectile;
 
 	public void ConfigureFromModifiers(ModifierManager modifierManager)
 	{
@@ -44,7 +44,7 @@ public partial class OrbitManager : Node2D
 	{
 		try
 		{
-			parentProjectile = GetParent<Projectile>();
+			parentProjectile = GetParent<PlayerProjectile>();
 		}
 		catch (Exception e)
 		{

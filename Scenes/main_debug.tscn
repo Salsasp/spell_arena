@@ -6,7 +6,7 @@
 [ext_resource type="Script" uid="uid://chiji0st1ftrb" path="res://Scripts/Wave/ArenaBounds.cs" id="4_fvjjx"]
 [ext_resource type="PackedScene" uid="uid://c4rggtnuhb8j3" path="res://Scenes/player.tscn" id="5_dqi53"]
 [ext_resource type="Script" uid="uid://dlfxn8ubefymy" path="res://Scripts/ProjectileSpawner.cs" id="6_n6tff"]
-[ext_resource type="PackedScene" uid="uid://dfgghhva4et46" path="res://Scenes/Projectile.tscn" id="7_6p2e1"]
+[ext_resource type="PackedScene" uid="uid://dfgghhva4et46" path="res://Scenes/PlayerProjectile.tscn" id="7_6p2e1"]
 [ext_resource type="PackedScene" uid="uid://v1rbis70bab5" path="res://Scenes/EnemyProjectile.tscn" id="8_vrawu"]
 [ext_resource type="PackedScene" uid="uid://c5xyb7qpbq56d" path="res://Scenes/TextProjectile.tscn" id="9_ntd5v"]
 [ext_resource type="Script" uid="uid://3ugmys41jeqj" path="res://Scripts/UI/TextManagerComponent.cs" id="10_igc14"]

@@ -1,6 +1,6 @@
 using Godot;
 
-public partial class OrbitProjectile : Projectile
+public partial class OrbitProjectile : PlayerProjectile
 {
 	public float OrbitDistance;
 	[Export] public float AngularSpeed = 4f;
@@ -18,7 +18,7 @@ public partial class OrbitProjectile : Projectile
 		Position = Vector2.FromAngle(AngleToParent) * OrbitDistance;
 	}
 
-	public void InitializeFromParent(Projectile parentProjectile)
+	public void InitializeFromParent(PlayerProjectile parentProjectile)
 	{
 		EnsureComponentsInitialized();
 

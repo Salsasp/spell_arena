@@ -6,13 +6,19 @@
 [ext_resource type="Script" uid="uid://cs8nivwxnirj8" path="res://Scripts/Spell/DespawnComponent.cs" id="4_despawn"]
 [ext_resource type="Script" uid="uid://7vbl3a4b3hlt" path="res://Scripts/Spell/LifetimeComponent.cs" id="5_lifetime"]
 [ext_resource type="Texture2D" uid="uid://bi10gkxvs8qa7" path="res://Assets/Sprites/Enemy/projectile_enemy.png" id="6_hwef1"]
+[ext_resource type="Script" uid="uid://nabumqpkq4ny" path="res://Scripts/Entity/AnimationComponent.cs" id="7_vxjvc"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_enemyproj"]
 radius = 2.0
 height = 20.0
 
-[node name="EnemyProjectile" type="Node2D" unique_id=183864806 groups=["enemy_attacks"]]
+[node name="EnemyProjectile" type="Node2D" unique_id=183864806 node_paths=PackedStringArray("damageComponent", "despawnComponent", "lifetimeComponent", "spellMovementComponent", "animationComponent") groups=["enemy_attacks"]]
 script = ExtResource("1_enemyproj")
+damageComponent = NodePath("DamageComponent")
+despawnComponent = NodePath("DespawnComponent")
+lifetimeComponent = NodePath("LifetimeComponent")
+spellMovementComponent = NodePath("SpellMovementComponent")
+animationComponent = NodePath("AnimationComponent")
 
 [node name="DamageComponent" type="Node2D" parent="." unique_id=1688255860]
 unique_name_in_owner = true
@@ -48,3 +54,11 @@ shape = SubResource("CapsuleShape2D_enemyproj")
 modulate = Color(1, 0.3, 0.3, 1)
 rotation = 1.5707964
 texture = ExtResource("6_hwef1")
+
+[node name="AnimationComponent" type="Node2D" parent="." unique_id=1015588366 node_paths=PackedStringArray("animatedSprite", "animationPlayer")]
+script = ExtResource("7_vxjvc")
+animatedSprite = NodePath("")
+animationPlayer = NodePath("../AnimationPlayer")
+isEnemy = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=2081109577]

@@ -15,7 +15,7 @@ public partial class HitComponent : Component
 
 	public void Update(Node2D target)
 	{
-		ModifierContext context = ModifierContext.ForProjectile(GetParent<Projectile>(), target);
+		ModifierContext context = ModifierContext.ForProjectile(GetParent<PlayerProjectile>(), target);
 		ModifierEffectRegistry.Apply(ModifierPhase.OnHit, context);
 
 		if (!context.HitResult.PreventDespawn && !context.HitResult.HandledChain)

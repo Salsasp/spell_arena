@@ -1,68 +1,68 @@
 [gd_scene format=3 uid="uid://dfgghhva4et46"]
 
-[ext_resource type="Script" uid="uid://bh66xfb6jcblf" path="res://Scripts/Entity/Projectile/Projectile.cs" id="1_cu5m1"]
-[ext_resource type="Script" uid="uid://d3op0eovhs6cq" path="res://Scripts/Spell/DamageComponent.cs" id="2_rsyq6"]
-[ext_resource type="PackedScene" uid="uid://dwgyxrrevl24e" path="res://Scenes/Spells/OrbitManager.tscn" id="2_xxsyy"]
-[ext_resource type="Script" uid="uid://5k1veq5ulv3t" path="res://Scripts/Spell/SpellMovementComponent.cs" id="3_augfd"]
-[ext_resource type="Script" uid="uid://d1r3sxdk0chv5" path="res://Scripts/Spell/SpellSpawnComponent.cs" id="4_ar0ab"]
-[ext_resource type="Script" uid="uid://cyw23b1rilbxg" path="res://Scripts/Spell/HitComponent.cs" id="5_d6p7i"]
-[ext_resource type="Script" uid="uid://cs8nivwxnirj8" path="res://Scripts/Spell/DespawnComponent.cs" id="6_ovs0d"]
-[ext_resource type="Script" uid="uid://7vbl3a4b3hlt" path="res://Scripts/Spell/LifetimeComponent.cs" id="7_ay8ps"]
-[ext_resource type="Texture2D" uid="uid://blh6in6m1obtw" path="res://Assets/Sprites/Spell/projectile_animated-Sheet-particles-Sheet.png" id="8_ekur6"]
-[ext_resource type="Script" uid="uid://nabumqpkq4ny" path="res://Scripts/Entity/AnimationComponent.cs" id="9_ekur6"]
-[ext_resource type="Texture2D" uid="uid://c2cyol36emsq6" path="res://Assets/Sprites/Spell/spell_particle.png" id="10_dsm84"]
-[ext_resource type="Texture2D" uid="uid://c6smv8wk2dp03" path="res://Assets/Sprites/Spell/projectile_animated-Sheet.png" id="10_xsjeh"]
+[ext_resource type="Script" uid="uid://c12it7c6htill" path="res://Scripts/Entity/Projectile/PlayerProjectile.cs" id="1_k4cj0"]
+[ext_resource type="PackedScene" uid="uid://dwgyxrrevl24e" path="res://Scenes/Spells/OrbitManager.tscn" id="2_hekk0"]
+[ext_resource type="Script" uid="uid://d3op0eovhs6cq" path="res://Scripts/Spell/DamageComponent.cs" id="3_gpagl"]
+[ext_resource type="Script" uid="uid://5k1veq5ulv3t" path="res://Scripts/Spell/SpellMovementComponent.cs" id="4_6wski"]
+[ext_resource type="Script" uid="uid://d1r3sxdk0chv5" path="res://Scripts/Spell/SpellSpawnComponent.cs" id="5_mc4u3"]
+[ext_resource type="Script" uid="uid://cyw23b1rilbxg" path="res://Scripts/Spell/HitComponent.cs" id="6_tkeu6"]
+[ext_resource type="Script" uid="uid://cs8nivwxnirj8" path="res://Scripts/Spell/DespawnComponent.cs" id="7_2om0w"]
+[ext_resource type="Script" uid="uid://7vbl3a4b3hlt" path="res://Scripts/Spell/LifetimeComponent.cs" id="8_khaf2"]
+[ext_resource type="Texture2D" uid="uid://blh6in6m1obtw" path="res://Assets/Sprites/Spell/projectile_animated-Sheet-particles-Sheet.png" id="9_ltris"]
+[ext_resource type="Texture2D" uid="uid://c6smv8wk2dp03" path="res://Assets/Sprites/Spell/projectile_animated-Sheet.png" id="10_jgib8"]
+[ext_resource type="Texture2D" uid="uid://c2cyol36emsq6" path="res://Assets/Sprites/Spell/spell_particle.png" id="11_3wkhj"]
+[ext_resource type="Script" uid="uid://nabumqpkq4ny" path="res://Scripts/Entity/AnimationComponent.cs" id="12_ifwvi"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_rsyq6"]
 radius = 5.9
 height = 31.88
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xxsyy"]
-atlas = ExtResource("8_ekur6")
+atlas = ExtResource("9_ltris")
 region = Rect2(0, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dsm84"]
-atlas = ExtResource("8_ekur6")
+atlas = ExtResource("9_ltris")
 region = Rect2(16, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xsjeh"]
-atlas = ExtResource("8_ekur6")
+atlas = ExtResource("9_ltris")
 region = Rect2(32, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tomee"]
-atlas = ExtResource("8_ekur6")
+atlas = ExtResource("9_ltris")
 region = Rect2(48, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_likag"]
-atlas = ExtResource("8_ekur6")
+atlas = ExtResource("9_ltris")
 region = Rect2(64, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_urmru"]
-atlas = ExtResource("8_ekur6")
+atlas = ExtResource("9_ltris")
 region = Rect2(80, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qycw7"]
-atlas = ExtResource("10_xsjeh")
+atlas = ExtResource("10_jgib8")
 region = Rect2(0, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2rrls"]
-atlas = ExtResource("10_xsjeh")
+atlas = ExtResource("10_jgib8")
 region = Rect2(16, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_r4qm0"]
-atlas = ExtResource("10_xsjeh")
+atlas = ExtResource("10_jgib8")
 region = Rect2(32, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_joqcv"]
-atlas = ExtResource("10_xsjeh")
+atlas = ExtResource("10_jgib8")
 region = Rect2(48, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4hnog"]
-atlas = ExtResource("10_xsjeh")
+atlas = ExtResource("10_jgib8")
 region = Rect2(64, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0qh1p"]
-atlas = ExtResource("10_xsjeh")
+atlas = ExtResource("10_jgib8")
 region = Rect2(80, 0, 16, 16)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_urmru"]
@@ -136,9 +136,9 @@ hue_variation_max = 0.19999997
 [sub_resource type="CircleShape2D" id="CircleShape2D_ar0ab"]
 radius = 200.0
 
-[node name="Projectile" type="Node2D" unique_id=1249408229 node_paths=PackedStringArray("damageComponent", "despawnComponent", "hitComponent", "lifetimeComponent", "spellMovementComponent", "spawnComponent", "animationComponent", "projArea2D")]
-script = ExtResource("1_cu5m1")
-OrbitScene = ExtResource("2_xxsyy")
+[node name="PlayerProjectile" type="Node2D" unique_id=1249408229 node_paths=PackedStringArray("damageComponent", "despawnComponent", "hitComponent", "lifetimeComponent", "spellMovementComponent", "spawnComponent", "animationComponent", "projArea2D")]
+script = ExtResource("1_k4cj0")
+OrbitScene = ExtResource("2_hekk0")
 damageComponent = NodePath("DamageComponent")
 despawnComponent = NodePath("DespawnComponent")
 hitComponent = NodePath("HitComponent")
@@ -152,29 +152,29 @@ projArea2D = NodePath("ProjArea2D")
 
 [node name="DamageComponent" type="Node2D" parent="." unique_id=539318127]
 unique_name_in_owner = true
-script = ExtResource("2_rsyq6")
+script = ExtResource("3_gpagl")
 
 [node name="SpellMovementComponent" type="Node2D" parent="." unique_id=1332081632]
 unique_name_in_owner = true
-script = ExtResource("3_augfd")
+script = ExtResource("4_6wski")
 Speed = 500.0
 
 [node name="SpellSpawnComponent" type="Node2D" parent="." unique_id=345381162]
 unique_name_in_owner = true
-script = ExtResource("4_ar0ab")
+script = ExtResource("5_mc4u3")
 
 [node name="HitComponent" type="Node2D" parent="." unique_id=1007074092]
 unique_name_in_owner = true
-script = ExtResource("5_d6p7i")
+script = ExtResource("6_tkeu6")
 ShowDebugCircle = false
 
 [node name="DespawnComponent" type="Node2D" parent="." unique_id=161814801]
 unique_name_in_owner = true
-script = ExtResource("6_ovs0d")
+script = ExtResource("7_2om0w")
 
 [node name="LifetimeComponent" type="Node2D" parent="." unique_id=363474903]
 unique_name_in_owner = true
-script = ExtResource("7_ay8ps")
+script = ExtResource("8_khaf2")
 Lifetime = 2
 
 [node name="Timer" type="Timer" parent="LifetimeComponent" unique_id=295151940]
@@ -202,7 +202,7 @@ texture = SubResource("GradientTexture2D_dsm84")
 [node name="GPUParticles2D" type="GPUParticles2D" parent="ProjArea2D" unique_id=176750348]
 amount = 16
 sub_emitter = NodePath(".")
-texture = ExtResource("10_dsm84")
+texture = ExtResource("11_3wkhj")
 lifetime = 0.5
 process_material = SubResource("ParticleProcessMaterial_dsm84")
 
@@ -215,7 +215,7 @@ collision_mask = 8
 shape = SubResource("CircleShape2D_ar0ab")
 
 [node name="AnimationComponent" type="Node2D" parent="." unique_id=402119261 node_paths=PackedStringArray("animatedSprite", "animationPlayer")]
-script = ExtResource("9_ekur6")
+script = ExtResource("12_ifwvi")
 animatedSprite = NodePath("../ProjArea2D/Sprite2D")
 animationPlayer = NodePath("../AnimationPlayer")
 
