@@ -19,6 +19,8 @@
 [ext_resource type="PackedScene" uid="uid://c63br0578nusx" path="res://Scenes/UI/DamageText.tscn" id="16_w5kog"]
 [ext_resource type="Texture2D" uid="uid://dp1c3gytffl71" path="res://Assets/Sprites/Map/pitfall_96x96.png" id="18_vp7ys"]
 [ext_resource type="PackedScene" uid="uid://tyjtdxw8l54a" path="res://Scenes/Map/Pitfall.tscn" id="19_1tb08"]
+[ext_resource type="Script" uid="uid://bmfevpx6kughl" path="res://Scripts/UI/Cursor.cs" id="20_08nt8"]
+[ext_resource type="Texture2D" uid="uid://b35ycxwb1egqa" path="res://Assets/UI/Cursor/cursor_crosshair.png" id="21_rc81e"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_y71vl"]
 texture = ExtResource("2_w5kog")
@@ -184,3 +186,7 @@ energy = 2.2
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1340268877]
 environment = SubResource("Environment_1tb08")
 compositor = SubResource("Compositor_08nt8")
+
+[node name="Cursor" type="Node2D" parent="." unique_id=543896547]
+script = ExtResource("20_08nt8")
+CrosshairCursor = ExtResource("21_rc81e")
