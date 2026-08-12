@@ -61,7 +61,7 @@ public partial class WaveSpawner : Node2D
 
 	private void SpawnEnemy()
 	{
-		PackedScene scene = GD.Randf() < activeWave.ChargerWeight ? ChargerScene : StrafeShooterScene;
+		PackedScene scene = GD.Randf() < activeWave.CasterWeight ? StrafeShooterScene : ChargerScene;
 		Enemy enemy = scene.Instantiate<Enemy>();
 		ApplyStatMultipliers(enemy);
 
