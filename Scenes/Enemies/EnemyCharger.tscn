@@ -38,7 +38,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_uboki")
 }],
-"loop": true,
+"loop": 1,
 "name": &"idle",
 "speed": 5.0
 }, {
@@ -49,7 +49,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_khfrg")
 }],
-"loop": true,
+"loop": 1,
 "name": &"walk_left",
 "speed": 5.0
 }, {
@@ -60,7 +60,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_bmy8f")
 }],
-"loop": true,
+"loop": 1,
 "name": &"walk_right",
 "speed": 5.0
 }]
@@ -121,7 +121,7 @@ _data = {
 }
 
 [node name="EnemyCharger" type="CharacterBody2D" unique_id=917117052 node_paths=PackedStringArray("healthComponent", "hitboxComponent", "movementComponent", "movementBehavior", "attackBehavior", "animationComponent", "arenaClamp") groups=["enemies"]]
-scale = Vector2(2, 2)
+scale = Vector2(1.5, 1.5)
 collision_layer = 4
 script = ExtResource("1_enemy")
 healthComponent = NodePath("HealthComponent")
