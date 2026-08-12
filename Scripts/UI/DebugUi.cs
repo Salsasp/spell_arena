@@ -2,7 +2,7 @@ using Godot;
 using System;
 using System.Collections.Generic;
 
-public partial class DebugUi : Control
+public partial class DebugUI : Control
 {
 	[Export] public Label debugHealthLabel;
 	[Export] public OptionButton modifierOptionButton;

@@ -1,8 +1,9 @@
 [gd_scene format=3 uid="uid://bobqekh085xdg"]
 
-[ext_resource type="Script" uid="uid://cxqi8g3p81cvv" path="res://Scripts/UI/GameUi.cs" id="1_gameui"]
+[ext_resource type="Script" uid="uid://dm2yia25lcnpy" path="res://Scripts/UI/GameUI.cs" id="1_71wt1"]
+[ext_resource type="PackedScene" uid="uid://ca225tco2h2f2" path="res://Scenes/UI/ModifierDraftUI.tscn" id="2_71wt1"]
 
-[node name="GameUI" type="Control" unique_id=1940756825]
+[node name="GameUI" type="Control" unique_id=1940756825 node_paths=PackedStringArray("waveLabel", "statusLabel", "ModifierDraftUI", "gameOverPanel", "gameOverLabel")]
 process_mode = 3
 layout_mode = 3
 anchors_preset = 15
@@ -11,7 +12,12 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-script = ExtResource("1_gameui")
+script = ExtResource("1_71wt1")
+waveLabel = NodePath("WaveLabel")
+statusLabel = NodePath("StatusLabel")
+ModifierDraftUI = NodePath("ModifierDraftUi")
+gameOverPanel = NodePath("GameOverPanel")
+gameOverLabel = NodePath("GameOverPanel/MarginContainer/GameOverLabel")
 
 [node name="WaveLabel" type="Label" parent="." unique_id=1995830593]
 layout_mode = 1
@@ -38,112 +44,6 @@ offset_right = 160.0
 offset_bottom = 74.0
 grow_horizontal = 2
 horizontal_alignment = 1
-
-[node name="ModifierDraftPanel" type="Panel" parent="." unique_id=1573351269]
-visible = false
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -380.0
-offset_top = -90.0
-offset_right = 380.0
-offset_bottom = 90.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="MarginContainer" type="MarginContainer" parent="ModifierDraftPanel" unique_id=1434591307]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 16
-theme_override_constants/margin_top = 16
-theme_override_constants/margin_right = 16
-theme_override_constants/margin_bottom = 16
-
-[node name="VBoxContainer" type="VBoxContainer" parent="ModifierDraftPanel/MarginContainer" unique_id=553493716]
-layout_mode = 2
-theme_override_constants/separation = 12
-
-[node name="DraftTitle" type="Label" parent="ModifierDraftPanel/MarginContainer/VBoxContainer" unique_id=1897980067]
-layout_mode = 2
-theme_override_font_sizes/font_size = 20
-text = "Choose a Spell Modifier"
-horizontal_alignment = 1
-
-[node name="ModifierOptions" type="HBoxContainer" parent="ModifierDraftPanel/MarginContainer/VBoxContainer" unique_id=531110815]
-layout_mode = 2
-size_flags_vertical = 3
-theme_override_constants/separation = 12
-alignment = 1
-
-[node name="ModifierDetailModal" type="Control" parent="." unique_id=1426546503]
-visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-
-[node name="Backdrop" type="ColorRect" parent="ModifierDetailModal" unique_id=1364299030]
-visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-color = Color(0, 0, 0, 0.65)
-
-[node name="DetailPanel" type="Panel" parent="ModifierDetailModal" unique_id=358125303]
-layout_mode = 0
-offset_left = 8.0
-offset_top = 8.0
-offset_right = 448.0
-offset_bottom = 208.0
-
-[node name="MarginContainer" type="MarginContainer" parent="ModifierDetailModal/DetailPanel" unique_id=438172656]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 16
-theme_override_constants/margin_top = 16
-theme_override_constants/margin_right = 16
-theme_override_constants/margin_bottom = 16
-
-[node name="VBoxContainer" type="VBoxContainer" parent="ModifierDetailModal/DetailPanel/MarginContainer" unique_id=2037416101]
-layout_mode = 2
-theme_override_constants/separation = 10
-
-[node name="DetailNameLabel" type="Label" parent="ModifierDetailModal/DetailPanel/MarginContainer/VBoxContainer" unique_id=1866837773]
-layout_mode = 2
-theme_override_font_sizes/font_size = 22
-text = "Modifier Name"
-horizontal_alignment = 1
-
-[node name="DetailRarityLabel" type="Label" parent="ModifierDetailModal/DetailPanel/MarginContainer/VBoxContainer" unique_id=1360518667]
-layout_mode = 2
-text = "common"
-horizontal_alignment = 1
-
-[node name="DetailDescriptionLabel" type="Label" parent="ModifierDetailModal/DetailPanel/MarginContainer/VBoxContainer" unique_id=1394061237]
-custom_minimum_size = Vector2(360, 0)
-layout_mode = 2
-size_flags_vertical = 3
-text = "Description goes here."
-horizontal_alignment = 1
-autowrap_mode = 3
 
 [node name="GameOverPanel" type="Panel" parent="." unique_id=1089239132]
 visible = false
@@ -178,3 +78,6 @@ theme_override_font_sizes/font_size = 22
 text = "Game Over"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="ModifierDraftUi" parent="." unique_id=1781051647 instance=ExtResource("2_71wt1")]
+layout_mode = 1

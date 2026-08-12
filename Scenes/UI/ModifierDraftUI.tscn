@@ -1,0 +1,148 @@
+[gd_scene format=3 uid="uid://ca225tco2h2f2"]
+
+[ext_resource type="Script" uid="uid://veee8y25bhah" path="res://Scripts/UI/ModifierDraftUI.cs" id="1_pjdjv"]
+
+[node name="ModifierDraftUi" type="Control" unique_id=1781051647 node_paths=PackedStringArray("modifierDraftPanel", "draftTitlePanel", "modifierOptionsContainer", "modifierIconsContainer", "modifierDetailModal", "detailPanel", "detailNameLabel", "detailDescriptionLabel", "detailRarityLabel")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_pjdjv")
+modifierDraftPanel = NodePath("ModifierDraftPanel")
+draftTitlePanel = NodePath("DraftTitlePanel")
+modifierOptionsContainer = NodePath("ModifierDraftPanel/MarginContainer/VBoxContainer/ModifierOptions")
+modifierIconsContainer = NodePath("ModifierDraftPanel/MarginContainer/VBoxContainer/ModifierIcons")
+modifierDetailModal = NodePath("ModifierDetailModal")
+detailPanel = NodePath("ModifierDetailModal/DetailPanel")
+detailNameLabel = NodePath("ModifierDetailModal/DetailPanel/MarginContainer/VBoxContainer/DetailNameLabel")
+detailDescriptionLabel = NodePath("ModifierDetailModal/DetailPanel/MarginContainer/VBoxContainer/DetailDescriptionLabel")
+detailRarityLabel = NodePath("ModifierDetailModal/DetailPanel/MarginContainer/VBoxContainer/DetailRarityLabel")
+
+[node name="DraftTitlePanel" type="Panel" parent="." unique_id=507905174]
+layout_mode = 0
+offset_left = 336.0
+offset_top = 112.0
+offset_right = 816.0
+offset_bottom = 212.0
+
+[node name="DraftTitle" type="Label" parent="DraftTitlePanel" unique_id=508620351]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 32.0
+offset_right = 448.0
+offset_bottom = 68.0
+theme_override_font_sizes/font_size = 20
+text = "Choose a Spell Modifier"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ModifierDraftPanel" type="Panel" parent="." unique_id=426230351]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.11100001
+anchor_top = 0.395
+anchor_right = 0.88900006
+anchor_bottom = 0.79
+offset_left = 0.12799072
+offset_top = 0.039993286
+offset_right = -0.12805176
+offset_bottom = 3.0517578e-05
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="ModifierDraftPanel" unique_id=144748490]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 32.000004
+offset_top = 32.0
+offset_right = -32.0
+offset_bottom = -31.920044
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ModifierDraftPanel/MarginContainer" unique_id=654849164]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="ModifierOptions" type="HBoxContainer" parent="ModifierDraftPanel/MarginContainer/VBoxContainer" unique_id=729046434]
+layout_mode = 2
+size_flags_vertical = 3
+alignment = 1
+
+[node name="ModifierIcons" type="HBoxContainer" parent="ModifierDraftPanel/MarginContainer/VBoxContainer" unique_id=148915555]
+layout_mode = 2
+
+[node name="ModifierDetailModal" type="Control" parent="." unique_id=598786511]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Backdrop" type="ColorRect" parent="ModifierDetailModal" unique_id=1035606426]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0.65)
+
+[node name="DetailPanel" type="Panel" parent="ModifierDetailModal" unique_id=573437300]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 448.0
+offset_bottom = 208.0
+
+[node name="MarginContainer" type="MarginContainer" parent="ModifierDetailModal/DetailPanel" unique_id=1388886772]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.07300001
+anchor_top = 0.16000001
+anchor_right = 0.92700005
+anchor_bottom = 0.84000003
+offset_left = -8.120003
+offset_right = 8.119995
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ModifierDetailModal/DetailPanel/MarginContainer" unique_id=1557386692]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="DetailNameLabel" type="Label" parent="ModifierDetailModal/DetailPanel/MarginContainer/VBoxContainer" unique_id=2050335611]
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "Modifier Name"
+horizontal_alignment = 1
+
+[node name="DetailRarityLabel" type="Label" parent="ModifierDetailModal/DetailPanel/MarginContainer/VBoxContainer" unique_id=865780838]
+layout_mode = 2
+text = "common"
+horizontal_alignment = 1
+
+[node name="DetailDescriptionLabel" type="Label" parent="ModifierDetailModal/DetailPanel/MarginContainer/VBoxContainer" unique_id=1217094863]
+custom_minimum_size = Vector2(360, 0)
+layout_mode = 2
+size_flags_vertical = 3
+text = "Description goes here."
+horizontal_alignment = 1
+autowrap_mode = 3

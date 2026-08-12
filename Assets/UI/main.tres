@@ -37,17 +37,18 @@ expand_margin_top = 2.0
 expand_margin_right = 2.0
 expand_margin_bottom = 2.0
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3mlip"]
-content_margin_left = 4.0
-content_margin_top = 4.0
-content_margin_right = 4.0
-content_margin_bottom = 4.0
-bg_color = Color(0.225, 0.225, 0.225, 0.6)
-corner_radius_top_left = 3
-corner_radius_top_right = 3
-corner_radius_bottom_right = 3
-corner_radius_bottom_left = 3
-corner_detail = 5
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_kwqax"]
+load_path = "res://.godot/imported/button.png-2488c83fce2861a6b6541517c8bd714e.ctex"
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_td8hg"]
+texture = SubResource("CompressedTexture2D_kwqax")
+texture_margin_left = 32.0
+texture_margin_top = 33.0
+texture_margin_right = 32.0
+texture_margin_bottom = 32.0
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+modulate_color = Color(0.8089983, 0.8089983, 0.8089982, 1)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_3mlip"]
 texture = ExtResource("1_m5no6")
@@ -101,7 +102,7 @@ Button/constants/outline_size = 0
 Button/font_sizes/font_size = 16
 Button/styles/disabled = SubResource("StyleBoxFlat_m5no6")
 Button/styles/focus = SubResource("StyleBoxFlat_kwqax")
-Button/styles/hover = SubResource("StyleBoxFlat_3mlip")
+Button/styles/hover = SubResource("StyleBoxTexture_td8hg")
 Button/styles/normal = SubResource("StyleBoxTexture_3mlip")
 Button/styles/pressed = SubResource("StyleBoxFlat_bhd44")
 Panel/styles/panel = SubResource("StyleBoxTexture_bhd44")

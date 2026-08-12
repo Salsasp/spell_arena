@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cwhripoub67q1"]
 
-[ext_resource type="Script" uid="uid://xhkltev7xgnk" path="res://Scripts/UI/DebugUi.cs" id="1_fpupx"]
+[ext_resource type="Script" uid="uid://l1gxv633xfer" path="res://Scripts/UI/DebugUI.cs" id="1_7gdgf"]
 [ext_resource type="Theme" uid="uid://btp4nkh4u337k" path="res://Assets/UI/main.tres" id="2_7gdgf"]
 
 [node name="DebugUi" type="Control" unique_id=1563016044 node_paths=PackedStringArray("debugHealthLabel", "modifierOptionButton", "modifierPickerPopup", "modifierApplyStatusLabel")]
@@ -12,7 +12,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-script = ExtResource("1_fpupx")
+script = ExtResource("1_7gdgf")
 debugHealthLabel = NodePath("DebugHealthLabel")
 modifierOptionButton = NodePath("ModifierPickerPopup/MarginContainer/VBoxContainer/ModifierOptionButton")
 modifierPickerPopup = NodePath("ModifierPickerPopup")

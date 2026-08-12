@@ -20,7 +20,7 @@ public partial class RunManager : Node
 	[Signal] public delegate void ForceEndWaveEventHandler();
 
 	private WaveSpawner waveSpawner;
-	private GameUi gameUi;
+	private GameUI gameUi;
 	private Player player;
 	private ModifierManager modifierManager;
 	private HealthComponent playerHealth;
@@ -31,14 +31,14 @@ public partial class RunManager : Node
 	public override void _Ready()
 	{
 		waveSpawner = GetNode<WaveSpawner>(WaveSpawnerPath);
-		gameUi = GetNode<GameUi>(GameUiPath);
+		gameUi = GetNode<GameUI>(GameUiPath);
 		player = GetNode<Player>(PlayerPath);
 		modifierManager = player.GetNode<ModifierManager>("ModifierManager");
 		playerHealth = player.GetNode<HealthComponent>("HealthComponent");
 
 		waveSpawner.WaveComplete += OnWaveComplete;
 		playerHealth.Dead += OnPlayerDead;
-		gameUi.ModifierSelected += OnModifierSelected;
+		gameUi.ModifierDraftUI.ModifierSelected += OnModifierSelected;
 		ForceEndWave += OnForceEndWave;
 
 		StartWave();
@@ -49,7 +49,7 @@ public partial class RunManager : Node
 		SetPhase(RunPhase.Combat);
 		WaveDefinition wave = WaveTable.GetWave(currentWave);
 		gameUi.SetWave(currentWave);
-		gameUi.HideModifierDraft();
+		gameUi.ModifierDraftUI.HideModifierDraft();
 		gameUi.HideGameOver();
 		EmitSignal(SignalName.WaveStarted, currentWave);
 		waveSpawner.BeginWave(wave);
@@ -67,7 +67,7 @@ public partial class RunManager : Node
 
 		int numDraftOptions = DEFAULT_DRAFT_OPTIONS + modifierManager.ExtraDraftOptions;
 
-		gameUi.ShowModifierDraft(ModifierDraftService.RollDraft(numDraftOptions));
+		gameUi.ModifierDraftUI.ShowModifierDraft(ModifierDraftService.RollDraft(numDraftOptions));
 	}
 
 	private void OnModifierSelected(string modifierId)
@@ -92,7 +92,7 @@ public partial class RunManager : Node
 		SetPhase(RunPhase.GameOver);
 		GetTree().Paused = true;
 		waveSpawner.ClearAllEnemies();
-		gameUi.HideModifierDraft();
+		gameUi.ModifierDraftUI.HideModifierDraft();
 		gameUi.ShowGameOver(currentWave);
 	}
 
