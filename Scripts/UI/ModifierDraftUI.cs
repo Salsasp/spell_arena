@@ -50,11 +50,13 @@ public partial class ModifierDraftUI : Control
 		gameUI.statusLabel.Text = string.Empty;
 		HideModifierDetail();
 		ClearModifierOptions();
+		ClearModifierIcons();
 	}
 
 	public void ShowModifierDraft(List<ModifierData> options)
 	{
 		ClearModifierOptions();
+		ClearModifierIcons();
 		HideModifierDetail();
 		gameUI.statusLabel.Text = "Choose a spell modifier";
 
@@ -121,6 +123,14 @@ public partial class ModifierDraftUI : Control
 	private void ClearModifierOptions()
 	{
 		foreach (Node child in modifierOptionsContainer.GetChildren())
+		{
+			child.QueueFree();
+		}
+	}
+
+	private void ClearModifierIcons()
+	{
+		foreach (Node child in modifierIconsContainer.GetChildren())
 		{
 			child.QueueFree();
 		}

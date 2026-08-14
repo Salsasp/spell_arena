@@ -21,6 +21,7 @@ detailDescriptionLabel = NodePath("ModifierDetailModal/DetailPanel/MarginContain
 detailRarityLabel = NodePath("ModifierDetailModal/DetailPanel/MarginContainer/VBoxContainer/DetailRarityLabel")
 
 [node name="DraftTitlePanel" type="Panel" parent="." unique_id=507905174]
+visible = false
 layout_mode = 0
 offset_left = 336.0
 offset_top = 112.0
@@ -39,6 +40,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="ModifierDraftPanel" type="Panel" parent="." unique_id=426230351]
+visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.11100001
