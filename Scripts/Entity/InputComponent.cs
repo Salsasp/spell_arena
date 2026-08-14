@@ -7,6 +7,7 @@ public partial class InputComponent : Component
 	public bool LeftClickPressed { get; private set; } = false;
 	public bool LeftClickJustPressed { get; private set; } = false;
 	public bool RightClickPressed { get; private set; } = false;
+	public bool DodgePressed { get; private set; } = false;
 	public Vector2 MousePos { get; private set; } = Vector2.Zero;
 
 	public void Update()
@@ -15,6 +16,7 @@ public partial class InputComponent : Component
 		LeftClickPressed = Input.IsMouseButtonPressed(MouseButton.Left);
 		LeftClickJustPressed = Input.IsActionJustReleased("left_click");
 		RightClickPressed = Input.IsMouseButtonPressed(MouseButton.Right);
+		DodgePressed = Input.IsActionJustPressed("dodge");
 		MousePos = GetGlobalMousePosition();
 	}
 	public override void _Ready()

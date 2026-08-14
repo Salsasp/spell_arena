@@ -331,11 +331,16 @@ z_index = 1
 sprite_frames = SubResource("SpriteFrames_olqyp")
 animation = &"idle"
 
-[node name="MovementComponent" type="Node2D" parent="." unique_id=498815492 node_paths=PackedStringArray("body")]
+[node name="MovementComponent" type="Node2D" parent="." unique_id=498815492 node_paths=PackedStringArray("body", "DodgeTimer")]
 unique_name_in_owner = true
 script = ExtResource("2_fkybt")
 body = NodePath("..")
 Speed = 200.0
+DodgeSpeed = 700.0
+DodgeDuration = 0.2
+DodgeTimer = NodePath("DodgeTimer")
+
+[node name="DodgeTimer" type="Timer" parent="MovementComponent" unique_id=1129202753]
 
 [node name="InputComponent" type="Node2D" parent="." unique_id=1352110215]
 unique_name_in_owner = true

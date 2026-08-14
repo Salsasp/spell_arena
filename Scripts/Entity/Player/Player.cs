@@ -42,6 +42,12 @@ public partial class Player : CharacterBody2D, IEntity
 		wand.SnapPivotToDirection(movementComponent, wandSnapPoints);
 		movementComponent.direction = inputComponent.MoveDir;
 		movementComponent.mouseDir = GlobalPosition.DirectionTo(inputComponent.MousePos).Normalized();
+
+		if (inputComponent.DodgePressed)
+		{
+			movementComponent.Dodge(inputComponent.MoveDir);
+		}
+
 		movementComponent.Update(delta);
 		animationComponent.Update(movementComponent);
 	}
