@@ -18,6 +18,7 @@ public partial class TextProjectile : Node2D
 		spellMovementComponent = GetNode<SpellMovementComponent>("SpellMovementComponent");
 		richTextLabel = GetNode<RichTextLabel>("ProjArea2D/RichTextLabel");
 		spellMovementComponent.SetHomingEnabled(true, 4.0f);
+		SortLayers.Apply(this, SortLayers.Projectiles);
 
 		if (richTextLabel != null)
 		{

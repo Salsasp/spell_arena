@@ -22,6 +22,7 @@ public partial class PlayerProjectile : Node2D, IProjectile
 	{
 		modifierManager ??= GetNode<ModifierManager>("../Player/ModifierManager");
 		CastModifiers ??= modifierManager?.CreateCastSnapshot();
+		SortLayers.Apply(this, SortLayers.Projectiles);
 		animationComponent.Update();
 
 		hitComponent.Initialize(modifierManager, despawnComponent, spellMovementComponent);

@@ -133,7 +133,6 @@ animationComponent = NodePath("AnimationComponent")
 arenaClamp = NodePath("ArenaClampComponent")
 
 [node name="EnemySprite" type="AnimatedSprite2D" parent="." unique_id=982701685]
-z_index = 1
 scale = Vector2(1.5, 1.5)
 sprite_frames = SubResource("SpriteFrames_0utv8")
 animation = &"idle"

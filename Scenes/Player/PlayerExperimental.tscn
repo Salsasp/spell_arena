@@ -318,7 +318,6 @@ script = ExtResource("1_524uk")
 shape = SubResource("RectangleShape2D_v0iea")
 
 [node name="PlayerSprite" type="AnimatedSprite2D" parent="." unique_id=335451100]
-z_index = 1
 sprite_frames = SubResource("SpriteFrames_olqyp")
 animation = &"walk_up_right"
 

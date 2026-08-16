@@ -175,6 +175,7 @@ _data = {
 size = Vector2(74, 71)
 
 [node name="Pitfall" type="Node2D" unique_id=802387860 node_paths=PackedStringArray("PitfallSprite", "PitfallBottomLipSprite", "FallArea", "SwipeArea", "SkeletalHand", "FallStartPoint", "FallInvulnTimer", "PitfallBarrierShape")]
+z_index = 2
 script = ExtResource("1_qxcdb")
 PitfallSprite = NodePath("PitfallSprite")
 PitfallBottomLipSprite = NodePath("PitfallBottomLipSprite")
@@ -215,7 +216,7 @@ visible = false
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="SkeletalHand" unique_id=2079688472]
 
 [node name="HandSprite" type="Sprite2D" parent="SkeletalHand" unique_id=1155032848]
-z_index = 2
+z_index = 1
 position = Vector2(93, -12)
 texture = ExtResource("3_pfdka")
 

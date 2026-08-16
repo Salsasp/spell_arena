@@ -9,6 +9,7 @@ public partial class OrbitProjectile : PlayerProjectile
 	public override void _Ready()
 	{
 		EnsureComponentsInitialized();
+		SortLayers.Apply(this, SortLayers.Projectiles);
 		animationComponent.Update();
 	}
 

@@ -332,7 +332,6 @@ position = Vector2(-0.5, 5.5)
 shape = SubResource("RectangleShape2D_v0iea")
 
 [node name="PlayerSprite" type="AnimatedSprite2D" parent="." unique_id=335451100]
-z_index = 1
 sprite_frames = SubResource("SpriteFrames_olqyp")
 animation = &"idle"
 
@@ -370,7 +369,6 @@ tree_root = SubResource("AnimationNodeBlendTree_bi64h")
 
 [node name="Wand" parent="." unique_id=1764541263 instance=ExtResource("12_pu2lt")]
 visible = false
-z_index = 1
 
 [node name="HitboxComponent" type="Node2D" parent="." unique_id=2033937966]
 script = ExtResource("14_7dp3o")

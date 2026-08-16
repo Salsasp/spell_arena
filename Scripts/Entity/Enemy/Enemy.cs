@@ -21,11 +21,14 @@ public partial class Enemy : CharacterBody2D, IEntity
 	public override void _Ready()
 	{
 		IsFalling = false;
-		textManagerComponent = GetNode<TextManagerComponent>("../../TextManagerComponent");
+		SortLayers.Apply(this, SortLayers.Entities);
 
-		ProjectileSpawner projectileSpawner = GetNode<ProjectileSpawner>("../../ProjectileSpawner");
-		Player player = GetNodeOrNull<Player>("../../Player");
-		ArenaBounds arenaBounds = GetNodeOrNull<ArenaBounds>("../../ArenaBounds");
+		Node sceneRoot = GetTree().CurrentScene;
+		textManagerComponent = sceneRoot.GetNode<TextManagerComponent>("TextManagerComponent");
+
+		ProjectileSpawner projectileSpawner = sceneRoot.GetNode<ProjectileSpawner>("ProjectileSpawner");
+		Player player = sceneRoot.GetNodeOrNull<Player>("Player");
+		ArenaBounds arenaBounds = sceneRoot.GetNodeOrNull<ArenaBounds>("ArenaBounds");
 		context = new EnemyContext(this, player, movementComponent, projectileSpawner, arenaBounds);
 
 		movementBehavior?.Initialize(context);

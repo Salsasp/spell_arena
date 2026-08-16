@@ -41,6 +41,7 @@ public partial class Player : CharacterBody2D, IEntity
 		projectileSpawner = GetNode<ProjectileSpawner>("../ProjectileSpawner");
 		InitElementalWands();
 		ActiveWand = ArcaneWand;
+		SortLayers.Apply(this, SortLayers.Entities);
 
 		animationComponent.FallAnimationFinished += OnFallFinished;
 		hitboxComponent.Hit += OnHit;
