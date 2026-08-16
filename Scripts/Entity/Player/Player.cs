@@ -12,6 +12,7 @@ public partial class Player : CharacterBody2D, IEntity
 	[Export] public Node2D wandSnapPoints { get; set; }
 	[Export] public ModifierManager modifierManager { get; set; }
 	[Export] public Node2D ElementalWands { get; set; }
+	public Wand ActiveWand { get; set; }
 	public ModifierInventory ModifierPool { get; } = new(ModifierInventory.PlayerPoolSlotCount);
 	public Wand ArcaneWand { get; private set; }
 	public Wand LightningWand { get; private set; }
@@ -27,6 +28,7 @@ public partial class Player : CharacterBody2D, IEntity
 		IsFalling = false;
 		projectileSpawner = GetNode<ProjectileSpawner>("../ProjectileSpawner");
 		InitElementalWands();
+		ActiveWand = ArcaneWand;
 
 		animationComponent.FallAnimationFinished += OnFallFinished;
 		hitboxComponent.Hit += OnHit;
@@ -60,7 +62,7 @@ public partial class Player : CharacterBody2D, IEntity
 		if (IsFalling) return;
 
 		inputComponent.Update();
-		Vector2 EndOfWandPos = wand.GetEndOfWandPos();
+		Vector2 EndOfWandPos = ActiveWand.GetEndOfWandPos();
 		Vector2 projDir = EndOfWandPos.DirectionTo(inputComponent.MousePos).Normalized();
 
 		if (inputComponent.LeftClickJustPressed)
@@ -68,8 +70,8 @@ public partial class Player : CharacterBody2D, IEntity
 			projectileSpawner.SpawnProjectile(EndOfWandPos, projDir);
 		}
 
-		wand.RotateWand(inputComponent);
-		wand.SnapPivotToDirection(movementComponent, wandSnapPoints);
+		ActiveWand.RotateWand(inputComponent);
+		ActiveWand.SnapPivotToDirection(movementComponent, wandSnapPoints);
 		movementComponent.direction = inputComponent.MoveDir;
 		movementComponent.mouseDir = GlobalPosition.DirectionTo(inputComponent.MousePos).Normalized();
 
