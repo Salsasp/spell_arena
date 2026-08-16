@@ -6,9 +6,13 @@
 [ext_resource type="Script" uid="uid://1jk3xu5psrn6" path="res://Scripts/Entity/InputComponent.cs" id="4_x3wgy"]
 [ext_resource type="Script" uid="uid://nabumqpkq4ny" path="res://Scripts/Entity/AnimationComponent.cs" id="5_fkybt"]
 [ext_resource type="Script" uid="uid://csu7r54n2f32y" path="res://Scripts/Entity/HealthComponent.cs" id="11_ukyrk"]
+[ext_resource type="PackedScene" uid="uid://bhjlpjc7osalo" path="res://Scenes/Wand/ArcaneWand.tscn" id="12_h4iuc"]
 [ext_resource type="PackedScene" uid="uid://cgrn4o6mbcqip" path="res://Scenes/Wand/Wand.tscn" id="12_pu2lt"]
+[ext_resource type="PackedScene" uid="uid://uh1hlr2c8m8o" path="res://Scenes/Wand/IceWand.tscn" id="13_fd4e3"]
 [ext_resource type="Script" uid="uid://bol4ib3tbtusr" path="res://Scripts/Entity/HitboxComponent.cs" id="14_7dp3o"]
+[ext_resource type="PackedScene" uid="uid://cltnub5rr213a" path="res://Scenes/Wand/FireWand.tscn" id="14_qqcod"]
 [ext_resource type="Script" uid="uid://dqpht7uwxxbvk" path="res://Scripts/Spell/ModifierManager.cs" id="15_h4iuc"]
+[ext_resource type="PackedScene" uid="uid://dongkcstai4jo" path="res://Scenes/Wand/LightningWand.tscn" id="15_igrcy"]
 [ext_resource type="Script" uid="uid://3d4f4v4pavcm" path="res://Scripts/Entity/DamageFlashComponent.cs" id="16_fd4e3"]
 [ext_resource type="Script" uid="uid://dc8vsaj0jqhyr" path="res://Scripts/Entity/Player/CameraPanComponent.cs" id="17_camerapan"]
 
@@ -310,7 +314,7 @@ nodes/Animation/position = Vector2(180, 100)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7dp3o"]
 size = Vector2(19, 21)
 
-[node name="Player" type="CharacterBody2D" unique_id=1570652818 node_paths=PackedStringArray("inputComponent", "movementComponent", "healthComponent", "hitboxComponent", "animationComponent", "wand", "wandSnapPoints", "modifierManager")]
+[node name="Player" type="CharacterBody2D" unique_id=1570652818 node_paths=PackedStringArray("inputComponent", "movementComponent", "healthComponent", "hitboxComponent", "animationComponent", "wand", "wandSnapPoints", "modifierManager", "ElementalWands")]
 collision_mask = 68
 script = ExtResource("1_vgqql")
 inputComponent = NodePath("InputComponent")
@@ -321,6 +325,7 @@ animationComponent = NodePath("AnimationComponent")
 wand = NodePath("Wand")
 wandSnapPoints = NodePath("WandSnapPoints")
 modifierManager = NodePath("ModifierManager")
+ElementalWands = NodePath("ElementalWands")
 
 [node name="Collider" type="CollisionShape2D" parent="." unique_id=462390313]
 position = Vector2(-0.5, 5.5)
@@ -414,3 +419,13 @@ position = Vector2(10.5, 6)
 
 [node name="CameraPanComponent" type="Node2D" parent="Camera2D" unique_id=1521297070]
 script = ExtResource("17_camerapan")
+
+[node name="ElementalWands" type="Node2D" parent="." unique_id=1920756635]
+
+[node name="ArcaneWand" parent="ElementalWands" unique_id=392570727 instance=ExtResource("12_h4iuc")]
+
+[node name="IceWand" parent="ElementalWands" unique_id=230840458 instance=ExtResource("13_fd4e3")]
+
+[node name="FireWand" parent="ElementalWands" unique_id=1910636929 instance=ExtResource("14_qqcod")]
+
+[node name="LightningWand" parent="ElementalWands" unique_id=781432588 instance=ExtResource("15_igrcy")]

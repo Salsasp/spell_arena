@@ -4,11 +4,12 @@
 [ext_resource type="Texture2D" uid="uid://djal7phgq5mow" path="res://Assets/UI/WandModifier/ModifierSlot.png" id="1_js0m1"]
 [ext_resource type="Theme" uid="uid://dcir03i8y5gms" path="res://Assets/UI/WandModifier/WandModifierTheme.tres" id="2_theme"]
 
-[node name="InventoryModifierSlot" type="PanelContainer" unique_id=1444426116 node_paths=PackedStringArray("IconFrame")]
+[node name="InventoryModifierSlot" type="PanelContainer" unique_id=1444426116 node_paths=PackedStringArray("IconFrame", "ModifierIcon")]
 custom_minimum_size = Vector2(32, 32)
 theme = ExtResource("2_theme")
 script = ExtResource("1_0v0ne")
 IconFrame = NodePath("IconFrame")
+ModifierIcon = NodePath("ModifierIcon")
 
 [node name="IconFrame" type="TextureRect" parent="." unique_id=230487120]
 custom_minimum_size = Vector2(32, 32)

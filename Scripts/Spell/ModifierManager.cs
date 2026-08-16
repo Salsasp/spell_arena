@@ -9,6 +9,12 @@ public partial class ModifierManager : Node
     public IEnumerable<ModifierData> GetAllModifiers() => ModifierCatalog.GetAll();
 
     public bool HasActiveModifier(string id) => ActiveModifiers.ContainsKey(id);
+
+    public bool HasCollectedModifier(string id)
+    {
+        Player player = GetParent() as Player;
+        return player != null && player.HasModifier(id);
+    }
     [Export] public float SpellEnlargeAmount = 0.1f; // additive transform scale modifier
     [Export] public float SpellHastenAmount = 0.1f; // additive speed modifier
 
@@ -27,6 +33,33 @@ public partial class ModifierManager : Node
     }
 
     public ModifierData GetModifier(string id) => ModifierCatalog.Get(id);
+
+    public bool TryCollectModifier(string id)
+    {
+        ModifierData modifier = GetModifier(id);
+        if (modifier == null)
+        {
+            return false;
+        }
+
+        if (modifier.IsRunScoped)
+        {
+            return TryAddActiveModifier(id);
+        }
+
+        Player player = GetParent<Player>();
+        if (player == null)
+        {
+            return false;
+        }
+
+        if (!modifier.isStackable && player.HasModifier(id))
+        {
+            return false;
+        }
+
+        return player.ModifierPool.TryAdd(modifier);
+    }
 
     public bool TryAddActiveModifier(string id)
     {

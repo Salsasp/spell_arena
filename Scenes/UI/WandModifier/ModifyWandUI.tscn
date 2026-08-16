@@ -3,8 +3,10 @@
 [ext_resource type="Texture2D" uid="uid://be7t8r0jdmv84" path="res://Assets/Sprites/Player/placeholder_wand.png" id="1_7501a"]
 [ext_resource type="PackedScene" uid="uid://d1fkgj11jw5dx" path="res://Scenes/UI/WandModifier/InventoryModifierSlot.tscn" id="2_1yfrq"]
 [ext_resource type="Theme" uid="uid://btp4nkh4u337k" path="res://Assets/UI/main.tres" id="3_theme"]
+[ext_resource type="Script" path="res://Scripts/UI/WandModifier/ModifyWandUI.cs" id="4_script"]
 
-[node name="ModifyWandUI" type="Control"]
+[node name="ModifyWandUI" type="Control" node_paths=PackedStringArray("ArcaneGrid", "LightningGrid", "FireGrid", "IceGrid", "InventoryGrid", "ContinueButton")]
+process_mode = 3
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -12,6 +14,13 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("3_theme")
+script = ExtResource("4_script")
+ArcaneGrid = NodePath("MarginContainer/HBoxContainer/ArcaneWandVBox/Panel/GridContainer")
+LightningGrid = NodePath("MarginContainer/HBoxContainer/LightningWandVBox/Panel/GridContainer")
+FireGrid = NodePath("MarginContainer/HBoxContainer/FireWandVBox/Panel/GridContainer")
+IceGrid = NodePath("MarginContainer/HBoxContainer/IceWandVBox/Panel/GridContainer")
+InventoryGrid = NodePath("MarginContainer/HBoxContainer/ModInventoryVBox/Panel/GridContainer")
+ContinueButton = NodePath("ContinueButton")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -398,3 +407,18 @@ layout_mode = 2
 
 [node name="ModifierIcon24" parent="MarginContainer/HBoxContainer/ModInventoryVBox/Panel/GridContainer" instance=ExtResource("2_1yfrq")]
 layout_mode = 2
+
+[node name="ContinueButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -90.0
+offset_top = -56.0
+offset_right = 90.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Continue"

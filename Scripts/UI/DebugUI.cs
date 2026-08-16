@@ -78,11 +78,17 @@ public partial class DebugUI : Control
 		}
 
 		string modifierId = modifierOptionButton.GetItemMetadata(selectedIndex).AsString();
-		bool added = modifierManager.TryAddActiveModifier(modifierId);
+		bool added = modifierManager.TryCollectModifier(modifierId);
 		ModifierData modifier = ModifierCatalog.Get(modifierId);
 		modifierApplyStatusLabel.Text = added
 			? $"Added {modifier.name}."
-			: $"{modifier.name} is already active and not stackable.";
+			: $"{modifier.name} could not be collected.";
+
+		GameUI gameUi = GetNodeOrNull<GameUI>("../GameUI");
+		if (gameUi?.ModifyWandUI != null && gameUi.ModifyWandUI.Visible)
+		{
+			gameUi.ModifyWandUI.Refresh();
+		}
 	}
 
 	private void HideModifierPicker()

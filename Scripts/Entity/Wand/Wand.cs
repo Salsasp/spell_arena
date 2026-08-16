@@ -10,6 +10,27 @@ public partial class Wand : Node2D
 	[Export] public Node2D WandPivot;
 	public WandInventory wandInventory = new();
 	public ModifierData InnateMod;
+	public virtual ModifierAffinity Affinity => ModifierAffinity.Neutral;
+
+	public bool CanAccept(ModifierData modifier)
+	{
+		if (modifier == null)
+		{
+			return true;
+		}
+
+		if (modifier.IsRunScoped)
+		{
+			return false;
+		}
+
+		if (modifier.affinity == ModifierAffinity.Neutral)
+		{
+			return true;
+		}
+
+		return modifier.affinity == Affinity;
+	}
 
 	public override void _Ready()
 	{

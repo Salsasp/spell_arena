@@ -18,6 +18,14 @@ public class ModifierData
     public string uiOnHit;
     public bool isStackable;
     public int copies = 1;
+    public ModifierAffinity affinity = ModifierAffinity.Neutral;
+
+    public bool IsRunScoped =>
+        !string.IsNullOrEmpty(onAcquire) ||
+        (!string.IsNullOrEmpty(uiOnHit) &&
+         string.IsNullOrEmpty(onHit) &&
+         string.IsNullOrEmpty(onSpawn) &&
+         string.IsNullOrEmpty(orbital));
     public override string ToString()
     {
         return $"[{id}] {name} ({rarity}) - {description}\n" +

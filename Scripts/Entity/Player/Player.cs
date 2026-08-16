@@ -11,18 +11,48 @@ public partial class Player : CharacterBody2D, IEntity
 	[Export] public Wand wand { get; set; }
 	[Export] public Node2D wandSnapPoints { get; set; }
 	[Export] public ModifierManager modifierManager { get; set; }
+	[Export] public Node2D ElementalWands { get; set; }
+	public ModifierInventory ModifierPool { get; } = new(ModifierInventory.PlayerPoolSlotCount);
+	public Wand ArcaneWand { get; private set; }
+	public Wand LightningWand { get; private set; }
+	public Wand FireWand { get; private set; }
+	public Wand IceWand { get; private set; }
     public bool IsFalling { get; set; }
 	private ProjectileSpawner projectileSpawner { get; set; }
 	private Vector2 respawnPos;
 	private int pitfallDamage;
 
-    public override void _Ready()
+	public override void _Ready()
 	{
 		IsFalling = false;
 		projectileSpawner = GetNode<ProjectileSpawner>("../ProjectileSpawner");
+		InitElementalWands();
 
 		animationComponent.FallAnimationFinished += OnFallFinished;
 		hitboxComponent.Hit += OnHit;
+	}
+
+	public bool HasModifier(string id)
+	{
+		if (ModifierPool.ContainsId(id) || modifierManager.HasActiveModifier(id))
+		{
+			return true;
+		}
+
+		foreach (Wand loadoutWand in GetLoadoutWands())
+		{
+			if (loadoutWand.wandInventory.Slots.ContainsId(id))
+			{
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	public Wand[] GetLoadoutWands()
+	{
+		return [ArcaneWand, LightningWand, FireWand, IceWand];
 	}
 
 	public override void _PhysicsProcess(double delta)
@@ -106,6 +136,14 @@ public partial class Player : CharacterBody2D, IEntity
 		healthComponent.TakeDamage(pitfallDamage);
 		GlobalPosition = respawnPos;
 		IsFalling = false;
+	}
+
+	private void InitElementalWands()
+	{
+		ArcaneWand = ElementalWands.GetNode<Wand>("ArcaneWand");
+		IceWand = ElementalWands.GetNode<Wand>("IceWand");
+		FireWand = ElementalWands.GetNode<Wand>("FireWand");
+		LightningWand = ElementalWands.GetNode<Wand>("LightningWand");
 	}
 
 }

@@ -21,8 +21,7 @@ public static class ModifierDraftService
 
 		List<ModifierData> pool = ModifierCatalog.GetAll()
 			.Where(modifier => modifier.id != "debug_modifier")
-			.Where(modifier => !manager.HasActiveModifier(modifier.id) ||
-			 (manager.HasActiveModifier(modifier.id) && modifier.isStackable))
+			.Where(modifier => modifier.isStackable || !manager.HasCollectedModifier(modifier.id))
 			.ToList();
 
 		if (pool.Count == 0)

@@ -1,29 +1,40 @@
-using Godot;
 using System.Collections.Generic;
 
 public class WandInventory
 {
-    private List<ModifierData> Mods = [];
-    private ModifierData InnateModifier { get; set; }
+	public ModifierInventory Slots { get; } = new(ModifierInventory.WandSlotCount);
+	private ModifierData InnateModifier { get; set; }
 
+	public List<ModifierData> GetMods()
+	{
+		return Slots.GetOccupied();
+	}
 
-    public List<ModifierData> GetMods()
-    {
-        return Mods;
-    }
+	public void AddMod(ModifierData mod)
+	{
+		Slots.TryAdd(mod);
+	}
 
-    public void AddMod(ModifierData mod)
-    {
-        Mods.Add(mod);
-    }
+	public void RemoveMod(string modId)
+	{
+		for (int i = 0; i < Slots.SlotCount; i++)
+		{
+			ModifierData modifier = Slots.GetSlot(i);
+			if (modifier != null && modifier.id == modId)
+			{
+				Slots.SetSlot(i, null);
+				return;
+			}
+		}
+	}
 
-    public void RemoveMod(string modId)
-    {
-        Mods.Remove(Mods.Find(x => x.id == modId));
-    }
+	public void SetInnateMod(ModifierData innateMod)
+	{
+		InnateModifier = innateMod;
+	}
 
-    public void SetInnateMod(ModifierData innateMod)
-    {
-        InnateModifier = innateMod;
-    }
+	public ModifierData GetInnateMod()
+	{
+		return InnateModifier;
+	}
 }

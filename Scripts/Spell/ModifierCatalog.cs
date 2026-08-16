@@ -86,7 +86,8 @@ public static class ModifierCatalog
 				onSpawn = modData["on_spawn"].ToString(),
 				onAcquire = modData.ContainsKey("on_acquire") ? modData["on_acquire"].ToString() : "",
 				uiOnHit = modData.ContainsKey("ui_on_hit") ? modData["ui_on_hit"].ToString() : "",
-				isStackable = Convert.ToBoolean(modData["stackable"].ToString())
+				isStackable = Convert.ToBoolean(modData["stackable"].ToString()),
+				affinity = ParseAffinity(modData)
 			};
 
 			modifiers[modifier.id] = modifier;
@@ -94,5 +95,15 @@ public static class ModifierCatalog
 
 		loaded = true;
 		GD.Print($"Loaded {modifiers.Count} modifiers");
+	}
+
+	private static ModifierAffinity ParseAffinity(Godot.Collections.Dictionary modData)
+	{
+		if (modData.ContainsKey("affinity"))
+		{
+			return ModifierAffinityParser.Parse(modData["affinity"].ToString());
+		}
+
+		return ModifierAffinityParser.Parse(modData["damage_type"].ToString());
 	}
 }
