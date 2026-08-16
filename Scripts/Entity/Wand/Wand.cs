@@ -8,7 +8,8 @@ public partial class Wand : Node2D
 	[Export] public Marker2D EndOfWand;
 	[Export] public Sprite2D WandSprite;
 	[Export] public Node2D WandPivot;
-	public Dictionary<int, Marker2D> IndexToDirectionSnapDict;
+	public WandInventory wandInventory = new();
+	public ModifierData InnateMod;
 
 	public override void _Ready()
 	{

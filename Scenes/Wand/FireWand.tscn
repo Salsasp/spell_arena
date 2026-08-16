@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://cltnub5rr213a"]
+
+[ext_resource type="Script" uid="uid://xebrprn4bi8a" path="res://Scripts/Entity/Wand/FireWand.cs" id="1_lrhtk"]
+[ext_resource type="Texture2D" uid="uid://be7t8r0jdmv84" path="res://Assets/Sprites/Player/placeholder_wand.png" id="2_kejbb"]
+
+[node name="FireWand" type="Node2D" unique_id=1764541263 node_paths=PackedStringArray("EndOfWand", "WandSprite", "WandPivot")]
+script = ExtResource("1_lrhtk")
+EndOfWand = NodePath("WandPivot/EndOfWand")
+WandSprite = NodePath("WandPivot/WandSprite")
+WandPivot = NodePath("WandPivot")
+
+[node name="WandPivot" type="Node2D" parent="." unique_id=2436162]
+
+[node name="WandSprite" type="Sprite2D" parent="WandPivot" unique_id=391171080]
+position = Vector2(7, 0)
+rotation = 1.5707963
+scale = Vector2(0.5, 0.535)
+texture = ExtResource("2_kejbb")
+offset = Vector2(0.025237322, 0.023332119)
+
+[node name="EndOfWand" type="Marker2D" parent="WandPivot" unique_id=1194365774]
+position = Vector2(15.56, -6.462621e-07)
+scale = Vector2(1.07, 1.0706638)

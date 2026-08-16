@@ -16,6 +16,22 @@
             "stackable": true
         },
         {
+            "id": "chain_lightning",
+            "name": "Chain Lightning",
+            "description": "Lightning wand chains to one additional enemy.",
+            "icon": "res://Assets/Sprites/proj_placeholder.png",
+            "rarity": "uncommon",
+            "damage_type": "lightning",
+            "dot_damage": 0.0,
+            "crit_additive": 0.0,
+            "crit_multiplicative": 0.0,
+            "on_hit": "chain_lightning",
+            "orbital": "",
+            "on_spawn": "",
+            "on_acquire": "",
+            "stackable": true
+        },
+        {
             "id": "fire_spells",
             "name": "Fire Magic",
             "description": "Applies fire damage to all spells. (Stackable)",
@@ -26,6 +42,21 @@
             "crit_additive": 0.0,
             "crit_multiplicative": 0.0,
             "on_hit": "apply_burn",
+            "orbital": "",
+            "on_spawn": "",
+            "stackable": true
+        },
+        {
+            "id": "ice_spells",
+            "name": "Fire Magic",
+            "description": "Applies ice damage to all spells. Hit enemies have a chance to be frozen. Frozen enemies take additional damage. (Stackable)",
+            "icon": "res://Assets/Sprites/proj_placeholder.png",
+            "rarity": "common",
+            "damage_type": "ice",
+            "dot_damage": 0.0,
+            "crit_additive": 0.0,
+            "crit_multiplicative": 0.0,
+            "on_hit": "apply_freeze",
             "orbital": "",
             "on_spawn": "",
             "stackable": true
