@@ -12,11 +12,12 @@ WandPivot = NodePath("WandPivot")
 [node name="WandPivot" type="Node2D" parent="." unique_id=2436162]
 
 [node name="WandSprite" type="Sprite2D" parent="WandPivot" unique_id=391171080]
-position = Vector2(18, -9.536743e-07)
+position = Vector2(13, 9.536742e-07)
 rotation = 0.7853982
+scale = Vector2(0.75, 0.75)
 texture = ExtResource("2_qhfcf")
 offset = Vector2(0.025237322, 0.023332119)
 
 [node name="EndOfWand" type="Marker2D" parent="WandPivot" unique_id=1194365774]
-position = Vector2(38, 0)
+position = Vector2(29, 0)
 scale = Vector2(1.07, 1.0706638)
