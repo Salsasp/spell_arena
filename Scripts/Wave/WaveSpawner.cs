@@ -124,7 +124,10 @@ public partial class WaveSpawner : Node2D
 
 		foreach (Node child in enemyContainer.GetChildren())
 		{
-			child.QueueFree();
+			if (child is Enemy)
+			{
+				child.QueueFree();
+			}
 		}
 	}
 }

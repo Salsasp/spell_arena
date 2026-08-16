@@ -62,6 +62,7 @@ public partial class InventoryModifierSlot : PanelContainer
 			StretchMode = TextureRect.StretchModeEnum.KeepAspectCentered,
 		};
 		SetDragPreview(preview);
+		ownerUi?.HideModifierTooltip(this);
 		return this;
 	}
 
@@ -90,6 +91,7 @@ public partial class InventoryModifierSlot : PanelContainer
 		Tween tween = CreateTween();
 		tween.SetPauseMode(Tween.TweenPauseMode.Process);
 		tween.TweenProperty(this, "modulate", HoverColor, TweenDuration);
+		ownerUi?.ShowModifierTooltip(this);
 	}
 
 	private void OnMouseExited()
@@ -97,5 +99,6 @@ public partial class InventoryModifierSlot : PanelContainer
 		Tween tween = CreateTween();
 		tween.SetPauseMode(Tween.TweenPauseMode.Process);
 		tween.TweenProperty(this, "modulate", NormalColor, TweenDuration);
+		ownerUi?.HideModifierTooltip(this);
 	}
 }
