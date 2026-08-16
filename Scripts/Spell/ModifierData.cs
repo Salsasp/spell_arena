@@ -25,9 +25,3 @@ public class ModifierData
             $"Events: onHit={onHit}, onSpawn={onSpawn}, onAcquire={onAcquire}, uiOnHit={uiOnHit}, orbital={orbital}";
     }
 }
-
-[System.Serializable]
-public class ModifierDatabase
-{
-    public ModifierData[] modifiers;
-}

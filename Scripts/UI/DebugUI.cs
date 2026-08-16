@@ -79,7 +79,7 @@ public partial class DebugUI : Control
 
 		string modifierId = modifierOptionButton.GetItemMetadata(selectedIndex).AsString();
 		bool added = modifierManager.TryAddActiveModifier(modifierId);
-		ModifierData modifier = modifierManager.GetModifier(modifierId);
+		ModifierData modifier = ModifierCatalog.Get(modifierId);
 		modifierApplyStatusLabel.Text = added
 			? $"Added {modifier.name}."
 			: $"{modifier.name} is already active and not stackable.";
@@ -105,7 +105,7 @@ public partial class DebugUI : Control
 	{
 		modifierOptionButton.Clear();
 
-		List<ModifierData> allModifiers = new(modifierManager.GetAllModifiers());
+		List<ModifierData> allModifiers = new(ModifierCatalog.GetAll());
 		allModifiers.Sort((a, b) => string.Compare(a.name, b.name, StringComparison.OrdinalIgnoreCase));
 
 		foreach (ModifierData modifier in allModifiers)
