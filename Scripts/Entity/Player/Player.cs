@@ -166,12 +166,13 @@ public partial class Player : CharacterBody2D, IEntity
 		if (inputComponent.WandCycleUpPressed)
 		{
 			int idx = GetActiveWandIndex();
-			ActiveWand = GetLoadoutWands()[(idx + 1) % 3];
+			ActiveWand = GetLoadoutWands()[(idx + 1) % 4];
 		}
 		if (inputComponent.WandCycleDownPressed)
 		{
 			int idx = GetActiveWandIndex();
-			ActiveWand = GetLoadoutWands()[Math.Abs((idx - 1) % 3)];
+			int newIdx = (idx - 1) % 4;
+			ActiveWand = GetLoadoutWands()[newIdx < 0 ? 3 : newIdx];
 		}
 		ActiveWand.Visible =  true;
 	}
