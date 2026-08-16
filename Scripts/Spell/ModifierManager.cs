@@ -5,6 +5,7 @@ public partial class ModifierManager : Node
 {
     public static ModifierManager Instance { get; private set; }
     public Dictionary<string, ModifierData> ActiveModifiers = [];
+    public Wand ActiveWand { get; set; }
 
     public IEnumerable<ModifierData> GetAllModifiers() => ModifierCatalog.GetAll();
 
@@ -33,6 +34,22 @@ public partial class ModifierManager : Node
     }
 
     public ModifierData GetModifier(string id) => ModifierCatalog.Get(id);
+
+    public List<ModifierData> GetCombatModifiers()
+    {
+        Wand wand = ActiveWand ?? (GetParent() as Player)?.ActiveWand;
+        if (wand == null)
+        {
+            return [];
+        }
+
+        return wand.GetCombatModifiers();
+    }
+
+    public List<ModifierData> CreateCastSnapshot()
+    {
+        return [.. GetCombatModifiers()];
+    }
 
     public bool TryCollectModifier(string id)
     {

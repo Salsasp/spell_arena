@@ -12,12 +12,24 @@ public partial class Player : CharacterBody2D, IEntity
 	[Export] public Node2D wandSnapPoints { get; set; }
 	[Export] public ModifierManager modifierManager { get; set; }
 	[Export] public Node2D ElementalWands { get; set; }
-	public Wand ActiveWand { get; set; }
+	public Wand ActiveWand
+	{
+		get => activeWand;
+		set
+		{
+			activeWand = value;
+			if (modifierManager != null)
+			{
+				modifierManager.ActiveWand = value;
+			}
+		}
+	}
 	public ModifierInventory ModifierPool { get; } = new(ModifierInventory.PlayerPoolSlotCount);
 	public Wand ArcaneWand { get; private set; }
 	public Wand LightningWand { get; private set; }
 	public Wand FireWand { get; private set; }
 	public Wand IceWand { get; private set; }
+	private Wand activeWand;
     public bool IsFalling { get; set; }
 	private ProjectileSpawner projectileSpawner { get; set; }
 	private Vector2 respawnPos;
@@ -67,8 +79,10 @@ public partial class Player : CharacterBody2D, IEntity
 
 		if (inputComponent.LeftClickJustPressed)
 		{
-			projectileSpawner.SpawnProjectile(EndOfWandPos, projDir);
+			projectileSpawner.SpawnProjectile(EndOfWandPos, projDir, castModifiers: modifierManager.CreateCastSnapshot());
 		}
+
+		HandleWandSwitchInput();
 
 		ActiveWand.RotateWand(inputComponent);
 		ActiveWand.SnapPivotToDirection(movementComponent, wandSnapPoints);
@@ -133,6 +147,34 @@ public partial class Player : CharacterBody2D, IEntity
 		}
     }
 
+	public void HandleWandSwitchInput()
+	{
+		ActiveWand.Visible = false;
+		if (inputComponent.Wand1Pressed) {
+			ActiveWand = ArcaneWand;
+		}
+		if (inputComponent.Wand2Pressed) {
+			ActiveWand = LightningWand;
+		}
+		if (inputComponent.Wand3Pressed) {
+			ActiveWand = FireWand;
+		}
+		if (inputComponent.Wand4Pressed) {
+			ActiveWand = IceWand;
+		}
+		if (inputComponent.WandCycleUpPressed)
+		{
+			int idx = GetActiveWandIndex();
+			ActiveWand = GetLoadoutWands()[(idx + 1) % 3];
+		}
+		if (inputComponent.WandCycleDownPressed)
+		{
+			int idx = GetActiveWandIndex();
+			ActiveWand = GetLoadoutWands()[Math.Abs((idx - 1) % 3)];
+		}
+		ActiveWand.Visible =  true;
+	}
+
 	private void OnFallFinished()
 	{
 		healthComponent.TakeDamage(pitfallDamage);
@@ -148,4 +190,17 @@ public partial class Player : CharacterBody2D, IEntity
 		LightningWand = ElementalWands.GetNode<Wand>("LightningWand");
 	}
 
+	private int GetActiveWandIndex()
+	{
+		Wand[] wandArr = GetLoadoutWands();
+		for (int i = 0; i < wandArr.Length; i++)
+		{
+			if (wandArr[i] == ActiveWand)
+			{
+				return i;
+			}
+		}
+		
+		return 0;
+	}
 }

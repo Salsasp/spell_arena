@@ -27,7 +27,7 @@ public sealed class OrbitSpawnEffect : IModifierEffect
 		{
 			OrbitManager orbitManager = context.OrbitScene.Instantiate<OrbitManager>();
 			orbitManager.Name = "OrbitManager";
-			orbitManager.ConfigureFromModifiers(context.ModifierManager);
+			orbitManager.ConfigureFromModifiers(context.CombatModifiers);
 			context.Projectile.AddChild(orbitManager);
 		}
 		catch (Exception exception)

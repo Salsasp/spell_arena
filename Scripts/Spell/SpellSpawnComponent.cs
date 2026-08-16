@@ -11,7 +11,7 @@ public partial class SpellSpawnComponent : Component
 		ModifierContext ctx = ModifierContext.ForProjectile(GetParent<PlayerProjectile>());
 
 		AggregatedSpellStats stats = SpellStatBuilder.Build(
-			modifierManager.ActiveModifiers.Values,
+			GetParent<PlayerProjectile>().CastModifiers ?? modifierManager.GetCombatModifiers(),
 			modifierManager.SpellEnlargeAmount,
 			modifierManager.SpellHastenAmount
 		);

@@ -29,6 +29,8 @@ public partial class OrbitProjectile : PlayerProjectile
 		}
 
 		hitComponent.Initialize(parentProjectile.modifierManager, despawnComponent, spellMovementComponent);
+		CastModifiers = parentProjectile.CastModifiers;
+		modifierManager = parentProjectile.modifierManager;
 	}
 
 	private void EnsureComponentsInitialized()

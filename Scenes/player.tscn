@@ -426,7 +426,10 @@ script = ExtResource("17_camerapan")
 [node name="ArcaneWand" parent="ElementalWands" unique_id=392570727 instance=ExtResource("12_h4iuc")]
 
 [node name="IceWand" parent="ElementalWands" unique_id=230840458 instance=ExtResource("13_fd4e3")]
+visible = false
 
 [node name="FireWand" parent="ElementalWands" unique_id=1910636929 instance=ExtResource("14_qqcod")]
+visible = false
 
 [node name="LightningWand" parent="ElementalWands" unique_id=781432588 instance=ExtResource("15_igrcy")]
+visible = false

@@ -62,4 +62,17 @@ public partial class Wand : Node2D
 	{
 		return EndOfWand.GlobalPosition;
 	}
+
+	public List<ModifierData> GetCombatModifiers()
+	{
+		List<ModifierData> modifiers = [];
+		ModifierData innate = InnateMod ?? wandInventory.GetInnateMod();
+		if (innate != null)
+		{
+			modifiers.Add(innate);
+		}
+
+		modifiers.AddRange(wandInventory.GetMods());
+		return modifiers;
+	}
 }

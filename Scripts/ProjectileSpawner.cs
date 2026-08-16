@@ -1,4 +1,5 @@
 using Godot;
+using System.Collections.Generic;
 
 public partial class ProjectileSpawner : Node2D
 {
@@ -15,9 +16,10 @@ public partial class ProjectileSpawner : Node2D
     }
 
 
-	public void SpawnProjectile(Vector2 pos, Vector2 dir, Vector2 initVel = new())
+	public void SpawnProjectile(Vector2 pos, Vector2 dir, Vector2 initVel = new(), List<ModifierData> castModifiers = null)
 	{
 		Node2D projectile = ProjectilePrefab.Instantiate<Node2D>();
+		StampPlayerProjectile(projectile, castModifiers);
 		GetParent().AddChild(projectile);
 		projectile.Position = pos;
 
@@ -33,9 +35,10 @@ public partial class ProjectileSpawner : Node2D
 		projectileArea.Rotation = dir.Angle();
 	}
 
-	public void SpawnOrbitWizardProjectile (Vector2 pos, Vector2 dir, Vector2 initVel = new())
+	public void SpawnOrbitWizardProjectile (Vector2 pos, Vector2 dir, Vector2 initVel = new(), List<ModifierData> castModifiers = null)
 	{
 		Node2D projectile = OrbitWizardProjectilePrefab.Instantiate<Node2D>();
+		StampPlayerProjectile(projectile, castModifiers);
 		GetParent().AddChild(projectile);
 		projectile.Position = pos;
 
@@ -83,5 +86,16 @@ public partial class ProjectileSpawner : Node2D
 		damageComponent.BaseDamage = damage;
 
 		GetParent().CallDeferred(Node.MethodName.AddChild, projectile);
+	}
+
+	private static void StampPlayerProjectile(Node2D projectile, List<ModifierData> castModifiers)
+	{
+		if (projectile is not PlayerProjectile playerProjectile)
+		{
+			return;
+		}
+
+		playerProjectile.modifierManager = ModifierManager.Instance;
+		playerProjectile.CastModifiers = castModifiers ?? ModifierManager.Instance?.CreateCastSnapshot();
 	}
 }

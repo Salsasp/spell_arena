@@ -27,11 +27,16 @@ public partial class OrbitManager : Node2D
 	private readonly HashSet<string> activeOrbitalKeys = [];
 	private PlayerProjectile parentProjectile;
 
-	public void ConfigureFromModifiers(ModifierManager modifierManager)
+	public void ConfigureFromModifiers(IEnumerable<ModifierData> modifiers)
 	{
 		activeOrbitalKeys.Clear();
 
-		foreach (ModifierData modifier in modifierManager.ActiveModifiers.Values)
+		if (modifiers == null)
+		{
+			return;
+		}
+
+		foreach (ModifierData modifier in modifiers)
 		{
 			if (modifier.onSpawn == "orbit" && !string.IsNullOrEmpty(modifier.orbital))
 			{

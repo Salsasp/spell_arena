@@ -37,7 +37,7 @@ public partial class OrbitWizard : OrbitProjectile
 		}
 
 		Vector2 dir = GlobalPosition.DirectionTo(target.GlobalPosition);
-		ProjectileSpawner.Instance.SpawnOrbitWizardProjectile(GlobalPosition, dir);
+		ProjectileSpawner.Instance.SpawnOrbitWizardProjectile(GlobalPosition, dir, castModifiers: CastModifiers);
 		cooldown = AttackCooldown;
 	}
 
