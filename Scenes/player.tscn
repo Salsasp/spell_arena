@@ -6,7 +6,7 @@
 [ext_resource type="Script" uid="uid://1jk3xu5psrn6" path="res://Scripts/Entity/InputComponent.cs" id="4_x3wgy"]
 [ext_resource type="Script" uid="uid://nabumqpkq4ny" path="res://Scripts/Entity/AnimationComponent.cs" id="5_fkybt"]
 [ext_resource type="Script" uid="uid://csu7r54n2f32y" path="res://Scripts/Entity/HealthComponent.cs" id="11_ukyrk"]
-[ext_resource type="PackedScene" uid="uid://cgrn4o6mbcqip" path="res://Scenes/wand.tscn" id="12_pu2lt"]
+[ext_resource type="PackedScene" uid="uid://cgrn4o6mbcqip" path="res://Scenes/Wand/Wand.tscn" id="12_pu2lt"]
 [ext_resource type="Script" uid="uid://bol4ib3tbtusr" path="res://Scripts/Entity/HitboxComponent.cs" id="14_7dp3o"]
 [ext_resource type="Script" uid="uid://dqpht7uwxxbvk" path="res://Scripts/Spell/ModifierManager.cs" id="15_h4iuc"]
 [ext_resource type="Script" uid="uid://3d4f4v4pavcm" path="res://Scripts/Entity/DamageFlashComponent.cs" id="16_fd4e3"]

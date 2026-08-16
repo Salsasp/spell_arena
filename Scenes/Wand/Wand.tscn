@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cgrn4o6mbcqip"]
 
-[ext_resource type="Script" uid="uid://dl2ic55iycexw" path="res://Scripts/Entity/Wand.cs" id="1_bcswe"]
+[ext_resource type="Script" uid="uid://dsxwrjfix7gep" path="res://Scripts/Entity/Wand/Wand.cs" id="1_bcswe"]
 [ext_resource type="Texture2D" uid="uid://be7t8r0jdmv84" path="res://Assets/Sprites/Player/placeholder_wand.png" id="1_qsrja"]
 
 [node name="Wand" type="Node2D" unique_id=1764541263 node_paths=PackedStringArray("EndOfWand", "WandSprite", "WandPivot")]
