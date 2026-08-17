@@ -31,6 +31,7 @@ public partial class OrbitProjectile : PlayerProjectile
 
 		hitComponent.Initialize(parentProjectile.modifierManager, despawnComponent, spellMovementComponent);
 		CastModifiers = parentProjectile.CastModifiers;
+		WandStats = parentProjectile.WandStats;
 		modifierManager = parentProjectile.modifierManager;
 	}
 

@@ -46,9 +46,19 @@ public partial class ModifierManager : Node
         return wand.GetCombatModifiers();
     }
 
-    public List<ModifierData> CreateCastSnapshot()
+    public CastSnapshot CreateCastSnapshot()
     {
-        return [.. GetCombatModifiers()];
+        return new CastSnapshot
+        {
+            Modifiers = [.. GetCombatModifiers()],
+            WandStats = GetActiveWandBaseStats(),
+        };
+    }
+
+    public AggregatedSpellStats GetActiveWandBaseStats()
+    {
+        Wand wand = ActiveWand ?? (GetParent() as Player)?.ActiveWand;
+        return wand?.GetBaseStats() ?? new AggregatedSpellStats();
     }
 
     public bool TryCollectModifier(string id)

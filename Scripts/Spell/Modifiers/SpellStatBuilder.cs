@@ -2,18 +2,22 @@ using System.Collections.Generic;
 
 public static class SpellStatBuilder
 {
-	public static AggregatedSpellStats Build(IEnumerable<ModifierData> activeModifiers, float enlargePerStack = 0.1f, float hastenPerStack = 0.1f)
+	public static AggregatedSpellStats Build(
+		IEnumerable<ModifierData> activeModifiers,
+		AggregatedSpellStats baseStats,
+		float enlargePerStack = 0.1f,
+		float hastenPerStack = 0.1f)
 	{
-		float scaleMultiplier = 1f;
-		float speedMultiplier = 1f;
-		float critChanceBonus = 0f;
-		int elementalDamage = 0;
+		float scaleMultiplier = baseStats.ScaleMultiplier;
+		float speedMultiplier = baseStats.SpeedMultiplier;
+		float critChanceBonus = baseStats.CritChanceBonus;
+		int elementalDamage = baseStats.ElementalDamage;
 
-		string damageType = "";
+		string damageType = baseStats.DamageType ?? "";
 		string bestDamageTypeModifierId = null;
-		float bestElementalContribution = 0f;
+		float bestElementalContribution = elementalDamage;
 
-		foreach (ModifierData modifier in activeModifiers)
+		foreach (ModifierData modifier in activeModifiers ?? [])
 		{
 			critChanceBonus += modifier.critAdditive * modifier.copies;
 
@@ -59,6 +63,8 @@ public static class SpellStatBuilder
 			CritChanceBonus = critChanceBonus,
 			DamageType = damageType,
 			ElementalDamage = elementalDamage,
+			BaseDamage = baseStats.BaseDamage,
+			FireRate = baseStats.FireRate,
 		};
 	}
 }

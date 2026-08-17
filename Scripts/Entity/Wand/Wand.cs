@@ -8,9 +8,62 @@ public partial class Wand : Node2D
 	[Export] public Marker2D EndOfWand;
 	[Export] public Sprite2D WandSprite;
 	[Export] public Node2D WandPivot;
+	[Export] public Timer FireCooldownTimer;
+
+	[ExportGroup("Base Stats")]
+	[Export] public float BaseScaleMultiplier { get; set; } = 1f;
+	[Export] public float BaseSpeedMultiplier { get; set; } = 1f;
+	[Export] public float BaseCritChanceBonus { get; set; }
+	[Export] public string BaseDamageType { get; set; } = "";
+	[Export] public int BaseElementalDamage { get; set; }
+	[Export] public int BaseDamage { get; set; } = 20;
+	[Export] public float BaseFireRate { get; set; } = 3f;
+
 	public WandInventory wandInventory = new();
 	public ModifierData InnateMod;
 	public virtual ModifierAffinity Affinity => ModifierAffinity.Neutral;
+
+	public AggregatedSpellStats GetBaseStats()
+	{
+		return new AggregatedSpellStats
+		{
+			ScaleMultiplier = BaseScaleMultiplier,
+			SpeedMultiplier = BaseSpeedMultiplier,
+			CritChanceBonus = BaseCritChanceBonus,
+			DamageType = BaseDamageType ?? "",
+			ElementalDamage = BaseElementalDamage,
+			BaseDamage = BaseDamage,
+			FireRate = BaseFireRate,
+		};
+	}
+
+	public bool CanFire()
+	{
+		EnsureFireCooldownTimer();
+		return FireCooldownTimer.IsStopped();
+	}
+
+	public bool TryBeginShot()
+	{
+		if (!CanFire())
+		{
+			return false;
+		}
+
+		float fireRate = GetCombatFireRate();
+		if (fireRate <= 0f)
+		{
+			return false;
+		}
+
+		FireCooldownTimer.Start(1f / fireRate);
+		return true;
+	}
+
+	public float GetCombatFireRate()
+	{
+		return SpellStatBuilder.Build(GetCombatModifiers(), GetBaseStats()).FireRate;
+	}
 
 	public bool CanAccept(ModifierData modifier)
 	{
@@ -35,6 +88,35 @@ public partial class Wand : Node2D
 	public override void _EnterTree()
 	{
 		SortLayers.Apply(this, SortLayers.Wands);
+		EnsureFireCooldownTimer();
+	}
+
+	private void EnsureFireCooldownTimer()
+	{
+		if (FireCooldownTimer != null && GodotObject.IsInstanceValid(FireCooldownTimer))
+		{
+			ConfigureFireCooldownTimer();
+			return;
+		}
+
+		FireCooldownTimer = GetNodeOrNull<Timer>("FireCooldownTimer");
+		if (FireCooldownTimer == null)
+		{
+			FireCooldownTimer = new Timer
+			{
+				Name = "FireCooldownTimer",
+			};
+			AddChild(FireCooldownTimer);
+		}
+
+		ConfigureFireCooldownTimer();
+	}
+
+	private void ConfigureFireCooldownTimer()
+	{
+		FireCooldownTimer.OneShot = true;
+		FireCooldownTimer.Autostart = false;
+		FireCooldownTimer.ProcessCallback = Timer.TimerProcessCallback.Physics;
 	}
 
 	public override void _Ready()
@@ -71,6 +153,7 @@ public partial class Wand : Node2D
 		return EndOfWand.GlobalPosition;
 	}
 
+	/// <summary> Retrieve all modifiers within a wand's inventory </summary>
 	public List<ModifierData> GetCombatModifiers()
 	{
 		List<ModifierData> modifiers = [];

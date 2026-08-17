@@ -34,6 +34,7 @@ public partial class DamageComponent : Component
 
 	public void ApplyFromStats(AggregatedSpellStats stats)
 	{
+		BaseDamage = stats.BaseDamage;
 		CritChance += stats.CritChanceBonus;
 
 		if (!string.IsNullOrEmpty(stats.DamageType))

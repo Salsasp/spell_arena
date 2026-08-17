@@ -78,9 +78,9 @@ public partial class Player : CharacterBody2D, IEntity
 		Vector2 EndOfWandPos = ActiveWand.GetEndOfWandPos();
 		Vector2 projDir = EndOfWandPos.DirectionTo(inputComponent.MousePos).Normalized();
 
-		if (inputComponent.LeftClickJustPressed)
+		if (inputComponent.LeftClickPressed && ActiveWand.TryBeginShot())
 		{
-			projectileSpawner.SpawnProjectile(EndOfWandPos, projDir, castModifiers: modifierManager.CreateCastSnapshot());
+			projectileSpawner.SpawnProjectile(EndOfWandPos, projDir, snapshot: modifierManager.CreateCastSnapshot());
 		}
 
 		HandleWandSwitchInput();
@@ -144,7 +144,7 @@ public partial class Player : CharacterBody2D, IEntity
 
 		if (!animationComponent.TryPlayFallAnimation(pitfall))
 		{
-			IsFalling = false; // no anim configured — fail safe
+			IsFalling = false; // no anim configured - fail safe
 		}
     }
 
