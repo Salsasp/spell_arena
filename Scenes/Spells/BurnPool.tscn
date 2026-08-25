@@ -21,8 +21,8 @@ lifetimeComponent = NodePath("LifetimeComponent")
 [node name="BurnPoolSprite" type="AnimatedSprite2D" parent="." unique_id=1751713092]
 
 [node name="Area2D" type="Area2D" parent="." unique_id=1587745861]
-collision_layer = 16
-collision_mask = 8
+collision_layer = 128
+collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=2020841154]
 shape = SubResource("CircleShape2D_m4sdn")
@@ -31,6 +31,7 @@ shape = SubResource("CircleShape2D_m4sdn")
 polygon = PackedVector2Array(-41, 13, -30, -39, 5, -46, 41, -45, 52, -13, 52, 11, 20, 46, -18, 34)
 
 [node name="Timer" type="Timer" parent="." unique_id=997092234]
+wait_time = 0.2
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=1469990364]
 

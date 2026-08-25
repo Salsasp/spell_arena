@@ -1,5 +1,4 @@
 using Godot;
-using System;
 
 public partial class BurnPool : Node2D
 {
@@ -11,46 +10,47 @@ public partial class BurnPool : Node2D
 	[Export] public DamageComponent damageComponent;
 	[Export] public HitComponent hitComponent;
 	[Export] public LifetimeComponent lifetimeComponent;
-	private bool damageTimerActive = false;
+	private bool hasAppliedInitialTick;
 
 	public override void _Ready()
 	{
-		//BurnPoolArea2D.AreaEntered += OnBurnPoolEntered;
+		DamageCooldownTimer.WaitTime = FirePoolDamageCooldown;
+		DamageCooldownTimer.OneShot = false;
 		DamageCooldownTimer.Timeout += OnDamageTimerTimeout;
-
-		DamageCooldownTimer.Start(FirePoolDamageCooldown);
-		damageTimerActive = true;
+		DamageCooldownTimer.Start();
 
 		SortLayers.Apply(this, SortLayers.Floors);
 	}
 
+	public override void _PhysicsProcess(double delta)
+	{
+		if (!hasAppliedInitialTick)
+		{
+			hasAppliedInitialTick = true;
+			ApplyTickDamage();
+		}
 
+		if (lifetimeComponent.TimedOut)
+		{
+			QueueFree();
+		}
+	}
 
-    public override void _PhysicsProcess(double delta)
-    {
+	public void OnDamageTimerTimeout()
+	{
+		ApplyTickDamage();
+	}
+
+	private void ApplyTickDamage()
+	{
 		foreach (Node2D body in BurnPoolArea2D.GetOverlappingBodies())
 		{
 			if (body is Enemy enemy)
 			{
-				
+				bool isCrit = damageComponent.IsCriticalHit();
+				int damage = damageComponent.CalculateDamage(isCrit);
+				enemy.ApplyDamage(damage, isCrit, showHitAnimation: false);
 			}
 		}
-
-        if (lifetimeComponent.TimedOut)
-		{
-			QueueFree();
-		}
-    }
-
-
-	// public void OnBurnPoolEntered(Area2D area)
-	// {
-	// 	if (damageTimerActive) return;
-	// }
-
-	public void OnDamageTimerTimeout()
-	{
-		damageTimerActive = false;
 	}
-
 }

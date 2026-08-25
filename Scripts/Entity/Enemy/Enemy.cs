@@ -110,7 +110,7 @@ public partial class Enemy : CharacterBody2D, IEntity
 		}
 	}
 
-	public void ApplyDamage(int damage, bool isCrit, bool showText = true)
+	public void ApplyDamage(int damage, bool isCrit, bool showText = true, bool showHitAnimation = true)
 	{
 		healthComponent.TakeDamage(damage);
 
@@ -128,7 +128,10 @@ public partial class Enemy : CharacterBody2D, IEntity
 			textManagerComponent.DrawAbove(this, -30, damageString, textModifiers, damage);
 		}
 
-		animationComponent.PlayProjectileHitAnimation(GlobalPosition);
+		if (showHitAnimation)
+		{
+			animationComponent.PlayProjectileHitAnimation(GlobalPosition);
+		}
 	}
 
 	private void OnDead()
