@@ -7,4 +7,5 @@ public static class CollisionLayers
 	public const uint PlayerProjectile = 16;
 	public const uint EnemyProjectile = 32;
 	public const uint Obstacles = 64;
+	public const uint DamagePools = 128;
 }

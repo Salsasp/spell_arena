@@ -1,19 +1,54 @@
 [gd_scene format=3 uid="uid://bec8sqd2kis2i"]
 
-[ext_resource type="Script" uid="uid://cxw8pfustwpsu" path="res://Scripts/Spell/Modifiers/Effects/BurnPool.cs" id="1_ouoo5"]
+[ext_resource type="Script" uid="uid://hqiektgn0jic" path="res://Scripts/Spell/Modifiers/BurnPool.cs" id="1_ouoo5"]
+[ext_resource type="Script" uid="uid://d3op0eovhs6cq" path="res://Scripts/Spell/DamageComponent.cs" id="2_f6pvb"]
+[ext_resource type="Script" uid="uid://cyw23b1rilbxg" path="res://Scripts/Spell/HitComponent.cs" id="3_207bm"]
+[ext_resource type="Script" uid="uid://7vbl3a4b3hlt" path="res://Scripts/Spell/LifetimeComponent.cs" id="4_207bm"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_m4sdn"]
 radius = 54.2
 
-[node name="BurnPool" type="Node2D" unique_id=1899521418]
+[node name="BurnPool" type="Node2D" unique_id=1899521418 node_paths=PackedStringArray("BurnPoolSprite", "BurnPoolArea2D", "DamageCooldownTimer", "BurnPoolFireParticles", "damageComponent", "hitComponent", "lifetimeComponent")]
 script = ExtResource("1_ouoo5")
+BurnPoolSprite = NodePath("BurnPoolSprite")
+BurnPoolArea2D = NodePath("Area2D")
+DamageCooldownTimer = NodePath("Timer")
+BurnPoolFireParticles = NodePath("GPUParticles2D")
+damageComponent = NodePath("DamageComponent")
+hitComponent = NodePath("HitComponent")
+lifetimeComponent = NodePath("LifetimeComponent")
 
 [node name="BurnPoolSprite" type="AnimatedSprite2D" parent="." unique_id=1751713092]
 
 [node name="Area2D" type="Area2D" parent="." unique_id=1587745861]
+collision_layer = 16
+collision_mask = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=2020841154]
 shape = SubResource("CircleShape2D_m4sdn")
 
 [node name="TempPoolShape" type="Polygon2D" parent="." unique_id=1685263640]
 polygon = PackedVector2Array(-41, 13, -30, -39, 5, -46, 41, -45, 52, -13, 52, 11, 20, 46, -18, 34)
+
+[node name="Timer" type="Timer" parent="." unique_id=997092234]
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=1469990364]
+
+[node name="DamageComponent" type="Node2D" parent="." unique_id=227876530]
+unique_name_in_owner = true
+script = ExtResource("2_f6pvb")
+CritChance = 0.0
+
+[node name="HitComponent" type="Node2D" parent="." unique_id=966120804]
+unique_name_in_owner = true
+script = ExtResource("3_207bm")
+ShowDebugCircle = false
+ChainEnabled = false
+IsPool = true
+
+[node name="LifetimeComponent" type="Node2D" parent="." unique_id=1658861342]
+unique_name_in_owner = true
+script = ExtResource("4_207bm")
+Lifetime = 2
+
+[node name="Timer" type="Timer" parent="LifetimeComponent" unique_id=398899722]

@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://c66jupkp5t2xn"]
+
+[ext_resource type="Script" uid="uid://bn154o14s1evh" path="res://Scripts/Spell/PoolManager.cs" id="1_aqa7n"]
+[ext_resource type="PackedScene" uid="uid://bec8sqd2kis2i" path="res://Scenes/Spells/BurnPool.tscn" id="2_cjttw"]
+
+[node name="PoolManager" type="Node2D" unique_id=2072824453]
+script = ExtResource("1_aqa7n")
+BurnPoolScene = ExtResource("2_cjttw")

@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 ProjectileSpawner="*uid://dlfxn8ubefymy"
 EventBus="*uid://elvkfrj61eb4"
+PoolManager="*uid://c66jupkp5t2xn"
 
 [display]
 
@@ -110,6 +111,7 @@ wand_cycle_down={
 2d_physics/layer_5="PlayerProjectile"
 2d_physics/layer_6="EnemyProjectile"
 2d_physics/layer_7="Obstacles"
+2d_physics/layer_8="DamagePools"
 
 [physics]
 
