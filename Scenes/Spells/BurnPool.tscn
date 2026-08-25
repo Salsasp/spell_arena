@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://bec8sqd2kis2i"]
+
+[ext_resource type="Script" uid="uid://cxw8pfustwpsu" path="res://Scripts/Spell/Modifiers/Effects/BurnPool.cs" id="1_ouoo5"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_m4sdn"]
+radius = 54.2
+
+[node name="BurnPool" type="Node2D" unique_id=1899521418]
+script = ExtResource("1_ouoo5")
+
+[node name="BurnPoolSprite" type="AnimatedSprite2D" parent="." unique_id=1751713092]
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1587745861]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=2020841154]
+shape = SubResource("CircleShape2D_m4sdn")
+
+[node name="TempPoolShape" type="Polygon2D" parent="." unique_id=1685263640]
+polygon = PackedVector2Array(-41, 13, -30, -39, 5, -46, 41, -45, 52, -13, 52, 11, 20, 46, -18, 34)
