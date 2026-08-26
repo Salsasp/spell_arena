@@ -1,12 +1,35 @@
 [gd_scene format=3 uid="uid://bec8sqd2kis2i"]
 
 [ext_resource type="Script" uid="uid://hqiektgn0jic" path="res://Scripts/Spell/Modifiers/BurnPool.cs" id="1_ouoo5"]
+[ext_resource type="Shader" uid="uid://bvq6q2nnaqx5y" path="res://Assets/Data/Shaders/BurnPool.gdshader" id="2_edi6u"]
+[ext_resource type="Texture2D" uid="uid://14vo6mq6jkhy" path="res://Assets/Sprites/Map/burn_pool.png" id="2_egiv0"]
 [ext_resource type="Script" uid="uid://d3op0eovhs6cq" path="res://Scripts/Spell/DamageComponent.cs" id="2_f6pvb"]
 [ext_resource type="Script" uid="uid://cyw23b1rilbxg" path="res://Scripts/Spell/HitComponent.cs" id="3_207bm"]
+[ext_resource type="Texture2D" uid="uid://dq3ijsmyfb1cq" path="res://Assets/Sprites/Spell/Modifiers/fire_spells_icon.png" id="4_5li3s"]
 [ext_resource type="Script" uid="uid://7vbl3a4b3hlt" path="res://Scripts/Spell/LifetimeComponent.cs" id="4_207bm"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5li3s"]
+shader = ExtResource("2_edi6u")
+shader_parameter/amount = 5.0000002375
+shader_parameter/texture_details = Vector4(0, 0, 1, 1)
+shader_parameter/image_details = Vector2(1, 1)
+shader_parameter/colour_1 = Color(0.2627451, 0.09803922, 0.09803922, 1)
+shader_parameter/colour_2 = Color(1, 0, 0, 1)
+shader_parameter/id = 1.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_m4sdn"]
 radius = 54.2
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_qp1vo"]
+lifetime_randomness = 0.15
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 72.2
+spread = 180.0
+gravity = Vector3(0, -40, 0)
+scale_min = 0.099999994
+scale_max = 0.29999998
+color = Color(1, 0.37098792, 0.36512765, 1)
 
 [node name="BurnPool" type="Node2D" unique_id=1899521418 node_paths=PackedStringArray("BurnPoolSprite", "BurnPoolArea2D", "DamageCooldownTimer", "BurnPoolFireParticles", "damageComponent", "hitComponent", "lifetimeComponent")]
 script = ExtResource("1_ouoo5")
@@ -18,7 +41,15 @@ damageComponent = NodePath("DamageComponent")
 hitComponent = NodePath("HitComponent")
 lifetimeComponent = NodePath("LifetimeComponent")
 
-[node name="BurnPoolSprite" type="AnimatedSprite2D" parent="." unique_id=1751713092]
+[node name="BurnPoolSprite" type="Sprite2D" parent="." unique_id=2012672511]
+scale = Vector2(3.5, 3.5)
+texture = ExtResource("2_egiv0")
+
+[node name="BurnPoolFireShader" type="Sprite2D" parent="." unique_id=957585491]
+material = SubResource("ShaderMaterial_5li3s")
+position = Vector2(-2, -22)
+scale = Vector2(5.8593755, 6.3359375)
+texture = ExtResource("2_egiv0")
 
 [node name="Area2D" type="Area2D" parent="." unique_id=1587745861]
 collision_layer = 128
@@ -28,12 +59,17 @@ collision_mask = 4
 shape = SubResource("CircleShape2D_m4sdn")
 
 [node name="TempPoolShape" type="Polygon2D" parent="." unique_id=1685263640]
+visible = false
 polygon = PackedVector2Array(-41, 13, -30, -39, 5, -46, 41, -45, 52, -13, 52, 11, 20, 46, -18, 34)
 
 [node name="Timer" type="Timer" parent="." unique_id=997092234]
 wait_time = 0.2
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=1469990364]
+amount = 32
+texture = ExtResource("4_5li3s")
+lifetime = 2.0
+process_material = SubResource("ParticleProcessMaterial_qp1vo")
 
 [node name="DamageComponent" type="Node2D" parent="." unique_id=227876530]
 unique_name_in_owner = true
@@ -50,6 +86,6 @@ IsPool = true
 [node name="LifetimeComponent" type="Node2D" parent="." unique_id=1658861342]
 unique_name_in_owner = true
 script = ExtResource("4_207bm")
-Lifetime = 2
+Lifetime = 4
 
 [node name="Timer" type="Timer" parent="LifetimeComponent" unique_id=398899722]

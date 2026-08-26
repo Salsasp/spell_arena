@@ -2,7 +2,7 @@ using Godot;
 
 public partial class BurnPool : Node2D
 {
-	[Export] public AnimatedSprite2D BurnPoolSprite;
+	[Export] public Sprite2D BurnPoolSprite;
 	[Export] public Area2D BurnPoolArea2D;
 	[Export] public Timer DamageCooldownTimer;
 	[Export] public GpuParticles2D BurnPoolFireParticles;
