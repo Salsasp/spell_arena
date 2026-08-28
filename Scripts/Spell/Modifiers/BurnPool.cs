@@ -10,6 +10,7 @@ public partial class BurnPool : Node2D
 	[Export] public DamageComponent damageComponent;
 	[Export] public HitComponent hitComponent;
 	[Export] public LifetimeComponent lifetimeComponent;
+	[Export] public AnimationPlayer AnimPlayer;
 	private bool hasAppliedInitialTick;
 
 	public override void _Ready()
@@ -20,6 +21,8 @@ public partial class BurnPool : Node2D
 		DamageCooldownTimer.Start();
 
 		SortLayers.Apply(this, SortLayers.Floors);
+
+		AnimPlayer.Play("spawn");
 	}
 
 	public override void _PhysicsProcess(double delta)
