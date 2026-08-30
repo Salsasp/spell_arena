@@ -14,7 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://bh8m3odh755o7" path="res://Assets/Sprites/Map/tileset_master_borderless-export.png" id="12_7eh1v"]
 [ext_resource type="Texture2D" uid="uid://dp1c3gytffl71" path="res://Assets/Sprites/Map/pitfall_96x96.png" id="13_2axc0"]
 [ext_resource type="PackedScene" uid="uid://tyjtdxw8l54a" path="res://Scenes/Map/Pitfall.tscn" id="14_vbdk7"]
-[ext_resource type="PackedScene" uid="uid://jl207mgkmkb7" path="res://Scenes/Enemies/EnemyCharger.tscn" id="15_38hdy"]
+[ext_resource type="PackedScene" uid="uid://jl207mgkmkb7" path="res://Scenes/Enemies/EnemyChargerSkeleton.tscn" id="15_38hdy"]
 [ext_resource type="Script" uid="uid://clpg8wpj286h1" path="res://Scripts/Wave/RunManager.cs" id="16_bsy17"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_y71vl"]

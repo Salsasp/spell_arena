@@ -6,7 +6,7 @@
 [ext_resource type="Script" uid="uid://dlfxn8ubefymy" path="res://Scripts/ProjectileSpawner.cs" id="3_5ogh5"]
 [ext_resource type="PackedScene" uid="uid://dfgghhva4et46" path="res://Scenes/PlayerProjectile.tscn" id="4_lb6bl"]
 [ext_resource type="PackedScene" uid="uid://bgg3myko12fb5" path="res://Scenes/Enemies/EnemyStrafeShooter.tscn" id="5_strafe"]
-[ext_resource type="PackedScene" uid="uid://jl207mgkmkb7" path="res://Scenes/Enemies/EnemyCharger.tscn" id="6_charger"]
+[ext_resource type="PackedScene" uid="uid://jl207mgkmkb7" path="res://Scenes/Enemies/EnemyChargerSkeleton.tscn" id="6_charger"]
 [ext_resource type="PackedScene" uid="uid://v1rbis70bab5" path="res://Scenes/EnemyProjectile.tscn" id="7_enemyproj"]
 [ext_resource type="PackedScene" uid="uid://cwhripoub67q1" path="res://Scenes/UI/DebugUI.tscn" id="8_o3wvq"]
 [ext_resource type="PackedScene" uid="uid://x8l344sbjamp" path="res://Scenes/Spells/OrbitWizardProjectile.tscn" id="8_y71vl"]
@@ -15,6 +15,7 @@
 [ext_resource type="Script" uid="uid://drai7myprghfn" path="res://Scripts/Wave/WaveSpawner.cs" id="10_spawner"]
 [ext_resource type="Script" uid="uid://clpg8wpj286h1" path="res://Scripts/Wave/RunManager.cs" id="11_run"]
 [ext_resource type="PackedScene" uid="uid://bobqekh085xdg" path="res://Scenes/UI/GameUI.tscn" id="12_gameui"]
+[ext_resource type="PackedScene" uid="uid://b6blf4yt4l0ma" path="res://Scenes/Enemies/EnemyChargerGoblin.tscn" id="14_eb5qc"]
 [ext_resource type="Script" uid="uid://3ugmys41jeqj" path="res://Scripts/UI/TextManagerComponent.cs" id="15_ss8vn"]
 [ext_resource type="PackedScene" uid="uid://c63br0578nusx" path="res://Scenes/UI/DamageText.tscn" id="16_w5kog"]
 [ext_resource type="Texture2D" uid="uid://dp1c3gytffl71" path="res://Assets/Sprites/Map/pitfall_96x96.png" id="18_vp7ys"]
@@ -139,7 +140,8 @@ EnemyContainerPath = NodePath("..")
 ArenaBoundsPath = NodePath("../ArenaBounds")
 PlayerPath = NodePath("../Player")
 StrafeShooterScene = ExtResource("5_strafe")
-ChargerScene = ExtResource("6_charger")
+SkeletonChargerScene = ExtResource("6_charger")
+GoblinChargerScene = ExtResource("14_eb5qc")
 
 [node name="RunManager" type="Node" parent="." unique_id=1918361792]
 script = ExtResource("11_run")

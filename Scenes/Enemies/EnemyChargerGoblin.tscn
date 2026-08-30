@@ -1,0 +1,163 @@
+[gd_scene format=3 uid="uid://b6blf4yt4l0ma"]
+
+[ext_resource type="Script" uid="uid://c0ouqjnx6xc1d" path="res://Scripts/Entity/Enemy/Enemy.cs" id="1_ubk0l"]
+[ext_resource type="Texture2D" uid="uid://ct8dd5tm1xmed" path="res://Assets/Sprites/Enemy/goblin_melee_left.png" id="2_kxxx8"]
+[ext_resource type="Script" uid="uid://cn0ulmxa1s7nw" path="res://Scripts/Entity/MovementComponent.cs" id="3_fohtw"]
+[ext_resource type="Texture2D" uid="uid://cmjevc0dpu5as" path="res://Assets/Sprites/Enemy/gobin_melee_right.png" id="3_xla1t"]
+[ext_resource type="Script" uid="uid://csu7r54n2f32y" path="res://Scripts/Entity/HealthComponent.cs" id="4_xla1t"]
+[ext_resource type="Script" uid="uid://nabumqpkq4ny" path="res://Scripts/Entity/AnimationComponent.cs" id="5_5xwyj"]
+[ext_resource type="PackedScene" uid="uid://bu8isgl0sthh5" path="res://Scenes/Spells/FX/ProjectileHitAnimation.tscn" id="6_ncylq"]
+[ext_resource type="Script" uid="uid://bol4ib3tbtusr" path="res://Scripts/Entity/HitboxComponent.cs" id="7_858bq"]
+[ext_resource type="Script" uid="uid://b5a4ximggnjsp" path="res://Scripts/Entity/Enemy/Behaviors/ChaseMovementComponent.cs" id="8_5do2i"]
+[ext_resource type="Script" uid="uid://cc6b21v53uga3" path="res://Scripts/Entity/Enemy/Behaviors/MeleeAttackComponent.cs" id="9_5c1gn"]
+[ext_resource type="Script" uid="uid://cjlcywrbmru3k" path="res://Scripts/Entity/Enemy/Behaviors/ArenaClampComponent.cs" id="10_daudl"]
+[ext_resource type="Script" uid="uid://3d4f4v4pavcm" path="res://Scripts/Entity/DamageFlashComponent.cs" id="11_pdtth"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0utv8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_kxxx8")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_kxxx8")
+}],
+"loop": true,
+"name": &"walk_left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_xla1t")
+}],
+"loop": true,
+"name": &"walk_right",
+"speed": 5.0
+}]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_charger"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_charger"]
+nodes/output/position = Vector2(380, 160)
+nodes/Animation/node = SubResource("AnimationNodeAnimation_charger")
+nodes/Animation/position = Vector2(180, 100)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_charger"]
+size = Vector2(20, 30.66667)
+
+[sub_resource type="Animation" id="Animation_156dd"]
+resource_name = "fall"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("EnemySprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.49, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 25), Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("EnemySprite:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.49, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1.5, 1.5), Vector2(0.8, 0.8), Vector2(1.5, 1.5)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("EnemySprite:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.49, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0.2159017, 0.21590173, 0.2159017, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_uboki"]
+_data = {
+&"fall": SubResource("Animation_156dd")
+}
+
+[node name="EnemyChargerGoblin" type="CharacterBody2D" unique_id=917117052 node_paths=PackedStringArray("healthComponent", "hitboxComponent", "movementComponent", "movementBehavior", "attackBehavior", "animationComponent", "arenaClamp") groups=["enemies"]]
+scale = Vector2(1.5, 1.5)
+collision_layer = 4
+script = ExtResource("1_ubk0l")
+healthComponent = NodePath("HealthComponent")
+hitboxComponent = NodePath("HitboxComponent")
+movementComponent = NodePath("MovementComponent")
+movementBehavior = NodePath("ChaseMovementComponent")
+attackBehavior = NodePath("MeleeAttackComponent")
+animationComponent = NodePath("AnimationComponent")
+arenaClamp = NodePath("ArenaClampComponent")
+
+[node name="EnemySprite" type="AnimatedSprite2D" parent="." unique_id=982701685]
+sprite_frames = SubResource("SpriteFrames_0utv8")
+animation = &"idle"
+
+[node name="MovementComponent" type="Node2D" parent="." unique_id=2129182553 node_paths=PackedStringArray("body")]
+unique_name_in_owner = true
+script = ExtResource("3_fohtw")
+body = NodePath("..")
+
+[node name="HealthComponent" type="Node2D" parent="." unique_id=300003991]
+unique_name_in_owner = true
+script = ExtResource("4_xla1t")
+
+[node name="AnimationComponent" type="Node2D" parent="." unique_id=196994673 node_paths=PackedStringArray("animatedSprite", "animationPlayer")]
+script = ExtResource("5_5xwyj")
+animatedSprite = NodePath("../EnemySprite")
+animationPlayer = NodePath("../AnimationPlayer")
+directionalSprites = true
+isEnemy = true
+ProjectileHitAnimation = ExtResource("6_ncylq")
+
+[node name="AnimationTree" type="AnimationTree" parent="." unique_id=1188544908]
+tree_root = SubResource("AnimationNodeBlendTree_charger")
+
+[node name="HitboxComponent" type="Node2D" parent="." unique_id=1590627092 groups=["enemies"]]
+script = ExtResource("7_858bq")
+
+[node name="Area2D" type="Area2D" parent="HitboxComponent" unique_id=1339677383 groups=["enemies"]]
+collision_layer = 8
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent/Area2D" unique_id=1645468465]
+position = Vector2(1.3333335, -6.357829e-07)
+shape = SubResource("RectangleShape2D_charger")
+
+[node name="ChaseMovementComponent" type="Node2D" parent="." unique_id=1352163447]
+script = ExtResource("8_5do2i")
+
+[node name="MeleeAttackComponent" type="Node2D" parent="." unique_id=1973116540]
+script = ExtResource("9_5c1gn")
+
+[node name="ArenaClampComponent" type="Node2D" parent="." unique_id=838125797]
+script = ExtResource("10_daudl")
+
+[node name="DamageFlashComponent" type="Node2D" parent="." unique_id=586835674]
+script = ExtResource("11_pdtth")
+FlashTargetPath = NodePath("EnemySprite")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=84299739]
+visible = false
+shape = SubResource("RectangleShape2D_charger")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1671678467]
+libraries/ = SubResource("AnimationLibrary_uboki")
