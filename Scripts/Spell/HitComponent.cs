@@ -1,5 +1,6 @@
 using Godot;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 
 public partial class HitComponent : Component
 {
@@ -12,9 +13,12 @@ public partial class HitComponent : Component
 	private const int DOT_DURATION = 10;
 	[Export] public bool ShowDebugCircle { get; set; } = true;
 	[Export] public bool ChainEnabled { get; set; } = true;
+	[Export] public bool IsPool { get; set; } = false;
 
 	public void Update(Node2D target)
 	{
+		if (IsPool) return;
+
 		ModifierContext context = ModifierContext.ForProjectile(GetParent<PlayerProjectile>(), target);
 		ModifierEffectRegistry.Apply(ModifierPhase.OnHit, context);
 

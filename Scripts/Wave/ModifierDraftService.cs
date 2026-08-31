@@ -19,16 +19,15 @@ public static class ModifierDraftService
 			return new List<ModifierData>();
 		}
 
-		List<ModifierData> pool = manager.GetAllModifiers()
+		List<ModifierData> pool = ModifierCatalog.GetAll()
 			.Where(modifier => modifier.id != "debug_modifier")
-			.Where(modifier => !manager.HasActiveModifier(modifier.id) ||
-			 (manager.HasActiveModifier(modifier.id) && modifier.isStackable))
+			.Where(modifier => modifier.isStackable || !manager.HasCollectedModifier(modifier.id))
 			.ToList();
 
 		if (pool.Count == 0)
 		{
 			GD.PrintErr("No viable modifiers found for modifier draft");
-			pool = manager.GetAllModifiers()
+			pool = ModifierCatalog.GetAll()
 				.Where(modifier => modifier.id != "debug_modifier")
 				.ToList();
 		}

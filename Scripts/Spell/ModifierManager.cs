@@ -1,16 +1,21 @@
 using Godot;
-using System;
 using System.Collections.Generic;
 
 public partial class ModifierManager : Node
 {
     public static ModifierManager Instance { get; private set; }
-    private Dictionary<string, ModifierData> modifiers = [];
     public Dictionary<string, ModifierData> ActiveModifiers = [];
+    public Wand ActiveWand { get; set; }
 
-    public IEnumerable<ModifierData> GetAllModifiers() => modifiers.Values;
+    public IEnumerable<ModifierData> GetAllModifiers() => ModifierCatalog.GetAll();
 
     public bool HasActiveModifier(string id) => ActiveModifiers.ContainsKey(id);
+
+    public bool HasCollectedModifier(string id)
+    {
+        Player player = GetParent() as Player;
+        return player != null && player.HasModifier(id);
+    }
     [Export] public float SpellEnlargeAmount = 0.1f; // additive transform scale modifier
     [Export] public float SpellHastenAmount = 0.1f; // additive speed modifier
 
@@ -25,65 +30,62 @@ public partial class ModifierManager : Node
     public override void _Ready()
     {
         ModifierEffectRegistry.RegisterDefaults();
-        LoadModifiers("res://Assets/Data/spell_modifiers.json");
+        ModifierCatalog.EnsureLoaded();
     }
 
-    private void LoadModifiers(string path)
+    public ModifierData GetModifier(string id) => ModifierCatalog.Get(id);
+
+    public List<ModifierData> GetCombatModifiers()
     {
-        var file = FileAccess.Open(path, FileAccess.ModeFlags.Read);
-        if (file == null)
+        Wand wand = ActiveWand ?? (GetParent() as Player)?.ActiveWand;
+        if (wand == null)
         {
-            GD.PrintErr($"Failed to load modifiers from {path}");
-            return;
+            return [];
         }
 
-        var json = new Json();
-        var error = json.Parse(file.GetAsText());
-        
-        if (error != Error.Ok)
-        {
-            GD.PrintErr("Failed to parse modifiers JSON");
-            return;
-        }
-
-        var root = json.GetData().AsGodotDictionary();
-        var modifierArray = root["modifiers"].AsGodotArray();
-
-        foreach (var modDict in modifierArray)
-        {
-            var modData = modDict.AsGodotDictionary();
-            var modifier = new ModifierData
-            {
-                id = modData["id"].ToString(),
-                name = modData["name"].ToString(),
-                description = modData["description"].ToString(),
-                icon = modData["icon"].ToString(),
-                rarity = modData["rarity"].ToString(),
-                damageType = modData["damage_type"].ToString(),
-                dotDamage = modData["dot_damage"].ToString().ToFloat(),
-                critAdditive = modData["crit_additive"].ToString().ToFloat(),
-                critMultiplicative = modData["crit_multiplicative"].ToString().ToFloat(),
-                onHit = modData["on_hit"].ToString(),
-                orbital = modData["orbital"].ToString(),
-                onSpawn = modData["on_spawn"].ToString(),
-                onAcquire = modData.ContainsKey("on_acquire") ? modData["on_acquire"].ToString() : "",
-                uiOnHit = modData.ContainsKey("ui_on_hit") ? modData["ui_on_hit"].ToString() : "",
-                isStackable = Convert.ToBoolean(modData["stackable"].ToString())
-            };
-
-            modifiers[modifier.id] = modifier;
-        }
-
-        GD.Print($"Loaded {modifiers.Count} modifiers");
+        return wand.GetCombatModifiers();
     }
 
-    public ModifierData GetModifier(string id)
+    public CastSnapshot CreateCastSnapshot()
     {
-        if (modifiers.TryGetValue(id, out var modifier))
-            return modifier;
-        
-        GD.PrintErr($"Modifier '{id}' not found");
-        return null;
+        return new CastSnapshot
+        {
+            Modifiers = [.. GetCombatModifiers()],
+            WandStats = GetActiveWandBaseStats(),
+        };
+    }
+
+    public AggregatedSpellStats GetActiveWandBaseStats()
+    {
+        Wand wand = ActiveWand ?? (GetParent() as Player)?.ActiveWand;
+        return wand?.GetBaseStats() ?? new AggregatedSpellStats();
+    }
+
+    public bool TryCollectModifier(string id)
+    {
+        ModifierData modifier = GetModifier(id);
+        if (modifier == null)
+        {
+            return false;
+        }
+
+        if (modifier.IsRunScoped)
+        {
+            return TryAddActiveModifier(id);
+        }
+
+        Player player = GetParent<Player>();
+        if (player == null)
+        {
+            return false;
+        }
+
+        if (!modifier.isStackable && player.HasModifier(id))
+        {
+            return false;
+        }
+
+        return player.ModifierPool.TryAdd(modifier);
     }
 
     public bool TryAddActiveModifier(string id)
@@ -122,9 +124,9 @@ public partial class ModifierManager : Node
 
     public void PrintModifiers()
     {
-        foreach (var (key, value) in modifiers)
+        foreach (ModifierData modifier in ModifierCatalog.GetAll())
         {
-            GD.Print(key + ": " + value);
+            GD.Print(modifier.id + ": " + modifier);
         }
     }
 }

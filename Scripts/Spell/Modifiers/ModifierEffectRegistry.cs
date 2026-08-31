@@ -20,6 +20,7 @@ public static class ModifierEffectRegistry
 		Register(new HomingSpawnEffect());
 		Register(new OrbitSpawnEffect());
 		Register(new ChainHitEffect());
+		Register(new LightningWandInnateEffect());
 		Register(new PierceHitEffect());
 		Register(new BurnHitEffect());
 		Register(new ExtraDraftOptionAcquireEffect());
@@ -36,14 +37,20 @@ public static class ModifierEffectRegistry
 	/// </summary>
 	public static void Apply(ModifierPhase phase, ModifierContext context)
 	{
-		if (context?.ModifierManager == null)
+		if (context == null)
 		{
 			return;
 		}
 
 		HashSet<string> appliedEffectIds = [];
+		IEnumerable<ModifierData> modifiers = context.CombatModifiers
+			?? context.ModifierManager?.GetCombatModifiers();
+		if (modifiers == null)
+		{
+			return;
+		}
 
-		foreach (ModifierData modifier in context.ModifierManager.ActiveModifiers.Values)
+		foreach (ModifierData modifier in modifiers)
 		{
 			string effectId = GetEffectId(modifier, phase);
 			if (string.IsNullOrEmpty(effectId) || appliedEffectIds.Contains(effectId))

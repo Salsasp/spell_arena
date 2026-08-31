@@ -83,7 +83,7 @@ scale_max = 1.1999999
 color_ramp = SubResource("GradientTexture1D_w0r63")
 
 [node name="ProjectileHitAnimation" type="AnimatedSprite2D" unique_id=1714040695]
-z_index = 5
+z_index = 4
 sprite_frames = SubResource("SpriteFrames_sj8g1")
 animation = &"hit"
 frame = 7

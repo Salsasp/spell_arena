@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://d1fkgj11jw5dx"]
+
+[ext_resource type="Script" uid="uid://d1r3v8pfi3udh" path="res://Scripts/UI/WandModifier/InventoryModifierSlot.cs" id="1_0v0ne"]
+[ext_resource type="Texture2D" uid="uid://djal7phgq5mow" path="res://Assets/UI/WandModifier/ModifierSlot.png" id="1_js0m1"]
+[ext_resource type="Theme" uid="uid://dcir03i8y5gms" path="res://Assets/UI/WandModifier/WandModifierTheme.tres" id="2_theme"]
+
+[node name="InventoryModifierSlot" type="PanelContainer" unique_id=1444426116 node_paths=PackedStringArray("IconFrame", "ModifierIcon")]
+custom_minimum_size = Vector2(32, 32)
+theme = ExtResource("2_theme")
+script = ExtResource("1_0v0ne")
+IconFrame = NodePath("IconFrame")
+ModifierIcon = NodePath("ModifierIcon")
+
+[node name="IconFrame" type="TextureRect" parent="." unique_id=230487120]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("1_js0m1")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="ModifierIcon" type="TextureRect" parent="." unique_id=1696165558]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 5

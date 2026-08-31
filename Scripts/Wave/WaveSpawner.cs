@@ -1,4 +1,5 @@
 using Godot;
+using System;
 using System.Collections.Generic;
 
 public partial class WaveSpawner : Node2D
@@ -7,7 +8,8 @@ public partial class WaveSpawner : Node2D
 	[Export] public NodePath ArenaBoundsPath { get; set; }
 	[Export] public NodePath PlayerPath { get; set; }
 	[Export] public PackedScene StrafeShooterScene { get; set; }
-	[Export] public PackedScene ChargerScene { get; set; }
+	[Export] public PackedScene SkeletonChargerScene { get; set; }
+	[Export] public PackedScene GoblinChargerScene { get; set; }
 
 	[Signal] public delegate void WaveCompleteEventHandler();
 	[Signal] public delegate void EnemyCountChangedEventHandler(int aliveCount);
@@ -20,12 +22,15 @@ public partial class WaveSpawner : Node2D
 	private int spawnedCount;
 	private float spawnTimer;
 	private bool isSpawning;
+	private List<PackedScene> tierOneMeleeEnemies;
 
 	public override void _Ready()
 	{
 		enemyContainer = GetNode<Node2D>(EnemyContainerPath);
 		arenaBounds = GetNode<ArenaBounds>(ArenaBoundsPath);
 		player = GetNode<Player>(PlayerPath);
+
+		tierOneMeleeEnemies = [SkeletonChargerScene, GoblinChargerScene]; // Update this as more enemies are created
 	}
 
 	public void BeginWave(WaveDefinition wave)
@@ -61,7 +66,19 @@ public partial class WaveSpawner : Node2D
 
 	private void SpawnEnemy()
 	{
-		PackedScene scene = GD.Randf() < activeWave.CasterWeight ? StrafeShooterScene : ChargerScene;
+		PackedScene scene;
+		bool casterSpawn = GD.Randf() < activeWave.CasterWeight;
+
+		if (casterSpawn)
+		{
+			scene = StrafeShooterScene;
+		}
+		else
+		{
+			int randIndex = Random.Shared.Next(tierOneMeleeEnemies.Count);
+			scene = tierOneMeleeEnemies[randIndex];
+		}
+
 		Enemy enemy = scene.Instantiate<Enemy>();
 		ApplyStatMultipliers(enemy);
 
@@ -124,7 +141,10 @@ public partial class WaveSpawner : Node2D
 
 		foreach (Node child in enemyContainer.GetChildren())
 		{
-			child.QueueFree();
+			if (child is Enemy)
+			{
+				child.QueueFree();
+			}
 		}
 	}
 }

@@ -8,6 +8,12 @@ public partial class InputComponent : Component
 	public bool LeftClickJustPressed { get; private set; } = false;
 	public bool RightClickPressed { get; private set; } = false;
 	public bool DodgePressed { get; private set; } = false;
+	public bool Wand1Pressed { get; private set; } = false;
+	public bool Wand2Pressed { get; private set; } = false;
+	public bool Wand3Pressed { get; private set; } = false;
+	public bool Wand4Pressed { get; private set; } = false;
+	public bool WandCycleUpPressed { get; private set; } = false;
+	public bool WandCycleDownPressed { get; private set; } = false;
 	public Vector2 MousePos { get; private set; } = Vector2.Zero;
 
 	public void Update()
@@ -18,6 +24,13 @@ public partial class InputComponent : Component
 		RightClickPressed = Input.IsMouseButtonPressed(MouseButton.Right);
 		DodgePressed = Input.IsActionJustPressed("dodge");
 		MousePos = GetGlobalMousePosition();
+
+		Wand1Pressed = Input.IsActionJustReleased("wand1");
+		Wand2Pressed = Input.IsActionJustReleased("wand2");
+		Wand3Pressed = Input.IsActionJustReleased("wand3");
+		Wand4Pressed = Input.IsActionJustReleased("wand4");
+		WandCycleUpPressed = Input.IsActionJustPressed("wand_cycle_up");
+		WandCycleDownPressed = Input.IsActionJustPressed("wand_cycle_down");
 	}
 	public override void _Ready()
 	{

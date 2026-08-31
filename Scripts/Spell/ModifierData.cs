@@ -18,16 +18,18 @@ public class ModifierData
     public string uiOnHit;
     public bool isStackable;
     public int copies = 1;
+    public ModifierAffinity affinity = ModifierAffinity.Neutral;
+
+    public bool IsRunScoped =>
+        !string.IsNullOrEmpty(onAcquire) ||
+        (!string.IsNullOrEmpty(uiOnHit) &&
+         string.IsNullOrEmpty(onHit) &&
+         string.IsNullOrEmpty(onSpawn) &&
+         string.IsNullOrEmpty(orbital));
     public override string ToString()
     {
         return $"[{id}] {name} ({rarity}) - {description}\n" +
             $"Damage: {damageType} | Crit: +{critAdditive} x{critMultiplicative}\n" +
             $"Events: onHit={onHit}, onSpawn={onSpawn}, onAcquire={onAcquire}, uiOnHit={uiOnHit}, orbital={orbital}";
     }
-}
-
-[System.Serializable]
-public class ModifierDatabase
-{
-    public ModifierData[] modifiers;
 }

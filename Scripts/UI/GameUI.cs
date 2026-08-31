@@ -6,6 +6,7 @@ public partial class GameUI : Control
 	[Export] public Label waveLabel;
 	[Export] public Label statusLabel;
 	[Export] public ModifierDraftUI ModifierDraftUI;
+	[Export] public ModifyWandUI ModifyWandUI;
 	[Export] public Panel gameOverPanel;
 	[Export] public Label gameOverLabel;
 

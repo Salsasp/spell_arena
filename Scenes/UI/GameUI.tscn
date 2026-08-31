@@ -2,8 +2,9 @@
 
 [ext_resource type="Script" uid="uid://dm2yia25lcnpy" path="res://Scripts/UI/GameUI.cs" id="1_71wt1"]
 [ext_resource type="PackedScene" uid="uid://ca225tco2h2f2" path="res://Scenes/UI/ModifierDraftUI.tscn" id="2_71wt1"]
+[ext_resource type="PackedScene" uid="uid://7ga15vr1cxes" path="res://Scenes/UI/WandModifier/ModifyWandUI.tscn" id="3_wandui"]
 
-[node name="GameUI" type="Control" unique_id=1940756825 node_paths=PackedStringArray("waveLabel", "statusLabel", "ModifierDraftUI", "gameOverPanel", "gameOverLabel")]
+[node name="GameUI" type="Control" unique_id=1940756825 node_paths=PackedStringArray("waveLabel", "statusLabel", "ModifierDraftUI", "ModifyWandUI", "gameOverPanel", "gameOverLabel")]
 process_mode = 3
 layout_mode = 3
 anchors_preset = 15
@@ -16,6 +17,7 @@ script = ExtResource("1_71wt1")
 waveLabel = NodePath("WaveLabel")
 statusLabel = NodePath("StatusLabel")
 ModifierDraftUI = NodePath("ModifierDraftUi")
+ModifyWandUI = NodePath("ModifyWandUI")
 gameOverPanel = NodePath("GameOverPanel")
 gameOverLabel = NodePath("GameOverPanel/MarginContainer/GameOverLabel")
 
@@ -81,3 +83,7 @@ vertical_alignment = 1
 
 [node name="ModifierDraftUi" parent="." unique_id=1781051647 instance=ExtResource("2_71wt1")]
 layout_mode = 1
+
+[node name="ModifyWandUI" parent="." instance=ExtResource("3_wandui")]
+layout_mode = 1
+visible = false

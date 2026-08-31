@@ -11,5 +11,9 @@ public sealed class BurnHitEffect : IModifierEffect
 		}
 
 		context.Hit.ApplyDot(context.HitTarget, modifier);
+		if (context.HitTarget is Enemy enemy)
+		{
+			enemy.MarkedForBurnPoolSpawn = true;
+		}
 	}
 }

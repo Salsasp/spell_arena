@@ -1,8 +1,10 @@
 using Godot;
+using System.Collections.Generic;
 
 public class ModifierContext
 {
 	public ModifierManager ModifierManager { get; init; }
+	public IReadOnlyList<ModifierData> CombatModifiers { get; init; }
 	public PlayerProjectile Projectile { get; init; }
 	public DamageComponent Damage { get; init; }
 	public SpellMovementComponent Movement { get; init; }
@@ -15,9 +17,14 @@ public class ModifierContext
 
 	public static ModifierContext ForProjectile(PlayerProjectile projectile, Node2D hitTarget = null)
 	{
+		IReadOnlyList<ModifierData> combatModifiers = projectile.CastModifiers
+			?? projectile.modifierManager?.GetCombatModifiers()
+			?? [];
+
 		return new ModifierContext
 		{
 			ModifierManager = projectile.modifierManager,
+			CombatModifiers = combatModifiers,
 			Projectile = projectile,
 			Damage = projectile.damageComponent,
 			Movement = projectile.spellMovementComponent,

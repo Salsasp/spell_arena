@@ -10,6 +10,7 @@ public partial class EnemyProjectile : Node2D, IProjectile
 
 	public override void _Ready()
 	{
+		SortLayers.Apply(this, SortLayers.Projectiles);
 	}
 
 	public override void _PhysicsProcess(double delta)

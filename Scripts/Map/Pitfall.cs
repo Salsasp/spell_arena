@@ -18,6 +18,7 @@ public partial class Pitfall : Node2D
 
 	public override void _Ready()
 	{
+		SortLayers.Apply(this, SortLayers.Pitfalls);
 		FallInvulnTimer.Timeout += OnTimerTimeout;
 		FallArea.BodyEntered += OnFallAreaEntered;
 		SwipeArea.BodyEntered += OnSwipeAreaEntered;

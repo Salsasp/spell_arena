@@ -6,7 +6,7 @@
 [ext_resource type="Script" uid="uid://dlfxn8ubefymy" path="res://Scripts/ProjectileSpawner.cs" id="3_5ogh5"]
 [ext_resource type="PackedScene" uid="uid://dfgghhva4et46" path="res://Scenes/PlayerProjectile.tscn" id="4_lb6bl"]
 [ext_resource type="PackedScene" uid="uid://bgg3myko12fb5" path="res://Scenes/Enemies/EnemyStrafeShooter.tscn" id="5_strafe"]
-[ext_resource type="PackedScene" uid="uid://jl207mgkmkb7" path="res://Scenes/Enemies/EnemyCharger.tscn" id="6_charger"]
+[ext_resource type="PackedScene" uid="uid://jl207mgkmkb7" path="res://Scenes/Enemies/EnemyChargerSkeleton.tscn" id="6_charger"]
 [ext_resource type="PackedScene" uid="uid://v1rbis70bab5" path="res://Scenes/EnemyProjectile.tscn" id="7_enemyproj"]
 [ext_resource type="PackedScene" uid="uid://cwhripoub67q1" path="res://Scenes/UI/DebugUI.tscn" id="8_o3wvq"]
 [ext_resource type="PackedScene" uid="uid://x8l344sbjamp" path="res://Scenes/Spells/OrbitWizardProjectile.tscn" id="8_y71vl"]
@@ -15,12 +15,14 @@
 [ext_resource type="Script" uid="uid://drai7myprghfn" path="res://Scripts/Wave/WaveSpawner.cs" id="10_spawner"]
 [ext_resource type="Script" uid="uid://clpg8wpj286h1" path="res://Scripts/Wave/RunManager.cs" id="11_run"]
 [ext_resource type="PackedScene" uid="uid://bobqekh085xdg" path="res://Scenes/UI/GameUI.tscn" id="12_gameui"]
+[ext_resource type="PackedScene" uid="uid://b6blf4yt4l0ma" path="res://Scenes/Enemies/EnemyChargerGoblin.tscn" id="14_eb5qc"]
 [ext_resource type="Script" uid="uid://3ugmys41jeqj" path="res://Scripts/UI/TextManagerComponent.cs" id="15_ss8vn"]
 [ext_resource type="PackedScene" uid="uid://c63br0578nusx" path="res://Scenes/UI/DamageText.tscn" id="16_w5kog"]
 [ext_resource type="Texture2D" uid="uid://dp1c3gytffl71" path="res://Assets/Sprites/Map/pitfall_96x96.png" id="18_vp7ys"]
 [ext_resource type="PackedScene" uid="uid://tyjtdxw8l54a" path="res://Scenes/Map/Pitfall.tscn" id="19_1tb08"]
 [ext_resource type="Script" uid="uid://bmfevpx6kughl" path="res://Scripts/UI/Cursor.cs" id="20_08nt8"]
 [ext_resource type="Texture2D" uid="uid://b35ycxwb1egqa" path="res://Assets/UI/Cursor/cursor_crosshair.png" id="21_rc81e"]
+[ext_resource type="PackedScene" uid="uid://c66jupkp5t2xn" path="res://Scenes/Spells/PoolManager.tscn" id="22_vpakw"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_y71vl"]
 texture = ExtResource("2_w5kog")
@@ -103,6 +105,7 @@ sources/0 = SubResource("TileSetAtlasSource_1tb08")
 [sub_resource type="Compositor" id="Compositor_08nt8"]
 
 [node name="Main" type="Node2D" unique_id=1087891947]
+y_sort_enabled = true
 script = ExtResource("1_pg4io")
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=1575237862]
@@ -133,11 +136,12 @@ TextProjectilePrefab = ExtResource("9_1tr1b")
 
 [node name="WaveSpawner" type="Node2D" parent="." unique_id=883766410]
 script = ExtResource("10_spawner")
-EnemyContainerPath = NodePath("../EnemyManager")
+EnemyContainerPath = NodePath("..")
 ArenaBoundsPath = NodePath("../ArenaBounds")
 PlayerPath = NodePath("../Player")
 StrafeShooterScene = ExtResource("5_strafe")
-ChargerScene = ExtResource("6_charger")
+SkeletonChargerScene = ExtResource("6_charger")
+GoblinChargerScene = ExtResource("14_eb5qc")
 
 [node name="RunManager" type="Node" parent="." unique_id=1918361792]
 script = ExtResource("11_run")
@@ -156,6 +160,7 @@ CanvasLayerPath = NodePath("../UI")
 [node name="TileMaps" type="Node2D" parent="Map" unique_id=339071446]
 
 [node name="Walls32x64" type="TileMapLayer" parent="Map/TileMaps" unique_id=1183334819]
+z_index = 1
 tile_map_data = PackedByteArray("AADu//r/AAACAAAAAADv//r/AAACAAAAAADw//r/AAACAAAAAADx//r/AAACAAAAAADy//r/AAACAAAAAADz//r/AAACAAAAAAD0//r/AAACAAAAAAD1//r/AAACAAAAAAD2//r/AAACAAAAAAD3//r/AAACAAAAAAD4//r/AAACAAAAAAD5//r/AAACAAAAAAD6//r/AAACAAAAAAD7//r/AAACAAAAAAD8//r/AAACAAAAAAD9//r/AAACAAAAAAD+//r/AAACAAAAAAD///r/AAACAAAAAAAAAPr/AAACAAAAAAABAPr/AAACAAAAAAACAPr/AAACAAAAAAADAPr/AAACAAAAAAAEAPr/AAACAAAAAAAFAPr/AAACAAAAAAAGAPr/AAACAAAAAAAHAPr/AAACAAAAAAAIAPr/AAACAAAAAAAJAPr/AAACAAAAAAAKAPr/AAACAAAAAAALAPr/AAACAAAAAAAMAPr/AAACAAAAAAANAPr/AAACAAAAAAAOAPr/AAACAAAAAAAPAPr/AAACAAAAAAAQAPr/AAACAAAAAAARAPr/AAACAAAAAAASAPr/AAACAAAAAADt//r/AAAAAAAAAAATAPr/AAAEAAAAAAA=")
 tile_set = SubResource("TileSet_vp7ys")
 
@@ -164,13 +169,16 @@ tile_map_data = PackedByteArray("AADv//f/AAAAAAMAAADu//b/AAAAAAMAAADw//b/AAAAAAM
 tile_set = SubResource("TileSet_1tb08")
 
 [node name="Walls32x32" type="TileMapLayer" parent="Map/TileMaps" unique_id=156212138]
+z_index = 1
 tile_map_data = PackedByteArray("AADt//b/AAAGAAEAAADt//f/AAAGAAEAAADt//j/AAAGAAEAAADt//n/AAAGAAEAAADt//r/AAAGAAEAAADt//v/AAAGAAEAAADt//z/AAAGAAEAAADt//3/AAAGAAEAAADt//7/AAAGAAEAAADt////AAAGAAEAAADt/wAAAAAGAAEAAADt/wEAAAAGAAEAAADt/wIAAAAGAAEAAADt/wMAAAAGAAEAAADt/wQAAAAGAAEAAADt/wUAAAAGAAEAAADt/wYAAAAGAAEAAADt/wcAAAAGAAEAAADt/wgAAAAGAAEAAADt/wkAAAAGAAEAAADt/woAAAAGAAEAAAATAPb/AAAKAAEAAAATAPf/AAAKAAEAAAATAPj/AAAKAAEAAAATAPn/AAAKAAEAAAATAPr/AAAKAAEAAAATAPv/AAAKAAEAAAATAPz/AAAKAAEAAAATAP3/AAAKAAEAAAATAP7/AAAKAAEAAAATAP//AAAKAAEAAAATAAAAAAAKAAEAAAATAAEAAAAKAAEAAAATAAIAAAAKAAEAAAATAAMAAAAKAAEAAAATAAQAAAAKAAEAAAATAAUAAAAKAAEAAAATAAYAAAAKAAEAAAATAAcAAAAKAAEAAAATAAgAAAAKAAEAAAATAAkAAAAKAAEAAAATAAoAAAAKAAEAAADt/wsAAAAMAAEAAAATAAsAAAAOAAEAAADu/wsAAAAIAAEAAADv/wsAAAAIAAEAAADw/wsAAAAIAAEAAADx/wsAAAAIAAEAAADy/wsAAAAIAAEAAADz/wsAAAAIAAEAAAD0/wsAAAAIAAEAAAD1/wsAAAAIAAEAAAD2/wsAAAAIAAEAAAD3/wsAAAAIAAEAAAD4/wsAAAAIAAEAAAD5/wsAAAAIAAEAAAD6/wsAAAAIAAEAAAD7/wsAAAAIAAEAAAD8/wsAAAAIAAEAAAD9/wsAAAAIAAEAAAD+/wsAAAAIAAEAAAD//wsAAAAIAAEAAAAAAAsAAAAIAAEAAAABAAsAAAAIAAEAAAACAAsAAAAIAAEAAAADAAsAAAAIAAEAAAAEAAsAAAAIAAEAAAAFAAsAAAAIAAEAAAAGAAsAAAAIAAEAAAAHAAsAAAAIAAEAAAAIAAsAAAAIAAEAAAAJAAsAAAAIAAEAAAAKAAsAAAAIAAEAAAALAAsAAAAIAAEAAAAMAAsAAAAIAAEAAAANAAsAAAAIAAEAAAAOAAsAAAAIAAEAAAAPAAsAAAAIAAEAAAAQAAsAAAAIAAEAAAARAAsAAAAIAAEAAAASAAsAAAAIAAEAAAA=")
 tile_set = SubResource("TileSet_rc81e")
 
 [node name="Pitfalls32x32" type="TileMapLayer" parent="Map/TileMaps" unique_id=1140601221]
+z_index = 2
 tile_set = SubResource("TileSet_08nt8")
 
 [node name="Pitfalls" type="Node2D" parent="Map" unique_id=657133677]
+z_index = 2
 
 [node name="Pitfall" parent="Map/Pitfalls" unique_id=802387860 instance=ExtResource("19_1tb08")]
 position = Vector2(-424, -185)
@@ -190,3 +198,5 @@ compositor = SubResource("Compositor_08nt8")
 [node name="Cursor" type="Node2D" parent="." unique_id=543896547]
 script = ExtResource("20_08nt8")
 CrosshairCursor = ExtResource("21_rc81e")
+
+[node name="PoolManager" parent="." unique_id=2072824453 instance=ExtResource("22_vpakw")]

@@ -15,9 +15,10 @@ public partial class ProjectileSpawner : Node2D
     }
 
 
-	public void SpawnProjectile(Vector2 pos, Vector2 dir, Vector2 initVel = new())
+	public void SpawnProjectile(Vector2 pos, Vector2 dir, Vector2 initVel = new(), CastSnapshot snapshot = null)
 	{
 		Node2D projectile = ProjectilePrefab.Instantiate<Node2D>();
+		StampPlayerProjectile(projectile, snapshot);
 		GetParent().AddChild(projectile);
 		projectile.Position = pos;
 
@@ -33,9 +34,10 @@ public partial class ProjectileSpawner : Node2D
 		projectileArea.Rotation = dir.Angle();
 	}
 
-	public void SpawnOrbitWizardProjectile (Vector2 pos, Vector2 dir, Vector2 initVel = new())
+	public void SpawnOrbitWizardProjectile (Vector2 pos, Vector2 dir, Vector2 initVel = new(), CastSnapshot snapshot = null)
 	{
 		Node2D projectile = OrbitWizardProjectilePrefab.Instantiate<Node2D>();
+		StampPlayerProjectile(projectile, snapshot);
 		GetParent().AddChild(projectile);
 		projectile.Position = pos;
 
@@ -83,5 +85,18 @@ public partial class ProjectileSpawner : Node2D
 		damageComponent.BaseDamage = damage;
 
 		GetParent().CallDeferred(Node.MethodName.AddChild, projectile);
+	}
+
+	private static void StampPlayerProjectile(Node2D projectile, CastSnapshot snapshot)
+	{
+		if (projectile is not PlayerProjectile playerProjectile)
+		{
+			return;
+		}
+
+		snapshot ??= ModifierManager.Instance?.CreateCastSnapshot();
+		playerProjectile.modifierManager = ModifierManager.Instance;
+		playerProjectile.CastModifiers = snapshot?.Modifiers;
+		playerProjectile.WandStats = snapshot?.WandStats ?? new AggregatedSpellStats();
 	}
 }

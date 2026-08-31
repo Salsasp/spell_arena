@@ -8,17 +8,17 @@ public partial class SpellSpawnComponent : Component
 
 	public void Update()
 	{
-		ModifierContext ctx = ModifierContext.ForProjectile(GetParent<PlayerProjectile>());
-
+		PlayerProjectile projectile = GetParent<PlayerProjectile>();
+		ModifierContext ctx = ModifierContext.ForProjectile(projectile);
 		AggregatedSpellStats stats = SpellStatBuilder.Build(
-			modifierManager.ActiveModifiers.Values,
+			projectile.CastModifiers ?? modifierManager.GetCombatModifiers(),
+			projectile.WandStats,
 			modifierManager.SpellEnlargeAmount,
 			modifierManager.SpellHastenAmount
 		);
 		damageComponent.ApplyFromStats(stats);
 
-		Area2D area = GetParent<PlayerProjectile>().projArea2D;
-		area.Scale = Vector2.One * stats.ScaleMultiplier;
+		projectile.projArea2D.Scale = Vector2.One * stats.ScaleMultiplier;
 
 		ctx.Movement.Speed *= stats.SpeedMultiplier;
 

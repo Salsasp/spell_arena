@@ -11,18 +11,63 @@ public partial class Player : CharacterBody2D, IEntity
 	[Export] public Wand wand { get; set; }
 	[Export] public Node2D wandSnapPoints { get; set; }
 	[Export] public ModifierManager modifierManager { get; set; }
+	[Export] public Node2D ElementalWands { get; set; }
+	public Wand ActiveWand
+	{
+		get => activeWand;
+		set
+		{
+			activeWand = value;
+			if (modifierManager != null)
+			{
+				modifierManager.ActiveWand = value;
+			}
+		}
+	}
+	public ModifierInventory ModifierPool { get; } = new(ModifierInventory.PlayerPoolSlotCount);
+	public Wand ArcaneWand { get; private set; }
+	public Wand LightningWand { get; private set; }
+	public Wand FireWand { get; private set; }
+	public Wand IceWand { get; private set; }
+	private Wand activeWand;
     public bool IsFalling { get; set; }
 	private ProjectileSpawner projectileSpawner { get; set; }
 	private Vector2 respawnPos;
 	private int pitfallDamage;
 
-    public override void _Ready()
+	public override void _Ready()
 	{
 		IsFalling = false;
 		projectileSpawner = GetNode<ProjectileSpawner>("../ProjectileSpawner");
+		InitElementalWands();
+		ActiveWand = ArcaneWand;
+		SortLayers.Apply(this, SortLayers.Entities);
 
 		animationComponent.FallAnimationFinished += OnFallFinished;
 		hitboxComponent.Hit += OnHit;
+	}
+
+	public bool HasModifier(string id)
+	{
+		if (ModifierPool.ContainsId(id) || modifierManager.HasActiveModifier(id))
+		{
+			return true;
+		}
+
+		foreach (Wand loadoutWand in GetLoadoutWands())
+		{
+			if (loadoutWand.wandInventory.Slots.ContainsId(id))
+			{
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	public Wand[] GetLoadoutWands()
+	{
+		return [ArcaneWand, LightningWand, FireWand, IceWand];
 	}
 
 	public override void _PhysicsProcess(double delta)
@@ -30,16 +75,18 @@ public partial class Player : CharacterBody2D, IEntity
 		if (IsFalling) return;
 
 		inputComponent.Update();
-		Vector2 EndOfWandPos = wand.GetEndOfWandPos();
+		Vector2 EndOfWandPos = ActiveWand.GetEndOfWandPos();
 		Vector2 projDir = EndOfWandPos.DirectionTo(inputComponent.MousePos).Normalized();
 
-		if (inputComponent.LeftClickJustPressed)
+		if (inputComponent.LeftClickPressed && ActiveWand.TryBeginShot())
 		{
-			projectileSpawner.SpawnProjectile(EndOfWandPos, projDir);
+			projectileSpawner.SpawnProjectile(EndOfWandPos, projDir, snapshot: modifierManager.CreateCastSnapshot());
 		}
 
-		wand.RotateWand(inputComponent);
-		wand.SnapPivotToDirection(movementComponent, wandSnapPoints);
+		HandleWandSwitchInput();
+
+		ActiveWand.RotateWand(inputComponent);
+		ActiveWand.SnapPivotToDirection(movementComponent, wandSnapPoints);
 		movementComponent.direction = inputComponent.MoveDir;
 		movementComponent.mouseDir = GlobalPosition.DirectionTo(inputComponent.MousePos).Normalized();
 
@@ -97,9 +144,38 @@ public partial class Player : CharacterBody2D, IEntity
 
 		if (!animationComponent.TryPlayFallAnimation(pitfall))
 		{
-			IsFalling = false; // no anim configured — fail safe
+			IsFalling = false; // no anim configured - fail safe
 		}
     }
+
+	public void HandleWandSwitchInput()
+	{
+		ActiveWand.Visible = false;
+		if (inputComponent.Wand1Pressed) {
+			ActiveWand = ArcaneWand;
+		}
+		if (inputComponent.Wand2Pressed) {
+			ActiveWand = LightningWand;
+		}
+		if (inputComponent.Wand3Pressed) {
+			ActiveWand = FireWand;
+		}
+		if (inputComponent.Wand4Pressed) {
+			ActiveWand = IceWand;
+		}
+		if (inputComponent.WandCycleUpPressed)
+		{
+			int idx = GetActiveWandIndex();
+			ActiveWand = GetLoadoutWands()[(idx + 1) % 4];
+		}
+		if (inputComponent.WandCycleDownPressed)
+		{
+			int idx = GetActiveWandIndex();
+			int newIdx = (idx - 1) % 4;
+			ActiveWand = GetLoadoutWands()[newIdx < 0 ? 3 : newIdx];
+		}
+		ActiveWand.Visible =  true;
+	}
 
 	private void OnFallFinished()
 	{
@@ -108,4 +184,25 @@ public partial class Player : CharacterBody2D, IEntity
 		IsFalling = false;
 	}
 
+	private void InitElementalWands()
+	{
+		ArcaneWand = ElementalWands.GetNode<Wand>("ArcaneWand");
+		IceWand = ElementalWands.GetNode<Wand>("IceWand");
+		FireWand = ElementalWands.GetNode<Wand>("FireWand");
+		LightningWand = ElementalWands.GetNode<Wand>("LightningWand");
+	}
+
+	private int GetActiveWandIndex()
+	{
+		Wand[] wandArr = GetLoadoutWands();
+		for (int i = 0; i < wandArr.Length; i++)
+		{
+			if (wandArr[i] == ActiveWand)
+			{
+				return i;
+			}
+		}
+		
+		return 0;
+	}
 }

@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://d3op0eovhs6cq" path="res://Scripts/Spell/DamageComponent.cs" id="2_iit1p"]
 [ext_resource type="Script" uid="uid://5k1veq5ulv3t" path="res://Scripts/Spell/SpellMovementComponent.cs" id="3_08kpi"]
 [ext_resource type="Script" uid="uid://cs8nivwxnirj8" path="res://Scripts/Spell/DespawnComponent.cs" id="4_kchkn"]
+[ext_resource type="Shader" uid="uid://bvq6q2nnaqx5y" path="res://Assets/Data/Shaders/BurnPool.gdshader" id="5_08kpi"]
 [ext_resource type="Texture2D" uid="uid://dfsaapvej0soa" path="res://Assets/Sprites/Spell/projectile_orbit.png" id="5_lt3ql"]
 [ext_resource type="Texture2D" uid="uid://c2cyol36emsq6" path="res://Assets/Sprites/Spell/spell_particle.png" id="6_iit1p"]
 [ext_resource type="Script" uid="uid://nabumqpkq4ny" path="res://Scripts/Entity/AnimationComponent.cs" id="6_uw5ag"]
@@ -11,6 +12,15 @@
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_0dfur"]
 radius = 13.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kchkn"]
+shader = ExtResource("5_08kpi")
+shader_parameter/amount = 6.000000285
+shader_parameter/texture_details = Vector4(0, 0, 1, 1)
+shader_parameter/image_details = Vector2(1, 1)
+shader_parameter/colour_1 = Color(0.7176471, 0.13725491, 0.08627451, 1)
+shader_parameter/colour_2 = Color(0.70468175, 0.3162299, 0.090481274, 1)
+shader_parameter/id = 0.0
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_08kpi"]
 lifetime_randomness = 0.1
@@ -74,7 +84,8 @@ shape = SubResource("CircleShape2D_0dfur")
 
 [node name="Sprite2D" type="Sprite2D" parent="ProjArea2D" unique_id=461592810]
 modulate = Color(1, 0.3, 0.3, 1)
-rotation = 1.5707964
+material = SubResource("ShaderMaterial_kchkn")
+scale = Vector2(1.3618422, 1.5506289)
 texture = ExtResource("5_lt3ql")
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="ProjArea2D" unique_id=2029889895]

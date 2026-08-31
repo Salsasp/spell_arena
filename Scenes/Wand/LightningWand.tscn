@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://dongkcstai4jo"]
+
+[ext_resource type="Script" uid="uid://cr05tei5eqn4h" path="res://Scripts/Entity/Wand/LightningWand.cs" id="1_y5y8a"]
+[ext_resource type="Texture2D" uid="uid://siwrarrfikq" path="res://Assets/Sprites/Wand/lightning_wand.png" id="2_y5y8a"]
+
+[node name="LightningWand" type="Node2D" unique_id=1764541263 node_paths=PackedStringArray("EndOfWand", "WandSprite", "WandPivot", "FireCooldownTimer")]
+script = ExtResource("1_y5y8a")
+EndOfWand = NodePath("WandPivot/EndOfWand")
+WandSprite = NodePath("WandPivot/WandSprite")
+WandPivot = NodePath("WandPivot")
+FireCooldownTimer = NodePath("FireCooldownTimer")
+
+[node name="WandPivot" type="Node2D" parent="." unique_id=2436162]
+
+[node name="WandSprite" type="Sprite2D" parent="WandPivot" unique_id=391171080]
+position = Vector2(14.000002, 0)
+rotation = 0.7853982
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("2_y5y8a")
+
+[node name="EndOfWand" type="Marker2D" parent="WandPivot" unique_id=1194365774]
+position = Vector2(30, 0)
+scale = Vector2(1.07, 1.0706638)
+
+[node name="FireCooldownTimer" type="Timer" parent="."]
+one_shot = true

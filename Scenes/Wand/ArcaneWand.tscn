@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://bhjlpjc7osalo"]
+
+[ext_resource type="Script" uid="uid://c3cvp5b0a6ygi" path="res://Scripts/Entity/Wand/ArcaneWand.cs" id="1_53xpx"]
+[ext_resource type="Texture2D" uid="uid://c6ec5upn7maib" path="res://Assets/Sprites/Wand/arcane_wand.png" id="2_53xpx"]
+
+[node name="ArcaneWand" type="Node2D" unique_id=1764541263 node_paths=PackedStringArray("EndOfWand", "WandSprite", "WandPivot", "FireCooldownTimer")]
+rotation = 0.7853982
+script = ExtResource("1_53xpx")
+EndOfWand = NodePath("WandPivot/EndOfWand")
+WandSprite = NodePath("WandPivot/WandSprite")
+WandPivot = NodePath("WandPivot")
+FireCooldownTimer = NodePath("FireCooldownTimer")
+BaseSpeedMultiplier = 1.5
+BaseCritChanceBonus = 20.0
+BaseDamage = 40
+BaseFireRate = 4.0
+
+[node name="WandPivot" type="Node2D" parent="." unique_id=2436162]
+
+[node name="WandSprite" type="Sprite2D" parent="WandPivot" unique_id=391171080]
+position = Vector2(6.363961, -6.3639617)
+scale = Vector2(0.467, 0.5)
+texture = ExtResource("2_53xpx")
+offset = Vector2(0.025237322, 0.023332119)
+
+[node name="EndOfWand" type="Marker2D" parent="WandPivot" unique_id=1194365774]
+position = Vector2(10.606602, -12.020816)
+
+[node name="FireCooldownTimer" type="Timer" parent="."]
+one_shot = true

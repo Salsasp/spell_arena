@@ -39,6 +39,7 @@ public partial class RunManager : Node
 		waveSpawner.WaveComplete += OnWaveComplete;
 		playerHealth.Dead += OnPlayerDead;
 		gameUi.ModifierDraftUI.ModifierSelected += OnModifierSelected;
+		gameUi.ModifyWandUI.ContinuePressed += OnCustomizeContinue;
 		ForceEndWave += OnForceEndWave;
 
 		StartWave();
@@ -50,6 +51,7 @@ public partial class RunManager : Node
 		WaveDefinition wave = WaveTable.GetWave(currentWave);
 		gameUi.SetWave(currentWave);
 		gameUi.ModifierDraftUI.HideModifierDraft();
+		gameUi.ModifyWandUI.HideCustomize();
 		gameUi.HideGameOver();
 		EmitSignal(SignalName.WaveStarted, currentWave);
 		waveSpawner.BeginWave(wave);
@@ -77,11 +79,25 @@ public partial class RunManager : Node
 			return;
 		}
 
-		if (!modifierManager.TryAddActiveModifier(modifierId))
+		if (!modifierManager.TryCollectModifier(modifierId))
 		{
 			GD.Print($"Modifier '{modifierId}' was not added.");
+			return;
 		}
 
+		gameUi.ModifierDraftUI.HideModifierDraft();
+		gameUi.statusLabel.Text = "Slot modifiers, then continue";
+		gameUi.ModifyWandUI.ShowCustomize(player);
+	}
+
+	private void OnCustomizeContinue()
+	{
+		if (phase != RunPhase.ModifierDraft)
+		{
+			return;
+		}
+
+		gameUi.ModifyWandUI.HideCustomize();
 		GetTree().Paused = false;
 		currentWave++;
 		StartWave();
@@ -93,6 +109,7 @@ public partial class RunManager : Node
 		GetTree().Paused = true;
 		waveSpawner.ClearAllEnemies();
 		gameUi.ModifierDraftUI.HideModifierDraft();
+		gameUi.ModifyWandUI.HideCustomize();
 		gameUi.ShowGameOver(currentWave);
 	}
 

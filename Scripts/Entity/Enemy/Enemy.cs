@@ -12,6 +12,7 @@ public partial class Enemy : CharacterBody2D, IEntity
 	[Export] public AnimationComponent animationComponent { get; set; }
 	[Export] public ArenaClampComponent arenaClamp { get; set; }
 	public bool IsFalling { get; set; }
+	public bool MarkedForBurnPoolSpawn = false;
 	private EnemyContext context;
 	private TextManagerComponent textManagerComponent;
 	private Vector2 fallStartPosition;
@@ -21,11 +22,14 @@ public partial class Enemy : CharacterBody2D, IEntity
 	public override void _Ready()
 	{
 		IsFalling = false;
-		textManagerComponent = GetNode<TextManagerComponent>("../../TextManagerComponent");
+		SortLayers.Apply(this, SortLayers.Entities);
 
-		ProjectileSpawner projectileSpawner = GetNode<ProjectileSpawner>("../../ProjectileSpawner");
-		Player player = GetNodeOrNull<Player>("../../Player");
-		ArenaBounds arenaBounds = GetNodeOrNull<ArenaBounds>("../../ArenaBounds");
+		Node sceneRoot = GetTree().CurrentScene;
+		textManagerComponent = sceneRoot.GetNode<TextManagerComponent>("TextManagerComponent");
+
+		ProjectileSpawner projectileSpawner = sceneRoot.GetNode<ProjectileSpawner>("ProjectileSpawner");
+		Player player = sceneRoot.GetNodeOrNull<Player>("Player");
+		ArenaBounds arenaBounds = sceneRoot.GetNodeOrNull<ArenaBounds>("ArenaBounds");
 		context = new EnemyContext(this, player, movementComponent, projectileSpawner, arenaBounds);
 
 		movementBehavior?.Initialize(context);
@@ -81,10 +85,9 @@ public partial class Enemy : CharacterBody2D, IEntity
 			return;
 		}
 
-		Node2D projectileRoot = hitBy.GetParent<Node2D>();
-		DamageComponent hitByDamageComponent = projectileRoot.GetNodeOrNull<DamageComponent>("DamageComponent");
-		HitComponent hitByHitComponent = projectileRoot.GetNodeOrNull<HitComponent>("HitComponent");
-		AnimationComponent hitByAnimationComponent = projectileRoot.GetNodeOrNull<AnimationComponent>("AnimationComponent");
+		var hitByRoot = hitBy.GetParent<Node2D>();
+		DamageComponent hitByDamageComponent = hitByRoot.GetNodeOrNull<DamageComponent>("DamageComponent");
+		HitComponent hitByHitComponent = hitByRoot.GetNodeOrNull<HitComponent>("HitComponent");
 		if (hitByDamageComponent == null)
 		{
 			GD.PrintErr("Hit by area without valid DamageComponent");
@@ -93,8 +96,9 @@ public partial class Enemy : CharacterBody2D, IEntity
 
 		bool isCrit = hitByDamageComponent.IsCriticalHit();
 		int damage = hitByDamageComponent.CalculateDamage(isCrit);
+		bool showText = hitByRoot is not TextProjectile;
 
-		healthComponent.TakeDamage(damage);
+		ApplyDamage(damage, isCrit, showText);
 
 		if (hitByHitComponent != null)
 		{
@@ -102,29 +106,40 @@ public partial class Enemy : CharacterBody2D, IEntity
 		}
 		else
 		{
-			projectileRoot.QueueFree();
+			hitByRoot.QueueFree();
 		}
+	}
 
-		List<string> textModifiers = new List<string>() { "color=red", "center" };
-		string damageString = damage.ToString();
+	public void ApplyDamage(int damage, bool isCrit, bool showText = true, bool showHitAnimation = true)
+	{
+		healthComponent.TakeDamage(damage);
 
-		if (isCrit)
+		if (showText && textManagerComponent != null)
 		{
-			textModifiers.Add("shake");
-			damageString += " - CRIT!";
-		} 
-		
-		if (textManagerComponent != null && projectileRoot is not TextProjectile)
-		{
+			List<string> textModifiers = new List<string>() { "color=red", "center" };
+			string damageString = damage.ToString();
+
+			if (isCrit)
+			{
+				textModifiers.Add("shake");
+				damageString += " - CRIT!";
+			}
+
 			textManagerComponent.DrawAbove(this, -30, damageString, textModifiers, damage);
 		}
 
-		animationComponent.PlayProjectileHitAnimation(GlobalPosition);
+		if (showHitAnimation)
+		{
+			animationComponent.PlayProjectileHitAnimation(GlobalPosition);
+		}
 	}
 
 	private void OnDead()
 	{
-		//GD.Print("Enemy died!");
+		if (MarkedForBurnPoolSpawn)
+		{
+			Callable.From(() => PoolManager.Instance.SpawnBurnPool(GlobalPosition)).CallDeferred();
+		}
 	}
 
 	public bool DotApplied()

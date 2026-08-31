@@ -1,0 +1,530 @@
+[gd_scene format=3 uid="uid://7ga15vr1cxes"]
+
+[ext_resource type="PackedScene" uid="uid://d1fkgj11jw5dx" path="res://Scenes/UI/WandModifier/InventoryModifierSlot.tscn" id="2_1yfrq"]
+[ext_resource type="Texture2D" uid="uid://c6ec5upn7maib" path="res://Assets/Sprites/Wand/arcane_wand.png" id="3_qbqx5"]
+[ext_resource type="Theme" uid="uid://btp4nkh4u337k" path="res://Assets/UI/main.tres" id="3_theme"]
+[ext_resource type="Script" uid="uid://dw14af6iwhuie" path="res://Scripts/UI/WandModifier/ModifyWandUI.cs" id="4_script"]
+[ext_resource type="Texture2D" uid="uid://siwrarrfikq" path="res://Assets/Sprites/Wand/lightning_wand.png" id="5_yvdt7"]
+[ext_resource type="Texture2D" uid="uid://b7mxkn7vawmjk" path="res://Assets/Sprites/Wand/fire_wand.png" id="6_e74ej"]
+[ext_resource type="Texture2D" uid="uid://dxygvy0g8rhrv" path="res://Assets/Sprites/Wand/ice_wand.png" id="7_wnfp7"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tooltip"]
+content_margin_left = 12.0
+content_margin_top = 10.0
+content_margin_right = 12.0
+content_margin_bottom = 10.0
+bg_color = Color(0.07, 0.07, 0.09, 0.94)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.85, 0.85, 0.85, 0.55)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[node name="ModifyWandUI" type="Control" unique_id=1933763687 node_paths=PackedStringArray("ArcaneGrid", "LightningGrid", "FireGrid", "IceGrid", "InventoryGrid", "ContinueButton", "TooltipPanel", "TooltipNameLabel", "TooltipDescriptionLabel", "TooltipRarityLabel", "TooltipAffinityLabel")]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("3_theme")
+script = ExtResource("4_script")
+ArcaneGrid = NodePath("MarginContainer/HBoxContainer/ArcaneWandVBox/Panel/GridContainer")
+LightningGrid = NodePath("MarginContainer/HBoxContainer/LightningWandVBox/Panel/GridContainer")
+FireGrid = NodePath("MarginContainer/HBoxContainer/FireWandVBox/Panel/GridContainer")
+IceGrid = NodePath("MarginContainer/HBoxContainer/IceWandVBox/Panel/GridContainer")
+InventoryGrid = NodePath("MarginContainer/HBoxContainer/ModInventoryVBox/Panel/GridContainer")
+ContinueButton = NodePath("ContinueButton")
+TooltipPanel = NodePath("ModifierTooltip")
+TooltipNameLabel = NodePath("ModifierTooltip/VBoxContainer/NameLabel")
+TooltipDescriptionLabel = NodePath("ModifierTooltip/VBoxContainer/DescriptionLabel")
+TooltipRarityLabel = NodePath("ModifierTooltip/VBoxContainer/RarityLabel")
+TooltipAffinityLabel = NodePath("ModifierTooltip/VBoxContainer/AffinityLabel")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=438019362]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer" unique_id=515686252]
+layout_mode = 2
+theme_override_constants/separation = 24
+alignment = 1
+
+[node name="ArcaneWandVBox" type="VBoxContainer" parent="MarginContainer/HBoxContainer" unique_id=402670429]
+layout_mode = 2
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="ArcaneWandTexture" type="TextureRect" parent="MarginContainer/HBoxContainer/ArcaneWandVBox" unique_id=980766532]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+texture = ExtResource("3_qbqx5")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="ArcaneParticles" type="CPUParticles2D" parent="MarginContainer/HBoxContainer/ArcaneWandVBox/ArcaneWandTexture" unique_id=286840810]
+position = Vector2(53, 9)
+amount = 16
+lifetime = 2.0
+emission_shape = 1
+emission_sphere_radius = 7.0
+spread = 90.0
+gravity = Vector2(0, -10)
+color = Color(0.7764706, 0.30588236, 0.81960785, 1)
+hue_variation_max = 1.0
+
+[node name="Panel" type="Panel" parent="MarginContainer/HBoxContainer/ArcaneWandVBox" unique_id=1124505469]
+custom_minimum_size = Vector2(84, 228)
+layout_mode = 2
+
+[node name="GridContainer" type="GridContainer" parent="MarginContainer/HBoxContainer/ArcaneWandVBox/Panel" unique_id=757191454]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/h_separation = 4
+theme_override_constants/v_separation = 4
+columns = 2
+
+[node name="ModifierIcon" parent="MarginContainer/HBoxContainer/ArcaneWandVBox/Panel/GridContainer" unique_id=461891541 instance=ExtResource("2_1yfrq")]
+layout_mode = 2
+
+[node name="ModifierIcon2" parent="MarginContainer/HBoxContainer/ArcaneWandVBox/Panel/GridContainer" unique_id=1942931165 instance=ExtResource("2_1yfrq")]
+layout_mode = 2
+
+[node name="ModifierIcon3" parent="MarginContainer/HBoxContainer/ArcaneWandVBox/Panel/GridContainer" unique_id=1552894917 instance=ExtResource("2_1yfrq")]
+layout_mode = 2
+
+[node name="ModifierIcon4" parent="MarginContainer/HBoxContainer/ArcaneWandVBox/Panel/GridContainer" unique_id=1543463372 instance=ExtResource("2_1yfrq")]
+layout_mode = 2
+
+[node name="ModifierIcon5" parent="MarginContainer/HBoxContainer/ArcaneWandVBox/Panel/GridContainer" unique_id=188514827 instance=ExtResource("2_1yfrq")]
+layout_mode = 2
+
+[node name="ModifierIcon6" parent="MarginContainer/HBoxContainer/ArcaneWandVBox/Panel/GridContainer" unique_id=1047725210 instance=ExtResource("2_1yfrq")]
+layout_mode = 2
+
+[node name="ModifierIcon7" parent="MarginContainer/HBoxContainer/ArcaneWandVBox/Panel/GridContainer" unique_id=1919970534 instance=ExtResource("2_1yfrq")]
+layout_mode = 2
+
+[node name="ModifierIcon8" parent="MarginContainer/HBoxContainer/ArcaneWandVBox/Panel/GridContainer" unique_id=679225447 instance=ExtResource("2_1yfrq")]
+layout_mode = 2
+
+[node name="ModifierIcon9" parent="MarginContainer/HBoxContainer/ArcaneWandVBox/Panel/GridContainer" unique_id=626889607 instance=ExtResource("2_1yfrq")]
+layout_mode = 2
+
+[node name="ModifierIcon10" parent="MarginContainer/HBoxContainer/ArcaneWandVBox/Panel/GridContainer" unique_id=1170534405 instance=ExtResource("2_1yfrq")]
+layout_mode = 2
+
+[node name="ModifierIcon11" parent="MarginContainer/HBoxContainer/ArcaneWandVBox/Panel/GridContainer" unique_id=831863769 instance=ExtResource("2_1yfrq")]
+layout_mode = 2
+
+[node name="ModifierIcon12" parent="MarginContainer/HBoxContainer/ArcaneWandVBox/Panel/GridContainer" unique_id=1000963578 instance=ExtResource("2_1yfrq")]
+layout_mode = 2
+
+[node name="LightningWandVBox" type="VBoxContainer" parent="MarginContainer/HBoxContainer" unique_id=589486824]
+layout_mode = 2
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="LightningWandTexture" type="TextureRect" parent="MarginContainer/HBoxContainer/LightningWandVBox" unique_id=1018212569]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+texture = ExtResource("5_yvdt7")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="LightningParticles" type="CPUParticles2D" parent="MarginContainer/HBoxContainer/LightningWandVBox/LightningWandTexture" unique_id=1486439050]
+position = Vector2(41, 24)
+amount = 16
+lifetime = 2.0
+emission_shape = 1
+emission_sphere_radius = 7.0
+spread = 90.0
+gravity = Vector2(0, -10)
+color = Color(0.8901961, 0.8745098, 0.5294118, 1)
+hue_variation_max = 1.0
+
+[node name="Panel" type="Panel" parent="MarginContainer/HBoxContainer/LightningWandVBox" unique_id=1094220821]
+custom_minimum_size = Vector2(84, 228)
+layout_mode = 2
+
+[node name="GridContainer" type="GridContainer" parent="MarginContainer/HBoxContainer/LightningWandVBox/Panel" unique_id=1629796431]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/h_separation = 4
+theme_override_constants/v_separation = 4
+columns = 2
+
+[node name="ModifierIcon" parent="MarginContainer/HBoxContainer/LightningWandVBox/Panel/GridContainer" unique_id=1349216979 instance=ExtResource("2_1yfrq")]
+layout_mode = 2
+
+[node name="ModifierIcon2" parent="MarginContainer/HBoxContainer/LightningWandVBox/Panel/GridContainer" unique_id=1154127725 instance=ExtResource("2_1yfrq")]
+layout_mode = 2
+
+[node name="ModifierIcon3" parent="MarginContainer/HBoxContainer/LightningWandVBox/Panel/GridContainer" unique_id=489139499 instance=ExtResource("2_1yfrq")]
+layout_mode = 2
+
+[node name="ModifierIcon4" parent="MarginContainer/HBoxContainer/LightningWandVBox/Panel/GridContainer" unique_id=1309716723 instance=ExtResource("2_1yfrq")]
+layout_mode = 2
+
+[node name="ModifierIcon5" parent="MarginContainer/HBoxContainer/LightningWandVBox/Panel/GridContainer" unique_id=860498358 instance=ExtResource("2_1yfrq")]
+layout_mode = 2
+
+[node name="ModifierIcon6" parent="MarginContainer/HBoxContainer/LightningWandVBox/Panel/GridContainer" unique_id=1383300897 instance=ExtResource("2_1yfrq")]
+layout_mode = 2
+
+[node name="ModifierIcon7" parent="MarginContainer/HBoxContainer/LightningWandVBox/Panel/GridContainer" unique_id=1994008587 instance=ExtResource("2_1yfrq")]
+layout_mode = 2
+
+[node name="ModifierIcon8" parent="MarginContainer/HBoxContainer/LightningWandVBox/Panel/GridContainer" unique_id=1086037412 instance=ExtResource("2_1yfrq")]
+layout_mode = 2
+
+[node name="ModifierIcon9" parent="MarginContainer/HBoxContainer/LightningWandVBox/Panel/GridContainer" unique_id=1033395264 instance=ExtResource("2_1yfrq")]
+layout_mode = 2
+
+[node name="ModifierIcon10" parent="MarginContainer/HBoxContainer/LightningWandVBox/Panel/GridContainer" unique_id=515145304 instance=ExtResource("2_1yfrq")]
+layout_mode = 2
+
+[node name="ModifierIcon11" parent="MarginContainer/HBoxContainer/LightningWandVBox/Panel/GridContainer" unique_id=361674785 instance=ExtResource("2_1yfrq")]
+layout_mode = 2
+
+[node name="ModifierIcon12" parent="MarginContainer/HBoxContainer/LightningWandVBox/Panel/GridContainer" unique_id=1560640565 instance=ExtResource("2_1yfrq")]
+layout_mode = 2
+
+[node name="FireWandVBox" type="VBoxContainer" parent="MarginContainer/HBoxContainer" unique_id=1468355218]
+layout_mode = 2
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="FireWandTexture" type="TextureRect" parent="MarginContainer/HBoxContainer/FireWandVBox" unique_id=353938407]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+texture = ExtResource("6_e74ej")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="FireParticles" type="CPUParticles2D" parent="MarginContainer/HBoxContainer/FireWandVBox/FireWandTexture" unique_id=1353524560]
+position = Vector2(56, 11)
+amount = 16
+lifetime = 2.0
+emission_shape = 1
+emission_sphere_radius = 7.0
+spread = 90.0
+gravity = Vector2(0, -10)
+color = Color(0.627451, 0.023529412, 0.078431375, 1)
+hue_variation_max = 1.0
+
+[node name="Panel" type="Panel" parent="MarginContainer/HBoxContainer/FireWandVBox" unique_id=586275274]
+custom_minimum_size = Vector2(84, 228)
+layout_mode = 2
+
+[node name="GridContainer" type="GridContainer" parent="MarginContainer/HBoxContainer/FireWandVBox/Panel" unique_id=2041499246]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/h_separation = 4
+theme_override_constants/v_separation = 4
+columns = 2
+
+[node name="ModifierIcon" parent="MarginContainer/HBoxContainer/FireWandVBox/Panel/GridContainer" unique_id=599241347 instance=ExtResource("2_1yfrq")]
+layout_mode = 2
+
+[node name="ModifierIcon2" parent="MarginContainer/HBoxContainer/FireWandVBox/Panel/GridContainer" unique_id=1863610360 instance=ExtResource("2_1yfrq")]
+layout_mode = 2
+
+[node name="ModifierIcon3" parent="MarginContainer/HBoxContainer/FireWandVBox/Panel/GridContainer" unique_id=1809280205 instance=ExtResource("2_1yfrq")]
+layout_mode = 2
+
+[node name="ModifierIcon4" parent="MarginContainer/HBoxContainer/FireWandVBox/Panel/GridContainer" unique_id=1219509693 instance=ExtResource("2_1yfrq")]
+layout_mode = 2
+
+[node name="ModifierIcon5" parent="MarginContainer/HBoxContainer/FireWandVBox/Panel/GridContainer" unique_id=1187787301 instance=ExtResource("2_1yfrq")]
+layout_mode = 2
+
+[node name="ModifierIcon6" parent="MarginContainer/HBoxContainer/FireWandVBox/Panel/GridContainer" unique_id=405880128 instance=ExtResource("2_1yfrq")]
+layout_mode = 2
+
+[node name="ModifierIcon7" parent="MarginContainer/HBoxContainer/FireWandVBox/Panel/GridContainer" unique_id=1491248468 instance=ExtResource("2_1yfrq")]
+layout_mode = 2
+
+[node name="ModifierIcon8" parent="MarginContainer/HBoxContainer/FireWandVBox/Panel/GridContainer" unique_id=1032125699 instance=ExtResource("2_1yfrq")]
+layout_mode = 2
+
+[node name="ModifierIcon9" parent="MarginContainer/HBoxContainer/FireWandVBox/Panel/GridContainer" unique_id=1566298962 instance=ExtResource("2_1yfrq")]
+layout_mode = 2
+
+[node name="ModifierIcon10" parent="MarginContainer/HBoxContainer/FireWandVBox/Panel/GridContainer" unique_id=778136315 instance=ExtResource("2_1yfrq")]
+layout_mode = 2
+
+[node name="ModifierIcon11" parent="MarginContainer/HBoxContainer/FireWandVBox/Panel/GridContainer" unique_id=1696692432 instance=ExtResource("2_1yfrq")]
+layout_mode = 2
+
+[node name="ModifierIcon12" parent="MarginContainer/HBoxContainer/FireWandVBox/Panel/GridContainer" unique_id=1400762375 instance=ExtResource("2_1yfrq")]
+layout_mode = 2
+
+[node name="IceWandVBox" type="VBoxContainer" parent="MarginContainer/HBoxContainer" unique_id=1464673922]
+layout_mode = 2
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="IceWandTexture" type="TextureRect" parent="MarginContainer/HBoxContainer/IceWandVBox" unique_id=809537199]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+texture = ExtResource("7_wnfp7")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="IceParticles" type="CPUParticles2D" parent="MarginContainer/HBoxContainer/IceWandVBox/IceWandTexture" unique_id=1771304892]
+position = Vector2(59, 8)
+amount = 16
+lifetime = 2.0
+emission_shape = 1
+emission_sphere_radius = 7.0
+spread = 90.0
+gravity = Vector2(0, -10)
+color = Color(0.7058824, 0.8901961, 1, 1)
+hue_variation_max = 1.0
+
+[node name="Panel" type="Panel" parent="MarginContainer/HBoxContainer/IceWandVBox" unique_id=1503046151]
+custom_minimum_size = Vector2(84, 228)
+layout_mode = 2
+
+[node name="GridContainer" type="GridContainer" parent="MarginContainer/HBoxContainer/IceWandVBox/Panel" unique_id=1964352078]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/h_separation = 4
+theme_override_constants/v_separation = 4
+columns = 2
+
+[node name="ModifierIcon" parent="MarginContainer/HBoxContainer/IceWandVBox/Panel/GridContainer" unique_id=1289078987 instance=ExtResource("2_1yfrq")]
+layout_mode = 2
+
+[node name="ModifierIcon2" parent="MarginContainer/HBoxContainer/IceWandVBox/Panel/GridContainer" unique_id=1747141073 instance=ExtResource("2_1yfrq")]
+layout_mode = 2
+
+[node name="ModifierIcon3" parent="MarginContainer/HBoxContainer/IceWandVBox/Panel/GridContainer" unique_id=123275697 instance=ExtResource("2_1yfrq")]
+layout_mode = 2
+
+[node name="ModifierIcon4" parent="MarginContainer/HBoxContainer/IceWandVBox/Panel/GridContainer" unique_id=1184170415 instance=ExtResource("2_1yfrq")]
+layout_mode = 2
+
+[node name="ModifierIcon5" parent="MarginContainer/HBoxContainer/IceWandVBox/Panel/GridContainer" unique_id=1120987656 instance=ExtResource("2_1yfrq")]
+layout_mode = 2
+
+[node name="ModifierIcon6" parent="MarginContainer/HBoxContainer/IceWandVBox/Panel/GridContainer" unique_id=1044206301 instance=ExtResource("2_1yfrq")]
+layout_mode = 2
+
+[node name="ModifierIcon7" parent="MarginContainer/HBoxContainer/IceWandVBox/Panel/GridContainer" unique_id=1469918385 instance=ExtResource("2_1yfrq")]
+layout_mode = 2
+
+[node name="ModifierIcon8" parent="MarginContainer/HBoxContainer/IceWandVBox/Panel/GridContainer" unique_id=296456254 instance=ExtResource("2_1yfrq")]
+layout_mode = 2
+
+[node name="ModifierIcon9" parent="MarginContainer/HBoxContainer/IceWandVBox/Panel/GridContainer" unique_id=158452156 instance=ExtResource("2_1yfrq")]
+layout_mode = 2
+
+[node name="ModifierIcon10" parent="MarginContainer/HBoxContainer/IceWandVBox/Panel/GridContainer" unique_id=485203915 instance=ExtResource("2_1yfrq")]
+layout_mode = 2
+
+[node name="ModifierIcon11" parent="MarginContainer/HBoxContainer/IceWandVBox/Panel/GridContainer" unique_id=1365104887 instance=ExtResource("2_1yfrq")]
+layout_mode = 2
+
+[node name="ModifierIcon12" parent="MarginContainer/HBoxContainer/IceWandVBox/Panel/GridContainer" unique_id=2107706389 instance=ExtResource("2_1yfrq")]
+layout_mode = 2
+
+[node name="ModInventoryVBox" type="VBoxContainer" parent="MarginContainer/HBoxContainer" unique_id=876330227]
+layout_mode = 2
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/ModInventoryVBox" unique_id=294258341]
+layout_mode = 2
+text = "Inventory"
+horizontal_alignment = 1
+
+[node name="Panel" type="Panel" parent="MarginContainer/HBoxContainer/ModInventoryVBox" unique_id=1352999702]
+custom_minimum_size = Vector2(228, 156)
+layout_mode = 2
+
+[node name="GridContainer" type="GridContainer" parent="MarginContainer/HBoxContainer/ModInventoryVBox/Panel" unique_id=1067963626]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/h_separation = 4
+theme_override_constants/v_separation = 4
+columns = 6
+
+[node name="ModifierIcon" parent="MarginContainer/HBoxContainer/ModInventoryVBox/Panel/GridContainer" unique_id=2047323149 instance=ExtResource("2_1yfrq")]
+layout_mode = 2
+
+[node name="ModifierIcon2" parent="MarginContainer/HBoxContainer/ModInventoryVBox/Panel/GridContainer" unique_id=1705080592 instance=ExtResource("2_1yfrq")]
+layout_mode = 2
+
+[node name="ModifierIcon3" parent="MarginContainer/HBoxContainer/ModInventoryVBox/Panel/GridContainer" unique_id=943529346 instance=ExtResource("2_1yfrq")]
+layout_mode = 2
+
+[node name="ModifierIcon4" parent="MarginContainer/HBoxContainer/ModInventoryVBox/Panel/GridContainer" unique_id=1928240751 instance=ExtResource("2_1yfrq")]
+layout_mode = 2
+
+[node name="ModifierIcon5" parent="MarginContainer/HBoxContainer/ModInventoryVBox/Panel/GridContainer" unique_id=2102419186 instance=ExtResource("2_1yfrq")]
+layout_mode = 2
+
+[node name="ModifierIcon6" parent="MarginContainer/HBoxContainer/ModInventoryVBox/Panel/GridContainer" unique_id=1880620328 instance=ExtResource("2_1yfrq")]
+layout_mode = 2
+
+[node name="ModifierIcon7" parent="MarginContainer/HBoxContainer/ModInventoryVBox/Panel/GridContainer" unique_id=1593459357 instance=ExtResource("2_1yfrq")]
+layout_mode = 2
+
+[node name="ModifierIcon8" parent="MarginContainer/HBoxContainer/ModInventoryVBox/Panel/GridContainer" unique_id=1492685981 instance=ExtResource("2_1yfrq")]
+layout_mode = 2
+
+[node name="ModifierIcon9" parent="MarginContainer/HBoxContainer/ModInventoryVBox/Panel/GridContainer" unique_id=1748924028 instance=ExtResource("2_1yfrq")]
+layout_mode = 2
+
+[node name="ModifierIcon10" parent="MarginContainer/HBoxContainer/ModInventoryVBox/Panel/GridContainer" unique_id=1811728208 instance=ExtResource("2_1yfrq")]
+layout_mode = 2
+
+[node name="ModifierIcon11" parent="MarginContainer/HBoxContainer/ModInventoryVBox/Panel/GridContainer" unique_id=789608279 instance=ExtResource("2_1yfrq")]
+layout_mode = 2
+
+[node name="ModifierIcon12" parent="MarginContainer/HBoxContainer/ModInventoryVBox/Panel/GridContainer" unique_id=2002391483 instance=ExtResource("2_1yfrq")]
+layout_mode = 2
+
+[node name="ModifierIcon13" parent="MarginContainer/HBoxContainer/ModInventoryVBox/Panel/GridContainer" unique_id=836063208 instance=ExtResource("2_1yfrq")]
+layout_mode = 2
+
+[node name="ModifierIcon14" parent="MarginContainer/HBoxContainer/ModInventoryVBox/Panel/GridContainer" unique_id=1244323298 instance=ExtResource("2_1yfrq")]
+layout_mode = 2
+
+[node name="ModifierIcon15" parent="MarginContainer/HBoxContainer/ModInventoryVBox/Panel/GridContainer" unique_id=142042560 instance=ExtResource("2_1yfrq")]
+layout_mode = 2
+
+[node name="ModifierIcon16" parent="MarginContainer/HBoxContainer/ModInventoryVBox/Panel/GridContainer" unique_id=1674067323 instance=ExtResource("2_1yfrq")]
+layout_mode = 2
+
+[node name="ModifierIcon17" parent="MarginContainer/HBoxContainer/ModInventoryVBox/Panel/GridContainer" unique_id=537602198 instance=ExtResource("2_1yfrq")]
+layout_mode = 2
+
+[node name="ModifierIcon18" parent="MarginContainer/HBoxContainer/ModInventoryVBox/Panel/GridContainer" unique_id=1724978351 instance=ExtResource("2_1yfrq")]
+layout_mode = 2
+
+[node name="ModifierIcon19" parent="MarginContainer/HBoxContainer/ModInventoryVBox/Panel/GridContainer" unique_id=1966138775 instance=ExtResource("2_1yfrq")]
+layout_mode = 2
+
+[node name="ModifierIcon20" parent="MarginContainer/HBoxContainer/ModInventoryVBox/Panel/GridContainer" unique_id=1244041229 instance=ExtResource("2_1yfrq")]
+layout_mode = 2
+
+[node name="ModifierIcon21" parent="MarginContainer/HBoxContainer/ModInventoryVBox/Panel/GridContainer" unique_id=1149240928 instance=ExtResource("2_1yfrq")]
+layout_mode = 2
+
+[node name="ModifierIcon22" parent="MarginContainer/HBoxContainer/ModInventoryVBox/Panel/GridContainer" unique_id=346511167 instance=ExtResource("2_1yfrq")]
+layout_mode = 2
+
+[node name="ModifierIcon23" parent="MarginContainer/HBoxContainer/ModInventoryVBox/Panel/GridContainer" unique_id=283356359 instance=ExtResource("2_1yfrq")]
+layout_mode = 2
+
+[node name="ModifierIcon24" parent="MarginContainer/HBoxContainer/ModInventoryVBox/Panel/GridContainer" unique_id=1459217537 instance=ExtResource("2_1yfrq")]
+layout_mode = 2
+
+[node name="ContinueButton" type="Button" parent="." unique_id=1498445940]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -90.0
+offset_top = -56.0
+offset_right = 90.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Continue"
+
+[node name="ModifierTooltip" type="PanelContainer" parent="."]
+visible = false
+z_index = 20
+custom_minimum_size = Vector2(220, 0)
+layout_mode = 0
+offset_right = 220.0
+offset_bottom = 80.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_tooltip")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ModifierTooltip"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 4
+
+[node name="NameLabel" type="Label" parent="ModifierTooltip/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Modifier Name"
+autowrap_mode = 3
+
+[node name="RarityLabel" type="Label" parent="ModifierTooltip/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "Rarity: Common"
+
+[node name="AffinityLabel" type="Label" parent="ModifierTooltip/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "Affinity: Neutral"
+
+[node name="DescriptionLabel" type="Label" parent="ModifierTooltip/VBoxContainer"]
+custom_minimum_size = Vector2(196, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "Description goes here."
+autowrap_mode = 3
