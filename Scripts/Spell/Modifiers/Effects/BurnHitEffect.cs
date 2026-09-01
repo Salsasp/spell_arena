@@ -10,10 +10,7 @@ public sealed class BurnHitEffect : IModifierEffect
 			return;
 		}
 
+		// Burn pools are exclusive to the fire wand innate; this only applies the damage over time
 		context.Hit.ApplyDot(context.HitTarget, modifier);
-		if (context.HitTarget is Enemy enemy)
-		{
-			enemy.MarkedForBurnPoolSpawn = true;
-		}
 	}
 }

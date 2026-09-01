@@ -1,21 +1,24 @@
 using Godot;
-using System;
 
 public sealed class FireWandInnateEffect : IModifierEffect
 {
-	public string EffectId => "fire_wand_innate"; // TODO: fill this with valid modifier once created
-	public ModifierPhase Phase => ModifierPhase.OnSpawn;
+	public string EffectId => "fire_wand_innate";
+	public ModifierPhase Phase => ModifierPhase.OnHit;
 
 	public void Apply(ModifierContext context, ModifierData modifier)
 	{
-        if (context.Hit == null || context.HitTarget == null)
+		if (context.Hit == null || context.HitTarget == null)
 		{
 			return;
 		}
 
-        // Apply the burn dot
 		context.Hit.ApplyDot(context.HitTarget, modifier);
-        
-        // TODO: create scene node burn pool
+
+		if (context.HitTarget is Enemy enemy)
+		{
+			// Recorded on the enemy because the pool only spawns once it dies. Highest
+			// stack count wins so a later, weaker hit can never shrink a pending pool.
+			enemy.BurnPoolStacks = Mathf.Max(enemy.BurnPoolStacks, modifier.copies);
+		}
 	}
 }

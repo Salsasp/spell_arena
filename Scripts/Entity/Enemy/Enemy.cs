@@ -12,7 +12,8 @@ public partial class Enemy : CharacterBody2D, IEntity
 	[Export] public AnimationComponent animationComponent { get; set; }
 	[Export] public ArenaClampComponent arenaClamp { get; set; }
 	public bool IsFalling { get; set; }
-	public bool MarkedForBurnPoolSpawn = false;
+	/// <summary> Stacks of the fire wand innate that burned this enemy. 0 means no pool on death. </summary>
+	public int BurnPoolStacks = 0;
 	private EnemyContext context;
 	private TextManagerComponent textManagerComponent;
 	private Vector2 fallStartPosition;
@@ -136,9 +137,10 @@ public partial class Enemy : CharacterBody2D, IEntity
 
 	private void OnDead()
 	{
-		if (MarkedForBurnPoolSpawn)
+		if (BurnPoolStacks > 0)
 		{
-			Callable.From(() => PoolManager.Instance.SpawnBurnPool(GlobalPosition)).CallDeferred();
+			int stacks = BurnPoolStacks;
+			Callable.From(() => PoolManager.Instance.SpawnBurnPool(GlobalPosition, stacks: stacks)).CallDeferred();
 		}
 	}
 

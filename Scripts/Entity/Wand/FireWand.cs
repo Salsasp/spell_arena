@@ -8,7 +8,7 @@ public partial class FireWand : Wand
 
 	public override void _Ready()
 	{
-		InnateMod = ModifierCatalog.Get("fire_spells");
+		InnateMod = ModifierCatalog.Get("fire_wand_innate");
 		wandInventory.SetInnateMod(InnateMod);
 	}
 }

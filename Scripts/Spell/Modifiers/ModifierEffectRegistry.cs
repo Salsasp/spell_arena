@@ -23,6 +23,7 @@ public static class ModifierEffectRegistry
 		Register(new LightningWandInnateEffect());
 		Register(new PierceHitEffect());
 		Register(new BurnHitEffect());
+		Register(new FireWandInnateEffect());
 		Register(new ExtraDraftOptionAcquireEffect());
 		Register(new SwiftStepAcquireEffect());
 
