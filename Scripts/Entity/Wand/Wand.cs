@@ -153,7 +153,11 @@ public partial class Wand : Node2D
 		return EndOfWand.GlobalPosition;
 	}
 
-	/// <summary> Retrieve all modifiers within a wand's inventory </summary>
+	/// <summary>
+	/// Retrieve all modifiers within a wand's inventory, with duplicates collapsed into a single
+	/// stacked entry each. The innate is included first, so equipping more copies of a modifier the
+	/// wand already has innately stacks on top of it.
+	/// </summary>
 	public List<ModifierData> GetCombatModifiers()
 	{
 		List<ModifierData> modifiers = [];
@@ -164,6 +168,6 @@ public partial class Wand : Node2D
 		}
 
 		modifiers.AddRange(wandInventory.GetMods());
-		return modifiers;
+		return ModifierStacker.Collapse(modifiers);
 	}
 }

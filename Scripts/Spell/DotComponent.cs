@@ -17,6 +17,17 @@ public partial class DotComponent : Component
         timeRemaining = Duration;
     }
 
+    /// <summary>
+    /// Re-applies this DOT from a fresh hit. Takes the stronger of the two tick damages so a
+    /// weaker source can never downgrade an existing burn, and restarts the duration.
+    /// </summary>
+    public void Refresh(float damagePerTick, float duration)
+    {
+        DamagePerTick = Mathf.Max(DamagePerTick, damagePerTick);
+        Duration = duration;
+        timeRemaining = duration;
+    }
+
     public override void _PhysicsProcess(double delta)
     {
         timeRemaining -= (float)delta;

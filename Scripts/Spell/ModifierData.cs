@@ -20,6 +20,16 @@ public class ModifierData
     public int copies = 1;
     public ModifierAffinity affinity = ModifierAffinity.Neutral;
 
+    /// <summary>
+    /// Shallow copy. Every field is a value type or an immutable string, so this is safe.
+    /// Used wherever <see cref="copies"/> has to be mutated without writing back to the
+    /// single shared instance handed out by ModifierCatalog.
+    /// </summary>
+    public ModifierData Clone()
+    {
+        return (ModifierData)MemberwiseClone();
+    }
+
     public bool IsRunScoped =>
         !string.IsNullOrEmpty(onAcquire) ||
         (!string.IsNullOrEmpty(uiOnHit) &&

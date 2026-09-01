@@ -100,31 +100,21 @@ public partial class HitComponent : Component
 
 	public void ApplyDot(Node2D target, ModifierData modifier)
 	{
-		float dotDamage = modifier.dotDamage;
-		DotComponent dot = new()
+		float damagePerTick = modifier.dotDamage * modifier.copies;
+
+		DotComponent existing = Component.FindComponent<DotComponent>(target);
+		if (existing != null)
 		{
-			DamagePerTick = dotDamage * modifier.copies,
+			existing.Refresh(damagePerTick, DOT_DURATION);
+			return;
+		}
+
+		target.AddChild(new DotComponent
+		{
+			DamagePerTick = damagePerTick,
 			TickInterval = DOT_TICK_INTERVAL,
 			Duration = DOT_DURATION
-		};
-
-		if (!HasDotComponent(target))
-		{
-			target.AddChild(dot);
-		}
-	}
-
-	private static bool HasDotComponent(Node2D target)
-	{
-		foreach (Node child in target.GetChildren())
-		{
-			if (child is DotComponent)
-			{
-				return true;
-			}
-		}
-
-		return false;
+		});
 	}
 
 	public override void _Draw()

@@ -1,0 +1,90 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://Scripts/Spell/FX/LightningArc.cs" id="1_arcscr"]
+[ext_resource type="Shader" path="res://Assets/Data/Shaders/LightningArc.gdshader" id="2_arcshd"]
+[ext_resource type="Texture2D" uid="uid://c2cyol36emsq6" path="res://Assets/Sprites/Spell/spell_particle.png" id="3_spark"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bolt"]
+shader = ExtResource("2_arcshd")
+shader_parameter/core_color = Color(1, 1, 1, 1)
+shader_parameter/glow_color = Color(0.42352942, 0.6392157, 1, 1)
+shader_parameter/core_power = 16.0
+shader_parameter/glow_power = 2.0
+shader_parameter/glow_strength = 1.5
+shader_parameter/flow_speed = 14.0
+shader_parameter/flow_scale = 16.0
+shader_parameter/flow_strength = 0.5
+shader_parameter/progress = 0.0
+shader_parameter/strike_softness = 0.12
+shader_parameter/fade = 1.0
+shader_parameter/seed = 0.0
+
+[sub_resource type="Gradient" id="Gradient_bolt"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_bolt"]
+gradient = SubResource("Gradient_bolt")
+width = 2
+
+[sub_resource type="Gradient" id="Gradient_light"]
+offsets = PackedFloat32Array(0, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_light"]
+gradient = SubResource("Gradient_light")
+width = 128
+height = 128
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 0)
+
+[sub_resource type="Gradient" id="Gradient_spark"]
+colors = PackedColorArray(1, 1, 1, 1, 0.42352942, 0.6392157, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_spark"]
+gradient = SubResource("Gradient_spark")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_spark"]
+particle_flag_disable_z = true
+spread = 180.0
+initial_velocity_min = 80.0
+initial_velocity_max = 220.0
+gravity = Vector3(0, 0, 0)
+damping_min = 200.0
+damping_max = 400.0
+scale_min = 0.4
+scale_max = 0.9
+color_ramp = SubResource("GradientTexture1D_spark")
+
+[node name="LightningArc" type="Node2D" node_paths=PackedStringArray("Bolt", "ImpactLight", "ImpactSparks")]
+z_index = 5
+script = ExtResource("1_arcscr")
+Bolt = NodePath("Bolt")
+ImpactLight = NodePath("ImpactLight")
+ImpactSparks = NodePath("ImpactSparks")
+
+[node name="Bolt" type="Line2D" parent="."]
+material = SubResource("ShaderMaterial_bolt")
+points = PackedVector2Array(0, 0, 1, 0)
+width = 14.0
+texture = SubResource("GradientTexture1D_bolt")
+texture_mode = 2
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+antialiased = false
+
+[node name="ImpactLight" type="PointLight2D" parent="."]
+color = Color(0.6392157, 0.78431374, 1, 1)
+energy = 0.0
+texture = SubResource("GradientTexture2D_light")
+texture_scale = 0.6
+
+[node name="ImpactSparks" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 12
+texture = ExtResource("3_spark")
+lifetime = 0.35
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_spark")

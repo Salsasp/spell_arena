@@ -99,7 +99,9 @@ public partial class ModifierManager : Node
         bool added;
         if (!HasActiveModifier(id))
         {
-            ActiveModifiers.Add(id, modifier);
+            // Cloned so stack counts accumulate on this run's copy rather than on the
+            // catalog instance, which is static and would otherwise persist across restarts.
+            ActiveModifiers.Add(id, modifier.Clone());
             added = true;
         }
         else if (modifier.isStackable)
@@ -116,7 +118,7 @@ public partial class ModifierManager : Node
         {
             // Only the modifier that was just picked fires its OnAcquire effect,
             // unlike OnSpawn/OnHit which re-evaluate the whole active set.
-            ModifierEffectRegistry.ApplyToModifier(ModifierPhase.OnAcquire, ModifierContext.ForRun(this), modifier);
+            ModifierEffectRegistry.ApplyToModifier(ModifierPhase.OnAcquire, ModifierContext.ForRun(this), ActiveModifiers[id]);
         }
 
         return added;
