@@ -9,22 +9,47 @@ using System.Collections.Generic;
 /// </summary>
 public static class LightningChain
 {
-	private const int MAX_JUMPS = 3;
+	private const int BASE_JUMPS = 3;
+	/// <summary> Extra enemies reached per stack beyond the first. </summary>
+	private const int JUMPS_PER_EXTRA_STACK = 1;
 	private const float ARC_RADIUS = 180f;
-	/// <summary> Share of the projectile's damage dealt by the first arc. </summary>
-	private const float ARC_DAMAGE_RATIO = 0.5f;
+	/// <summary> Share of the projectile's damage dealt by the first arc at one stack. </summary>
+	private const float BASE_ARC_DAMAGE_RATIO = 0.5f;
+	/// <summary> Added to that share per stack beyond the first. </summary>
+	private const float ARC_DAMAGE_RATIO_PER_EXTRA_STACK = 0.25f;
 	/// <summary> Damage retained by each arc relative to the one before it. </summary>
 	private const float ARC_FALLOFF = 0.7f;
 	private const string ARC_SCENE_PATH = "res://Scenes/Spells/FX/LightningArc.tscn";
 
 	private static PackedScene arcScene;
 
-	public static void Strike(Node2D origin, DamageComponent damage)
+	/// <summary> How many enemies the chain reaches at the given stack count. </summary>
+	public static int GetJumpCount(int copies)
+	{
+		return BASE_JUMPS + (ExtraStacks(copies) * JUMPS_PER_EXTRA_STACK);
+	}
+
+	/// <summary> Share of the projectile's damage dealt by the first arc at the given stack count. </summary>
+	public static float GetFirstArcDamageRatio(int copies)
+	{
+		return BASE_ARC_DAMAGE_RATIO + (ExtraStacks(copies) * ARC_DAMAGE_RATIO_PER_EXTRA_STACK);
+	}
+
+	private static int ExtraStacks(int copies)
+	{
+		return Mathf.Max(0, copies - 1);
+	}
+
+	/// <param name="copies">Equipped stacks of the innate. Each stack past the first adds a jump and raises arc damage.</param>
+	public static void Strike(Node2D origin, DamageComponent damage, int copies = 1)
 	{
 		if (origin == null || damage == null)
 		{
 			return;
 		}
+
+		int maxJumps = GetJumpCount(copies);
+		float ratio = GetFirstArcDamageRatio(copies);
 
 		SceneTree tree = origin.GetTree();
 		if (tree == null)
@@ -34,9 +59,8 @@ public static class LightningChain
 
 		HashSet<Node2D> struck = [origin];
 		Vector2 arcFrom = origin.GlobalPosition;
-		float ratio = ARC_DAMAGE_RATIO;
 
-		for (int jump = 0; jump < MAX_JUMPS; jump++)
+		for (int jump = 0; jump < maxJumps; jump++)
 		{
 			Enemy target = FindNearestUnstruck(tree, arcFrom, struck);
 			if (target == null)

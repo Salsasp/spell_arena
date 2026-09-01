@@ -18,7 +18,7 @@
         {
             "id": "lightning_wand_innate",
             "name": "Chain Lightning",
-            "description": "Lightning wand innate modifier. Spell hits instantly arc lightning through nearby enemies, dealing reduced damage with each jump.",
+            "description": "Lightning wand innate modifier. Spell hits instantly arc lightning through nearby enemies, dealing reduced damage with each jump. Each additional copy adds a jump and increases arc damage. (Stackable)",
             "icon": "res://Assets/Sprites/proj_placeholder.png",
             "rarity": "uncommon",
             "affinity": "lightning",

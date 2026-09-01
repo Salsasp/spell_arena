@@ -10,6 +10,6 @@ public sealed class LightningWandInnateEffect : IModifierEffect
 			return;
 		}
 
-		LightningChain.Strike(context.HitTarget, context.Damage);
+		LightningChain.Strike(context.HitTarget, context.Damage, modifier.copies);
 	}
 }
