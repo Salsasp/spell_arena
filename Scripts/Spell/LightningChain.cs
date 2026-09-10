@@ -12,6 +12,8 @@ public static class LightningChain
 	private const int BASE_JUMPS = 3;
 	/// <summary> Extra enemies reached per stack beyond the first. </summary>
 	private const int JUMPS_PER_EXTRA_STACK = 1;
+	/// <summary> Extra chain radius reached per stack beyond the first. </summary>
+	private const float RANGE_PER_EXTRA_STACK = 40f;
 	private const float ARC_RADIUS = 180f;
 	/// <summary> Share of the projectile's damage dealt by the first arc at one stack. </summary>
 	private const float BASE_ARC_DAMAGE_RATIO = 0.5f;
@@ -62,7 +64,7 @@ public static class LightningChain
 
 		for (int jump = 0; jump < maxJumps; jump++)
 		{
-			Enemy target = FindNearestUnstruck(tree, arcFrom, struck);
+			Enemy target = FindNearestUnstruck(tree, arcFrom, struck, copies);
 			if (target == null)
 			{
 				return;
@@ -83,10 +85,10 @@ public static class LightningChain
 		}
 	}
 
-	private static Enemy FindNearestUnstruck(SceneTree tree, Vector2 from, HashSet<Node2D> struck)
+	private static Enemy FindNearestUnstruck(SceneTree tree, Vector2 from, HashSet<Node2D> struck, int copies)
 	{
 		Enemy nearest = null;
-		float nearestDistance = ARC_RADIUS;
+		float nearestDistance = ARC_RADIUS + (RANGE_PER_EXTRA_STACK * copies);
 
 		foreach (Node node in tree.GetNodesInGroup("enemies"))
 		{
